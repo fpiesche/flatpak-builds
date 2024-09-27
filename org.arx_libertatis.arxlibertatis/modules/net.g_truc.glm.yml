@@ -1,0 +1,14 @@
+name: glm
+buildsystem: simple
+build-commands:
+  - cp -r glm /app/include
+sources:
+  - type: archive
+    url: https://api.github.com/repos/g-truc/glm/zipball/1.0.1
+    dest-filename: glm.zip
+    sha256: 022236a5f7c2b187eb3e7b50854b0b2017df26d3a9bd2f533764c96c369211c1
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/g-truc/glm/releases/latest
+      version-query: .tag_name
+      url-query: '.zipball_url'

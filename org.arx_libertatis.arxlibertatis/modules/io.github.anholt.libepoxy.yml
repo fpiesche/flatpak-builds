@@ -1,0 +1,16 @@
+name: libepoxy
+buildsystem: meson
+builddir: true
+config-opts:
+  - --buildtype=debugoptimized
+  - --default-library=static
+  - -Dtests=false
+sources:
+  - type: git
+    url: https://github.com/anholt/libepoxy.git
+    tag: "1.5.10"
+    commit: c84bc9459357a40e46e2fec0408d04fbdde2c973
+    x-checker-data:
+      type: git
+      tag-pattern: ^([\d\.]+)$
+

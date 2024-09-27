@@ -1,0 +1,86 @@
+app-id: io.github.andrei_drexler.ironwail
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: ironwail.sh
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # default Steam library for auto-detecting game data
+  - --filesystem=~/.local/share/Steam/steamapps/
+
+cleanup:
+  - /include
+  - "*.a"
+  - "*.la"
+  - /lib/pkgconfig
+
+modules:
+
+  - ../shared-modules/libmad/libmad.json
+
+  - name: libxmp
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://github.com/libxmp/libxmp/
+        tag: libxmp-4.6.0
+        commit: 8201d26cf933688a8be64292457c429fd8e654ab
+        x-checker-data:
+          type: git
+          tag-pattern: ^libxmp-(.*)$
+
+  - name: ironwail
+    sources:
+      - type: git
+        url: https://github.com/fpiesche/ironwail
+        commit: 20eed18235c3f6b7e0bf37f99623116c070e5fe1
+        # url: https://github.com/andrei-drexler/ironwail
+        # tag: v0.7.0
+        # commit: 5b130aae74d43139e5292104a085c19fc1a24b1e
+        # x-checker-data:
+        #   type: git
+        #   tag-pattern: ^v(.*)$
+      - type: script
+        dest-filename: ironwail.sh
+        commands:
+          - # Check for game data
+          - if [[ ! -d $HOME/.local/share/Steam/steamapps/common/Quake/id1/ ]]; then
+          -     if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
+          -         zenity --error --text "<b>Could not find Quake game data</b>\n\n
+                        Please either install Quake via Steam to your library in <tt><b>$HOME/.local/share/Steam/</b></tt>
+                        or copy the game data (at least <tt>pak0.pak</tt>) to <tt><b>$XDG_DATA_HOME/id1/pak0.pak</b></tt>."
+                        --ok-label "Quit" --width=400
+          -     else
+          - # If game data is already in XDG_DATA_HOME, just start the game
+          -         /app/bin/ironwail -basedir $XDG_DATA_HOME "$@"
+          -     fi
+          - # If game data is in Steam directory, run Ironwail without -basedir but catch potential errors on exit
+          - else
+          -     /app/bin/ironwail "$@"
+          -     if [[ "$?" != "0" ]]; then
+          -         zenity --error --text "<b>Ironwail exited with an error</b>\n\n
+                    For a detailed error message, please run Ironwail from a terminal window using\n
+                    <tt><b>flatpak run $FLATPAK_ID</b></tt>."
+                    --ok-label "Quit" --width=400
+          -     fi
+          - fi
+    buildsystem: simple
+    build-commands:
+      # Build
+      - cd Quake && make LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
+      # Install main data and executable
+      - install -D -m744 -t /app/bin/ Quake/ironwail
+      - install -D -m755 -t /app/bin/ Quake/ironwail.pak
+      - install -D -m744 -t /app/bin/ ironwail.sh
+      # Install metadata and launcher files
+      - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -D -m755 Linux/${FLATPAK_ID}.metainfo.xml  /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/${FLATPAK_ID}.desktop
+      - install -D -m755 Linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop

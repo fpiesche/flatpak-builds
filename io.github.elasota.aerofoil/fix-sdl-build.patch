@@ -1,0 +1,38 @@
+diff --git a/AerofoilX/GpFileSystem_X.cpp b/AerofoilX/GpFileSystem_X.cpp
+index a61e296..9c4573b 100644
+--- a/AerofoilX/GpFileSystem_X.cpp
++++ b/AerofoilX/GpFileSystem_X.cpp
+@@ -217,7 +217,11 @@ GpFileSystem_X::~GpFileSystem_X()
+ 
+ void GpFileSystem_X::Init()
+ {
+-	char *prefsDir = SDL_GetPrefPath("aerofoil", "aerofoil");
++	char* homeDir = std::getenv("HOME");
++	char* configDir = "/.config/aerofoil/";
++	std::string buf(homeDir);
++	buf.append(configDir);
++	char* prefsDir = const_cast<char*>(buf.c_str());
+ 	m_prefsPath = prefsDir;
+ 
+ 	char *baseDir = SDL_GetBasePath();
+@@ -234,7 +238,6 @@ void GpFileSystem_X::Init()
+ 		std::string prefsPath = std::string(prefsDir) + extensions[i];
+ 		int created = mkdir(prefsPath.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+ 	}
+-	SDL_free(prefsDir);
+ }
+ 
+ bool GpFileSystem_X::FileExists(PortabilityLayer::VirtualDirectory_t virtualDirectory, const char *path)
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 63b061e..e138642 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,7 +1,7 @@
+ cmake_minimum_required(VERSION 3.10)
+ project (Aerofoil)
+ SET(PLATFORM "X" CACHE STRING "Defines the target platform")
+-SET(EXECNAME "AerofoilX" CACHE STRING "Defines the exec name")
++SET(EXECNAME "aerofoil" CACHE STRING "Defines the exec name")
+ 
+ message(${CMAKE_BINARY_DIR})
+ 

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Game;RolePlaying
+Comment[en_US]=A modernised version of The Elder Scrolls II: Daggerfall
+Comment=A modernised version of The Elder Scrolls II: Daggerfall
+Exec=DaggerfallUnity.x86_64
+GenericName[en_US]=
+GenericName=
+Icon=io.github.interkarma.daggerfall-unity
+Keywords=elder scrolls;daggerfall;rpg;role playing
+MimeType=
+Name[en_US]=Daggerfall Unity
+Name=Daggerfall Unity
+Path=
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

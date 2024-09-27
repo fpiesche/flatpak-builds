@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.interkarma.daggerfall-unity</id>
+  <name>Daggerfall Unity</name>
+  <developer id="io.github.interkarma.daggerfall-unity">
+    <name>Daggerfall Unity contributors</name>
+  </developer>
+  <summary>A modern port of The Elder Scrolls II: Daggerfall</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <launchable type="desktop-id">io.github.interkarma.daggerfall-unity.desktop</launchable>
+  <url type="homepage">https://www.dfworkshop.net/</url>
+  <description>
+    <p>Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.</p>
+    <p>Experience the adventure and intrigue of Daggerfall with all of its original charm along with hundreds of fixes,
+       quality of life enhancements, and extensive mod support.</p>
+    <p>Classic Daggerfall Plus</p>
+      <ul>
+        <li>Cross-platform without emulation (Windows/Linux/Mac)</li>
+        <li>Retro graphics are boosted by modern engine and lighting</li>
+        <li>High resolution widescreen with classic style</li>
+        <li>Optionally play in retro mode 320x200 or 640x400 with VGA palettes</li>
+        <li>Optionally overhaul the graphics and gameplay with mods</li>
+        <li>Huge draw distances even without mods</li>
+        <li>Smooth first-person controls</li>
+        <li>Quality of life enhancements</li>
+        <li>Extensive mod support with an active creator community</li>
+        <li>Translation support via community mods</li>
+      </ul>
+    <p>Daggerfall Unity requires a free copy of the original Daggerfall game to run. This provides all necessary assets
+       such as textures, 3D models, and sound effects.</p>
+    <p>You can get a copy of the original Daggerfall for free from Steam or GOG. Daggerfall Unity will ask for the location
+       of your original Daggerfall game on first startup and then take care of everything else.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/screen.jpg</image>
+      <caption>1.0 release feature banner</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/image-5.png</image>
+      <caption>DREAM mod feature screenshots</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/image-10.png</image>
+      <caption>World of Daggerfall mod screenshots</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="1.0.0" date="2023-12-30"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="violence-desecration">moderate</content_attribute>
+    <content_attribute id="drugs-alcohol">moderate</content_attribute>
+    <content_attribute id="drugs-narcotics">moderate</content_attribute>
+    <content_attribute id="sex-themes">mild</content_attribute>
+    <content_attribute id="language-discrimination">moderate</content_attribute>
+    <content_attribute id="money-gambling">moderate</content_attribute>
+  </content_rating>
+  <update_contact>https://forums.dfworkshop.net/</update_contact>
+</component>

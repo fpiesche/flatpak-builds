@@ -1,0 +1,38 @@
+app-id: io.github.elasota.aerofoil
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: AerofoilX
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - /include
+  - /lib/*.a
+  - /lib/*.la
+  - /lib/pkgconfig
+  - /share/pixmaps
+
+modules:
+  - ../shared-modules/SDL2/SDL2-with-libdecor.json
+
+  - name: aerofoil
+    buildsystem: cmake-ninja
+    builddir: true
+    build-options:
+      - -DCMAKE_INSTALL_PREFIX=/app
+    sources:
+      - type: git
+        url: https://github.com/elasota/Aerofoil.git
+        # tag: "1.1.2"
+        commit: e3b481093a12c65cb94be9cc8b602898dd68b10b
+        x-checker-data:
+          type: git
+          tag-pattern: '^([\d\.]+)$'

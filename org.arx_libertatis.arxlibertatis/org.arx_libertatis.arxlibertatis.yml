@@ -1,0 +1,66 @@
+app-id: org.arx_libertatis.arxlibertatis
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: arx
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Data path
+  - --persist=.local/share/arx
+
+build-options:
+  cflags: -O2 -g
+  cxxflags: -O2 -g
+
+cleanup:
+  - /include
+  - /lib/*.a
+  - /lib/*.la
+  - /lib/pkgconfig
+  - /share/pixmaps
+
+modules:
+  - name: arx
+    modules:
+      - ../shared-modules/glu/glu-9.json
+      - modules/org.boost.Boost.yml
+      - modules/org.freetype.libfreetype.yml
+      - modules/io.github.anholt.libepoxy.yml
+      - modules/net.g_truc.glm.yml
+      - modules/org.openal_soft.openal-soft.yml
+    buildsystem: cmake-ninja
+    build-options:
+      cxxflags: -O2 -g -pthread -lGL
+      env:
+        BOOST_ROOT: /app
+    config-opts:
+      - -DDATA_FILES=./ArxLibertatisData
+    sources:
+      - type: git
+        url: https://github.com/arx/ArxLibertatis.git
+        tag: "1.2.1"
+        commit: b054123cd0ac280c1e1b42479c52ea32e25c7965
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d\.]+)$
+      - type: git
+        url: https://github.com/arx/ArxLibertatisData.git
+        tag: "1"
+        commit: d92cc853ca5d40795073b432f1b5ded38e941228
+        dest: ./ArxLibertatisData
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d\.]+)$
+    post-install:
+      # Install metadata and launcher files
+      - desktop-file-edit --set-icon=${FLATPAK_ID} data/icons/arx-libertatis.desktop
+      - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m644 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      # - install -D -m644 ./

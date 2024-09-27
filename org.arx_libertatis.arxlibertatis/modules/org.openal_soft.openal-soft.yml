@@ -1,0 +1,12 @@
+name: openal-soft
+buildsystem: cmake-ninja
+config-opts:
+  - -DALSOFT_EXAMPLES=OFF
+sources:
+  - type: git
+    url: https://github.com/kcat/openal-soft.git
+    tag: "1.23.1"
+    commit: d3875f333fb6abe2f39d82caca329414871ae53b
+    x-checker-data:
+      type: git
+      tag-pattern: ^([\d\.]+)$
