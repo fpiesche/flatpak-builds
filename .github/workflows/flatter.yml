@@ -25,10 +25,10 @@ jobs:
   flatter:
     needs:
       - build-matrix
-    name: ${{ matrix.manifest }}
+    name: ${{ matrix.arch }} ${{ matrix.manifest }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/gnome:46
+      image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
 
     strategy:
