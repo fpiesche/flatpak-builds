@@ -29,7 +29,11 @@ cleanup:
 modules:
   - name: arx
     modules:
-      - ../shared-modules/glu/glu-9.json
+      - buildsystem: simple
+        build-commands:
+          - pwd
+          - ls -la
+      - shared-modules/glu/glu-9.json
       - modules/org.boost.Boost.yml
       - modules/org.freetype.libfreetype.yml
       - modules/io.github.anholt.libepoxy.yml
