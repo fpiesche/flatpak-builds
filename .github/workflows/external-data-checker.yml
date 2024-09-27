@@ -15,7 +15,7 @@ jobs:
     - id: get-manifests
       run: |
         MANIFEST_JSON=$(find . -maxdepth 2 -name "*.yml" | jq -R -s -c 'split("\n")')
-        echo manifests='$MANIFEST_JSON' >> $GITHUB_OUTPUT
+        echo manifests=$MANIFEST_JSON >> $GITHUB_OUTPUT
         echo "::group::Manifests found"
         echo $MANIFEST_JSON | jq
         echo "::endgroup::"
