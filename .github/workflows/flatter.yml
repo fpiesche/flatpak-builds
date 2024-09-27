@@ -90,8 +90,7 @@ jobs:
 
       - name: Check cache
         run: |
-          ls -la /__w/flatpak-builds/
-          ls -la /__w/flatpak-builds/flatpak-builds
+          find /__w/flatpak-builds/ -name "cache*"
 
   deploy:
     name: Deploy to Github Pages
