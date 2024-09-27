@@ -89,7 +89,9 @@ jobs:
           upload-pages-artifact: false
 
       - name: Check cache
-        run: ls -la /__w/flatpak-builds/flatpak-builds/cache*
+        run: |
+          ls -la /__w/flatpak-builds/
+          ls -la /__w/flatpak-builds/flatpak-builds
 
   deploy:
     name: Deploy to Github Pages
