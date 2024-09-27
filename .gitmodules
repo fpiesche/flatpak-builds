@@ -1,3 +1,3 @@
 [submodule "shared-modules"]
-	path = shared-modules
+	path = apps/shared-modules
 	url = git@github.com:flathub/shared-modules.git

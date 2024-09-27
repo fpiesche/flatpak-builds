@@ -5,13 +5,17 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+    inputs:
+      publish:
+        type: boolean
+        description: Publish builds
   push:
     paths:
-      - "*/*.yml"
+      - "apps/*/*.yml"
 
 jobs:
   setup:
-    name: Figure out what to build and deploy
+    name: Gather manifests and publishing info
     runs-on: ubuntu-latest
     outputs:
       manifests: ${{ steps.get-manifests.outputs.manifests }}
@@ -20,15 +24,15 @@ jobs:
     - uses: actions/checkout@v4
     - id: get-manifests
       run: |
-        MANIFEST_JSON=$(find . -maxdepth 2 -name "*.yml" | jq -R -s -c 'split("\n")' | jq 'map(select(length > 0))')
-        echo manifests=$MANIFEST_JSON >> $GITHUB_OUTPUT
+        MANIFEST_LIST=$(find ./apps/ -maxdepth 2 -name "*.yml")
+        echo manifests=$MANIFEST_LIST >> $GITHUB_OUTPUT
         echo "::group::Manifests found"
-        echo $MANIFEST_JSON | jq
+        echo $MANIFEST_LIST
         echo "::endgroup::"
     - id: set-variables
       run: |
         PUBLISH=false
-        if [[ ${{ github.ref }} == "refs/heads/main" ]]; then PUBLISH=true; fi
+        if [[ ${{ github.ref }} == "refs/heads/main" || ${{ inputs.publish }} == "true" ]]; then PUBLISH=true; fi
         echo publish=$PUBLISH >> $GITHUB_OUTPUT
 
   flatter:
@@ -43,7 +47,6 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-        manifest: ${{ fromJson(needs.setup.outputs.manifests) }}
       fail-fast: false
       # Only one job at a time can use the shared repository cache
       max-parallel: 1
@@ -76,10 +79,19 @@ jobs:
         run: |
           echo "flatpak.yellowkeycard.net" > CNAME
 
+      - name: Generate index.html file
+        uses: jaywcjlove/markdown-to-html-cli@main
+        with:
+          source: README.md
+          output: index.html
+          title: outie's flathub repo
+          description: Various things missing from Flathub
+          github-corners: https://github.com/fpiesche/flatpak-builds
+
       - name: Build
         uses: andyholmes/flatter@main
         with:
-          files: ${{ matrix.manifest }}
+          files: ${{ needs.setup.outputs.manifests }}
           flatpak-builder-args: |
             --skip-if-unchanged
           flatpak-build-bundle-args: |
@@ -87,7 +99,7 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-artifact: true
+          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
           upload-pages-includes: |
             CNAME
             default.css
