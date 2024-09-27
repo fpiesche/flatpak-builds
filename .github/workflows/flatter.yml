@@ -106,10 +106,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate timestamp
+        id: timestamp
+        run: echo timestamp=$(date +%s%N | cut -b1-13) >> $GITHUB_OUTPUT
+
       - name: Restore repository from cache
         uses: actions/cache/restore@v4
         with:
           path: ./_site
+          key: flatter-${{ needs.flatter.outputs.gpgkey }}-${{ steps.timestamp.outputs.timestamp }}
           restore-keys: flatter-${{ needs.flatter.outputs.gpgkey }}-
 
       - name: Generate CNAME
