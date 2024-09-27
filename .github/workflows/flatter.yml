@@ -24,10 +24,10 @@ jobs:
     - uses: actions/checkout@v4
     - id: get-manifests
       run: |
-        MANIFEST_LIST=$(find ./apps/ -maxdepth 2 -name "*.yml")
-        echo manifests=$MANIFEST_LIST >> $GITHUB_OUTPUT
+        MANIFEST_JSON=$(find . -maxdepth 2 -name "*.yml" | jq -R -s -c 'split("\n")' | jq 'map(select(length > 0))')
+        echo manifests=$MANIFEST_JSON >> $GITHUB_OUTPUT
         echo "::group::Manifests found"
-        echo $MANIFEST_LIST
+        echo $MANIFEST_JSON
         echo "::endgroup::"
     - id: set-variables
       run: |
@@ -38,8 +38,10 @@ jobs:
   flatter:
     needs:
       - setup
-    name: ${{ matrix.arch }}
+    name: ${{ matrix.arch }} ${{ matrix.manifest }}
     runs-on: ubuntu-latest
+    outputs:
+      gpgkey: ${{ steps.gpg.outputs.fingerprint }}
     container:
       image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
@@ -47,6 +49,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
+        manifest: ${{ fromJson(needs.setup.outputs.manifests) }}
       fail-fast: false
       # Only one job at a time can use the shared repository cache
       max-parallel: 1
@@ -74,40 +77,19 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-      # Generate a CNAME file on-the-fly for a configured host
-      - name: Generate CNAME
-        run: |
-          echo "flatpak.yellowkeycard.net" > CNAME
-
-      - name: Generate index.html file
-        uses: jaywcjlove/markdown-to-html-cli@main
-        with:
-          source: README.md
-          output: index.html
-          title: outie's flathub repo
-          description: Various things missing from Flathub
-          github-corners: https://github.com/fpiesche/flatpak-builds
-
       - name: Build
         uses: andyholmes/flatter@main
         with:
-          files: ${{ needs.setup.outputs.manifests }}
-          flatpak-builder-args: |
-            --skip-if-unchanged
+          files: ${{ matrix.manifest }}
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
-          upload-pages-includes: |
-            CNAME
-            default.css
-            index.html
+          upload-pages-artifact: false
 
-  # See "Github Pages" below
   deploy:
-    name: Deploy
+    name: Deploy to Github Pages
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.publish }}
     needs:
@@ -121,6 +103,31 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore repository from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./_site
+          restore-keys: flatter-${{ needs.flatter.outputs.gpgkey }}-
+
+      - name: Generate CNAME
+        run: |
+          echo "flatpak.yellowkeycard.net" > ./_site/CNAME
+
+      - name: Generate index.html file
+        uses: jaywcjlove/markdown-to-html-cli@main
+        with:
+          source: README.md
+          output: ./_site/index.html
+          title: outie's flathub repo
+          description: Various things missing from Flathub
+          github-corners: https://github.com/fpiesche/flatpak-builds
+
+      - name: Create Pages artifact
+        uses: actions/upload-pages-artifact@v3
+
       - name: Publish repo
         id: deployment
         uses: actions/deploy-pages@v1
