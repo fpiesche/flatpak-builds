@@ -5,13 +5,17 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+  push:
+    paths:
+      - "*/*.yml"
 
 jobs:
-  build-matrix:
-    name: Collect list of Flatpak manifests
+  setup:
+    name: Figure out what to build and deploy
     runs-on: ubuntu-latest
     outputs:
       manifests: ${{ steps.get-manifests.outputs.manifests }}
+      publish: ${{ steps.set-variables.outputs.publish }}
     steps:
     - uses: actions/checkout@v4
     - id: get-manifests
@@ -21,10 +25,15 @@ jobs:
         echo "::group::Manifests found"
         echo $MANIFEST_JSON | jq
         echo "::endgroup::"
+    - id: set-variables
+      run: |
+        PUBLISH=false
+        if [[ ${{ github.ref }} == "refs/heads/main" ]]; then PUBLISH=true; fi
+        echo publish=$PUBLISH >> $GITHUB_OUTPUT
 
   flatter:
     needs:
-      - build-matrix
+      - setup
     name: ${{ matrix.arch }} ${{ matrix.manifest }}
     runs-on: ubuntu-latest
     container:
@@ -34,7 +43,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-        manifest: ${{ fromJson(needs.build-matrix.outputs.manifests) }}
+        manifest: ${{ fromJson(needs.setup.outputs.manifests) }}
       fail-fast: false
       # Only one job at a time can use the shared repository cache
       max-parallel: 1
@@ -69,6 +78,10 @@ jobs:
         uses: andyholmes/flatter@main
         with:
           files: ${{ matrix.manifest }}
+          flatpak-builder-args: |
+            --skip-if-unchanged
+          flatpak-build-bundle-args: |
+            --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
@@ -82,7 +95,10 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: flatter
+    if: ${{ needs.setup.outputs.publish }}
+    needs:
+      - setup
+      - flatter
     permissions:
       pages: write
       id-token: write
@@ -91,6 +107,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: GitHub Pages
+      - name: Publish repo
         id: deployment
         uses: actions/deploy-pages@v1
