@@ -20,6 +20,8 @@ jobs:
         echo "::endgroup::"
 
   flathub-data-checker-global:
+    needs:
+      - build-matrix
     name: ${{ matrix.manifest }}
     strategy:
       fail-fast: false
