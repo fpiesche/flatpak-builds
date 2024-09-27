@@ -88,6 +88,15 @@ jobs:
           upload-bundles: true
           upload-pages-artifact: false
 
+      - name: Check cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./_site
+          key: flatter-${{ steps.gpg.outputs.fingerprint }}-
+          restore-keys: flatter-${{ steps.gpg.outputs.fingerprint }}-
+          lookup-only: true
+          fail-on-cache-miss: true
+
   deploy:
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
