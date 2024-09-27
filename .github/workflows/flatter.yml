@@ -32,13 +32,13 @@ jobs:
     - id: set-variables
       run: |
         PUBLISH=false
-        if [[ ${{ github.ref }} == "refs/heads/main" || ${{ inputs.publish }} == "true" ]]; then PUBLISH=true; fi
+        if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
         echo publish=$PUBLISH >> $GITHUB_OUTPUT
 
   flatter:
     needs:
       - setup
-    name: ${{ matrix.arch }} ${{ matrix.manifest }}
+    name: ${{ matrix.arch }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andyholmes/flatter/freedesktop:24.08
