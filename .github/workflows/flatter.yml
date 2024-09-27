@@ -30,12 +30,6 @@ jobs:
       max-parallel: 1
 
     steps:
-      - name: Determine whether to publish
-        run: |
-            PUBLISH=false
-            if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
-            echo PUBLISH=$PUBLISH >> $GITHUB_ENV
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -92,9 +86,7 @@ jobs:
   deploy:
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.publish }}
     needs:
-      - setup
       - flatter
     permissions:
       pages: write
@@ -104,6 +96,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Publish repo
-        id: deployment
-        uses: actions/deploy-pages@v1
+    - name: Determine whether to publish
+      run: |
+        PUBLISH=false
+        if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
+        echo PUBLISH=$PUBLISH >> $GITHUB_ENV
+
+    - name: Publish repo
+      if: ${{ env.PUBLISH }} == "true"
+      id: deployment
+      uses: actions/deploy-pages@v1
