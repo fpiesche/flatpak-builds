@@ -89,13 +89,7 @@ jobs:
           upload-pages-artifact: false
 
       - name: Check cache
-        uses: actions/cache/restore@v4
-        with:
-          path: ./_site
-          key: flatter-${{ steps.gpg.outputs.fingerprint }}-
-          restore-keys: flatter-${{ steps.gpg.outputs.fingerprint }}-
-          lookup-only: true
-          fail-on-cache-miss: true
+        run: ls -la /__w/flatpak-builds/flatpak-builds/cache*
 
   deploy:
     name: Deploy to Github Pages
@@ -124,7 +118,7 @@ jobs:
         with:
           path: ./_site
           key: flatter-${{ needs.flatter.outputs.gpgkey }}-${{ steps.timestamp.outputs.timestamp }}
-          restore-keys: flatter-${{ needs.flatter.outputs.gpgkey }}-
+          restore-keys: flatter-
 
       - name: Generate CNAME
         run: |
