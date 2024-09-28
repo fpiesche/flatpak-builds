@@ -99,6 +99,10 @@ jobs:
         run: |
           echo "flatpak.yellowkeycard.net" > _site/CNAME
 
+      - name: Checkout
+        if: ${{ env.PUBLISH }} == "true"
+        uses: actions/checkout@v4
+
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
         uses: jaywcjlove/markdown-to-html-cli@main
