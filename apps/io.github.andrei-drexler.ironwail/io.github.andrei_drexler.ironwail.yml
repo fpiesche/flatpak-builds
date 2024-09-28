@@ -33,8 +33,10 @@ modules:
         tag: libxmp-4.6.0
         commit: 8201d26cf933688a8be64292457c429fd8e654ab
         x-checker-data:
-          type: git
-          tag-pattern: ^libxmp-(.*)$
+          type: json
+          url: https://api.github.com/repos/libxmp/libxmp/releases/latest
+          version-query: .tag_name | sub(\"^libxmp-\"; \"\")
+          url-query: .tarball_url
 
   - name: ironwail
     sources:

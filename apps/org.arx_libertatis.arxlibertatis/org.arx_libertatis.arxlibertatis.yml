@@ -48,8 +48,10 @@ modules:
         tag: "1.2.1"
         commit: b054123cd0ac280c1e1b42479c52ea32e25c7965
         x-checker-data:
-          type: git
-          tag-pattern: ^([\d\.]+)$
+          type: json
+          url: https://api.github.com/repos/arx/ArxLibertatis/releases/latest
+          version-query: ".tag_name"
+          url-query: ".assets[] | select(.name==\"arx-libertatis-\" + $version + \".tar.xz\") | .browser_download_url"
       - type: git
         url: https://github.com/arx/ArxLibertatisData.git
         tag: "1"

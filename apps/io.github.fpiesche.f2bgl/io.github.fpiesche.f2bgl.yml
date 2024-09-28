@@ -22,10 +22,11 @@ modules:
         url: https://github.com/Mindwerks/wildmidi/archive/wildmidi-0.4.5.tar.gz
         sha256: 116c0f31d349eaa74a630ed5a9a17b6a351204877a4ed9fb9aacd9dbd7f6c874
         x-checker-data:
-          type: anitya
-          project-id: 9179
-          stable-only: true
-          url-template: https://github.com/Mindwerks/wildmidi/archive/wildmidi-$version.tar.gz
+          type: json
+          url: https://api.github.com/repos/Mindwerks/wildmidi/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="wildmidi-" + $version + ".tar.gz")
+            | .browser_download_url
 
   - name: f2bgl
     sources:

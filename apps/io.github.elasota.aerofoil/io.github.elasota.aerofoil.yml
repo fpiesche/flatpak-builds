@@ -32,5 +32,7 @@ modules:
         # tag: "1.1.2"
         commit: e3b481093a12c65cb94be9cc8b602898dd68b10b
         x-checker-data:
-          type: git
-          tag-pattern: '^([\d\.]+)$'
+          type: json
+          url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
