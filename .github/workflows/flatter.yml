@@ -53,19 +53,6 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Generate CNAME
-        run: |
-          echo "flatpak.yellowkeycard.net" > CNAME
-
-      - name: Generate index.html file
-        uses: jaywcjlove/markdown-to-html-cli@main
-        with:
-          source: README.md
-          output: index.html
-          title: outie's flathub repo
-          description: Various things missing from Flathub
-          github-corners: https://github.com/fpiesche/flatpak-builds
-
       - name: Build
         id: flatpak
         uses: andyholmes/flatter@main
@@ -81,21 +68,50 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-artifact: false
-          upload-pages-includes: |
-            CNAME
-            default.css
-            index.html
+          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: flatter
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+
+    steps:
       - name: Determine whether to publish
         run: |
           PUBLISH=false
           if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
           echo PUBLISH=$PUBLISH >> $GITHUB_ENV
 
+      - name: Get Pages artifact
+        if: ${{ env.PUBLISH }} == "true"
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: _site
+
+      - name: Generate CNAME
+        if: ${{ env.PUBLISH }} == "true"
+        run: |
+          echo "flatpak.yellowkeycard.net" > _site/CNAME
+
+      - name: Generate index.html file
+        if: ${{ env.PUBLISH }} == "true"
+        uses: jaywcjlove/markdown-to-html-cli@main
+        with:
+          source: README.md
+          output: _site/index.html
+          title: outie's flathub repo
+          description: Various things missing from Flathub
+          github-corners: https://github.com/fpiesche/flatpak-builds
+
       - name: Publish repo
         if: ${{ env.PUBLISH }} == "true"
-        uses: JamesIves/github-pages-deploy-action@releases/v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ${{ steps.flatpak.outputs.repository }}
+          folder: _site
           target-folder: repo
