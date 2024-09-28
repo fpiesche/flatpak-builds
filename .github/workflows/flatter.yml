@@ -103,23 +103,24 @@ jobs:
           tar -xf artifact.tar
           rm artifact.tar
           touch index.html
-          ls -la
-          pwd
           echo "flatpak.yellowkeycard.net" > CNAME
 
       - name: Checkout
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
+        with:
+          path: src
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
-        uses: jaywcjlove/markdown-to-html-cli@main
-        with:
-          source: README.md
-          output: _site/index.html
-          title: outie's flathub repo
-          description: Various things missing from Flathub
-          github-corners: https://github.com/fpiesche/flatpak-builds
+        run: |
+          npm i markdown-to-html-cli -g
+          markdown-to-html \
+            --source src/README.md \
+            --output _site/index.html \
+            --title "retrogame flathub repo" \
+            --description "Various things missing from Flathub" \
+            --github-corners "https://github.com/fpiesche/flatpak-builds"
 
       - name: Publish repo
         if: ${{ env.PUBLISH }} == "true"
