@@ -27,7 +27,8 @@ jobs:
 
     strategy:
       matrix:
-        arch: [x86_64, aarch64]
+        arch: [x86_64]
+        # arch: [x86_64, aarch64]
         # manifest: ${{ fromJson(needs.setup.outputs.manifests) }}
       fail-fast: false
       # Only one job at a time can use the shared repository cache
@@ -58,11 +59,11 @@ jobs:
         uses: andyholmes/flatter@main
         with:
           files: |
-            apps/io.github.andrei-drexler.ironwail/io.github.andrei_drexler.ironwail.yml
-            apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.yml
+            # apps/io.github.andrei-drexler.ironwail/io.github.andrei_drexler.ironwail.yml
+            # apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.yml
             apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.yml
-            apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
-            apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
+            # apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
+            # apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
@@ -101,6 +102,8 @@ jobs:
           tar -xf artifact.tar
           rm artifact.tar
           touch index.html
+          ls -la
+          pwd
           echo "flatpak.yellowkeycard.net" > CNAME
 
       - name: Checkout
