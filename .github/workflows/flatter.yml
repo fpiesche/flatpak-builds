@@ -97,14 +97,13 @@ jobs:
           name: github-pages
           path: _site
 
-      - name: Extract artifact and generate CNAME file
+      - name: Extract artifact
         if: ${{ env.PUBLISH }} == "true"
         run: |
           cd _site
           tar -xf artifact.tar
           rm artifact.tar
           touch index.html
-          echo "flatpak.yellowkeycard.net" > CNAME
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
