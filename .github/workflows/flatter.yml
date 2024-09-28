@@ -109,14 +109,13 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
         with:
-          path: src
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
         run: |
           npm i markdown-to-html-cli -g
           markdown-to-html \
-            --source src/README.md \
+            --source README.md \
             --output _site/index.html \
             --title "retrogame flathub repo" \
             --description "Various things missing from Flathub" \
