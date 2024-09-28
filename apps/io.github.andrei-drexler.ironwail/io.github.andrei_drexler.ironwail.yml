@@ -29,10 +29,9 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://github.com/fpiesche/ironwail/archive/refs/tags/libxmp-4.6.0.zip
-        tag: libxmp-4.6.0
+        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.6.0.zip
         dest-filename: libxmp.zip
-        commit: 8201d26cf933688a8be64292457c429fd8e654ab
+        sha256: d46726d978f661b2f5206dc350c789edac8eafa041b93e5a46a388e271055c92
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
