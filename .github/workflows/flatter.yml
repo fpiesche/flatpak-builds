@@ -60,17 +60,16 @@ jobs:
         with:
           files: |
             apps/io.github.andrei-drexler.ironwail/io.github.andrei_drexler.ironwail.yml
-        # apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.yml
-        # apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.yml
-        # apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
-        # apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
+            apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.yml
+            apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.yml
+            apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
+            apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-artifact: true
-          # upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
   deploy:
     name: Deploy to GitHub Pages
@@ -125,4 +124,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-          target-folder: repo
+
