@@ -20,6 +20,10 @@ jobs:
     container:
       image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
+    permissions:
+      pages: write
+      id-token: write
+      contents: write
 
     strategy:
       matrix:
@@ -63,6 +67,7 @@ jobs:
           github-corners: https://github.com/fpiesche/flatpak-builds
 
       - name: Build
+        id: flatpak
         uses: andyholmes/flatter@main
         with:
           files: |
@@ -71,38 +76,26 @@ jobs:
             apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.yml
             apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
             apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
-
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+          upload-pages-artifact: false
           upload-pages-includes: |
             CNAME
             default.css
             index.html
 
-  deploy:
-    name: Deploy to Github Pages
-    runs-on: ubuntu-latest
-    needs:
-      - flatter
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      - name: Determine whether to publish
+        run: |
+          PUBLISH=false
+          if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
+          echo PUBLISH=$PUBLISH >> $GITHUB_ENV
 
-    steps:
-    - name: Determine whether to publish
-      run: |
-        PUBLISH=false
-        if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
-        echo PUBLISH=$PUBLISH >> $GITHUB_ENV
-
-    - name: Publish repo
-      if: ${{ env.PUBLISH }} == "true"
-      id: deployment
-      uses: actions/deploy-pages@v1
+      - name: Publish repo
+        if: ${{ env.PUBLISH }} == "true"
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          folder: ${{ steps.flatpak.outputs.repository }}
+          target-folder: repo
