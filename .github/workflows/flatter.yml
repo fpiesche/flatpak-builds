@@ -119,13 +119,10 @@ jobs:
             --title "retrogame flathub repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
-          pwd
-          ls -la
-          ls -la _site
 
       - name: Publish repo
         if: ${{ env.PUBLISH }} == "true"
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ../_site
+          folder: _site
           target-folder: repo
