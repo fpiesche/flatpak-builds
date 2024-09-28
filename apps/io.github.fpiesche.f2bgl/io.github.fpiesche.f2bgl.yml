@@ -31,8 +31,8 @@ modules:
   - name: f2bgl
     sources:
       - type: archive
-        url: https://github.com/fpiesche/f2bgl/archive/refs/tags/v1.0.0.zip
-        sha256: 35dc7d87d55760b04c795ed6f779649676ac868fab13c0bb82c8c8a4a4f81315
+        url: https://api.github.com/repos/fpiesche/f2bgl/zipball/v1.0.0
+        sha256: 1da3a30cf264fcad20fb10df6d82645ec3f287add138221dd329c021f3aad11b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fpiesche/f2bgl/releases/latest
@@ -44,23 +44,23 @@ modules:
         dest-filename: io.github.fpiesche.f2bgl.sh
         commands:
           # Ensure data directories expected by the game exist
-          - if [[ ! -d ${XDG_DATA_HOME}/game ]]; then mkdir ${XDG_DATA_HOME}/game; fi
-          - if [[ ! -d ${XDG_DATA_HOME}/user ]]; then mkdir ${XDG_DATA_HOME}/user; fi
+          - if [[ ! -d ${XDG_DATA_HOME}/game ]]; then mkdir ${XDG_DATA_HOME}/game;
+            fi
+          - if [[ ! -d ${XDG_DATA_HOME}/user ]]; then mkdir ${XDG_DATA_HOME}/user;
+            fi
           # Verify game data is present
-          - if [[ ! -f ${XDG_DATA_HOME}/game/DATA/INTRO.CIN ]]; then
-                zenity --error --text "f2bgl requires the game data from a Fade to Black installation.
-                Please copy at least the game's DATA directory and DELPHINE.INI to ${XDG_DATA_HOME}/game/."
-                --ok-label "Close" --width=400;
-                exit 1;
-            fi
+          - if [[ ! -f ${XDG_DATA_HOME}/game/DATA/INTRO.CIN ]]; then zenity --error
+            --text "f2bgl requires the game data from a Fade to Black installation.
+            Please copy at least the game's DATA directory and DELPHINE.INI to ${XDG_DATA_HOME}/game/."
+            --ok-label "Close" --width=400; exit 1; fi
           # Copy control mapping file to user data if it doesn't exist there
-          - if [[ ! -f ${XDG_CONFIG_HOME}/user/controls.cfg ]]; then
-                echo "Copying controls.cfg to user data...";
-                install -Dm744 /app/bin/controls.cfg -t ${XDG_DATA_HOME}/user/;
-            fi
+          - if [[ ! -f ${XDG_CONFIG_HOME}/user/controls.cfg ]]; then echo "Copying
+            controls.cfg to user data..."; install -Dm744 /app/bin/controls.cfg -t
+            ${XDG_DATA_HOME}/user/; fi
           # Launch game
           - cd /app/bin
-          - ./f2bgl --datapath=$XDG_DATA_HOME/game --savepath=$XDG_DATA_HOME/user --subtitles $@
+          - ./f2bgl --datapath=$XDG_DATA_HOME/game --savepath=$XDG_DATA_HOME/user
+            --subtitles $@
     buildsystem: simple
     subdir: src
     builddir: true
