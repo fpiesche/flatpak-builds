@@ -43,10 +43,9 @@ modules:
     config-opts:
       - -DDATA_FILES=./ArxLibertatisData
     sources:
-      - type: git
-        url: https://github.com/arx/ArxLibertatis.git
-        tag: "1.2.1"
-        commit: b054123cd0ac280c1e1b42479c52ea32e25c7965
+      - type: archive
+        url: https://github.com/arx/ArxLibertatis/archive/refs/tags/1.2.1.zip
+        sha256: 1e0428e53919d37055319f23608c51eabed948489cde4402dca96df9af475d4f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/arx/ArxLibertatis/releases/latest

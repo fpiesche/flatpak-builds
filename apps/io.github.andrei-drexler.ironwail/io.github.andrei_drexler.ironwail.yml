@@ -40,15 +40,16 @@ modules:
 
   - name: ironwail
     sources:
-      - type: git
-        url: https://github.com/fpiesche/ironwail
-        commit: 20eed18235c3f6b7e0bf37f99623116c070e5fe1
-        # url: https://github.com/andrei-drexler/ironwail
-        # tag: v0.7.0
-        # commit: 5b130aae74d43139e5292104a085c19fc1a24b1e
-        # x-checker-data:
-        #   type: git
-        #   tag-pattern: ^v(.*)$
+      - type: archive
+        url: https://github.com/fpiesche/ironwail/archive/refs/heads/master.zip
+        sha256: a1848048f0aae2edf842f748b5c359fb42a595a481a53ba2993987b7307575b9
+        # url: https://github.com/andrei-drexler/ironwail/archive/refs/tags/v0.7.0.zip
+        # sha256: 43bdab0b816f800516d6a07c46087b0b5d4f9b9faf0d24d65fb8f169babbfe98
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/andrei-drexler/ironwail/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
       - type: script
         dest-filename: ironwail.sh
         commands:

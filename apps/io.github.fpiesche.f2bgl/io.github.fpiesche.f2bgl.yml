@@ -30,13 +30,14 @@ modules:
 
   - name: f2bgl
     sources:
-      - type: git
-        url: https://github.com/fpiesche/f2bgl
-        tag: "v1.0.0"
-        commit: "71914f5e7ab419290cfe22a2e8f68a7f6351fc96"
+      - type: archive
+        url: https://github.com/fpiesche/f2bgl/archive/refs/tags/v1.0.0.zip
+        sha256: 35dc7d87d55760b04c795ed6f779649676ac868fab13c0bb82c8c8a4a4f81315
         x-checker-data:
-          type: git
-          tag-pattern: '^v([\d.]+)$'
+          type: json
+          url: https://api.github.com/repos/fpiesche/f2bgl/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
       - type: patch
         path: f2bgl_remap_config_files.patch
       - type: script

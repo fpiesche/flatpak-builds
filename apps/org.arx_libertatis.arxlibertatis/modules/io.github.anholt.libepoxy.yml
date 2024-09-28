@@ -6,11 +6,12 @@ config-opts:
   - --default-library=static
   - -Dtests=false
 sources:
-  - type: git
-    url: https://github.com/anholt/libepoxy.git
-    tag: "1.5.10"
-    commit: c84bc9459357a40e46e2fec0408d04fbdde2c973
+  - type: archive
+    url: https://github.com/anholt/libepoxy/archive/refs/tags/1.5.10.zip
+    sha256: 27ccb3fdb46a0bd5a2e042669da6f7368404963eb9bb9b7f51616f2fed822090
     x-checker-data:
-      type: git
-      tag-pattern: ^([\d\.]+)$
+      type: json
+      url: https://api.github.com/repos/anholt/libepoxy/releases/latest
+      version-query: .tag_name
+      url-query: '.zipball_url'
 

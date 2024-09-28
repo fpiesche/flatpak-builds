@@ -3,10 +3,11 @@ buildsystem: cmake-ninja
 config-opts:
   - -DALSOFT_EXAMPLES=OFF
 sources:
-  - type: git
-    url: https://github.com/kcat/openal-soft.git
-    tag: "1.23.1"
-    commit: d3875f333fb6abe2f39d82caca329414871ae53b
+  - type: archive
+    url: https://github.com/kcat/openal-soft/archive/refs/tags/1.23.1.zip
+    sha256: dd4e36a61ac4726574a3d6e96492f2e136e12ccfc9f9b5e6f22a45713613c98b
     x-checker-data:
-      type: git
-      tag-pattern: ^([\d\.]+)$
+      type: json
+      url: https://api.github.com/repos/kcat/openal-soft/releases/latest
+      version-query: .tag_name
+      url-query: '.zipball_url'
