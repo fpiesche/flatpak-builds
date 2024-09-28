@@ -97,6 +97,8 @@ jobs:
       - name: Generate CNAME
         if: ${{ env.PUBLISH }} == "true"
         run: |
+          ls -la
+          ls -la _site
           echo "flatpak.yellowkeycard.net" > _site/CNAME
 
       - name: Checkout
