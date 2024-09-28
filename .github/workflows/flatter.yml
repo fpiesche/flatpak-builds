@@ -108,7 +108,6 @@ jobs:
       - name: Checkout
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
-        with:
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
