@@ -44,16 +44,17 @@ modules:
       - -DDATA_FILES=./ArxLibertatisData
     sources:
       - type: archive
-        url: https://github.com/arx/ArxLibertatis/archive/refs/tags/1.2.1.zip
-        sha256: 1e0428e53919d37055319f23608c51eabed948489cde4402dca96df9af475d4f
+        url: https://github.com/arx/ArxLibertatis/releases/download/1.2.1/arx-libertatis-1.2.1.tar.xz
+        sha256: aafd8831ee2d187d7647ad671a03aabd2df3b7248b0bac0b3ac36ffeb441aedf
         x-checker-data:
           type: json
           url: https://api.github.com/repos/arx/ArxLibertatis/releases/latest
-          version-query: ".tag_name"
-          url-query: ".assets[] | select(.name==\"arx-libertatis-\" + $version + \".tar.xz\") | .browser_download_url"
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="arx-libertatis-" + $version + ".tar.xz")
+            | .browser_download_url
       - type: git
         url: https://github.com/arx/ArxLibertatisData.git
-        tag: "1"
+        tag: '1'
         commit: d92cc853ca5d40795073b432f1b5ded38e941228
         dest: ./ArxLibertatisData
         x-checker-data:
