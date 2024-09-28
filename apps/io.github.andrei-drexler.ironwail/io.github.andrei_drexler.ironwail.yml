@@ -35,7 +35,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
-          version-query: .tag_name | sub(\"^libxmp-\"; \"\")
+          version-query: .tag_name | sub("^libxmp-"; "")
           url-query: .zipball_url
 
   - name: ironwail
