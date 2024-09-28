@@ -28,20 +28,22 @@ modules:
   - name: libxmp
     buildsystem: autotools
     sources:
-      - type: git
-        url: https://github.com/libxmp/libxmp/
+      - type: archive
+        url: https://github.com/fpiesche/ironwail/archive/refs/tags/libxmp-4.6.0.zip
         tag: libxmp-4.6.0
+        dest-filename: libxmp.zip
         commit: 8201d26cf933688a8be64292457c429fd8e654ab
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
           version-query: .tag_name | sub(\"^libxmp-\"; \"\")
-          url-query: .tarball_url
+          url-query: .zipball_url
 
   - name: ironwail
     sources:
       - type: archive
         url: https://github.com/fpiesche/ironwail/archive/refs/heads/master.zip
+        dest-filename: ironwail.zip
         sha256: a1848048f0aae2edf842f748b5c359fb42a595a481a53ba2993987b7307575b9
         # url: https://github.com/andrei-drexler/ironwail/archive/refs/tags/v0.7.0.zip
         # sha256: 43bdab0b816f800516d6a07c46087b0b5d4f9b9faf0d24d65fb8f169babbfe98

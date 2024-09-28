@@ -20,6 +20,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/Mindwerks/wildmidi/archive/wildmidi-0.4.5.tar.gz
+        dest-filename: wildmidi.tar.gz
         sha256: 116c0f31d349eaa74a630ed5a9a17b6a351204877a4ed9fb9aacd9dbd7f6c874
         x-checker-data:
           type: json
@@ -32,6 +33,7 @@ modules:
     sources:
       - type: archive
         url: https://api.github.com/repos/fpiesche/f2bgl/zipball/v1.0.0
+        dest-filename: f2bgl.zip
         sha256: 1da3a30cf264fcad20fb10df6d82645ec3f287add138221dd329c021f3aad11b
         x-checker-data:
           type: json
