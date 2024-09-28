@@ -25,7 +25,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Mindwerks/wildmidi/releases/latest
-          version-query: .tag_name
+          version-query: .tag_name | sub("wildmidi-"; "")
           url-query: .assets[] | select(.name=="wildmidi-" + $version + ".tar.gz")
             | .browser_download_url
 
