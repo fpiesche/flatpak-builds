@@ -9,6 +9,7 @@ sources:
   - type: archive
     url: https://api.github.com/repos/anholt/libepoxy/zipball/1.5.10
     sha256: d75ddc0e7925d9852b52c3db7f4f2c67cdc0f9bc3e9e542efab37f4791a6f9e4
+    dest-filename: libepoxy.zip
     x-checker-data:
       type: json
       url: https://api.github.com/repos/anholt/libepoxy/releases/latest
