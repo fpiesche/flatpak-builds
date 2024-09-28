@@ -89,6 +89,10 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
           echo PUBLISH=$PUBLISH >> $GITHUB_ENV
 
+      - name: Checkout
+        if: ${{ env.PUBLISH }} == "true"
+        uses: actions/checkout@v4
+
       - name: Get Pages artifact
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/download-artifact@v4
@@ -105,17 +109,13 @@ jobs:
           touch index.html
           echo "flatpak.yellowkeycard.net" > CNAME
 
-      - name: Checkout
-        if: ${{ env.PUBLISH }} == "true"
-        uses: actions/checkout@v4
-
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
         run: |
           npm i markdown-to-html-cli -g
           markdown-to-html \
             --source README.md \
-            --output ../_site/index.html \
+            --output _site/index.html \
             --title "retrogame flathub repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
