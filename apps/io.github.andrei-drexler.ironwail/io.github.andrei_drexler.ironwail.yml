@@ -17,8 +17,8 @@ finish-args:
 
 cleanup:
   - /include
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /lib/pkgconfig
 
 modules:
@@ -41,8 +41,8 @@ modules:
   - name: ironwail
     sources:
       - type: archive
-        url: https://github.com/fpiesche/ironwail/archive/refs/heads/master.zip
-        sha256: a1848048f0aae2edf842f748b5c359fb42a595a481a53ba2993987b7307575b9
+        url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.7.0
+        sha256: a9e442e4f8d725b6e79117e929cf1765177dfba003042e3b6c91776fb572d80d
         # url: https://github.com/andrei-drexler/ironwail/archive/refs/tags/v0.7.0.zip
         # sha256: 43bdab0b816f800516d6a07c46087b0b5d4f9b9faf0d24d65fb8f169babbfe98
         x-checker-data:
@@ -53,26 +53,28 @@ modules:
       - type: script
         dest-filename: ironwail.sh
         commands:
-          - # Check for game data
+          - 
+            # Check for game data
           - if [[ ! -d $HOME/.local/share/Steam/steamapps/common/Quake/id1/ ]]; then
-          -     if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
-          -         zenity --error --text "<b>Could not find Quake game data</b>\n\n
-                        Please either install Quake via Steam to your library in <tt><b>$HOME/.local/share/Steam/</b></tt>
-                        or copy the game data (at least <tt>pak0.pak</tt>) to <tt><b>$XDG_DATA_HOME/id1/pak0.pak</b></tt>."
-                        --ok-label "Quit" --width=400
-          -     else
-          - # If game data is already in XDG_DATA_HOME, just start the game
-          -         /app/bin/ironwail -basedir $XDG_DATA_HOME "$@"
-          -     fi
-          - # If game data is in Steam directory, run Ironwail without -basedir but catch potential errors on exit
+          - if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
+          - zenity --error --text "<b>Could not find Quake game data</b>\n\n Please
+            either install Quake via Steam to your library in <tt><b>$HOME/.local/share/Steam/</b></tt>
+            or copy the game data (at least <tt>pak0.pak</tt>) to <tt><b>$XDG_DATA_HOME/id1/pak0.pak</b></tt>."
+            --ok-label "Quit" --width=400
           - else
-          -     /app/bin/ironwail "$@"
-          -     if [[ "$?" != "0" ]]; then
-          -         zenity --error --text "<b>Ironwail exited with an error</b>\n\n
-                    For a detailed error message, please run Ironwail from a terminal window using\n
-                    <tt><b>flatpak run $FLATPAK_ID</b></tt>."
-                    --ok-label "Quit" --width=400
-          -     fi
+          - 
+            # If game data is already in XDG_DATA_HOME, just start the game
+          - /app/bin/ironwail -basedir $XDG_DATA_HOME "$@"
+          - fi
+          - 
+            # If game data is in Steam directory, run Ironwail without -basedir but catch potential errors on exit
+          - else
+          - /app/bin/ironwail "$@"
+          - if [[ "$?" != "0" ]]; then
+          - zenity --error --text "<b>Ironwail exited with an error</b>\n\n For a
+            detailed error message, please run Ironwail from a terminal window using\n
+            <tt><b>flatpak run $FLATPAK_ID</b></tt>." --ok-label "Quit" --width=400
+          - fi
           - fi
     buildsystem: simple
     build-commands:
