@@ -19,9 +19,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/Mindwerks/wildmidi/archive/wildmidi-0.4.5.tar.gz
+        url: https://github.com/Mindwerks/wildmidi/releases/download/wildmidi-0.4.6/wildmidi-0.4.6.tar.gz
         dest-filename: wildmidi.tar.gz
-        sha256: 116c0f31d349eaa74a630ed5a9a17b6a351204877a4ed9fb9aacd9dbd7f6c874
+        sha256: 24ca992639ce76efa3737029fceb3672385d56e2ac0a15d50b40cc12d26e60de
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Mindwerks/wildmidi/releases/latest
