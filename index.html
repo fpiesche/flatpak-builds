@@ -155,7 +155,18 @@ class MarkdownStyle extends HTMLElement {
     }
 }
 customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px;max-width: 960px;" class="markdown-style">
-    <h1 id="honk"><a class="anchor" aria-hidden="true" tabindex="-1" href="#honk"><span class="octicon octicon-link"></span></a>honk</h1>
+    <h1 id="random-flatpak-builds"><a class="anchor" aria-hidden="true" tabindex="-1" href="#random-flatpak-builds"><span class="octicon octicon-link"></span></a>Random Flatpak builds</h1>
+    <p>This is a repository holding some Flatpak builds I've assembled which can't be submitted to Flathub for a variety of reasons - the developers have gone missing or retired so I can't get approval for a submission, or the licensing situation is unclear or incompatible with Flathub, or the developers have specifically said they don't want their app to be listed on Flathub.</p>
+    <h1 id="setup"><a class="anchor" aria-hidden="true" tabindex="-1" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
+    <p><code>flatpak remote-add fpiesche https://raw.githubusercontent.com/fpiesche/flatpak-builds/refs/heads/gh-pages/index.flatpakrepo</code></p>
+    <h1 id="current-packages"><a class="anchor" aria-hidden="true" tabindex="-1" href="#current-packages"><span class="octicon octicon-link"></span></a>Current packages</h1>
+    <ul>
+      <li><a href="https://github.com/elasota/Aerofoil">Aerofoil</a> - a port of Glider PRO, the classic Macintosh paper airplane game (pending Flathub submission)</li>
+      <li><a href="https://github.com/andrei-drexler/ironwail">Ironwail</a> - a high-performance Quake source port (<a href="https://github.com/andrei-drexler/ironwail/issues/241#issuecomment-2261224166">waiting for dev approval for Flathub submission</a>)</li>
+      <li><a href="https://github.com/cyxx/f2bgl">f2bgl</a> - a reverse-engineered port of Fade To Black (license unclear)</li>
+      <li><a href="https://arx-libertatis.org/">Arx Libertatis</a> - a source port of Arx Fatalis (<a href="https://bugs.arx-libertatis.org/arx/issues/1747">waiting for dev approval for Flathub submission</a>)</li>
+      <li><a href="https://github.com/Interkarma/daggerfall-unity">Daggerfall Unity</a> - a modern Unity port of Elder Scrolls II: Daggerfall (developer refused Flathub submission)</li>
+    </ul>
   <style>markdown-style pre .copied {
   display: flex;
   position: absolute;
