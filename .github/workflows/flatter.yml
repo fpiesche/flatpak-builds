@@ -12,6 +12,9 @@ on:
   push:
     paths:
       - "apps/*/*.yml"
+    branches:
+      - main
+  pull_request:
 
 jobs:
   flatter:
@@ -62,6 +65,8 @@ jobs:
             apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.yml
             apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.yml
             apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.yml
+          flatpak-builder-args: |
+            --skip-if-unchanged
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
