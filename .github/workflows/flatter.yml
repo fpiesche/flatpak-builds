@@ -73,16 +73,12 @@ jobs:
       - name: Generate list of files to include for web listings
         id: web-listings
         run: |
-          METAINFO_FILES=$(find ./apps/ -name "*.metainfo.xml")
-          METAINFO_FILES="${METAINFO_FILES//'%'/'%25'}"
-          METAINFO_FILES="${METAINFO_FILES//$'\n'/'%0A'}"
-          METAINFO_FILES="${METAINFO_FILES//$'\r'/'%0D'}"
-          echo metainfo-files=${METAINFO_FILES} >> $GITHUB_OUTPUT
-          ICON_FILES=$(find ./apps/ -name "*.metainfo.xml")
-          ICON_FILES="${ICON_FILES//'%'/'%25'}"
-          ICON_FILES="${ICON_FILES//$'\n'/'%0A'}"
-          ICON_FILES="${ICON_FILES//$'\r'/'%0D'}"
-          echo icon-files=${ICON_FILES} >> $GITHUB_OUTPUT
+          echo 'metainfo-files<<EOF' >> $GITHUB_OUTPUT
+          find ./apps/ -name "*.metainfo.xml" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+          echo 'icon-files<<EOF' >> $GITHUB_OUTPUT
+          find ./apps/ -name "*.png" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Build
         id: flatpak
