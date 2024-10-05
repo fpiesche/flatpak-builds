@@ -41,7 +41,7 @@ jobs:
           echo 'files<<EOF' >> $GITHUB_OUTPUT
           if [[ "${{ github.event_name }}" == "push" ]]; then
             echo ${{ steps.changed_files_action.outputs.all_changed_files }} >> $GITHUB_OUTPUT
-          elif [[ "${{ inputs.appids }}" != "" ]]
+          elif [[ "${{ inputs.appids }}" != "" ]]; then
             echo ${{ inputs.appids }} | sed "s/ /\n/" >> $GITHUB_OUTPUT
           else
             echo $(ls -1 apps/*/*.yml) >> $GITHUB_OUTPUT
