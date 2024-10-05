@@ -28,25 +28,13 @@ modules:
       - -DCMAKE_INSTALL_PREFIX=/app
     sources:
       - type: archive
+        url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
         dest-filename: aerofoil.zip
-        url: https://github.com/elasota/Aerofoil/archive/refs/tags/1.1.2.zip
-        sha256: ba88e28ddc6c8abcee49812870967f4180a990355cac3ffeb1efa9633ad67e59
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
-  - name: support-files
-    buildsystem: simple
-    sources:
-      - type: file
-        path: io.github.elasota.aerofoil.svg
-      - type: file
-        path: io.github.elasota.aerofoil.desktop
-      - type: file
-        path: io.github.elasota.aerofoil.metainfo.xml
-    build-commands:
-      # Install metadata and launcher files
-      - install -D -m755 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -D -m755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+        sha256: 34f0bdaeed922c1d774dfab37dd8e4d6f99103137ef2782969a2b43209f920f3
+        # url: https://github.com/elasota/Aerofoil/archive/refs/tags/1.1.2.zip
+        # sha256: ba88e28ddc6c8abcee49812870967f4180a990355cac3ffeb1efa9633ad67e59
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
+        #   version-query: .tag_name
+        #   url-query: .zipball_url
