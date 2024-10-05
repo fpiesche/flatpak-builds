@@ -32,9 +32,9 @@ modules:
   - name: f2bgl
     sources:
       - type: archive
-        url: https://api.github.com/repos/fpiesche/f2bgl/zipball/v1.0.0
+        url: https://api.github.com/repos/fpiesche/f2bgl/zipball/v1.0.1
         dest-filename: f2bgl.zip
-        sha256: 1da3a30cf264fcad20fb10df6d82645ec3f287add138221dd329c021f3aad11b
+        sha256: 55920c887fd7cfc5ee014d241ff701c0c8f22bc8d38f9048a1616fa851b99b81
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fpiesche/f2bgl/releases/latest
