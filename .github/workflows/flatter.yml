@@ -43,12 +43,12 @@ jobs:
             echo ${{ steps.changed_files_action.outputs.all_changed_files }} >> $GITHUB_OUTPUT
           elif [[ "${{ inputs.appids }}" != "" ]]; then
             for appid in ${{ inputs.appids }}; do
-                echo apps/${appid}/${appid.yml} >> $GITHUB_OUTPUT
+                echo apps/${appid}/${appid}.yml >> $GITHUB_OUTPUT
             done
           else
             echo $(ls -1 apps/*/*.yml) >> $GITHUB_OUTPUT
           fi
-          echo EOF >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
           echo "::group::Output"
           cat $GITHUB_OUTPUT
           echo "::endgroup::"
