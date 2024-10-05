@@ -39,7 +39,7 @@ jobs:
         id: file_list
         run: |
           echo 'files<<EOF' >> $GITHUB_OUTPUT
-          if [[ "${{ github.event_name }}" == "push" ]]; then
+          if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
             echo ${{ steps.changed_files_action.outputs.all_changed_files }} >> $GITHUB_OUTPUT
           elif [[ "${{ inputs.appids }}" != "" ]]; then
             for appid in ${{ inputs.appids }}; do
