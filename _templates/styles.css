@@ -2,7 +2,6 @@
     padding: 1em;
     margin-right: 0;
     margin-left: 0;
-    /* padding-bottom: 3em; */
     min-height: 160px;
     width: 100%;
     background-color: lightsteelblue;
@@ -57,7 +56,7 @@
 
 .carousel-control-prev-icon:hover {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.75'/%3E%3Cpath d='m121.57 162.4-62.395-62.395 62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
-    transition: .4s
+    transition: .4s;
 }
 
 .carousel-control-next-icon {
