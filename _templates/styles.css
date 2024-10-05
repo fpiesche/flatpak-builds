@@ -44,5 +44,6 @@
 
 .carousel-caption {
     border-radius: 0.5em;
-    background: #000000a0;
+    background: #00000080;
+    margin: 0 8em;
 }
