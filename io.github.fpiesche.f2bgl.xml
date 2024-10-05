@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/_templates/app_page.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/_templates/app_page.xsl"?>
 <component>
   <id>io.github.fpiesche.f2bgl</id>
   <name>Fade to Black</name>
@@ -16,22 +16,28 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level4b-04.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level4b.png</image>
+      <caption>Level 4</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level1-10.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level1.png</image>
+      <caption>Level 1</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level3-21.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level3.png</image>
+      <caption>Level 3</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level2a-10.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level2a.png</image>
+      <caption>Level 2</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level2b-04.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level2b.png</image>
+      <caption>Level 2</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://cyxdown.free.fr/f2b/f2bgl-level6b-11.thumb.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level6b.png</image>
+      <caption>Level 6</caption>
     </screenshot>
   </screenshots>
   <categories>
@@ -40,6 +46,7 @@
   <releases>
     <release version="0.3.1" date="2019-12-26"/>
   </releases>
-  <content_rating type="oars-1.1"></content_rating>
-  <update_contact>https://github.com/fpiesche</update_contact>
-</application>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">moderate</content_attribute>
+  </content_rating>
+</component>
