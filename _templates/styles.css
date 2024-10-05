@@ -11,6 +11,11 @@
     font-weight: bold;
 }
 
+.homepage-link {
+    font-size: .5em;
+    margin-left: .5em;
+}
+
 .header > div > img {
     float: left;
     margin-right: 1em;

@@ -42,7 +42,10 @@
       >
         Install
       </button>
-      <h1><xsl:value-of select="component/name"/></h1>
+      <h1>
+        <xsl:value-of select="component/name"/>
+        <a class="homepage-link" href='{component/url[@type="homepage"]}' target="_blank">🏠</a>
+      </h1>
       <p class="developer">
         by <a href="{component/url}"><xsl:value-of select="component/developer/name"/></a>
       </p>
