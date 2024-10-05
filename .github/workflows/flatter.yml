@@ -71,11 +71,13 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Assemble files for web listings
+        id: weblisting-files
         run: |
           find apps -name "*.metainfo.xml" -exec cp {} . \;
-          ls -la *.xml
           rename ".metainfo.xml" ".xml" *.metainfo.xml
-          ls -la *.xml
+          echo 'files<<EOF' >> $GITHUB_OUTPUT
+          ls -1 *.xml >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Build
         id: flatpak
@@ -87,8 +89,7 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-includes: |
-            *.xml
+          upload-pages-includes: ${{ steps.weblisting-files.outputs.files }}
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
   deploy:
