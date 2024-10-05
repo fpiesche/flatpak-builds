@@ -30,6 +30,7 @@
 .header > div > button:hover {
     background-color: aliceblue;
     color: darkslateblue;
+    transition: .4s;
 }
 
 .popover-body {
@@ -51,11 +52,21 @@
 .carousel-control-prev-icon {
     border-radius: 0.5em;
     padding: 2em;
-    background: black;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.50'/%3E%3Cpath d='m121.57 162.4-62.395-62.395 62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+}
+
+.carousel-control-prev-icon:hover {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.75'/%3E%3Cpath d='m121.57 162.4-62.395-62.395 62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+    transition: .4s
 }
 
 .carousel-control-next-icon {
     border-radius: 0.5em;
     padding: 2em;
-    background: black;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.50'/%3E%3Cpath d='m78.434 162.4 62.395-62.395-62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+}
+
+.carousel-control-next-icon:hover {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.75'/%3E%3Cpath d='m78.434 162.4 62.395-62.395-62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+    transition: .4s;
 }
