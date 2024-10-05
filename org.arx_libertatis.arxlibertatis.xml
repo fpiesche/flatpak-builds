@@ -90,4 +90,4 @@
   <provides>
     <binary>arx</binary>
   </provides>
-</application>
+</component>
