@@ -73,10 +73,10 @@ modules:
                     --ok-label "Quit" --width=400
           -     fi
           - fi
-        - type: file
-          path: io.github.andrei_drexler.irownail.metainfo.yml
-        - type: file
-          path: io.github.andrei_drexler.ironwail.desktop
+      - type: file
+        path: io.github.andrei_drexler.irownail.metainfo.yml
+      - type: file
+        path: io.github.andrei_drexler.ironwail.desktop
     buildsystem: simple
     build-commands:
       # Build
