@@ -74,7 +74,7 @@ modules:
           -     fi
           - fi
       - type: file
-        path: io.github.andrei_drexler.ironwail.metainfo.yml
+        path: io.github.andrei_drexler.ironwail.metainfo.xml
       - type: file
         path: io.github.andrei_drexler.ironwail.desktop
     buildsystem: simple
