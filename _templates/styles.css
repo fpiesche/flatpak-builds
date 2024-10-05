@@ -47,3 +47,15 @@
     background: #00000080;
     margin: 0 8em;
 }
+
+.carousel-control-prev-icon {
+    border-radius: 0.5em;
+    padding: 2em;
+    background: black;
+}
+
+.carousel-control-next-icon {
+    border-radius: 0.5em;
+    padding: 2em;
+    background: black;
+}
