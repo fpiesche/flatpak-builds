@@ -1,6 +1,6 @@
 # Random Flatpak builds
 
-This is a repository holding some Flatpak builds I've assembled which can't be submitted to Flathub for a variety of reasons - the developers have gone missing or retired so I can't get approval for a submission, or the licensing situation is unclear or incompatible with Flathub, or the developers have specifically said they don't want their app to be listed on Flathub.
+This is a repository holding some Flatpak builds I've assembled which I have yet to submit to Flathub for a variety of reasons - the app is still going through developer changes and approval, the developers have gone missing or retired so I can't get approval for a submission, or the licensing situation is unclear or incompatible with Flathub, or the developers have specifically said they don't want their app to be listed on Flathub.
 
 # Setup
 
@@ -8,8 +8,10 @@ This is a repository holding some Flatpak builds I've assembled which can't be s
 
 # Current packages
 
-- [Aerofoil](https://github.com/elasota/Aerofoil) - a port of Glider PRO, the classic Macintosh paper airplane game (pending Flathub submission)
-- [Ironwail](https://github.com/andrei-drexler/ironwail) - a high-performance Quake source port ([waiting for dev approval for Flathub submission](https://github.com/andrei-drexler/ironwail/issues/241#issuecomment-2261224166))
-- [f2bgl](https://github.com/cyxx/f2bgl) - a reverse-engineered port of Fade To Black (license unclear)
-- [Arx Libertatis](https://arx-libertatis.org/) - a source port of Arx Fatalis ([waiting for dev approval for Flathub submission](https://bugs.arx-libertatis.org/arx/issues/1747))
-- [Daggerfall Unity](https://github.com/Interkarma/daggerfall-unity) - a modern Unity port of Elder Scrolls II: Daggerfall (developer refused Flathub submission)
+| | | |
+|:-:|:-|:-|
+| [<img src="apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.png" width=128 height=128 />](https://fpiesche.github.io/flatpak-builds/io.github.elasota.aerofoil.xml) | <h3>[Aerofoil](https://fpiesche.github.io/flatpak-builds/io.github.elasota.aerofoil.xml)</h3>A port of Glider PRO, the classic Macintosh paper airplane game. | Pending submission to Flathub |
+| [<img src="apps/io.github.andrei_drexler.ironwail/io.github.andrei_drexler.ironwail.png" width=128 height=128 />](https://fpiesche.github.io/flatpak-builds/io.github.andrei_drexler.ironwail.xml) | <h3>[Ironwail](https://fpiesche.github.io/flatpak-builds/io.github.andrei_drexler.ironwail.xml)</h3>A high-performance Quake source port. | [Waiting for dev approval for Flathub submission](https://github.com/andrei-drexler/ironwail/issues/241#issuecomment-2261224166) |
+| [<img src="apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.png" width=128 height=128 />](https://fpiesche.github.io/flatpak-builds/io.github.fpiesche.f2bgl.xml) | <h3>[f2bgl](https://fpiesche.github.io/flatpak-builds/io.github.fpiesche.f2bgl.xml)</h3>A reverse-engineered port of Fade to Black. | License unclear and developer retired |
+| [<img src="apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.png" width=128 height=128 />](https://fpiesche.github.io/flatpak-builds/org.arx_libertatis.arxlibertatis.xml) | <h3>[Arx Libertatis](https://fpiesche.github.io/flatpak-builds/org.arx_libertatis.arxlibertatis.xml)</h3>A source port of Arx Fatalis. | [waiting for dev approval for Flathub submission](https://bugs.arx-libertatis.org/arx/issues/1747) |
+| [<img src="apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.png" width=128 height=128 />](https://fpiesche.github.io/flatpak-builds/io.github.interkarma.daggerfall-unity.xml) | <h3>[Daggerfall Unity](https://fpiesche.github.io/flatpak-builds/io.github.interkarma.daggerfall-unity.xml)</h3>A modern port of The Elder Scrolls II: Daggerfall. | Developer refused Flathub submission |
