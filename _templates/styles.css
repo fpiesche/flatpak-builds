@@ -1,0 +1,47 @@
+.header {
+    padding: 1em;
+    margin-right: 0;
+    margin-left: 0;
+    /* padding-bottom: 3em; */
+    min-height: 160px;
+    width: 100%;
+    background-color: lightsteelblue;
+}
+
+.header > div > h1 {
+    font-weight: bold;
+}
+
+.header > div > img {
+    float: left;
+    margin-right: 1em;
+}
+
+.header > div > button {
+    float: right;
+    margin-top: 1em;
+    background-color: slateblue;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 2em;
+    color: white;
+}
+
+.header > div > button:hover {
+    background-color: aliceblue;
+    color: darkslateblue;
+}
+
+.popover-body {
+    font-family: monospace;
+}
+
+.carousel-inner > div > img {
+    height: 480px;
+    object-fit: scale-down;
+}
+
+.carousel-caption {
+    border-radius: 0.5em;
+    background: #000000a0;
+}
