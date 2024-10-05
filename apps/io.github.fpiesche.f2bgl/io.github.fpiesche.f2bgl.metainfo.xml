@@ -16,6 +16,14 @@
   </description>
   <screenshots>
     <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/main/meta/screenshot_cell.png</image>
+      <caption>The start of the game: Breaking out of your cell</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/main/meta/screenshot_intro.png</image>
+      <caption>Intro video in windowed mode</caption>
+    </screenshot>
+    <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/screenshots/level4b.png</image>
       <caption>Level 4</caption>
     </screenshot>
@@ -44,6 +52,9 @@
     <category>Game</category>
   </categories>
   <releases>
+    <release version="1.0.2" date="2024-10-05"><description><p>Improve metadata.</p></description></release>
+    <release version="1.0.1" date="2024-10-04"><description><p>Improve icon.</p></description></release>
+    <release version="1.0" date="2024-02-23"><description><p>The original Flatpak release of f2bgl.</p></description></release>
     <release version="0.3.1" date="2019-12-26"/>
   </releases>
   <content_rating type="oars-1.1">
