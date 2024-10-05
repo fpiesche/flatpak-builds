@@ -17,31 +17,40 @@ on:
   pull_request:
 
 jobs:
-  file_list:
-    name: Get list of changed files
+  manifests:
+    name: Get list of manifests to build
     runs-on: ubuntu-latest
     outputs:
-      file_list: ${{ steps.file_list.outputs.files }}
-      all_changed_files: ${{ steps.changed_files.outputs.all_changed_files }}
+      files: ${{ steps.file_list.outputs.files }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Get changed files
-        when:
+      - name: Get changed manifests
+        when: ${{ github.event_name == "push" }}
         id: changed_files_action
         uses: tj-actions/changed-files@v45
         with:
           files: apps/*/*.yml
 
-      - name: Build file list
+      - name: Build file list output
         id: file_list
+        run: |
+          echo 'files<<EOF' >> $GITHUB_OUTPUT
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            echo ${{ steps.changed_files_action.outputs.all_changed_files }} >> $GITHUB_OUTPUT
+          elif [[ "${{ inputs.appids }}" != "" ]]
+            echo ${{ inputs.appids }} | sed "s/ /\n/" >> $GITHUB_OUTPUT
+          else
+            echo $(ls -1 apps/*/*.yml) >> $GITHUB_OUTPUT
+          fi
+          echo EOF >> $GITHUB_OUTPUT
 
   flatter:
     name: ${{ matrix.arch }}
-    needs: changed_files
+    needs: manifests
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andyholmes/flatter/freedesktop:24.08
@@ -91,7 +100,7 @@ jobs:
         id: flatpak
         uses: andyholmes/flatter@main
         with:
-          files: ${{ needs.changed_files.outputs.all_changed_files }}
+          files: ${{ needs.manifests.outputs.files }}
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
