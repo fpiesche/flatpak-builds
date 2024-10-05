@@ -55,7 +55,6 @@
     <release version="v1.0.2" date="2024-10-05">
       <description></description>
     </release>
-    <release version="1.0.2" date="2024-10-05"><description><p>Improve metadata.</p></description></release>
     <release version="1.0.1" date="2024-10-04"><description><p>Improve icon.</p></description></release>
     <release version="1.0" date="2024-02-23"><description><p>The original Flatpak release of f2bgl.</p></description></release>
     <release version="0.3.1" date="2019-12-26"/>
