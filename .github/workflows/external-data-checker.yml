@@ -12,6 +12,8 @@ jobs:
       manifests: ${{ steps.get-manifests.outputs.manifests }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
     - id: get-manifests
       run: |
         MANIFEST_JSON=$(find ./apps/ -maxdepth 2 -name "*.yml" | jq -R -s -c 'split("\n")' | jq 'map(select(length > 0))')
