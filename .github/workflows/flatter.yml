@@ -70,15 +70,10 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Generate list of files to include for web listings
-        id: web-listings
+      - name: Assemble files for web listings
         run: |
-          echo 'metainfo-files<<EOF' >> $GITHUB_OUTPUT
-          find ./apps/ -name "*.metainfo.xml" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
-          echo 'icon-files<<EOF' >> $GITHUB_OUTPUT
-          find ./apps/ -name "*.png" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+          find apps -name "*.metainfo.xml" -exec cp {} . \;
+          rename "s/.metainfo.xml/.xml/" *.metainfo.xml
 
       - name: Build
         id: flatpak
@@ -91,8 +86,7 @@ jobs:
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
           upload-pages-includes: |
-            ${{ steps.web-listings.outputs.icon-files }}
-            ${{ steps.web-listings.outputs.metainfo-files }}
+            *.xml
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
   deploy:
