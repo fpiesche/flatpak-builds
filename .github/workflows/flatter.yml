@@ -73,7 +73,9 @@ jobs:
       - name: Assemble files for web listings
         run: |
           find apps -name "*.metainfo.xml" -exec cp {} . \;
-          rename "s/.metainfo.xml/.xml/" *.metainfo.xml
+          ls -la *.xml
+          rename ".metainfo.xml" ".xml" *.metainfo.xml
+          ls -la *.xml
 
       - name: Build
         id: flatpak
