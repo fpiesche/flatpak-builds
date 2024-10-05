@@ -15,7 +15,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/styles.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,26 +50,20 @@
     </div>
       <div id="screenshotCarousel" class="carousel slide">
         <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#screenshotCarousel"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#screenshotCarousel"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#screenshotCarousel"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
+          <xsl:for-each select="component/screenshots/screenshot">
+            <xsl:element name="button">
+              <xsl:attribute name="type">button</xsl:attribute>
+              <xsl:attribute name="data-bs-target">#screenshotCarousel</xsl:attribute>
+              <xsl:attribute name="data-bs-slide-to"><xsl:value-of select="position()-1"/></xsl:attribute>
+              <xsl:attribute name="aria-label"><xsl:value-of select="caption"/></xsl:attribute>
+              <xsl:choose>
+                <xsl:when test="@type='default'">
+                  <xsl:attribute name="class">active</xsl:attribute>
+                  <xsl:attribute name="aria-current">true</xsl:attribute>
+                </xsl:when>
+              </xsl:choose>
+            </xsl:element>
+          </xsl:for-each>
         </div>
         <div class="carousel-inner">
         <xsl:for-each select="component/screenshots/screenshot">
