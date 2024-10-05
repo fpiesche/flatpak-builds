@@ -10,7 +10,7 @@
   <summary>A modern port of the original Quake engine, focused on performance</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>
-  <launchable type="desktop-id">io.github.andrei_drexler.ironwail.desktop</launchable>
+  <launchable type="desktop-id">io.github.andrei_drexler.ironwail</launchable>
   <url type="homepage">https://github.com/andrei-drexler/ironwail/</url>
   <description>
     <p>Ironwail is a fork of the popular GLQuake descendant QuakeSpasm with a focus on high performance
@@ -42,23 +42,23 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/andrei-drexler/ironwail/master/Misc/screenshots/ironwail-modmenu.png</image>
+      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-modmenu.png</image>
       <caption>Mod menu with search functionality</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/andrei-drexler/ironwail/master/Misc/screenshots/ironwail-tershibboleth.png</image>
+      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-tershibboleth.png</image>
       <caption>Ter Shibboleth: Drake Redux</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/andrei-drexler/ironwail/master/Misc/screenshots/ironwail-ravenkeep.png</image>
+      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-ravenkeep.png</image>
       <caption>Raven Keep</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/andrei-drexler/ironwail/master/Misc/screenshots/ironwail-peril.png</image>
+      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-peril.png</image>
       <caption>Peril</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/andrei-drexler/ironwail/master/Misc/screenshots/ironwail-optionsmenu.png</image>
+      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-optionsmenu.png</image>
       <caption>Options menu with some new settings</caption>
     </screenshot>
   </screenshots>
@@ -73,5 +73,4 @@
     <content_attribute id="violence-bloodshed">intense</content_attribute>
     <content_attribute id="violence-desecration">moderate</content_attribute>
   </content_rating>
-  <update_contact>https://github.com/andrei-drexler/ironwail/issues</update_contact>
 </component>
