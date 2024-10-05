@@ -41,11 +41,9 @@ modules:
   - name: ironwail
     sources:
       - type: archive
-        url: https://github.com/fpiesche/ironwail/archive/refs/heads/master.zip
+        url: https://github.com/andrei-drexler/ironwail/archive/refs/tags/v0.7.0.zip
+        sha256: 43bdab0b816f800516d6a07c46087b0b5d4f9b9faf0d24d65fb8f169babbfe98
         dest-filename: ironwail.zip
-        sha256: a1848048f0aae2edf842f748b5c359fb42a595a481a53ba2993987b7307575b9
-        # url: https://github.com/andrei-drexler/ironwail/archive/refs/tags/v0.7.0.zip
-        # sha256: 43bdab0b816f800516d6a07c46087b0b5d4f9b9faf0d24d65fb8f169babbfe98
         x-checker-data:
           type: json
           url: https://api.github.com/repos/andrei-drexler/ironwail/releases/latest
@@ -75,6 +73,10 @@ modules:
                     --ok-label "Quit" --width=400
           -     fi
           - fi
+        - type: file
+          path: io.github.andrei_drexler.irownail.metainfo.yml
+        - type: file
+          path: io.github.andrei_drexler.ironwail.desktop
     buildsystem: simple
     build-commands:
       # Build
@@ -85,6 +87,6 @@ modules:
       - install -D -m744 -t /app/bin/ ironwail.sh
       # Install metadata and launcher files
       - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
-      - install -D -m755 Linux/${FLATPAK_ID}.metainfo.xml  /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/${FLATPAK_ID}.desktop
-      - install -D -m755 Linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m755 ${FLATPAK_ID}.metainfo.xml  /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh ${FLATPAK_ID}.desktop
+      - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
