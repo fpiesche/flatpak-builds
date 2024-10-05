@@ -70,6 +70,20 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Generate list of files to include for web listings
+        id: web-listings
+        run: |
+          METAINFO_FILES=$(find ./apps/ -name "*.metainfo.xml")
+          METAINFO_FILES="${METAINFO_FILES//'%'/'%25'}"
+          METAINFO_FILES="${METAINFO_FILES//$'\n'/'%0A'}"
+          METAINFO_FILES="${METAINFO_FILES//$'\r'/'%0D'}"
+          echo metainfo-files=${METAINFO_FILES} >> $GITHUB_OUTPUT
+          ICON_FILES=$(find ./apps/ -name "*.metainfo.xml")
+          ICON_FILES="${ICON_FILES//'%'/'%25'}"
+          ICON_FILES="${ICON_FILES//$'\n'/'%0A'}"
+          ICON_FILES="${ICON_FILES//$'\r'/'%0D'}"
+          echo icon-files=${ICON_FILES} >> $GITHUB_OUTPUT
+
       - name: Build
         id: flatpak
         uses: andyholmes/flatter@main
@@ -80,6 +94,9 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
+          upload-pages-includes: |
+            ${{ steps.web-listings.outputs.icon-files }}
+            ${{ steps.web-listings.outputs.metainfo-files }}
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
   deploy:
