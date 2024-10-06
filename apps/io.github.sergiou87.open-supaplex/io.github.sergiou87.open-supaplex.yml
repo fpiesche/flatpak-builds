@@ -23,35 +23,36 @@ modules:
       - -DLIBXMP_DISABLE_PROWIZARD=ON
     sources:
       - type: archive
-        url: https://github.com/libxmp/libxmp/releases/download/libxmp-4.6.0/libxmp-4.6.0.tar.gz
-        sha256: 2d3c45fe523b50907e89e60f9a3b7f4cc9aab83ec9dbba7743eaffbcdcb35ea6
+        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.6.0.tar.gz
+        sha256: 032ed31e9a334078e59dc5e2ca7a14b950712fef8e838328b727570ddbd3dc12
         dest-filename: libxmp.tar.gz
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/libxmp/libxmp/releases/latest
-          version-query: .tag_name | sub("^libxmp-"; "")
-          url-query: .assets[] | select(.name=="libxmp-" + $version + ".tar.gz")
-            | .browser_download_url
-
+          type: anitya
+          project-id: 1784
+          url-template: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-$version.tar.gz
+z
   - name: sdl_mixer
     config-opts:
         - --enable-music-mod-xmp=yes
     sources:
       - type: archive
-        url: https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.tar.gz
-        sha256: 1cfb34c87b26dbdbc7afd68c4f545c0116ab5f90bbfecc5aebe2a9cb4bb31549
-        dest-filename: sdl2-mixer.tar.gz
+        url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.0.tar.gz
+        dest-filename: sdl2_mixer.tar.gz
+        sha256: 1146f00815c8ad22c3d48fbe31ae23dc5997936ebf30b4b3aeab6eab7ea1db3e
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/libsdl-org/SDL_mixer/branches/SDL2
-          version-query: .commit.sha
-          url-template: https://github.com/libsdl-org/SDL_mixer/archive/$version.tar.gz
+          type: anitya
+          project-id: 4782
+          url-template: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-$version.tar.gz
+          versions:
+            - < : 3.0.0
+            - > : 2.0.0
+          stable-only: true
 
   - name: open-supaplex
     buildsystem: simple
     sources:
       - type: git
-        url: https://github.com/sergiou87/open-supaplex.git
+        url: https://github.com/sergiou87/open-supaplex
         branch: master
         commit: 1a91d9b170ca5880c23c3996cce259321821bdf5
         x-checker-data:
