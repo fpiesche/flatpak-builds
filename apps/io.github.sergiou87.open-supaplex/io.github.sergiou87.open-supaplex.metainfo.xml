@@ -43,7 +43,8 @@
     <category>Game</category>
   </categories>
   <releases>
-    <release version="1.0.0" date="2023-12-30"/>
+    <release version="nightly" date="2024-09-30" />
+    <release version="7.1.2" date="2020-08-21" />
   </releases>
   <content_rating type="oars-1.1" />
 </component>
