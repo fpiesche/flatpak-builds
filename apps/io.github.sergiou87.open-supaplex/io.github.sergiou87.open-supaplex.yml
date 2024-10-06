@@ -30,7 +30,7 @@ modules:
           type: anitya
           project-id: 1784
           url-template: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-$version.tar.gz
-z
+
   - name: sdl_mixer
     config-opts:
         - --enable-music-mod-xmp=yes
