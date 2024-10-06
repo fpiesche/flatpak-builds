@@ -16,11 +16,11 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/main/meta/screenshot_cell.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/meta/screenshot_cell.png</image>
       <caption>The start of the game: Breaking out of your cell</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/main/meta/screenshot_intro.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/f2bgl/meta/screenshot_intro.png</image>
       <caption>Intro video in windowed mode</caption>
     </screenshot>
     <screenshot>
