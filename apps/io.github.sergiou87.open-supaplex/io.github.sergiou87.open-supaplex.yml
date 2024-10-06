@@ -1,0 +1,64 @@
+app-id: io.github.sergiou87.open-supaplex
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: opensupaplex
+
+finish-args:
+  # gamepad support
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+modules:
+  - name: libxmp
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_STATIC=OFF
+      - -DLIBXMP_DISABLE_DEPACKERS=ON
+      - -DLIBXMP_DISABLE_PROWIZARD=ON
+    sources:
+      - type: git
+        url: https://github.com/libxmp/libxmp.git
+        tag: libxmp-4.6.0
+        commit: 8201d26cf933688a8be64292457c429fd8e654ab
+        x-checker-data:
+          type: git
+          tag-pattern: ^libxmp-([\d.]+)$
+  - name: sdl_mixer
+    config-opts:
+        - --enable-music-mod-xmp=yes
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.tar.gz
+        sha256: 1cfb34c87b26dbdbc7afd68c4f545c0116ab5f90bbfecc5aebe2a9cb4bb31549
+
+  - name: open-supaplex
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/sergiou87/open-supaplex/archive/1a91d9b170ca5880c23c3996cce259321821bdf5.zip
+        sha256: 37da19e6792479242e7661cbe9d645e9e0ae0afade28f0cb05392eed814be028
+        dest-filename: open-supaplex.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/sergiou87/open-supaplex/tags
+          version-query: .[] | select(.name == "ci-dev-build") | .commit.sha
+          url-template: https://github.com/sergiou87/open-supaplex/archive/$version.zip
+      - type: file
+        path: io.github.sergiou87.open-supaplex.svg
+      - type: file
+        path: io.github.sergiou87.open-supaplex.desktop
+      - type: file
+        path: io.github.sergiou87.open-supaplex.metainfo.xml
+    build-commands:
+      - cd linux && make -j${FLATPAK_BUILDER_N_JOBS} CFLAGS='-DFILE_FHS_XDG_DIRS -DFILE_DATA_PATH=/app/usr/share/OpenSupaplex -DHAVE_SDL2 -I/usr/include/SDL2 -I/app/include/SDL2'
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm755 linux/opensupaplex -t /app/bin/
+      - mkdir -p /app/usr/share/OpenSupaplex && cp -R resources/* /app/usr/share/OpenSupaplex/
