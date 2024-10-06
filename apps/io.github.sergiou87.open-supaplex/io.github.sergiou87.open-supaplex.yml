@@ -55,9 +55,6 @@ modules:
           type: json
           url: https://api.github.com/repos/sergiou87/open-supaplex/branches/master
           commit-query: .commit.sha
-          version-query: .commit.sha
-          timestamp-query: .commit.committer.date
-          is-main-source: true
       - type: file
         path: io.github.sergiou87.open-supaplex.svg
       - type: file
