@@ -56,7 +56,7 @@ modules:
         commit: 1a91d9b170ca5880c23c3996cce259321821bdf5
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sergiou87/open-supaplex/branches/msater
+          url: https://api.github.com/repos/sergiou87/open-supaplex/branches/master
           commit-query: .commit.sha
           version-query: .commit.sha
           timestamp-query: .commit.committer.date
