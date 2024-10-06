@@ -43,9 +43,6 @@ modules:
           type: anitya
           project-id: 4782
           url-template: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-$version.tar.gz
-          versions:
-            - < : 3.0.0
-            - > : 2.0.0
           stable-only: true
 
   - name: open-supaplex
@@ -53,7 +50,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/sergiou87/open-supaplex
-        branch: master
         commit: 1a91d9b170ca5880c23c3996cce259321821bdf5
         x-checker-data:
           type: json
