@@ -22,13 +22,17 @@ modules:
       - -DLIBXMP_DISABLE_DEPACKERS=ON
       - -DLIBXMP_DISABLE_PROWIZARD=ON
     sources:
-      - type: git
-        url: https://github.com/libxmp/libxmp.git
-        tag: libxmp-4.6.0
-        commit: 8201d26cf933688a8be64292457c429fd8e654ab
+      - type: archive
+        url: https://github.com/libxmp/libxmp/releases/download/libxmp-4.6.0/libxmp-4.6.0.tar.gz
+        sha256: 2d3c45fe523b50907e89e60f9a3b7f4cc9aab83ec9dbba7743eaffbcdcb35ea6
+        dest-filename: libxmp.tar.gz
         x-checker-data:
-          type: git
-          tag-pattern: ^libxmp-([\d.]+)$
+          type: json
+          url: https://api.github.com/repos/libxmp/libxmp/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="libxmp-" + $version + ".tar.gz")
+            | .browser_download_url
+
   - name: sdl_mixer
     config-opts:
         - --enable-music-mod-xmp=yes
@@ -36,6 +40,12 @@ modules:
       - type: archive
         url: https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.tar.gz
         sha256: 1cfb34c87b26dbdbc7afd68c4f545c0116ab5f90bbfecc5aebe2a9cb4bb31549
+        dest-filename: sdl2-mixer.tar.gz
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/libsdl-org/SDL_mixer/branches/SDL2
+          version-query: .commit.sha
+          url-template: https://github.com/libsdl-org/SDL_mixer/archive/$version.tar.gz
 
   - name: open-supaplex
     buildsystem: simple
@@ -57,8 +67,8 @@ modules:
         path: io.github.sergiou87.open-supaplex.metainfo.xml
     build-commands:
       - cd linux && make -j${FLATPAK_BUILDER_N_JOBS} CFLAGS='-DFILE_FHS_XDG_DIRS -DFILE_DATA_PATH=/app/usr/share/OpenSupaplex -DHAVE_SDL2 -I/usr/include/SDL2 -I/app/include/SDL2'
-      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+      - install -Dm 644 ${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm 644 ${FLATPAK_ID}.desktop -t /app/share/applications
       - install -Dm755 linux/opensupaplex -t /app/bin/
       - mkdir -p /app/usr/share/OpenSupaplex && cp -R resources/* /app/usr/share/OpenSupaplex/
