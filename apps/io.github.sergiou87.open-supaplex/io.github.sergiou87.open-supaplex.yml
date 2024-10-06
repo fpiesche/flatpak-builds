@@ -50,15 +50,17 @@ modules:
   - name: open-supaplex
     buildsystem: simple
     sources:
-      - type: archive
-        url: https://github.com/sergiou87/open-supaplex/archive/1a91d9b170ca5880c23c3996cce259321821bdf5.zip
-        sha256: 37da19e6792479242e7661cbe9d645e9e0ae0afade28f0cb05392eed814be028
-        dest-filename: open-supaplex.zip
+      - type: git
+        url: https://github.com/sergiou87/open-supaplex.git
+        branch: master
+        commit: 1a91d9b170ca5880c23c3996cce259321821bdf5
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sergiou87/open-supaplex/tags
-          version-query: .[] | select(.name == "ci-dev-build") | .commit.sha
-          url-template: https://github.com/sergiou87/open-supaplex/archive/$version.zip
+          url: https://api.github.com/repos/sergiou87/open-supaplex/branches/msater
+          commit-query: .commit.sha
+          version-query: .commit.sha
+          timestamp-query: .commit.committer.date
+          is-main-source: true
       - type: file
         path: io.github.sergiou87.open-supaplex.svg
       - type: file
