@@ -1,0 +1,82 @@
+app-id: gg.sprawl.sprawl96
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: gg.sprawl.sprawl96.sh
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  # Audio
+  - --socket=pulseaudio
+  # default Steam library for auto-detecting game data
+  - --filesystem=~/.local/share/Steam/steamapps/
+
+cleanup:
+  - /include
+  - '*.a'
+  - '*.la'
+  - /lib/pkgconfig
+
+modules:
+  - ../shared-modules/libmad/libmad.json
+  - name: libxmp
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/libxmp/libxmp/zipball/libxmp-4.6.0
+        dest-filename: libxmp.zip
+        sha256: 1955a7c7eb2e6c3ba2da689d115d10f89c6e5e261577e67cd0ad176bea1b97ef
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/libxmp/libxmp/releases/latest
+          version-query: .tag_name | sub("^libxmp-"; "")
+          url-query: .zipball_url
+  - name: qsprawl
+    sources:
+      - type: git
+        url: https://github.com/voidforce/qsprawl
+        commit: 3e2d807db43a5e033979e67289f761ca367671ee
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/voidforce/qsprawl/branches/master
+          commit-query: .commit.sha
+      - type: file
+        path: gg.sprawl.sprawl96.sh
+      - type: file
+        path: gg.sprawl.sprawl96.metainfo.xml
+      - type: file
+        path: gg.sprawl.sprawl96.desktop
+      - type: file
+        path: apply_extra
+    buildsystem: simple
+    build-commands:
+      # Build
+      - cd Quake && make LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
+      # Install main data and executable
+      - install -D -m744 -t /app/bin/ Quake/ironwail
+      - install -D -m755 -t /app/bin/ Quake/ironwail.pak
+      - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
+      # Install metadata and launcher files
+      - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -D -m755 ${FLATPAK_ID}.metainfo.xml  /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - desktop-file-edit --set-key=Exec --set-value=gg.sprawl.sprawl96.sh ${FLATPAK_ID}.desktop
+      - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm755 apply_extra ${FLATPAK_DEST}/bin/apply_extra
+  - name: sprawl96-mod
+    buildsystem: simple
+    sources:
+      - type: extra_data
+        filename: gg.sprawl.sprawl96.zip
+        url: https://www.slipseer.com/index.php?resources/sprawl-96.398/download
+        sha256: 9178c94c2b091a1ac3e12c610e142d633ac34cce0c673abddd8eea8d4816adac
+        size: 174391299
+        x-checker-data:
+          type: rotating-url
+          url: https://www.slipseer.com/index.php?resources/sprawl-96.398/download
+    build-commands:
+      - echo ""

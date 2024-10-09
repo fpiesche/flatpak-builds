@@ -1,0 +1,4 @@
+TEMPDIR=$(mktemp -d)
+unzip -d $TEMPDIR gg.sprawl.sprawl96.zip
+mv $TEMPDIR/Sprawl $XDG_DATA_HOME/sprawl
+rm $TEMPDIR
