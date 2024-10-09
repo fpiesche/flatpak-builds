@@ -7,6 +7,8 @@ command: ironwail.sh
 finish-args:
   # hardware 3D
   - --device=dri
+  # network access for multiplayer
+  - --share=network
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
