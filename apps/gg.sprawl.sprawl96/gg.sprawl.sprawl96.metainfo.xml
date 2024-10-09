@@ -19,6 +19,22 @@
     <p>By default, SPRAWL will install the LibreQuake content pack so it can be played even without having Quake itself, but you can add custom maps and replace LibreQuake with your normal Quake installation if you so wish.</p>
   </description>
   <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/gg.sprawl.sprawl96/screenshots/screen01.png</image>
+      <caption>Play with arbitrary Quake maps</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/gg.sprawl.sprawl96/screenshots/screen02.png</image>
+      <caption>Copper map support added in v1.1</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/gg.sprawl.sprawl96/screenshots/screen03.png</image>
+      <caption>Quake Brutalist Jam maps with SPRAWL '96'</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/gg.sprawl.sprawl96/screenshots/screen04.png</image>
+      <caption>Quake Brutalist Jam maps with SPRAWL '96'</caption>
+    </screenshot>
   </screenshots>
   <categories>
     <category>Game</category>
