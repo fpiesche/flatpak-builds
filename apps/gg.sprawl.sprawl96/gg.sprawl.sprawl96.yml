@@ -65,11 +65,11 @@ modules:
       - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
       # Install metadata and launcher files
       - install -D -m755 gg.sprawl.sprawl96.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -D -m755 ${FLATPAK_ID}.metainfo.xml  /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -D -m755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - desktop-file-edit --set-key=Exec --set-value=gg.sprawl.sprawl96.sh ${FLATPAK_ID}.desktop
       - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -Dm755 apply_extra ${FLATPAK_DEST}/bin/apply_extra
-  - name: sprawl96-mod
+  - name: game-data
     buildsystem: simple
     sources:
       - type: extra_data
@@ -80,5 +80,15 @@ modules:
         x-checker-data:
           type: rotating-url
           url: https://www.slipseer.com/index.php?resources/sprawl-96.398/download
+      - type: extra_data
+        filename: sh.queer.librequake.zip
+        url: https://github.com/lavenderdotpet/LibreQuake/releases/download/v0.07-beta/full.zip
+        sha256: 59dd151c2556ae95d92183053683cc842485fa49265a7cacf6566e0f500072d3
+        size: 180302822
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/lavenderdotpet/librequake/releases/latest
+          version-query: .tag_name
+          url-template: https://github.com/lavenderdotpet/LibreQuake/releases/download/$version/full.zip
     build-commands:
-      - echo ""
+      - echo "Extra data module added!"
