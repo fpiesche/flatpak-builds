@@ -42,23 +42,23 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-modmenu.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/ironwail/Misc/screenshots/ironwail-modmenu.png</image>
       <caption>Mod menu with search functionality</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-tershibboleth.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/ironwail/Misc/screenshots/ironwail-tershibboleth.png</image>
       <caption>Ter Shibboleth: Drake Redux</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-ravenkeep.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/ironwail/Misc/screenshots/ironwail-ravenkeep.png</image>
       <caption>Raven Keep</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-peril.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/ironwail/Misc/screenshots/ironwail-peril.png</image>
       <caption>Peril</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/fpiesche/ironwail/master/Misc/screenshots/ironwail-optionsmenu.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/ironwail/Misc/screenshots/ironwail-optionsmenu.png</image>
       <caption>Options menu with some new settings</caption>
     </screenshot>
   </screenshots>
