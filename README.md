@@ -4,7 +4,7 @@ This is a repository holding some Flatpak builds I've assembled which I have yet
 
 # Setup
 
-`flatpak remote-add fpiesche https://raw.githubusercontent.com/fpiesche/flatpak-builds/refs/heads/gh-pages/index.flatpakrepo`
+`flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/index.flatpakrepo`
 
 # Current packages
 
