@@ -8,7 +8,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><xsl:value-of select="component/name"/></title>
+    <title><xsl:value-of select="component/name"/> on Yellow Keycard Flatpaks</title>
+    <meta name="description" content="{component/summary}" />
+    <meta property="og:url" content="https://flatpak.yellowkeycard.net/gg.sprawl.sprawl96.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{component/name} on Yellow Keycard Flatpaks" />
+    <meta property="og:description" content="{component/summary}" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/apps/{component/id}/{component/id}.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
