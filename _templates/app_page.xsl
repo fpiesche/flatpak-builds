@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{component/name} on Yellow Keycard Flatpaks" />
     <meta property="og:description" content="{component/summary}" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/apps/{component/id}/{component/id}.png" />
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/{component/id}/{component/id}.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -35,7 +35,7 @@
         class="icon"
         height="128px"
         width="128px"
-        src='https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/apps/{component/id}/{component/id}.png'
+        src='https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/{component/id}/{component/id}.png'
       />
       <button
         type="button"
