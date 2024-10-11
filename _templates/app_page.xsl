@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><xsl:value-of select="component/name"/> on Yellow Keycard Flatpaks</title>
     <meta name="description" content="{component/summary}" />
-    <meta property="og:url" content="https://flatpak.yellowkeycard.net/gg.sprawl.sprawl96.xml" />
+    <meta property="og:url" content="https://flatpak.yellowkeycard.net/{component/id}.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{component/name} on Yellow Keycard Flatpaks" />
     <meta property="og:description" content="{component/summary}" />
