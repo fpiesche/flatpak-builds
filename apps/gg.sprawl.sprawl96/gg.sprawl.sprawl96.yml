@@ -13,8 +13,6 @@ finish-args:
   - --share=network
   # Audio
   - --socket=pulseaudio
-  # default Steam library for auto-detecting game data
-  - --filesystem=~/.local/share/Steam/steamapps/
 
 cleanup:
   - /include
