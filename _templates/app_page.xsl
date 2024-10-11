@@ -53,7 +53,7 @@
         <a class="homepage-link" href='{component/url[@type="homepage"]}' target="_blank">🏠</a>
       </h1>
       <p class="developer">
-        by <a href="{component/url}"><xsl:value-of select="component/developer/name"/></a>
+        by <a href="{component/developer/url}"><xsl:value-of select="component/developer/name"/></a>
       </p>
       </div>
     </div>
