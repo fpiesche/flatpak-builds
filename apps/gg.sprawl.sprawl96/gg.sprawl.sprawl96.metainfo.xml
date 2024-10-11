@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/_templates/app_page.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>gg.sprawl.sprawl96</id>
   <name>SPRAWL 96</name>
   <developer id="gg.sprawl.sprawl96-contributors">
-	  <name>Carlos "REVEL" Lizarraga, Hannah "EMBYR" Crawford, VoidForce, SPRAWL 96 contributors</name>
+    <name>Carlos "REVEL" Lizarraga, Hannah "EMBYR" Crawford, VoidForce, SPRAWL 96 contributors</name>
     <url>https://github.com/VoidForce/QSprawl/graphs/contributors</url>
   </developer>
   <summary>A Quake mod based on the retro shooter SPRAWL</summary>

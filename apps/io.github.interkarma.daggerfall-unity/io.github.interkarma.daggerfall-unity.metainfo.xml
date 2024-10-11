@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/_templates/app_page.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>io.github.interkarma.daggerfall-unity</id>
   <name>Daggerfall Unity</name>
   <developer id="io.github.interkarma.daggerfall-unity">
     <name>Daggerfall Unity contributors</name>
+    <url>https://github.com/interkarma/daggerfall-unity/graphs/contributors</url>
   </developer>
   <summary>A modern port of The Elder Scrolls II: Daggerfall</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <launchable type="desktop-id">io.github.interkarma.daggerfall-unity.desktop</launchable>
   <url type="homepage">https://www.dfworkshop.net/</url>
+  <url type="contact">https://forums.dfworkshop.net/</url>
   <description>
     <p>Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.</p>
     <p>Experience the adventure and intrigue of Daggerfall with all of its original charm along with hundreds of fixes,
@@ -63,5 +65,4 @@
     <content_attribute id="language-discrimination">moderate</content_attribute>
     <content_attribute id="money-gambling">moderate</content_attribute>
   </content_rating>
-  <update_contact>https://forums.dfworkshop.net/</update_contact>
 </component>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://raw.githubusercontent.com/fpiesche/flatpak-builds/main/_templates/app_page.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>io.github.andrei_drexler.ironwail</id>
   <name>Ironwail</name>
   <developer id="io.github.andrei-drexler.ironwail-contributors">
-	  <name>Andrei Drexler, Ironwail Contributors</name>
+    <name>Andrei Drexler, Ironwail Contributors</name>
     <url>https://github.com/andrei-drexler/ironwail/graphs/contributors</url>
   </developer>
   <summary>A modern port of the original Quake engine, focused on performance</summary>
