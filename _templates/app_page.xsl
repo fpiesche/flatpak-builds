@@ -20,7 +20,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="https://fpiesche.github.io/flatpak-builds/">Florian's Flatpak Repo</a>
+        <a class="navbar-brand" href="https://flatpak.yellowkeycard.net/">Yellow Keycard Flatpaks</a>
       </div>
     </nav>
     <div class="header">
@@ -38,7 +38,7 @@
         data-bs-toggle="popover"
         data-bs-placement="left"
         data-bs-html="true"
-        data-bs-content="flatpak install fpiesche {component/id}"
+        data-bs-content="flatpak remote-add ykc http://flatpak.yellowkeycard.net/index.flatpakrepo<br />flatpak install ykc {component/id}"
       >
         Install
       </button>
