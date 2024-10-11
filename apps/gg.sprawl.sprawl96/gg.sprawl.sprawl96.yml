@@ -45,50 +45,31 @@ modules:
           type: json
           url: https://api.github.com/repos/voidforce/qsprawl/branches/master
           commit-query: .commit.sha
-      - type: file
-        path: gg.sprawl.sprawl96.sh
+      # - type: file
+      #   path: gg.sprawl.sprawl96.sh
       - type: file
         path: gg.sprawl.sprawl96.metainfo.xml
       - type: file
         path: gg.sprawl.sprawl96.svg
       - type: file
         path: gg.sprawl.sprawl96.desktop
-      - type: file
-        path: apply_extra
     buildsystem: simple
     build-commands:
       # Build
-      - cd Quake && make LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
+      - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
       # Install main data and executable
       - install -D -m744 -t /app/bin/ Quake/ironwail
       - install -D -m755 -t /app/bin/ Quake/ironwail.pak
-      - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
+      # - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
       # Install metadata and launcher files
       - install -D -m755 gg.sprawl.sprawl96.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - desktop-file-edit --set-key=Exec --set-value=gg.sprawl.sprawl96.sh ${FLATPAK_ID}.desktop
       - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm755 apply_extra ${FLATPAK_DEST}/bin/apply_extra
-  - name: game-data
-    buildsystem: simple
+  - name: gamedata
     sources:
-      - type: extra_data
-        filename: gg.sprawl.sprawl96.zip
-        url: https://www.slipseer.com/index.php?resources/sprawl-96.398/download
-        sha256: 9178c94c2b091a1ac3e12c610e142d633ac34cce0c673abddd8eea8d4816adac
-        size: 174391299
-        x-checker-data:
-          type: rotating-url
-          url: https://www.slipseer.com/index.php?resources/sprawl-96.398/download
-      - type: extra_data
-        filename: sh.queer.librequake.zip
-        url: https://github.com/lavenderdotpet/LibreQuake/releases/download/v0.07-beta/full.zip
-        sha256: 59dd151c2556ae95d92183053683cc842485fa49265a7cacf6566e0f500072d3
-        size: 180302822
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/lavenderdotpet/librequake/releases/latest
-          version-query: .tag_name
-          url-template: https://github.com/lavenderdotpet/LibreQuake/releases/download/$version/full.zip
+      - type: file
+        path: gg.sprawl.sprawl96.sh
+    buildsystem: simple
     build-commands:
-      - echo "Extra data module added!"
+      - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
