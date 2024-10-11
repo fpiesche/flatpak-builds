@@ -32,6 +32,28 @@ Please try again or manually download and extract its contents to $TARGET_DIR."
     rm -rf $INSTALL_TEMP_DIR $XDG_DATA_HOME/wget
 }
 
+verify_quake_data () {
+    if [[ ! $(find $XDG_DATA_HOME/id1/ -iname "pak0.pak") ]]; then
+        zenity --warning --width=400 \
+            --title="No Quake game data found" \
+            --text="Please note that SPRAWL 96 requires base game data from Quake or LibreQuake to run.\n\n \
+Please either copy the <tt><b>id1</b></tt> directory from a Quake installation or LibreQuake to \
+<tt><b>$XDG_DATA_HOME</b></tt> or restart and download LibreQuake from here."
+        exit 1
+    fi
+}
+
+verify_sprawl_data () {
+    if [[ ! $(find $XDG_DATA_HOME/sprawl/ -iname "pak0.pak") ]]; then
+        zenity --warning --width=400 \
+            --title="SPRAWL 96 data not found" \
+            --text="SPRAWL 96 data has not been installed in <tt><b>$XDG_DATA_HOME/sprawl/</b></tt>.\n\n \
+Please either manually download the mod and copy the contents of the <tt><b>sprawl</b></tt> directory \
+to <tt><b>$XDG_DATA_HOME/sprawl/</b></tt> or restart and download the latest release from here."
+        exit 1
+    fi
+}
+
 update_librequake () {
     if [[ $(find $XDG_DATA_HOME/id1/ -iname "pak0.pak") && ! -f $LIBREQUAKE_VERSION_FILE ]]; then
         echo "$XDG_DATA_HOME/id1/pak0.pak exists but has no LibreQuake version file."
@@ -57,7 +79,7 @@ update_librequake () {
     echo "Installed LibreQuake version is $LOCAL_LIBREQUAKE_VERSION."
 
     if [[ "$LOCAL_LIBREQUAKE_VERSION" != "$LATEST_LIBREQUAKE_VERSION" ]]; then
-        selection=$(zenity --question --title="LibreQuake update available" \
+        selection=$(zenity --question --width=400 --title="LibreQuake update available" \
     --text "The latest release of LibreQuake is $LATEST_LIBREQUAKE_VERSION; you currently have \
 $LOCAL_LIBREQUAKE_VERSION installed. Do you want to update?" \
     --extra-button="No, don't ask again" \
@@ -101,7 +123,7 @@ update_sprawl () {
     echo "Installed SPRAWL 96 version is $LOCAL_SPRAWL96_VERSION."
 
     if [[ "$LOCAL_SPRAWL96_VERSION" != "$LATEST_SPRAWL96_VERSION" ]]; then
-        selection=$(zenity --question --title="SPRAWL 96 update available" \
+        selection=$(zenity --question --width=400 --title="SPRAWL 96 update available" \
     --text "The latest release of SPRAWL 96 is v$LATEST_SPRAWL96_VERSION; you currently have \
 $LOCAL_SPRAWL96_VERSION installed. Do you want to update?" \
     --extra-button="No, don't ask again" \
@@ -125,12 +147,14 @@ $LOCAL_SPRAWL96_VERSION installed. Do you want to update?" \
 }
 
 update_librequake
+verify_quake_data
 update_sprawl
+verify_sprawl_data
 
 /app/bin/ironwail -basedir $XDG_DATA_HOME +game sprawl "$@"
 
 if [[ "$?" != "0" ]]; then
-    zenity --error --title "SPRAWL 96 exited with an error" \
-    --text "For a detailed error message, please run SPRAWL '96 from a terminal window using\n \
-    <tt><b>flatpak run $FLATPAK_ID</b></tt>." --ok-label "Quit" --width=400
+    zenity --error --width=400 --title "SPRAWL 96 exited with an error" \
+    --text "For a detailed error message, please run SPRAWL 96 from a terminal window using\n \
+    <tt><b>flatpak run $FLATPAK_ID</b></tt>." --ok-label "Quit"
 fi
