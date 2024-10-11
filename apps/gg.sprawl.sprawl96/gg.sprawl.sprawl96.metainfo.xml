@@ -12,8 +12,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>
   <launchable type="desktop-id">gg.sprawl.sprawl96.desktop</launchable>
-  <url type="homepage">https://sprawl.gg/</url>
-  <url type="homepage">https://librequake.queer.sh/</url>
+  <url type="homepage">https://www.slipseer.com/index.php?resources/sprawl-96.398/</url>
   <url type="contact">https://discord.gg/4kVen5XDfn</url>
   <description>
     <p>SPRAWL 96 is a celebration of our retro shooter SPRAWL, released for the first anniversary of SPRAWL's release. It’s also our way of giving thanks and giving back to the communities which made SPRAWL possible.</p>
@@ -65,6 +64,7 @@
     <keyword>mod</keyword>
     <keyword>tc</keyword>
     <keyword>total conversion</keyword>
+  </keywords>
   <releases>
     <release version="1.1" date="2024-09-16">
       <description>v1.1 adds support for Copper maps</description>
