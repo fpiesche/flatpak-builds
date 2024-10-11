@@ -38,7 +38,7 @@
         data-bs-toggle="popover"
         data-bs-placement="left"
         data-bs-html="true"
-        data-bs-content="flatpak remote-add ykc http://flatpak.yellowkeycard.net/index.flatpakrepo<br />flatpak install ykc {component/id}"
+        data-bs-content="flatpak install ykc {component/id}"
       >
         Install
       </button>
