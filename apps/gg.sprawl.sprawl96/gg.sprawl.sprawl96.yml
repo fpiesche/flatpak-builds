@@ -38,7 +38,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/voidforce/qsprawl
-        commit: 3e2d807db43a5e033979e67289f761ca367671ee
+        commit: a0fcba725f714f7f673164db669a5cf06a83c301
         x-checker-data:
           type: json
           url: https://api.github.com/repos/voidforce/qsprawl/branches/master
@@ -54,7 +54,8 @@ modules:
     buildsystem: simple
     build-commands:
       # Build
-      - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
+      - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1
+        USE_CODEC_OPUS=1 USE_CODEC_XMP=1
       # Install main data and executable
       - install -D -m744 -t /app/bin/ Quake/ironwail
       - install -D -m755 -t /app/bin/ Quake/ironwail.pak
