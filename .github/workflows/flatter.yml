@@ -55,7 +55,7 @@ jobs:
             else
               arches="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"$manifest\", \"sdk\": \"$sdk\", \"sdk-version\": \"$sdk-version\", \"arches\": \"$arches\"}"
+            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"$manifest\", \"sdk\": \"$sdk\", \"sdk-version\": \"$sdk-version\", \"arches\": \"$arches\"}")
           done
           fi
           echo 'matrix<<EOF' >> $GITHUB_OUTPUT
