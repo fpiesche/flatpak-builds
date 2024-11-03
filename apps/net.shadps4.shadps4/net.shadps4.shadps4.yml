@@ -1,0 +1,53 @@
+app-id: net.shadps4.shadps4
+runtime: org.kde.Platform
+runtime-version: '6.8'
+sdk: org.kde.Sdk
+command: shadps4-qt
+
+finish-args:
+  # gamepad and 3D hardware support
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm18
+
+modules:
+  - deps/rapidjson.yml
+
+  - name: shadps4
+    buildsystem: cmake-ninja
+    builddir: true
+    build-options:
+      append-path: /usr/lib/sdk/llvm18/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+    config-opts:
+      - -DENABLE_QT_GUI=ON
+      - -DCMAKE_C_COMPILER=clang
+      - -DCMAKE_CXX_COMPILER=clang++
+      - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
+    sources:
+      - type: git
+        url: https://github.com/shadps4-emu/shadps4
+        tag: v.0.4.0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
+          version-query: .tag_name
+      - type: file
+        path: net.shadps4.shadps4.svg
+      - type: file
+        path: net.shadps4.shadps4.desktop
+      - type: file
+        path: net.shadps4.shadps4.metainfo.xml
+      - type: file
+        path: net.shadps4.shadps4.releases.xml
+    post-install:
+      - install -Dm 644 ${FLATPAK_ID}.releases.xml -t /app/share/metainfo/releases/
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+      - install -Dm 644 ${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm 644 ${FLATPAK_ID}.desktop -t /app/share/applications

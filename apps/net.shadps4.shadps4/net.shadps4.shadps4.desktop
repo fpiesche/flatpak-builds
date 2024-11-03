@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Game
+Comment[en_US]=PS4 emulator for PC
+Comment=PS4 emulator for PC
+Exec=shadps4-qt
+GenericName[en_US]=
+GenericName=
+Icon=net.shadps4.shadps4
+Keywords=emulator;ps4;playstation
+MimeType=
+Name[en_US]=shadPS4
+Name=shadPS4
+Path=
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
