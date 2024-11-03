@@ -17,7 +17,7 @@ on:
   pull_request:
 
 jobs:
-  manifests:
+  builds:
     name: Assemble build matrix
     runs-on: ubuntu-latest
     outputs:
@@ -62,22 +62,16 @@ jobs:
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            echo "Manifest filename: ${MANIFEST_FILENAME}"
-            echo "Manifest SDK: ${MANIFEST_SDK}"
-            echo "Manifest SDK version: ${MANIFEST_SDK_VERSION}"
-            echo "Manifest architectures: ${MANIFEST_ARCHES}"
-            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": $MANIFEST_ARCHES}")
+            MATRIX=$(echo $MATRIX | jq -c ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": $MANIFEST_ARCHES}")
           done
-          echo 'matrix<<EOF' >> $GITHUB_OUTPUT
-          echo $MATRIX >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "::group::Output"
           cat $GITHUB_OUTPUT
           echo "::endgroup::"
 
   flatter:
     name: ${{ matrix.appid }} ${{ matrix.arch }}
-    needs: manifests
+    needs: builds
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andyholmes/flatter/${{ matrix.sdk }}:${{ matrix.sdk-version}}}
@@ -88,7 +82,7 @@ jobs:
       contents: write
 
     strategy:
-      matrix: ${{fromJson(needs.manifests.outputs.matrix)}}
+      matrix: ${{fromJson(needs.builds.outputs.matrix)}}
 
     steps:
       - name: Checkout
