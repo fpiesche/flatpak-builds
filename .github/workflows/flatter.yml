@@ -18,7 +18,7 @@ on:
 
 jobs:
   manifests:
-    name: Get list of manifests to build
+    name: Assemble build matrix
     runs-on: ubuntu-latest
     outputs:
       files: ${{ steps.builds.outputs.matrix }}
@@ -51,11 +51,15 @@ jobs:
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             if [ -f apps/${appid}/flathub.json ]; then
-              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${appid}/flathub.json)
+              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${appid}/flathub.json | sed 's/\"/\\"/g')
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": \"$MANIFEST_ARCHES\"}")
+            echo "Manifest filename: ${MANIFEST_FILENAME}"
+            echo "Manifest SDK: ${MANIFEST_SDK}"
+            echo "Manifest SDK version: ${MANIFEST_SDK_VERSION}"
+            echo "Manifest architectures: ${MANIFEST_ARCHES}"
+            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": $MANIFEST_ARCHES}")
           done
           fi
           echo 'matrix<<EOF' >> $GITHUB_OUTPUT
