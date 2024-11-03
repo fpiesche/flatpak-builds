@@ -48,7 +48,7 @@ jobs:
             echo "Building all apps"
             APPS="$(ls -1 apps/*/*.yml)"
           fi
-          read -ra APP_LIST <<< "$apps"
+          read -ra APP_LIST <<< "$APPS"
 
           MATRIX="[]"
           echo $APP_LIST
