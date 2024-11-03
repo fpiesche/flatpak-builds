@@ -52,7 +52,7 @@ jobs:
 
           MATRIX="[]"
           echo $APP_LIST
-          for manifest in "${APP_LIST[@]}; do
+          for manifest in "${APP_LIST[@]}"; do
             appid=$(basename ${filename%.*})
             MANIFEST_FILENAME="$filename"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
