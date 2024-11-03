@@ -21,7 +21,7 @@ jobs:
     name: Get list of manifests to build
     runs-on: ubuntu-latest
     outputs:
-      files: ${{ steps.file_list.outputs.files }}
+      files: ${{ steps.builds.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,30 +35,42 @@ jobs:
         with:
           files: apps/*/*.yml
 
-      - name: Build file list output
-        id: file_list
+      - name: Assemble build matrix
+        id: builds
         run: |
-          echo 'files<<EOF' >> $GITHUB_OUTPUT
           if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
-            echo ${{ steps.changed_files_action.outputs.all_changed_files }} >> $GITHUB_OUTPUT
+            APPS="${{ steps.changed_files_action.outputs.all_changed_files }}"
           elif [[ "${{ inputs.appids }}" != "" ]]; then
-            for appid in ${{ inputs.appids }}; do
-                echo apps/${appid}/${appid}.yml >> $GITHUB_OUTPUT
-            done
+            APPS="${{ inputs.appids }}"
           else
-            echo $(ls -1 apps/*/*.yml) >> $GITHUB_OUTPUT
+            APPS=$(ls -1 apps/*/*.yml)
           fi
-          echo 'EOF' >> $GITHUB_OUTPUT
+          MATRIX="[]"
+          for appid in ${APPS}; do
+            manifest="apps/${appid}/${appid}.yml"
+            sdk=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
+            sdk-version=$(yq e ".runtime-version" $manifest)
+            if [ -f apps/${appid}/flathub.json ]; then
+              arches=$(jq '. | ."only-arches"' apps/${appid}/flathub.json)
+            else
+              arches="[\"x86_64\", \"aarch64\"]"
+            fi
+            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"$manifest\", \"sdk\": \"$sdk\", \"sdk-version\": \"$sdk-version\", \"arches\": \"$arches\"}
+          done
+          fi
+          echo 'matrix<<EOF' >> $GITHUB_OUTPUT
+          echo $MATRIX >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
           echo "::group::Output"
           cat $GITHUB_OUTPUT
           echo "::endgroup::"
 
   flatter:
-    name: ${{ matrix.arch }}
+    name: ${{ matrix.appid }} ${{ matrix.arch }}
     needs: manifests
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/freedesktop:24.08
+      image: ghcr.io/andyholmes/flatter/${{ matrix.sdk }}:${{ matrix.sdk-version}}}
       options: --privileged
     permissions:
       pages: write
@@ -66,11 +78,7 @@ jobs:
       contents: write
 
     strategy:
-      matrix:
-        arch: [x86_64, aarch64]
-      fail-fast: false
-      # Only one job at a time can use the shared repository cache
-      max-parallel: 1
+      matrix: ${{fromJson(needs.manifests.outputs.matrix)}}
 
     steps:
       - name: Checkout
@@ -92,27 +100,24 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Assemble files for web listings
-        id: weblisting-files
-        run: |
-          find apps -name "*.metainfo.xml" -exec cp {} . \;
-          rename ".metainfo.xml" ".xml" *.metainfo.xml
-          echo 'files<<EOF' >> $GITHUB_OUTPUT
-          ls -1 *.xml >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
-
       - name: Build
         id: flatpak
         uses: andyholmes/flatter@main
         with:
-          files: ${{ needs.manifests.outputs.files }}
+          files: ${{ matrix.manifest }}
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
-          upload-pages-includes: ${{ steps.weblisting-files.outputs.files }}
-          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+          # upload-pages-includes: ${{ steps.weblisting-files.outputs.files }}
+          # upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+
+      - name: Upload build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ steps.flatpak.outputs.repository }}
+          name: ${{ matrix.appid }}_${{ matrix.arch }}
 
   deploy:
     name: Deploy to GitHub Pages
@@ -135,19 +140,18 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
 
-      - name: Get Pages artifact
+      - name: Get build artifacts
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/download-artifact@v4
         with:
-          name: github-pages
           path: _site
 
-      - name: Extract artifact
-        if: ${{ env.PUBLISH }} == "true"
+      - name: Assemble files for web listings
+        id: weblisting-files
         run: |
-          cd _site
-          tar -xf artifact.tar
-          rm artifact.tar
+          find apps -name "*.metainfo.xml" -exec cp {} ./_site/ \;
+          rename ".metainfo.xml" ".xml" ./_site/*.metainfo.xml
+          find apps -name "*.flatpakref" -exec cp {} ./_site/ \;
           touch index.html
 
       - name: Generate index.html file
@@ -166,4 +170,3 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-
