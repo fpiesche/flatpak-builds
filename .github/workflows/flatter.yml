@@ -46,12 +46,15 @@ jobs:
             APPS="${{ inputs.appids }}"
           else
             echo "Building all apps"
-            APPS=$(ls -1 apps/*/*.yml)
+            APPS="$(ls -1 apps/*/*.yml)"
           fi
+          read -ra APP_LIST <<< "$apps"
+
           MATRIX="[]"
-          echo $APPS
-          for appid in ${APPS}; do
-            MANIFEST_FILENAME="apps/${appid}/${appid}.yml"
+          echo $APP_LIST
+          for manifest in "${APP_LIST[@]}; do
+            appid=$(basename ${filename%.*})
+            MANIFEST_FILENAME="$filename"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             if [ -f apps/${appid}/flathub.json ]; then
@@ -65,7 +68,6 @@ jobs:
             echo "Manifest architectures: ${MANIFEST_ARCHES}"
             MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": $MANIFEST_ARCHES}")
           done
-          fi
           echo 'matrix<<EOF' >> $GITHUB_OUTPUT
           echo $MATRIX >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
