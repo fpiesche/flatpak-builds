@@ -47,15 +47,15 @@ jobs:
           fi
           MATRIX="[]"
           for appid in ${APPS}; do
-            manifest="apps/${appid}/${appid}.yml"
-            sdk=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
-            sdk-version=$(yq e ".runtime-version" $manifest)
+            MANIFEST_FILENAME="apps/${appid}/${appid}.yml"
+            MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
+            MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             if [ -f apps/${appid}/flathub.json ]; then
-              arches=$(jq '. | ."only-arches"' apps/${appid}/flathub.json)
+              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${appid}/flathub.json)
             else
-              arches="[\"x86_64\", \"aarch64\"]"
+              MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"$manifest\", \"sdk\": \"$sdk\", \"sdk-version\": \"$sdk-version\", \"arches\": \"$arches\"}")
+            MATRIX=$(echo $MATRIX | jq ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": \"$MANIFEST_ARCHES\"}")
           done
           fi
           echo 'matrix<<EOF' >> $GITHUB_OUTPUT
