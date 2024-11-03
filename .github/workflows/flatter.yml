@@ -53,8 +53,8 @@ jobs:
           MATRIX="[]"
           echo $APP_LIST
           for manifest in "${APP_LIST[@]}"; do
-            appid=$(basename ${filename%.*})
-            MANIFEST_FILENAME="$filename"
+            appid=$(basename ${manifest%.*})
+            MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             if [ -f apps/${appid}/flathub.json ]; then
