@@ -37,7 +37,7 @@ modules:
   - name: qsprawl
     sources:
       - type: archive
-        url: https://api.github.com/repos/voidforce/qsprawl/zipball/1.1
+        url: https://api.github.com/repos/VoidForce/QSprawl/zipball/1.1
         dest-filename: qsprawl.zip
         sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
         x-checker-data:
