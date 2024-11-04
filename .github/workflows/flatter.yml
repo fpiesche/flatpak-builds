@@ -158,13 +158,8 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         run: |
           apk update && apk add --no-cache \
-            # Includes rename \
             util-linux-misc \
-            # Used to generate .flatpakref files \
-            jinja2-cli \
-            xmlstarlet \
-            gpg \
-            # Required by the publish action \
+            jinja2-cli xmlstarlet gpg \
             git
 
       - name: Checkout
