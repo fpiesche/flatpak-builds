@@ -49,7 +49,7 @@ jobs:
             APPS="$(ls -1 apps/*/*.yml)"
             echo "Building all apps: $APPS"
           fi
-          read -ra APP_LIST <<< "$APPS"
+          APP_LIST=($APPS)
 
           # Generate JSON matrix for build jobs
           MATRIX="{\"arch\": [\"x86_64\", \"aarch64\"], \"app\": []}"
