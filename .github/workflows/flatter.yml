@@ -176,6 +176,7 @@ jobs:
             # Used to generate .flatpakref files \
             jinja2-cli \
             xmlstarlet \
+            gpg \
             # Required by the publish action \
             git
 
