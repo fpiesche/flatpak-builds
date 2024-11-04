@@ -30,7 +30,7 @@ modules:
       - type: archive
         url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
         dest-filename: aerofoil.zip
-        sha256: 34f0bdaeed922c1d774dfab37dd8e4d6f99103137ef2782969a2b43209f920f3
+        sha256: e88540e9cc4e3355c31dad68443083c62616339984ac9dc2be9e399e6ec06f43
         # url: https://github.com/elasota/Aerofoil/archive/refs/tags/1.1.2.zip
         # sha256: ba88e28ddc6c8abcee49812870967f4180a990355cac3ffeb1efa9633ad67e59
         # x-checker-data:
