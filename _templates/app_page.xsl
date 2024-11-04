@@ -37,6 +37,10 @@
         width="128px"
         src='https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/{component/id}/{component/id}.png'
       />
+      <xsl:variable name="install-html">
+        &lt;a href="<xsl:value-of select="component/id" />.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;
+        flatpak install ykc <xsl:value-of select="component/id" />
+      </xsl:variable>
       <button
         type="button"
         class="btn install"
@@ -44,8 +48,8 @@
         data-bs-toggle="popover"
         data-bs-placement="left"
         data-bs-html="true"
-        data-bs-content="flatpak install ykc {component/id}<br/><a href='/{component/id}.flatpakref'>Download .flatpakref</a>"
       >
+      <xsl:attribute name="data-bs-content"><xsl:copy-of select="$install-html" /></xsl:attribute>
         Install
       </button>
       <h1>

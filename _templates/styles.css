@@ -37,6 +37,10 @@
     transition: .4s;
 }
 
+.popover {
+    --bs-popover-max-width: 80%;
+}
+
 .popover-body {
     font-family: monospace;
 }
