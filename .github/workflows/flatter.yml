@@ -62,7 +62,7 @@ jobs:
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq -c ".apps[.apps | length] |= .apps + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
+            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
           done
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "::group::Output"
