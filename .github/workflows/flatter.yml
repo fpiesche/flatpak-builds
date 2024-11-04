@@ -43,7 +43,11 @@ jobs:
             APPS="${{ steps.changed_files_action.outputs.all_changed_files }}"
             echo "Building changed manifests: $APPS"
           elif [[ "${{ inputs.appids }}" != "" ]]; then
-            APPS="${{ inputs.appids }}"
+            APPS_TO_BUILD=(${{ inputs.appids }})
+            declare -a APPS=()
+            for appid in "${APPS_TO_BUILD[@]}"; do
+              APPS+=($(find ./apps -name $appid.yml))
+            done
             echo "Building specified apps: $APPS"
           else
             APPS="$(ls -1 apps/*/*.yml)"
