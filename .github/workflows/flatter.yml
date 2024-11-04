@@ -159,7 +159,7 @@ jobs:
         run: |
           apk update && apk add --no-cache \
             util-linux-misc \
-            jinja2-cli xmlstarlet gpg \
+            jinja2-cli xmlstarlet gpg gpg-agent \
             git
 
       - name: Checkout
