@@ -38,13 +38,13 @@ modules:
     sources:
       - type: git
         url: https://github.com/voidforce/qsprawl
-        commit: 3e2d807db43a5e033979e67289f761ca367671ee
+        tag: v1.1
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/voidforce/qsprawl/branches/master
-          commit-query: .commit.sha
-      # - type: file
-      #   path: gg.sprawl.sprawl96.sh
+          url: https://api.github.com/repos/voidforce/qsprawl/releases/latest
+          commit-query: .tag_name
+      - type: file
+        path: gg.sprawl.sprawl96.sh
       - type: file
         path: gg.sprawl.sprawl96.metainfo.xml
       - type: file
@@ -54,11 +54,12 @@ modules:
     buildsystem: simple
     build-commands:
       # Build
-      - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1 USE_CODEC_OPUS=1 USE_CODEC_XMP=1
+      - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1
+        USE_CODEC_OPUS=1 USE_CODEC_XMP=1
       # Install main data and executable
       - install -D -m744 -t /app/bin/ Quake/ironwail
       - install -D -m755 -t /app/bin/ Quake/ironwail.pak
-      # - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
+      - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
       # Install metadata and launcher files
       - install -D -m755 gg.sprawl.sprawl96.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
