@@ -76,7 +76,7 @@ jobs:
     needs: builds
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version}}}
+      image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version }}
       options: --privileged
     permissions:
       pages: write
