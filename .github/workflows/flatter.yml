@@ -60,7 +60,7 @@ jobs:
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             if [ -f apps/${APPID}/flathub.json ]; then
-              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json | sed 's/\"/\\"/g')
+              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json)
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
