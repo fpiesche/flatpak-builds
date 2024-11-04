@@ -20,7 +20,7 @@ modules:
   - deps/rapidjson.yml
 
   - name: shadps4
-    buildsystem: simple
+    buildsystem: cmake-ninja
     builddir: true
     build-options:
       append-path: /usr/lib/sdk/llvm18/bin
@@ -48,8 +48,6 @@ modules:
         path: net.shadps4.shadps4.metainfo.xml
       - type: file
         path: net.shadps4.shadps4.releases.xml
-    build-commands:
-      - ls -la /usr/lib/sdk/llvm18/bin
     post-install:
       - install -Dm 644 ${FLATPAK_ID}.releases.xml -t /app/share/metainfo/releases/
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
