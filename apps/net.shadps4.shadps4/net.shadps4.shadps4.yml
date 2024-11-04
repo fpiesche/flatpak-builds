@@ -41,6 +41,7 @@ modules:
           type: json
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
           tag-query: .tag_name
+        commit: 67dfc7916c25441fa86ad228e017361b6bf35775
       - type: file
         path: net.shadps4.shadps4.svg
       - type: file
