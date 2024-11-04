@@ -160,7 +160,7 @@ jobs:
           apk update && apk add --no-cache \
             util-linux-misc bash \
             jinja2-cli xmlstarlet gpg gpg-agent \
-            git
+            git rsync
 
       - name: Checkout
         if: ${{ env.PUBLISH }} == "true"
