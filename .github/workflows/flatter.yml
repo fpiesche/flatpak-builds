@@ -158,7 +158,7 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         run: |
           apk update && apk add --no-cache \
-            util-linux-misc \
+            util-linux-misc bash \
             jinja2-cli xmlstarlet gpg gpg-agent \
             git
 
