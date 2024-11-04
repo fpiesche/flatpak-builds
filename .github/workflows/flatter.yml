@@ -38,19 +38,20 @@ jobs:
       - name: Assemble build matrix
         id: builds
         run: |
+          # Figure out which manifests need building
           if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "Getting changed files"
             APPS="${{ steps.changed_files_action.outputs.all_changed_files }}"
+            echo "Building changed manifests: $APPS"
           elif [[ "${{ inputs.appids }}" != "" ]]; then
-            echo "Building specified apps"
             APPS="${{ inputs.appids }}"
+            echo "Building specified apps: $APPS"
           else
-            echo "Building all apps"
             APPS="$(ls -1 apps/*/*.yml)"
+            echo "Building all apps: $APPS"
           fi
           read -ra APP_LIST <<< "$APPS"
 
-          echo $APP_LIST
+          # Generate JSON matrix for build jobs
           MATRIX="{\"arch\": [\"x86_64\", \"aarch64\"], \"app\": []}"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
@@ -64,9 +65,9 @@ jobs:
             fi
             MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
           done
-          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "::group::Output"
-          cat $GITHUB_OUTPUT
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo $MATRIX | jq
           echo "::endgroup::"
 
   flatter:
