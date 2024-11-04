@@ -44,7 +44,7 @@
         data-bs-toggle="popover"
         data-bs-placement="left"
         data-bs-html="true"
-        data-bs-content="flatpak install ykc {component/id}"
+        data-bs-content="flatpak install ykc {component/id}<br/><a href='/{component/id}.flatpakref'>Download .flatpakref</a>"
       >
         Install
       </button>
