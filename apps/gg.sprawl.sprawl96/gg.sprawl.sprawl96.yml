@@ -36,13 +36,14 @@ modules:
           url-query: .zipball_url
   - name: qsprawl
     sources:
-      - type: git
-        url: https://github.com/voidforce/qsprawl
-        tag: v1.1
+      - type: archive
+        url: https://api.github.com/repos/voidforce/qsprawl/zipball/1.1
+        dest-filename: qsprawl.zip
         x-checker-data:
           type: json
           url: https://api.github.com/repos/voidforce/qsprawl/releases/latest
-          commit-query: .tag_name
+          version-query: .tag_name
+          url-query: .zipball_url
       - type: file
         path: gg.sprawl.sprawl96.sh
       - type: file
@@ -51,16 +52,14 @@ modules:
         path: gg.sprawl.sprawl96.svg
       - type: file
         path: gg.sprawl.sprawl96.desktop
-      - type: patch
-        path: revert-structure-changes.patch
     buildsystem: simple
     build-commands:
       # Build
       - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1
         USE_CODEC_OPUS=1 USE_CODEC_XMP=1
       # Install main data and executable
-      - install -D -m744 -t /app/bin/ Quake/sprawl96
-      - install -D -m755 -t /app/bin/ Quake/sprawl96.pak
+      - install -m744 Quake/ironwail /app/bin/sprawl96
+      - install -D -m755 -t /app/bin/ Quake/ironwail.pak
       # Install metadata and launcher files
       - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
       - install -D -m755 gg.sprawl.sprawl96.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
