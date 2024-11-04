@@ -50,19 +50,19 @@ jobs:
           fi
           read -ra APP_LIST <<< "$APPS"
 
-          MATRIX="[]"
           echo $APP_LIST
+          MATRIX="{\"arch\": [\"x86_64\", \"aarch64\"], \"app\": []}"
           for manifest in "${APP_LIST[@]}"; do
-            appid=$(basename ${manifest%.*})
+            APPID=$(basename ${manifest%.*})
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
-            if [ -f apps/${appid}/flathub.json ]; then
-              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${appid}/flathub.json | sed 's/\"/\\"/g')
+            if [ -f apps/${APPID}/flathub.json ]; then
+              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json | sed 's/\"/\\"/g')
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq -c ".[. | length] |= . + {\"appid\": \"$appid\", \"manifest\": \"MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"arches\": $MANIFEST_ARCHES}")
+            MATRIX=$(echo $MATRIX | ".apps[.apps | length] |= .apps + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
           done
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "::group::Output"
@@ -70,11 +70,12 @@ jobs:
           echo "::endgroup::"
 
   flatter:
-    name: ${{ matrix.appid }} ${{ matrix.arch }}
+    name: ${{ matrix.app.appid }} ${{ matrix.arch }}
+    if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
     needs: builds
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/${{ matrix.sdk }}:${{ matrix.sdk-version}}}
+      image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version}}}
       options: --privileged
     permissions:
       pages: write
@@ -108,7 +109,7 @@ jobs:
         id: flatpak
         uses: andyholmes/flatter@main
         with:
-          files: ${{ matrix.manifest }}
+          files: ${{ matrix.app.manifest }}
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           arch: ${{ matrix.arch }}
@@ -121,7 +122,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
-          name: ${{ matrix.appid }}_${{ matrix.arch }}
+          name: ${{ matrix.app.appid }}_${{ matrix.arch }}
 
   deploy:
     name: Deploy to GitHub Pages
