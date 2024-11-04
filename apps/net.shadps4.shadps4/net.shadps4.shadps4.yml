@@ -5,7 +5,7 @@ sdk: org.kde.Sdk
 command: shadps4-qt
 
 rename-desktop-file: shadps4.desktop
-rename-icon: shadps4.png
+rename-icon: shadps4
 
 finish-args:
   # gamepad and 3D hardware support
