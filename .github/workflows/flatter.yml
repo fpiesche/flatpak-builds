@@ -116,6 +116,7 @@ jobs:
           files: ${{ matrix.app.manifest }}
           flatpak-build-bundle-args: |
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
+          flatpak-builder-args: |
             --install-deps-from=flathub
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
