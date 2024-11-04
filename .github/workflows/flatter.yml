@@ -154,6 +154,19 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
           echo PUBLISH=$PUBLISH >> $GITHUB_ENV
 
+      - name: Install required packages
+        if: ${{ env.PUBLISH }} == "true"
+        run: |
+          apk update && apk add --no-cache \
+            # Includes rename \
+            util-linux-misc \
+            # Used to generate .flatpakref files \
+            jinja2-cli \
+            xmlstarlet \
+            gpg \
+            # Required by the publish action \
+            git
+
       - name: Checkout
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
@@ -172,19 +185,6 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: Install required packages
-        if: ${{ env.PUBLISH }} == "true"
-        run: |
-          apk update && apk add --no-cache \
-            # Includes rename \
-            util-linux-misc \
-            # Used to generate .flatpakref files \
-            jinja2-cli \
-            xmlstarlet \
-            gpg \
-            # Required by the publish action \
-            git
 
       - name: Assemble web listings
         if: ${{ env.PUBLISH }} == "true"
