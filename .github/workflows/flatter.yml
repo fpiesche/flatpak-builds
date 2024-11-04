@@ -159,18 +159,53 @@ jobs:
           path: _site
           merge-multiple: true
 
-      - name: Assemble files for web listings
-        id: weblisting-files
+      - name: Setup GPG
+        if: ${{ env.PUBLISH }} == "true"
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Install required packages
+        if: ${{ env.PUBLISH }} == "true"
         run: |
-          apk update && apk add --no-cache util-linux-misc
+          apk update && apk add --no-cache \
+            # Includes rename \
+            util-linux-misc \
+            # Used to generate .flatpakref files \
+            jinja2-cli \
+            xmlstarlet \
+            # Required by the publish action \
+            git
+
+      - name: Assemble web listings
+        if: ${{ env.PUBLISH }} == "true"
+        shell: bash
+        run: |
           find apps -name "*.metainfo.xml" -exec cp {} ./_site/ \;
-          find apps -name "*.flatpakref" -exec cp {} ./_site/ \;
-          touch _site/index.html
           rename ".metainfo.xml" ".xml" ./_site/*.metainfo.xml
+
+      - name: Generate flatpakref files
+        if: ${{ env.PUBLISH }} == "true"
+        shell: bash
+        run: |
+          for app in $(ls -1 apps); do
+            if [[ "$app" != "shared-modules" ]]; then
+              jinja2 \
+                _templates/app.flatpakref.j2 \
+                -D app_id=$app \
+                -D app_name=$(xmlstarlet sel -t -v //component/name apps/$app/$app.metainfo.xml) \
+                -D gpg_key=$(gpg --export florian@yellowkeycard.net | base64) \
+                -o _site/${app}.flatpakref
+            fi
+          done
+          ls -la _site/*.flatpakref
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
         run: |
+          touch _site/index.html
           npm i markdown-to-html-cli -g
           markdown-to-html \
             --source README.md \
