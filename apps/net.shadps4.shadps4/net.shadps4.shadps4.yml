@@ -2,7 +2,7 @@ app-id: net.shadps4.shadps4
 runtime: org.kde.Platform
 runtime-version: '6.7'
 sdk: org.kde.Sdk
-command: shadps4-qt
+command: shadps4
 
 rename-desktop-file: shadps4.desktop
 rename-icon: shadps4
