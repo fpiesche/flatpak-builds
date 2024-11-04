@@ -21,7 +21,7 @@ jobs:
     name: Assemble build matrix
     runs-on: ubuntu-latest
     outputs:
-      files: ${{ steps.builds.outputs.matrix }}
+      matrix: ${{ steps.builds.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,6 +55,7 @@ jobs:
           MATRIX="{\"arch\": [\"x86_64\", \"aarch64\"], \"app\": []}"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
+            echo "Generating matrix entry for $APPID..."
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
