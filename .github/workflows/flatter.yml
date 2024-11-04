@@ -197,7 +197,7 @@ jobs:
               jinja2 \
                 -D app_id="$app" \
                 -D app_name="$(xmlstarlet sel -t -v //component/name apps/$app/$app.metainfo.xml)" \
-                -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 --wrap 0)" \
+                -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64)" \
                 -o _site/${app}.flatpakref \
                 _templates/app.flatpakref.j2
             fi
