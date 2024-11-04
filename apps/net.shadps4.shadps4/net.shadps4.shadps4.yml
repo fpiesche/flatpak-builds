@@ -31,15 +31,13 @@ modules:
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
     sources:
-      - type: archive
-        url: https://api.github.com/repos/shadps4-emu/shadPS4/zipball/v.0.4.0
-        dest-filename: shadps4.zip
-        sha256: 81d174f4de8ab10582ea25ffb2ff30d70e868f6c762f195515836e2af214416f
+      - type: git
+        url: https://github.com/shadps4-emu/shadPS4
+        tag: v.0.4.0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
+          tag-query: .tag_name
       - type: file
         path: net.shadps4.shadps4.svg
       - type: file
