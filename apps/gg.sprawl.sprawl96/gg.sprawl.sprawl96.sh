@@ -20,7 +20,8 @@ download_file () {
     unzip -d $INSTALL_TEMP_DIR $INSTALL_TEMP_DIR/downloaded_file.zip
     if [[ $? == 0 ]]; then
         PACKAGE_DIR=$(dirname $(find $INSTALL_TEMP_DIR -iname "pak0.pak"))
-        mv $PACKAGE_DIR/* $TARGET_DIR
+        mkdir -p $TARGET_DIR
+        mv $PACKAGE_DIR/* $TARGET_DIR/
     else
         zenity --error --title="Download failed" \
             --text="The downloaded file <tt>$FILE_URL</tt> failed to unzip. \
@@ -91,7 +92,7 @@ $LOCAL_LIBREQUAKE_VERSION installed. Do you want to update?" \
                     "https://github.com/lavenderdotpet/LibreQuake/releases/download/$LATEST_LIBREQUAKE_VERSION/full.zip" \
                     $XDG_DATA_HOME/id1 \
                     "LibreQuake game data"
-                rm $LIBREQUAKE_VERSION_FILE
+                if [[ -f $LIBREQUAKE_VERSION_FILE ]]; then rm $LIBREQUAKE_VERSION_FILE; fi
                 echo $LATEST_LIBREQUAKE_VERSION > $LIBREQUAKE_VERSION_FILE
                 ;;
             "No, don't ask again")
@@ -135,7 +136,7 @@ $LOCAL_SPRAWL96_VERSION installed. Do you want to update?" \
                     "https://slipseer.com/index.php?resources/sprawl-96.398/version/$LATEST_SPRAWL96_VERSION/download" \
                     $XDG_DATA_HOME/sprawl \
                     "SPRAWL 96 game data"
-                rm $SPRAWL96_VERSION_FILE
+                if [[ -f $SPRAWL96_VERSION_FILE ]]; then rm $SPRAWL96_VERSION_FILE; fi
                 echo $LATEST_SPRAWL96_VERSION > $SPRAWL96_VERSION_FILE
                 ;;
             "No, don't ask again")
@@ -151,7 +152,7 @@ verify_quake_data
 update_sprawl
 verify_sprawl_data
 
-/app/bin/ironwail -basedir $XDG_DATA_HOME +game sprawl "$@"
+/app/bin/sprawl96 -basedir $XDG_DATA_HOME +game sprawl "$@"
 
 if [[ "$?" != "0" ]]; then
     zenity --error --width=400 --title "SPRAWL 96 exited with an error" \

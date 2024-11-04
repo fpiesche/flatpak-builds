@@ -13,7 +13,7 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
-sdk-extensions:
+inherit-sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
 
 modules:
