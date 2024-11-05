@@ -1,0 +1,149 @@
+app-id: io.github.fgsfdsfgs.perfect_dark
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+command: io.github.fgsfdsfgs.perfect_dark.sh
+
+finish-args:
+  # multiarch is required for 32bit binaries
+  - --allow=multiarch
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Enable network for multiplayer
+  - --share=network
+
+# Parameters for 32-bit extensions
+x-gl-version: &gl-version '1.4'
+x-gl-versions: &gl-versions 24.04;1.4
+x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+
+# 32bit build option overrides
+x-compat-i386-build-options: &compat-i386-build-options
+  prepend-pkg-config-path: /app/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+  ldflags: -L/app/lib
+  prepend-path: /usr/lib/sdk/toolchain-i386/bin
+  env:
+    CC: i686-unknown-linux-gnu-gcc
+    CXX: i686-unknown-linux-gnu-g++
+  libdir: /app/lib
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: /lib/i386-linux-gnu
+    version: *runtime-version
+
+  org.freedesktop.Platform.GL32:
+    directory: /lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    autodelete: false
+    add-ld-path: /lib
+    merge-dirs: *gl-merge-dirs
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.GL32.Debug:
+    directory: /lib/debug/lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    merge-dirs: *gl-merge-dirs
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.VAAPI.Intel.i386:
+    directory: /lib/i386-linux-gnu/dri/intel-vaapi-driver
+    version: *runtime-version
+    versions: *runtime-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: /app/lib
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+modules:
+  - name: perfect_dark
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/fgsfdsfgs/perfect_dark/archive/2a5c3a351eeb1772306567969fb8dc5b31eaf34e.zip
+        sha256: 5a27cd5e61b53ef48e0b4c3827a12bbfd4889a10ec02b0ecb6ce3f7b98bf7250
+        dest-filename: perfect_dark.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
+          version-query: .[] | select(.name == "ci-dev-build") | .commit.sha
+          url-template: https://github.com/fgsfdsfgs/perfect_dark/archive/$version.zip
+    build-options: *compat-i386-build-options
+    build-commands:
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux
+      - install -Dm 755 build/ntsc-final-port/pd.exe /app/bin/pd
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=pal-final
+      - install -Dm 755 build/pal-final-port/pd.pal.exe /app/bin/pd.pal
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=jpn-final
+      - install -Dm 755 build/jpn-final-port/pd.jpn.exe /app/bin/pd.jpn
+      # metadata file
+      - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      # Regular launcher
+      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
+      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm 644 dist/linux/${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      # Netplay launcher
+      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
+      - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark Netplay"
+      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
+
+  - name: perfect_dark_netplay
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/fgsfdsfgs/perfect_dark/archive/9625cd7d28c7476e13f3f9ec9a9b0cab2d930246.zip
+        sha256: 9d421214f3b766b800d2604fd3b94e842ee05670bded39010b716d3a928fb1af
+        dest-filename: perfect_dark_netplay.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
+          version-query: .[] | select(.name == "ci-dev-build-net") | .commit.sha
+          url-template: https://github.com/fgsfdsfgs/perfect_dark/archive/$version.zip
+      - type: patch
+        path: fix-netplay-build.patch
+    build-options: *compat-i386-build-options
+    build-commands:
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux
+      - install -Dm 755 build/ntsc-final-port/pd.exe /app/bin/netplay/pd
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=pal-final
+      - install -Dm 755 build/pal-final-port/pd.pal.exe /app/bin/netplay/pd.pal
+      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=jpn-final
+      - install -Dm 755 build/jpn-final-port/pd.jpn.exe /app/bin/netplay/pd.jpn
+
+  # - name: bundle-setup
+  #   buildsystem: simple
+  #   build-commands:
+  #     - mkdir -p /lib/i386-linux-gnu
+  #     - mkdir -p /lib/debug/lib/i386-linux-gnu
+  #     - mkdir -p /lib/i386-linux-gnu/GL
+  #     - mkdir -p /lib/i386-linux-gnu/dri/intel-vaapi-driver
+  #     - install -Dm644 ld.so.conf /app/etc/ld.so.conf
+  #   sources:
+  #     - type: inline
+  #       dest-filename: ld.so.conf
+  #       contents: |
+  #         /lib/i386-linux-gnu
+  #         /app/lib/i386-linux-gnu
