@@ -21,7 +21,7 @@ finish-args:
   - --env=TIMIDITY_CFG=/app/share/timidity/timidity.cfg
 
 modules:
-  - shared-modules/linux-audio/fluidsynth2.json
+  - ../shared-modules/linux-audio/fluidsynth2.json
   - name: vorbis
     sources:
       - type: git
