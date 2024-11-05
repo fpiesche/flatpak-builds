@@ -72,6 +72,10 @@ modules:
           --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
+    post-install:
+      - install -Dm 644 desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
+      - install -Dm 644 desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      # - install -Dm 644 desktop/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.svg
 
   - name: extra-data
     sources:
@@ -103,14 +107,6 @@ modules:
           - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
           - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
           - install -m644 crude.cfg /app/share/freepats/freepats.cfg
-      - type: file
-        path: info.exult.exult.metainfo.xml
-      - type: file
-        path: info.exult.exult.releases.xml
-      - type: file
-        path: timidity.cfg
-      - type: file
-        path: info.exult.exult.png
     buildsystem: simple
     build-commands:
       # Temporary solution for the lack of extra-data support in exported bundles
@@ -121,8 +117,3 @@ modules:
       # - install -m644 freepats/crude.cfg /app/share/freepats/freepats.cfg
       # End of temporary fix for exported bundle
       - install -Dm755 apply_extra /app/bin/apply_extra
-      - install -d /app/share/timidity
-      - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
-      - install -Dm 644 ${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
-      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/${FLATPAK_ID}.png
