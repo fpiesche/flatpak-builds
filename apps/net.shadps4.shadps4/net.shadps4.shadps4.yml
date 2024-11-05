@@ -10,9 +10,9 @@ rename-icon: shadps4
 finish-args:
   # gamepad and 3D hardware support
   - --device=all
-  # X11 + XShm access
-  - --share=ipc
-  - --socket=x11
+  # Wayland + fallback
+  - --socket=wayland
+  - --socket=fallback-x11
   # Audio
   - --socket=pulseaudio
 
