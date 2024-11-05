@@ -37,6 +37,9 @@
     <keyword>port</keyword>
   </keywords>
   <releases>
+    <release version="9625cd7d28c7476e13f3f9ec9a9b0cab2d930246" date="2024-11-05">
+      <description></description>
+    </release>
     <release version="latest" date="2024-05-14"/>
   </releases>
   <content_rating type="oars-1.1">

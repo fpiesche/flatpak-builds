@@ -79,8 +79,8 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/fgsfdsfgs/perfect_dark/archive/2a5c3a351eeb1772306567969fb8dc5b31eaf34e.zip
-        sha256: 5a27cd5e61b53ef48e0b4c3827a12bbfd4889a10ec02b0ecb6ce3f7b98bf7250
+        url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/zipball/refs/tags/ci-dev-build
+        sha256: 2ba51d338d8c9aefe07231479eeb76e11ffd118324813bf1cda0bf19779fc16d
         dest-filename: perfect_dark.zip
         x-checker-data:
           type: json
@@ -107,15 +107,16 @@ modules:
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
       - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark Netplay"
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark
+        Netplay"
       - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
 
   - name: perfect_dark_netplay
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/fgsfdsfgs/perfect_dark/archive/9625cd7d28c7476e13f3f9ec9a9b0cab2d930246.zip
-        sha256: 9d421214f3b766b800d2604fd3b94e842ee05670bded39010b716d3a928fb1af
+        url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/zipball/refs/tags/ci-dev-build-net
+        sha256: 68df0658c787c87c499ca4e5713884e6ea29e2349f051b0fd82d49797bca57a3
         dest-filename: perfect_dark_netplay.zip
         x-checker-data:
           type: json
