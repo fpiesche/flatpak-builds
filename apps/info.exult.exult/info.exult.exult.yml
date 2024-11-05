@@ -27,7 +27,7 @@ modules:
       - type: archive
         url: https://api.github.com/repos/xiph/vorbis/zipball/v1.3.7
         dest-filename: libvorbis.zip
-        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
+        sha256: ec2fbe8ef8cb705481b57dcd3cad37b3dfaa59ed0ac6a386ca675d28b23b3157
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiph/vorbis/releases/latest
@@ -57,7 +57,7 @@ modules:
       - type: archive
         url: https://api.github.com/repos/exult/exult/zipball/v1.10.1
         dest-filename: exult.zip
-        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
+        sha256: 8e732acc2011beafa2060fd94be02d3e2a9b081e8252f813f1ae0d58e9ee0798
         x-checker-data:
           type: json
           url: https://api.github.com/repos/exult/exult/releases/latest
