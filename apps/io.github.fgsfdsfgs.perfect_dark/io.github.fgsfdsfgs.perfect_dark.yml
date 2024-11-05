@@ -79,7 +79,7 @@ modules:
     buildsystem: simple
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark/
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
         commit: 2a5c3a351eeb1772306567969fb8dc5b31eaf34e
         x-checker-data:
           type: json
@@ -112,7 +112,7 @@ modules:
     buildsystem: simple
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark/
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
         commit: 9625cd7d28c7476e13f3f9ec9a9b0cab2d930246
         x-checker-data:
           type: json
