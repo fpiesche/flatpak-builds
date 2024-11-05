@@ -24,12 +24,15 @@ modules:
   - ../shared-modules/linux-audio/fluidsynth2.json
   - name: vorbis
     sources:
-      - type: git
-        url: https://github.com/xiph/vorbis.git
-        tag: v1.3.7
+      - type: archive
+        url: https://api.github.com/repos/xiph/vorbis/zipball/v1.3.7
+        dest-filename: libvorbis.zip
+        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\\d.]+)$
+          type: json
+          url: https://api.github.com/repos/xiph/vorbis/releases/latest
+          version-query: .tag_name | sub(\"^v\"; \"\")
+          url-query: .zipball_url
     buildsystem: autotools
 
   # Build mt32emu for MT-32 MIDI emulation
@@ -51,17 +54,19 @@ modules:
 
   - name: exult
     sources:
-      - type: git
-        url: https://github.com/exult/exult.git
-        tag: v1.10
+      - type: archive
+        url: https://api.github.com/repos/exult/exult/zipball/snapshot-v1.11.0.20240924
+        dest-filename: exult.zip
+        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
+          type: json
+          url: https://api.github.com/repos/exult/exult/releases/latest
+          version-query: .tag_name | sub(\"^v\"; \"\")
+          url-query: .zipball_url
+
     buildsystem: simple
     build-commands:
-      - pwd
       - autoreconf -v -i
-      - pwd
       - >
           ./configure --prefix=/app --with-debug=extreme
           --enable-exult-studio --enable-exult-studio-support
@@ -73,8 +78,8 @@ modules:
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
     post-install:
-      - install -Dm 644 desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
-      - install -Dm 644 desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ../desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
+      - install -Dm 644 ../desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # - install -Dm 644 desktop/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.svg
 
   - name: extra-data
