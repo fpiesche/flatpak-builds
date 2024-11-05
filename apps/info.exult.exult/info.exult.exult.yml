@@ -42,8 +42,8 @@ modules:
       - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
     sources:
       - type: archive
-        url: https://github.com/munt/munt/archive/libmt32emu_2_7_0.tar.gz
-        sha256: 5ede7c3d28a3bb0d9e637935b8b96484fadb409c9e5952a9e5432b3e05e5dbc1
+        url: https://github.com/munt/munt/archive/libmt32emu_2_7_1.tar.gz
+        sha256: e4524d52d6799a4e32a961a2e92074f14adcb2f110a4e7a06bede77050cfdaf4
         x-checker-data:
           type: anitya
           project-id: 220368
@@ -53,23 +53,24 @@ modules:
     sources:
       - type: git
         url: https://github.com/exult/exult.git
-        tag: v1.10
+        tag: v1.10.1
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+        commit: d264d09d8e035e5de88441670218e0265a3c04c1
     buildsystem: simple
     build-commands:
       - pwd
       - autoreconf -v -i
       - pwd
       - >
-          ./configure --prefix=/app --with-debug=extreme
-          --enable-exult-studio --enable-exult-studio-support
-          --enable-compiler
-          --enable-zip-support --enable-shared --enable-midi-sfx
-          --enable-data --enable-mods
-          --enable-usecode-container --enable-nonreadied-objects
-          --disable-oggtest --disable-vorbistest
+        ./configure --prefix=/app --with-debug=extreme
+        --enable-exult-studio --enable-exult-studio-support
+        --enable-compiler
+        --enable-zip-support --enable-shared --enable-midi-sfx
+        --enable-data --enable-mods
+        --enable-usecode-container --enable-nonreadied-objects
+        --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
     post-install:
