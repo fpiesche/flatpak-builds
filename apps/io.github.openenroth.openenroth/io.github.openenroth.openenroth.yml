@@ -67,7 +67,8 @@ modules:
     sources:
        - type: git
          url: https://github.com/OpenEnroth/OpenEnroth.git
-         tag: v0.1
+         tag: nightly
+         commit: af34bad23171a58cd95e7e79fa51a22728f2cd03
          x-checker-data:
            type: git
            tag-pattern: ^v\d+(\.\d+)+.*$
