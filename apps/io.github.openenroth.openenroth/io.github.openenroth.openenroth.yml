@@ -75,7 +75,7 @@ modules:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/releases/latest
           tag-query: .tag_name
-          version-query: .tag_name | sub(\"^v\.\"; \"\")
+          version-query: .tag_name | sub("^v"; "")
 
     post-install:
       - install -Dm755 src/Bin/OpenEnroth/OpenEnroth /app/bin/OpenEnroth
