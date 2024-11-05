@@ -70,8 +70,11 @@ modules:
          tag: nightly
          commit: af34bad23171a58cd95e7e79fa51a22728f2cd03
          x-checker-data:
-           type: git
-           tag-pattern: ^v\d+(\.\d+)+.*$
+          type: json
+          url: https://api.github.com/repos/openenroth/openenroth/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name | sub(\"^v\.\"; \"\")
+
     post-install:
       - install -Dm755 src/Bin/OpenEnroth/OpenEnroth /app/bin/OpenEnroth
       # launcher script
