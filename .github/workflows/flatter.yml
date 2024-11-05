@@ -187,7 +187,7 @@ jobs:
         run: |
           mkdir -p _site/app
           find apps -name "*.metainfo.xml" -exec cp {} ./_site/app/ \;
-          rename ".metainfo.xml" "" ./_site/app/*.metainfo.xml
+          rename ".metainfo.xml" ".xml" ./_site/app/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
         if: ${{ env.PUBLISH }} == "true"
