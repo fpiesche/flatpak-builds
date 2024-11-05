@@ -20,7 +20,23 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
 
 modules:
-  - deps/rapidjson.yml
+  - name: rapidjson
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DRAPIDJSON_BUILD_DOC=OFF
+      - -DRAPIDJSON_BUILD_EXAMPLES=OFF
+      - -DRAPIDJSON_BUILD_TESTS=OFF
+      - -DRAPIDJSON_BUILD_THIRDPARTY_GTEST=OFF
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/Tencent/rapidjson/zipball/v1.1.0
+        dest-filename: rapidjson.zip
+        sha256: 7fb9f29b86f6842a6f67ebdf6b56b3fc25671b3bca50448e1505f47f37eb19d5
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/tencent/rapidjson/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
 
   - name: shadps4
     buildsystem: cmake-ninja
