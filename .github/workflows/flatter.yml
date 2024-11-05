@@ -185,13 +185,15 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
+          mkdir -p _site/app
           find apps -name "*.metainfo.xml" -exec cp {} ./_site/ \;
-          rename ".metainfo.xml" ".xml" ./_site/*.metainfo.xml
+          rename ".metainfo.xml" "" ./_site/app/*.metainfo.xml
 
-      - name: Generate flatpakref files
+      - name: Generate Flatpak repository and app reference files
         if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
+          gpg --export florian@yellowkeycard.net | base64 -w 0 > _site/ykc.gpg
           for app in $(ls -1 apps); do
             if [[ "$app" != "shared-modules" ]]; then
               jinja2 \
@@ -202,7 +204,10 @@ jobs:
                 _templates/app.flatpakref.j2
             fi
           done
-          ls -la _site/*.flatpakref
+          jinja2 \
+            -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 -w 0)" \
+            -o _site/ykc.flatpakrepo \
+            _templates/ykc.flatpakrepo.j2
 
       - name: Generate index.html file
         if: ${{ env.PUBLISH }} == "true"
