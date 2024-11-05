@@ -86,8 +86,11 @@ jobs:
       pages: write
       id-token: write
       contents: write
+    outputs:
+      cache-key: ${{ steps.flatpak.outputs.cache-key }}
 
     strategy:
+      max-parallel: 1
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
 
     steps:
@@ -115,7 +118,7 @@ jobs:
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
         id: flatpak
-        uses: andyholmes/flatter@main
+        uses: fpiesche/flatter@patch-1
         with:
           files: ${{ matrix.app.manifest }}
           flatpak-build-bundle-args: |
@@ -125,15 +128,6 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
-          # upload-pages-includes: ${{ steps.weblisting-files.outputs.files }}
-          # upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
-
-      - name: Upload build as artifact
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
-        uses: actions/upload-artifact@v4
-        with:
-          path: ${{ steps.flatpak.outputs.repository }}
-          name: ${{ matrix.app.appid }}_${{ matrix.arch }}
 
   deploy:
     name: Deploy to GitHub Pages
@@ -166,12 +160,19 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
 
-      - name: Get build artifacts
+      - name: Restore cache
         if: ${{ env.PUBLISH }} == "true"
-        uses: actions/download-artifact@v4
+        uses: actions/restore-cache
         with:
-          path: _site
-          merge-multiple: true
+          key: ${{ needs.flatter.outputs.cache-key }}
+          path: repo/
+          fail-on-cache-miss: true
+
+      - name: Move cache into working directory
+        if: ${{ env.PUBLISH }} == "true"
+        run: |
+          mkdir _site
+          mv repo _site
 
       - name: Setup GPG
         if: ${{ env.PUBLISH }} == "true"
