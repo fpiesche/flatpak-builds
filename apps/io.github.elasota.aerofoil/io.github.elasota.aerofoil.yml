@@ -28,9 +28,9 @@ modules:
       - -DCMAKE_INSTALL_PREFIX=/app
     sources:
       - type: archive
-        url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
+        url: https://api.github.com/repos/elasota/Aerofoil/zipball/1.1.2
         dest-filename: aerofoil.zip
-        sha256: e88540e9cc4e3355c31dad68443083c62616339984ac9dc2be9e399e6ec06f43
+        sha256: ae061f6d5eec51d1f8a901aa5e9132dfa1a22dda9e37fb170bce14b772e9c30f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
