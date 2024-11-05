@@ -74,7 +74,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/tags
-          version-query: .[] | select(.name == "nightly") | .commit.sha
+          commit-query: .[] | select(.name == "nightly") | .commit.sha
 
     post-install:
       - install -Dm755 src/Bin/OpenEnroth/OpenEnroth /app/bin/OpenEnroth
