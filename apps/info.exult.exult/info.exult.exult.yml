@@ -54,27 +54,26 @@ modules:
   - name: exult
     sources:
       - type: archive
-        url: https://api.github.com/repos/exult/exult/zipball/v1.10.1
+        url: https://api.github.com/repos/exult/exult/zipball/snapshot-v1.11.0.20241103
         dest-filename: exult.zip
-        sha256: 8e732acc2011beafa2060fd94be02d3e2a9b081e8252f813f1ae0d58e9ee0798
+        sha256: b0c48b74b5155064e84a6a1f910749c2dbd52677fe7df2409b1e05dc6d232eea
         x-checker-data:
           type: json
           url: https://api.github.com/repos/exult/exult/releases/latest
           version-query: .tag_name | sub("^v."; "")
           url-query: .zipball_url
-          versions:
-            !=: snapshot-*
+          versions: !=: snapshot-*
     buildsystem: simple
     build-commands:
       - autoreconf -v -i
       - >
-          ./configure --prefix=/app --with-debug=extreme
-          --enable-exult-studio --enable-exult-studio-support
-          --enable-compiler
-          --enable-zip-support --enable-shared --enable-midi-sfx
-          --enable-data --enable-mods
-          --enable-usecode-container --enable-nonreadied-objects
-          --disable-oggtest --disable-vorbistest
+        ./configure --prefix=/app --with-debug=extreme
+        --enable-exult-studio --enable-exult-studio-support
+        --enable-compiler
+        --enable-zip-support --enable-shared --enable-midi-sfx
+        --enable-data --enable-mods
+        --enable-usecode-container --enable-nonreadied-objects
+        --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
     post-install:
