@@ -78,15 +78,13 @@ modules:
   - name: perfect_dark
     buildsystem: simple
     sources:
-      - type: archive
-        url: https://github.com/fgsfdsfgs/perfect_dark/archive/2a5c3a351eeb1772306567969fb8dc5b31eaf34e.zip
-        sha256: 5a27cd5e61b53ef48e0b4c3827a12bbfd4889a10ec02b0ecb6ce3f7b98bf7250
-        dest-filename: perfect_dark.zip
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark/
+        commit: 2a5c3a351eeb1772306567969fb8dc5b31eaf34e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
-          version-query: .[] | select(.name == "ci-dev-build") | .commit.sha
-          url-query: .[] | select(.name == "ci-dev-build") | .zipball_url
+          commit-query: .[] | select(.name == "ci-dev-build") | .commit.sha
     build-options: *compat-i386-build-options
     build-commands:
       - make -f Makefile.port TARGET_PLATFORM=i686-linux
@@ -113,15 +111,13 @@ modules:
   - name: perfect_dark_netplay
     buildsystem: simple
     sources:
-      - type: archive
-        url: https://github.com/fgsfdsfgs/perfect_dark/archive/9625cd7d28c7476e13f3f9ec9a9b0cab2d930246.zip
-        sha256: 9d421214f3b766b800d2604fd3b94e842ee05670bded39010b716d3a928fb1af
-        dest-filename: perfect_dark_netplay.zip
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark/
+        commit: 9625cd7d28c7476e13f3f9ec9a9b0cab2d930246
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
-          version-query: .[] | select(.name == "ci-dev-build-net") | .commit.sha
-          url-query: .[] | select(.name == "ci-dev-build-net") | .zipball_url
+          commit-query: .[] | select(.name == "ci-dev-build-net") | .commit.sha
       - type: patch
         path: fix-netplay-build.patch
     build-options: *compat-i386-build-options
