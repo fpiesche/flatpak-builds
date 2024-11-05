@@ -31,8 +31,8 @@ modules:
         url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
         dest-filename: aerofoil.zip
         sha256: e88540e9cc4e3355c31dad68443083c62616339984ac9dc2be9e399e6ec06f43
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
+        #   version-query: .tag_name
+        #   url-query: .zipball_url
