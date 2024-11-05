@@ -38,7 +38,7 @@ modules:
       - type: archive
         url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v0.11.0
         dest-filename: libdwarf.zip
-        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
+        sha256: eb6c4bb1ce62dbb9e3d22e0495c6c8c191dd5ab98c02488be566304b7ed51146
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
