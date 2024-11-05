@@ -30,7 +30,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiph/vorbis/releases/latest
-          version-query: .tag_name | sub(\"^v\"; \"\")
+          version-query: .tag_name | sub("^v."; "")
           url-query: .zipball_url
     buildsystem: autotools
 
@@ -62,6 +62,8 @@ modules:
           url: https://api.github.com/repos/exult/exult/releases/latest
           version-query: .tag_name | sub("^v."; "")
           url-query: .zipball_url
+          versions:
+            !=: snapshot-*
     buildsystem: simple
     build-commands:
       - autoreconf -v -i
