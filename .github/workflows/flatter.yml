@@ -185,9 +185,9 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
-          mkdir -p _site/app
-          find apps -name "*.metainfo.xml" -exec cp {} ./_site/app/ \;
-          rename ".metainfo.xml" ".xml" ./_site/app/*.metainfo.xml
+          mkdir -p _site/apps
+          find apps -name "*.metainfo.xml" -exec cp {} ./_site/apps/ \;
+          rename ".metainfo.xml" ".xml" ./_site/apps/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
         if: ${{ env.PUBLISH }} == "true"
@@ -200,7 +200,7 @@ jobs:
                 -D app_id="$app" \
                 -D app_name="$(xmlstarlet sel -t -v //component/name apps/$app/$app.metainfo.xml)" \
                 -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 -w 0)" \
-                -o _site/${app}.flatpakref \
+                -o _site/apps/${app}.flatpakref \
                 _templates/app.flatpakref.j2
             fi
           done
