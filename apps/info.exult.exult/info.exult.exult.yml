@@ -1,0 +1,128 @@
+app-id: info.exult.exult
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: exult
+rename-desktop-file: exult.desktop
+
+add-extensions:
+  org.freedesktop.Platform.GL:
+    directory: lib/GL
+    version: '24.08'
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  - --env=TIMIDITY_CFG=/app/share/timidity/timidity.cfg
+
+modules:
+  - shared-modules/linux-audio/fluidsynth2.json
+  - name: vorbis
+    sources:
+      - type: git
+        url: https://github.com/xiph/vorbis.git
+        tag: v1.3.7
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+    buildsystem: autotools
+
+  # Build mt32emu for MT-32 MIDI emulation
+  - name: mt32emu
+    buildsystem: cmake-ninja
+    config-opts:
+      - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
+      - -Dmunt_WITH_MT32EMU_QT=FALSE
+      - -Dlibmt32emu_WITH_VERSION_TAGGING=TRUE
+      - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/munt/munt/archive/libmt32emu_2_7_0.tar.gz
+        sha256: 5ede7c3d28a3bb0d9e637935b8b96484fadb409c9e5952a9e5432b3e05e5dbc1
+        x-checker-data:
+          type: anitya
+          project-id: 220368
+          url-template: https://github.com/munt/munt/archive/libmt32emu_$version.tar.gz
+
+  - name: exult
+    sources:
+      - type: git
+        url: https://github.com/exult/exult.git
+        tag: v1.10
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+    buildsystem: simple
+    build-commands:
+      - pwd
+      - autoreconf -v -i
+      - pwd
+      - >
+          ./configure --prefix=/app --with-debug=extreme
+          --enable-exult-studio --enable-exult-studio-support
+          --enable-compiler
+          --enable-zip-support --enable-shared --enable-midi-sfx
+          --enable-data --enable-mods
+          --enable-usecode-container --enable-nonreadied-objects
+          --disable-oggtest --disable-vorbistest
+      - make -j$FLATPAK_BUILDER_N_JOBS
+      - make install
+
+  - name: extra-data
+    sources:
+      # - type: archive
+      # extra-data doesn't work with exported bundles https://github.com/flatpak/flatpak/issues/1334
+      - type: extra-data
+        filename: exult_audio.zip
+        dest: exult_audio/
+        url: https://downloads.sourceforge.net/project/exult/exult-data/exult_audio.zip
+        sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
+        size: 48439905
+      # - type: archive
+      # extra-data doesn't work with exported bundles https://github.com/flatpak/flatpak/issues/1334
+      - type: extra-data
+        filename: freepats.tar.xz
+        dest: freepats/
+        url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
+        sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
+        size: 25093512
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip exult_audio.zip
+          - mkdir -p /app/share/exult/music
+          - install -m644 *.ogg /app/share/exult/music/
+          - install -m644 *.flx /app/share/exult/
+          - tar xf freepats.tar.xz
+          - install -d /app/share/freepats/{Drum,Tone}_000
+          - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
+          - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
+          - install -m644 crude.cfg /app/share/freepats/freepats.cfg
+      - type: file
+        path: info.exult.exult.metainfo.xml
+      - type: file
+        path: info.exult.exult.releases.xml
+      - type: file
+        path: timidity.cfg
+      - type: file
+        path: info.exult.exult.png
+    buildsystem: simple
+    build-commands:
+      # Temporary solution for the lack of extra-data support in exported bundles
+      # - install -Dm644 exult_audio/*.ogg -t /app/share/exult/music/
+      # - install -Dm644 exult_audio/*.flx -t /app/share/exult/
+      # - install -Dm644 freepats/Drum_000/*.{pat,txt} -t /app/share/freepats/Drum_000
+      # - install -Dm644 freepats/Tone_000/*.{pat,txt} -t /app/share/freepats/Tone_000
+      # - install -m644 freepats/crude.cfg /app/share/freepats/freepats.cfg
+      # End of temporary fix for exported bundle
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -d /app/share/timidity
+      - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
+      - install -Dm 644 ${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/${FLATPAK_ID}.png
