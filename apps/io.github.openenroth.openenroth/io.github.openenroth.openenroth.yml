@@ -35,13 +35,15 @@ modules:
   - name: libdwarf
     buildsystem: cmake-ninja
     sources:
-      - type: git
-        url: https://github.com/davea42/libdwarf-code/
-        tag: v0.11.0
-        commit: 285d9d34f3e9f56cc1c487d0055f6dc54a9c54a1
+      - type: archive
+        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v0.11.0
+        dest-filename: libdwarf.zip
+        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
         x-checker-data:
-          type: git
-          tag-pattern: ^v\d+(\.\d+)+.*$
+          type: json
+          url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
+          version-query: .tag_name | sub(\"^v\"; \"\")
+          url-query: .zipball_url
 
   - name: openenroth
     buildsystem: cmake-ninja
@@ -65,11 +67,11 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
       - -DCMAKE_LINKER=lld
     sources:
-       - type: git
-         url: https://github.com/OpenEnroth/OpenEnroth.git
-         tag: nightly
-         commit: af34bad23171a58cd95e7e79fa51a22728f2cd03
-         x-checker-data:
+      - type: git
+        url: https://github.com/OpenEnroth/OpenEnroth.git
+        tag: nightly
+        commit: af34bad23171a58cd95e7e79fa51a22728f2cd03
+        x-checker-data:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/releases/latest
           tag-query: .tag_name
