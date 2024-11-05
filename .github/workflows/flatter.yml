@@ -162,7 +162,7 @@ jobs:
 
       - name: Restore cache
         if: ${{ env.PUBLISH }} == "true"
-        uses: actions/restore-cache
+        uses: actions/cache/restore@v4
         with:
           key: ${{ needs.flatter.outputs.cache-key }}
           path: repo/
