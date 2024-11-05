@@ -186,7 +186,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p _site/app
-          find apps -name "*.metainfo.xml" -exec cp {} ./_site/ \;
+          find apps -name "*.metainfo.xml" -exec cp {} ./_site/app/ \;
           rename ".metainfo.xml" "" ./_site/app/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
