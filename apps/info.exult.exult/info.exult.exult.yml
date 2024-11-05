@@ -58,12 +58,10 @@ modules:
         dest-filename: exult.zip
         sha256: 8e732acc2011beafa2060fd94be02d3e2a9b081e8252f813f1ae0d58e9ee0798
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/exult/exult/releases/latest
-          version-query: .tag_name | sub("^v."; "")
-          url-query: .zipball_url
-          versions:
-            !=: snapshot-*
+          type: html
+          url: https://exult.info/download.php
+          version-pattern: Exult (v[\d.]+) - official release
+          url-template: https://api.github.com/repos/exult/exult/zipball/$version
     buildsystem: simple
     build-commands:
       - autoreconf -v -i
