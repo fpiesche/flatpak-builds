@@ -86,11 +86,8 @@ jobs:
       pages: write
       id-token: write
       contents: write
-    outputs:
-      cache-key: ${{ steps.flatpak.outputs.cache-key }}
 
     strategy:
-      max-parallel: 1
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
 
     steps:
@@ -118,7 +115,7 @@ jobs:
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
         id: flatpak
-        uses: fpiesche/flatter@patch-1
+        uses: andyholmes/flatter@master
         with:
           files: ${{ matrix.app.manifest }}
           flatpak-build-bundle-args: |
@@ -128,6 +125,13 @@ jobs:
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
+
+      - name: Upload build as artifact
+        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ steps.flatpak.outputs.repository }}
+          name: ${{ matrix.app.appid }}_${{ matrix.arch }}
 
   deploy:
     name: Deploy to GitHub Pages
@@ -160,19 +164,12 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
 
-      - name: Restore cache
+      - name: Get build artifacts
         if: ${{ env.PUBLISH }} == "true"
-        uses: actions/cache/restore@v4
+        uses: actions/restore-cache
         with:
-          key: ${{ needs.flatter.outputs.cache-key }}
-          path: repo/
-          fail-on-cache-miss: true
-
-      - name: Move cache into working directory
-        if: ${{ env.PUBLISH }} == "true"
-        run: |
-          mkdir _site
-          mv repo _site
+          path: _site
+          merge-multiple: true
 
       - name: Setup GPG
         if: ${{ env.PUBLISH }} == "true"
@@ -221,6 +218,18 @@ jobs:
             --title "retrogame flathub repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
+
+      - name: Update repo metadata
+        if: ${{ env.PUBLISH }} == "true"
+        run: |
+          flatpak build-update-repo \
+            --default-branch=stable \
+            --title="Yellow Keycard" \
+            --homepage="https://flatpak.yellowkeycard.net" \
+            --collection-id=net.yellowkeycard.flatpak \
+            --deploy-collection-id \
+            --verbose \
+            _site/repo/
 
       - name: Publish repo
         if: ${{ env.PUBLISH }} == "true"
