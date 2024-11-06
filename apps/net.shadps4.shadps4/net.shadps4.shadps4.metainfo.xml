@@ -18,19 +18,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4/documents/Screenshots/1.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4@main/documents/Screenshots/1.png</image>
       <caption>Bloodborne</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4/documents/Screenshots/2.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4@main/documents/Screenshots/2.png</image>
       <caption>Hatsune Miku: Project DIVA Future Tone</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4/documents/Screenshots/3.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4@main/documents/Screenshots/3.png</image>
       <caption>Yakuza Kiwami</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4/documents/Screenshots/4.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/shadps4-emu/shadps4@main/documents/Screenshots/4.png</image>
       <caption>Persona 4 Golden</caption>
     </screenshot>
   </screenshots>
