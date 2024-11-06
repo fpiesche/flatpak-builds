@@ -34,8 +34,9 @@ add-extensions:
     directory: lib/ffmpeg
     add-ld-path: .
     version: '24.08'
-    autodownload: true
+    no-autodownload: false
     autodelete: false
+
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 
@@ -87,7 +88,7 @@ modules:
       - --disable-static
       - -Dtests=disabled
       - -Ddocumentation=disabled
-  cleanup:
+    cleanup:
       - /bin
       - /include
       - /lib/pkgconfig
