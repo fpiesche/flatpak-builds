@@ -166,7 +166,7 @@ jobs:
 
       - name: Get build artifacts
         if: ${{ env.PUBLISH }} == "true"
-        uses: actions/restore-cache
+        uses: actions/download-artifact@v4
         with:
           path: _site
           merge-multiple: true
