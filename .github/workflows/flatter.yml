@@ -115,7 +115,7 @@ jobs:
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
         id: flatpak
-        uses: andyholmes/flatter@master
+        uses: andyholmes/flatter@main
         with:
           files: ${{ matrix.app.manifest }}
           flatpak-build-bundle-args: |
