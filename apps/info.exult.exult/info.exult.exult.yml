@@ -101,15 +101,10 @@ modules:
       - type: script
         dest-filename: apply_extra
         commands:
-          - unzip exult_audio.zip
-          - mkdir -p /app/share/exult/music
-          - install -m644 *.ogg /app/share/exult/music/
-          - install -m644 *.flx /app/share/exult/
-          - tar xf freepats.tar.xz
-          - install -d /app/share/freepats/{Drum,Tone}_000
-          - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
-          - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
-          - install -m644 crude.cfg /app/share/freepats/freepats.cfg
+          - mkdir -p /app/extra/share/exult
+          - unzip exult_audio.zip -d /app/extra/share/exult && rm exult_audio.zip
+          - mkdir -p /app/extra/share/freepats
+          - tar xf freepats.tar.xz /app/extra/share/freepats/ && rm freepats.tar.xz
     buildsystem: simple
     build-commands:
       # Temporary solution for the lack of extra-data support in exported bundles
