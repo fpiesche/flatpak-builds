@@ -169,7 +169,7 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         uses: actions/download-artifact@v4
         with:
-          path: _site
+          path: _site/repo
           merge-multiple: true
 
       - name: Setup GPG
@@ -184,7 +184,6 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
-          ls -la _site
           mkdir -p _site/apps
           find apps -name "*.metainfo.xml" -exec cp {} ./_site/apps/ \;
           rename ".metainfo.xml" ".xml" ./_site/apps/*.metainfo.xml
