@@ -122,6 +122,7 @@ jobs:
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           flatpak-builder-args: |
             --install-deps-from=flathub
+            --collection-id=net.yellowkeycard.flathub
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
