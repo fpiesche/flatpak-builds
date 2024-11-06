@@ -184,6 +184,7 @@ jobs:
         if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
+          ls -la _site
           mkdir -p _site/apps
           find apps -name "*.metainfo.xml" -exec cp {} ./_site/apps/ \;
           rename ".metainfo.xml" ".xml" ./_site/apps/*.metainfo.xml
