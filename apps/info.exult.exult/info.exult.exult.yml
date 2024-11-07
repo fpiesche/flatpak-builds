@@ -95,10 +95,10 @@ modules:
       - type: script
         dest-filename: apply_extra
         commands:
-          - mkdir -p share/exult
-          - unzip exult_audio.zip -d share/exult && rm exult_audio.zip
-          - mkdir -p share/freepats
-          - tar xf freepats.tar.xz share/freepats/ && rm freepats.tar.xz
+          - unzip exult_audio.zip -d /app/share/exult && rm exult_audio.zip
+          - tar xf freepats.tar.xz /app/share/freepats/ && rm freepats.tar.xz
     buildsystem: simple
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
+      - mkdir -p /app/share/exult/music
+      - mkdir -o /app/share/freepats
