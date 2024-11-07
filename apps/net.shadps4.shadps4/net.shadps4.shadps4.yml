@@ -19,12 +19,14 @@ finish-args:
   - --socket=fallback-x11
   # Audio
   - --socket=pulseaudio
-  # Do we actually need these? What are they for?
-  - --share=network
-  - --filesystem=home
-  - --filesystem=/media
-  - --filesystem=/run/media
+  # Discord rich presence?
   - --talk-name=org.kde.StatusNotifierWatcher
+  # Netplay? Does shadps4 even support that?
+  - --share=network
+  # I don't think we need filesystem access, do we?
+  # - --filesystem=home
+  # - --filesystem=/media
+  # - --filesystem=/run/media
 
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
