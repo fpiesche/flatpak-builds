@@ -84,6 +84,7 @@ modules:
   # TODO: in https://github.com/shadps4-emu/shadPS4/blob/main/documents/building-linux.md
   # TODO: and it's not included in the KDE runtime...
   - name: evdev
+    buildsystem: meson
     config-opts:
       - --disable-static
       - -Dtests=disabled
