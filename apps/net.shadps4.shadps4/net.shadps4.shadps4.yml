@@ -86,7 +86,7 @@ modules:
   - name: evdev
     buildsystem: meson
     config-opts:
-      - --disable-static
+      - -Dtools=disabled
       - -Dtests=disabled
       - -Ddocumentation=disabled
     cleanup:
