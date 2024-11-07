@@ -101,4 +101,4 @@ modules:
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - mkdir -p /app/share/exult/music
-      - mkdir -o /app/share/freepats
+      - mkdir -p /app/share/freepats
