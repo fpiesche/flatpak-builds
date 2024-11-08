@@ -79,6 +79,8 @@ modules:
       - install -Dm 644 desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
       - install -Dm 644 desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm 644 desktop/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.svg
+      - mkdir -p /app/share/exult/music
+      - mkdir -p /app/share/freepats
 
   - name: extra-data
     sources:
@@ -100,5 +102,3 @@ modules:
     buildsystem: simple
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
-      - mkdir -p /app/share/exult/music
-      - mkdir -p /app/share/freepats
