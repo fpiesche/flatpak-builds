@@ -105,6 +105,7 @@ modules:
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
     # TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
+        commit: 67dfc7916c25441fa86ad228e017361b6bf35775
       - type: file
         path: net.shadps4.shadPS4.metainfo.xml
       - type: file
