@@ -1,0 +1,9 @@
+exult/music
+exult/jmsfx.flx
+exult/jmsisfx.flx
+exult/sqsfxbg.flx
+exult/sqsfxsi.flx
+Tone_000
+Drum_000
+crude.cfg
+freepats.cfg

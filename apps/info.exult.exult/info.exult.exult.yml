@@ -2,7 +2,7 @@ app-id: info.exult.exult
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-command: exult
+command: info.exult.exult.sh
 
 add-extensions:
   org.freedesktop.Platform.GL:
@@ -75,12 +75,45 @@ modules:
           --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
-    post-install:
+
+  - name: exult-support
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/exult/exult/zipball/v1.10.1
+        dest-filename: exult.zip
+        sha256: 8e732acc2011beafa2060fd94be02d3e2a9b081e8252f813f1ae0d58e9ee0798
+        x-checker-data:
+          type: html
+          url: https://exult.info/download.php
+          version-pattern: Exult (v[\d.]+) - official release
+          url-template: https://api.github.com/repos/exult/exult/zipball/$version
+      - type: file
+        path: exult.default.cfg
+      - type: file
+        path: info.exult.exult.sh
+      - type: file
+        path: exult-symlinks.txt
+    buildsystem: simple
+    build-commands:
+    # post-install:
       - install -Dm 644 desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
       - install -Dm 644 desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm 644 desktop/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.svg
-      - mkdir -p /app/share/exult/music
-      - mkdir -p /app/share/freepats
+      - install -Dm 644 desktop/info.exult.studio.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.studio.svg
+      - desktop-file-edit --set-icon=info.exult.exult.studio /app/share/applications/info.exult.studio.desktop
+      - install -Dm 644 desktop/info.exult.studio.desktop /app/share/applications/${FLATPAK_ID}.studio.desktop
+      - install -Dm 755 info.exult.exult.sh /app/bin/
+      - desktop-file-edit --set-key=Exec --set-value=info.exult.exult.sh /app/share/applications/info.exult.exult.desktop
+      - mkdir /app/extra
+      - install -m 644 exult.default.cfg /app/extra/exult.default.cfg
+      - install -m 644 data/bg/autonotes.txt /app/extra/bg_autonotes.txt
+      - install -m 644 data/si/autonotes.txt /app/extra/si_autonotes.txt
+      - |
+          for LINKPATH in $(cat exult-symlinks.txt); do
+            mkdir -p /app/extra/${LINKPATH}
+            ln -s /app/extra/${LINKPATH} /app/share/${LINKPATH}
+            rmdir /app/extra/${LINKPATH}
+          done
 
   - name: extra-data
     sources:
@@ -97,8 +130,9 @@ modules:
       - type: script
         dest-filename: apply_extra
         commands:
-          - unzip exult_audio.zip -d /app/share/exult && rm exult_audio.zip
-          - tar xf freepats.tar.xz /app/share/freepats/ && rm freepats.tar.xz
+          - mkdir exult
+          - unzip exult_audio.zip -d exult && rm exult_audio.zip
+          - tar xf freepats.tar.xz && rm freepats.tar.xz
     buildsystem: simple
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
