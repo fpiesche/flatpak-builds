@@ -63,50 +63,6 @@ modules:
     cleanup:
       - '*'
 
-  # TODO: libfmt is included as a submodule in externals - do we need to build it separately?
-  # - name: libfmt
-  #   buildsystem: cmake-ninja
-  #   config-opts:
-  #     - -DFMT_TEST=OFF
-  #   sources:
-  #     - type: archive
-  #       url: https://api.github.com/repos/fmtlib/fmt/zipball/11.0.2
-  #       dest-filename: fmtlib.zip
-  #       sha256: 441b654cfeca7dab0b457e8c327b150f4af3fbf908f55d2adb0d2a27fcfcfa41
-  #       x-checker-data:
-  #           type: json
-  #           url: https://api.github.com/repos/fmtlib/fmt/releases/latest
-  #           version-query: .tag_name
-  #           url-query: .zipball_url
-  #   cleanup:
-  #     - '*'
-
-  # TODO: Original manifest by deadmeu included libevdev. Do we need this?
-  # TODO: shadps4 seems to build fine without it, even though it's listed as a requirement
-  # TODO: in https://github.com/shadps4-emu/shadPS4/blob/main/documents/building-linux.md
-  # TODO: and it's not included in the KDE runtime...
-  - name: evdev
-    buildsystem: meson
-    config-opts:
-      - -Dtools=disabled
-      - -Dtests=disabled
-      - -Ddocumentation=disabled
-    cleanup:
-      - /bin
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /share/man
-    sources:
-      - type: archive
-        url: https://www.freedesktop.org/software/libevdev/libevdev-1.13.3.tar.xz
-        sha256: abf1aace86208eebdd5d3550ffded4c8d73bb405b796d51c389c9d0604cbcfbf
-        x-checker-data:
-          type: anitya
-          project-id: 20540
-          stable-only: true
-          url-template: https://www.freedesktop.org/software/libevdev/libevdev-$version.tar.xz
-
   - name: shadps4
     buildsystem: cmake-ninja
     builddir: true
@@ -132,6 +88,8 @@ modules:
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
         commit: 67dfc7916c25441fa86ad228e017361b6bf35775
+      - type: patch
+        path: thread_patch.patch
     # TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
       - type: file
         path: net.shadps4.shadps4.metainfo.xml
