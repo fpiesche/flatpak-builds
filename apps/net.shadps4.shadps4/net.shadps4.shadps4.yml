@@ -1,6 +1,6 @@
-app-id: net.shadps4.shadps4
+app-id: net.shadps4.shadPS4
 runtime: org.kde.Platform
-runtime-version: '6.7'
+runtime-version: '6.8'
 sdk: org.kde.Sdk
 command: shadps4
 
@@ -19,14 +19,15 @@ finish-args:
   - --socket=fallback-x11
   # Audio
   - --socket=pulseaudio
-  # Discord rich presence?
   - --talk-name=org.kde.StatusNotifierWatcher
-  # Netplay? Does shadps4 even support that?
+  # Reading the game list is very slow through the XDG portal
+  # More filesystem overrides may need to be added by users
+  # depending on where they store their games but these
+  # are reasonable defaults for direct access.
   - --share=network
-  # I don't think we need filesystem access, do we?
-  # - --filesystem=home
-  # - --filesystem=/media
-  # - --filesystem=/run/media
+  - --filesystem=home
+  - --filesystem=/media
+  - --filesystem=/run/media
 
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
@@ -62,6 +63,23 @@ modules:
           url-query: .zipball_url
     cleanup:
       - '*'
+  #
+  # - name: libfmt
+  #   buildsystem: cmake-ninja
+  #   config-opts:
+  #     - -DFMT_TEST=OFF
+  #   sources:
+  #     - type: archive
+  #       url: https://api.github.com/repos/fmtlib/fmt/zipball/11.0.2
+  #       dest-filename: fmtlib.zip
+  #       sha256: 441b654cfeca7dab0b457e8c327b150f4af3fbf908f55d2adb0d2a27fcfcfa41
+  #       x-checker-data:
+  #           type: json
+  #           url: https://api.github.com/repos/fmtlib/fmt/releases/latest
+  #           version-query: .tag_name
+  #           url-query: .zipball_url
+  #   cleanup:
+  #     - '*'
 
   - name: shadps4
     buildsystem: cmake-ninja
@@ -70,8 +88,7 @@ modules:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     config-opts:
-      # TODO: This requires https://github.com/shadps4-emu/shadPS4/pull/1490
-      # - -DENABLE_UPDATER=OFF
+      - -DENABLE_UPDATER=OFF
       - -DENABLE_QT_GUI=ON
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
@@ -87,16 +104,13 @@ modules:
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
-        commit: 67dfc7916c25441fa86ad228e017361b6bf35775
-      - type: patch
-        path: thread_patch.patch
     # TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
       - type: file
-        path: net.shadps4.shadps4.metainfo.xml
+        path: net.shadps4.shadPS4.metainfo.xml
       - type: file
-        path: net.shadps4.shadps4.releases.xml
+        path: net.shadps4.shadPS4.releases.xml
       - type: file
-        path: net.shadps4.shadps4.svg
+        path: net.shadps4.shadPS4.svg
     post-install:
       - install -Dm 644 ../${FLATPAK_ID}.releases.xml -t /app/share/metainfo/releases/
       - install -Dm 644 ../${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
