@@ -40,8 +40,8 @@ modules:
   - name: ironwail
     sources:
       - type: archive
-        url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.7.0
-        sha256: a9e442e4f8d725b6e79117e929cf1765177dfba003042e3b6c91776fb572d80d
+        url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.8.0
+        sha256: d7fbbd94dad93d11834de52b39c9cd30399fd1a75f8ef0c53769081ea0e780bf
         dest-filename: ironwail.zip
         x-checker-data:
           type: json
