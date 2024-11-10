@@ -62,6 +62,16 @@ modules:
           url: https://exult.info/download.php
           version-pattern: Exult (v[\d.]+) - official release
           url-template: https://api.github.com/repos/exult/exult/zipball/$version
+      - type: file
+        path: exult.default.cfg
+      - type: file
+        path: info.exult.exult.sh
+      - type: file
+        path: exult-studio.default.cfg
+      - type: file
+        path: info.exult.exult.studio.sh
+      - type: file
+        path: exult-symlinks.txt
     buildsystem: simple
     build-commands:
       - autoreconf -v -i
@@ -75,45 +85,43 @@ modules:
           --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
-
-  - name: exult-support
-    sources:
-      - type: archive
-        url: https://api.github.com/repos/exult/exult/zipball/v1.10.1
-        dest-filename: exult.zip
-        sha256: 8e732acc2011beafa2060fd94be02d3e2a9b081e8252f813f1ae0d58e9ee0798
-        x-checker-data:
-          type: html
-          url: https://exult.info/download.php
-          version-pattern: Exult (v[\d.]+) - official release
-          url-template: https://api.github.com/repos/exult/exult/zipball/$version
-      - type: file
-        path: exult.default.cfg
-      - type: file
-        path: info.exult.exult.sh
-      - type: file
-        path: exult-symlinks.txt
-    buildsystem: simple
-    build-commands:
-    # post-install:
-      - install -Dm 644 desktop/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
-      - install -Dm 644 desktop/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 desktop/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.svg
-      - install -Dm 644 desktop/info.exult.studio.svg /app/share/icons/hicolor/scalable/${FLATPAK_ID}.studio.svg
-      - desktop-file-edit --set-icon=info.exult.exult.studio /app/share/applications/info.exult.studio.desktop
-      - install -Dm 644 desktop/info.exult.studio.desktop /app/share/applications/${FLATPAK_ID}.studio.desktop
+    post-install:
+      - echo "Setting up metadata and launcher"
+      - install -Dm 644 -t /app/share/metainfo/releases desktop/${FLATPAK_ID}.releases.xml
+      - install -Dm 644 -t /app/share/metainfo/ desktop/${FLATPAK_ID}.metainfo.xml
+      - |
+          desktop-file-edit \
+            --set-key=Exec --set-value=info.exult.exult.sh \
+            /app/share/applications/info.exult.exult.desktop
       - install -Dm 755 info.exult.exult.sh /app/bin/
-      - desktop-file-edit --set-key=Exec --set-value=info.exult.exult.sh /app/share/applications/info.exult.exult.desktop
+
+      - echo "Prepare extra data directory"
       - mkdir /app/extra
-      - install -m 644 exult.default.cfg /app/extra/exult.default.cfg
-      - install -m 644 data/bg/autonotes.txt /app/extra/bg_autonotes.txt
-      - install -m 644 data/si/autonotes.txt /app/extra/si_autonotes.txt
+      - install -m 644 exult.default.cfg /app/share/exult//exult.default.cfg
+      - install -m 644 exult-studio.default.cfg /app/share/exult/exult-studio.default.cfg
       - |
           for LINKPATH in $(cat exult-symlinks.txt); do
             mkdir -p /app/extra/${LINKPATH}
             ln -s /app/extra/${LINKPATH} /app/share/${LINKPATH}
             rmdir /app/extra/${LINKPATH}
           done
+
+      - echo "Rename Exult Studio files for Flatpak compliance"
+      - |
+          install -Dm644 desktop/info.exult.studio.svg \
+            /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.studio.svg
+      - |
+          desktop-file-edit \
+            --set-icon=info.exult.exult.studio \
+            /app/share/applications/info.exult.studio.desktop
+      - |
+          desktop-file-edit \
+            --set-key=Exec --set-value=info.exult.exult.studio.sh \
+            /app/share/applications/info.exult.studio.desktop
+      - install -Dm 755 info.exult.exult.studio.sh /app/bin/
+      - |
+          mv /app/share/applications/info.exult.studio.desktop \
+            /app/share/applications/${FLATPAK_ID}.studio.desktop
 
   - name: extra-data
     sources:
@@ -127,6 +135,16 @@ modules:
         url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
         sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
         size: 25093512
+      - type: extra-data
+        filename: bg_autonotes.txt
+        url: https://cdn.jsdelivr.net/gh/exult/exult/data/bg/autonotes.txt
+        sha256: 67fa9a4ce602843099828cf734842f589750075fff826345b9aee79515136dfd
+        size: 8454
+      - type: extra-data
+        filename: si_autonotes.txt
+        url: https://cdn.jsdelivr.net/gh/exult/exult/data/si/autonotes.txt
+        sha256: 8f9f0c4fb04a035bb2aa4a2c041d3690ca612f7c6649a87a0ad167c9baf1e800
+        size: 29986
       - type: script
         dest-filename: apply_extra
         commands:
