@@ -97,7 +97,7 @@ modules:
 
       - echo "Prepare extra data directory"
       - mkdir /app/extra
-      - install -m 644 exult.default.cfg /app/share/exult//exult.default.cfg
+      - install -m 644 exult.default.cfg /app/share/exult/exult.default.cfg
       - install -m 644 exult-studio.default.cfg /app/share/exult/exult-studio.default.cfg
       - |
           for LINKPATH in $(cat exult-symlinks.txt); do
