@@ -17,63 +17,6 @@ finish-args:
   # Enable network for multiplayer
   - --share=network
 
-# Parameters for 32-bit extensions
-x-gl-version: &gl-version '1.4'
-x-gl-versions: &gl-versions 24.04;1.4
-x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
-
-# 32bit build option overrides
-x-compat-i386-build-options: &compat-i386-build-options
-  prepend-pkg-config-path: /app/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-  ldflags: -L/app/lib
-  prepend-path: /usr/lib/sdk/toolchain-i386/bin
-  env:
-    CC: i686-unknown-linux-gnu-gcc
-    CXX: i686-unknown-linux-gnu-g++
-  libdir: /app/lib
-
-add-extensions:
-  org.freedesktop.Platform.Compat.i386:
-    directory: /lib/i386-linux-gnu
-    version: *runtime-version
-
-  org.freedesktop.Platform.GL32:
-    directory: /lib/i386-linux-gnu/GL
-    version: *gl-version
-    versions: *gl-versions
-    subdirectories: true
-    no-autodownload: true
-    autodelete: false
-    add-ld-path: /lib
-    merge-dirs: *gl-merge-dirs
-    download-if: active-gl-driver
-    enable-if: active-gl-driver
-    autoprune-unless: active-gl-driver
-
-  org.freedesktop.Platform.GL32.Debug:
-    directory: /lib/debug/lib/i386-linux-gnu/GL
-    version: *gl-version
-    versions: *gl-versions
-    subdirectories: true
-    no-autodownload: true
-    merge-dirs: *gl-merge-dirs
-    enable-if: active-gl-driver
-    autoprune-unless: active-gl-driver
-
-  org.freedesktop.Platform.VAAPI.Intel.i386:
-    directory: /lib/i386-linux-gnu/dri/intel-vaapi-driver
-    version: *runtime-version
-    versions: *runtime-version
-    autodelete: false
-    no-autodownload: true
-    add-ld-path: /app/lib
-    download-if: have-intel-gpu
-    autoprune-unless: have-intel-gpu
-
-sdk-extensions:
-  - org.freedesktop.Sdk.Compat.i386
-  - org.freedesktop.Sdk.Extension.toolchain-i386
-
 modules:
   - name: perfect_dark
     buildsystem: simple
@@ -83,19 +26,19 @@ modules:
         commit: 91c43385dd6c653f3afa5445d7ee6245f35e2d9b
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
-          commit-query: .[] | select(.name == "ci-dev-build") | .commit.sha
-    build-options: *compat-i386-build-options
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          commit-query: .commit.sha
     build-commands:
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux
-      - install -Dm 755 build/ntsc-final-port/pd.exe /app/bin/pd
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=pal-final
-      - install -Dm 755 build/pal-final-port/pd.pal.exe /app/bin/pd.pal
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=jpn-final
-      - install -Dm 755 build/jpn-final-port/pd.jpn.exe /app/bin/pd.jpn
+      - |
+          regions="ntsc pal jpn"
+          for region in ${regions}; do
+            make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
+            install -Dm 755 build/${region}-final-*/pd.* /app/bin/pd.${region}
+          done
       # metadata file
       - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
+      - sed -i "s/.x86_64//" dist/linux/${FLATPAK_ID}.sh && sed -i "s/pd\"/pd.ntsc\"/" dist/linux/${FLATPAK_ID}.sh
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
       - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
       - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
@@ -114,33 +57,18 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: 9625cd7d28c7476e13f3f9ec9a9b0cab2d930246
+        commit: 4d96fab71f3135805cd09ad3f40e4b271b1f46f5
+        branch: port-net
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
-          commit-query: .[] | select(.name == "ci-dev-build-net") | .commit.sha
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          commit-query: .commit.sha
       - type: patch
         path: fix-netplay-build.patch
-    build-options: *compat-i386-build-options
     build-commands:
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux
-      - install -Dm 755 build/ntsc-final-port/pd.exe /app/bin/netplay/pd
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=pal-final
-      - install -Dm 755 build/pal-final-port/pd.pal.exe /app/bin/netplay/pd.pal
-      - make -f Makefile.port TARGET_PLATFORM=i686-linux ROMID=jpn-final
-      - install -Dm 755 build/jpn-final-port/pd.jpn.exe /app/bin/netplay/pd.jpn
-
-  # - name: bundle-setup
-  #   buildsystem: simple
-  #   build-commands:
-  #     - mkdir -p /lib/i386-linux-gnu
-  #     - mkdir -p /lib/debug/lib/i386-linux-gnu
-  #     - mkdir -p /lib/i386-linux-gnu/GL
-  #     - mkdir -p /lib/i386-linux-gnu/dri/intel-vaapi-driver
-  #     - install -Dm644 ld.so.conf /app/etc/ld.so.conf
-  #   sources:
-  #     - type: inline
-  #       dest-filename: ld.so.conf
-  #       contents: |
-  #         /lib/i386-linux-gnu
-  #         /app/lib/i386-linux-gnu
+      - |
+          regions="ntsc pal jpn"
+          for region in ${regions}; do
+            make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
+            install -Dm 755 build/${region}-final-*/pd.* /app/bin/netplay/pd.${region}
+          done
