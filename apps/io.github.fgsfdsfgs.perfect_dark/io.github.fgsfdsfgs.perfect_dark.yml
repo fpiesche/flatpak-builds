@@ -80,7 +80,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: 2a5c3a351eeb1772306567969fb8dc5b31eaf34e
+        commit: 91c43385dd6c653f3afa5445d7ee6245f35e2d9b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/tags
@@ -105,7 +105,8 @@ modules:
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
       - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark Netplay"
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark
+        Netplay"
       - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
 
   - name: perfect_dark_netplay
