@@ -30,15 +30,16 @@ modules:
           commit-query: .commit.sha
     build-commands:
       - |
-          regions="ntsc pal jpn"
-          for region in ${regions}; do
-            make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
-            install -Dm 755 build/${region}-final-*/pd.* /app/bin/pd.${region}
-          done
+        regions="ntsc pal jpn"
+        for region in ${regions}; do
+          make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
+          install -Dm 755 build/${region}-final-*/pd.* /app/bin/pd.${region}
+        done
       # metadata file
       - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
-      - sed -i "s/.x86_64//" dist/linux/${FLATPAK_ID}.sh && sed -i "s/pd\"/pd.ntsc\"/" dist/linux/${FLATPAK_ID}.sh
+      - sed -i "s/.x86_64//" dist/linux/${FLATPAK_ID}.sh && sed -i "s/pd\"/pd.ntsc\"/"
+        dist/linux/${FLATPAK_ID}.sh
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
       - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
       - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
@@ -67,8 +68,8 @@ modules:
         path: fix-netplay-build.patch
     build-commands:
       - |
-          regions="ntsc pal jpn"
-          for region in ${regions}; do
-            make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
-            install -Dm 755 build/${region}-final-*/pd.* /app/bin/netplay/pd.${region}
-          done
+        regions="ntsc pal jpn"
+        for region in ${regions}; do
+          make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
+          install -Dm 755 build/${region}-final-*/pd.* /app/bin/netplay/pd.${region}
+        done
