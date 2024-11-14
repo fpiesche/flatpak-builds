@@ -24,10 +24,10 @@ modules:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
         commit: 91c43385dd6c653f3afa5445d7ee6245f35e2d9b
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
-          commit-query: .commit.sha
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+        #   commit-query: .commit.sha
     build-commands:
       - |
         regions="ntsc pal jpn"
@@ -59,10 +59,10 @@ modules:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
         commit: 4d96fab71f3135805cd09ad3f40e4b271b1f46f5
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
-          commit-query: .commit.sha
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+        #   commit-query: .commit.sha
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
