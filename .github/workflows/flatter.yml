@@ -216,7 +216,7 @@ jobs:
           markdown-to-html \
             --source README.md \
             --output _site/index.html \
-            --title "retrogame flathub repo" \
+            --title "yellow keycard flatpak repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
 
