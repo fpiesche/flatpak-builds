@@ -42,9 +42,9 @@ modules:
 
   - name: enet
     sources:
-      - sha256: 1e0b4bc0b7127a2d779dd7928f0b31830f5b3dcb7ec9588c5de70033e8d2434a
+      - sha256: 28603c895f9ed24a846478180ee72c7376b39b4bb1287b73877e5eae7d96b0dd
         type: archive
-        url: https://github.com/lsalzman/enet/archive/v1.3.17.tar.gz
+        url: https://github.com/lsalzman/enet/archive/v1.3.18.tar.gz
         x-checker-data:
           type: anitya
           project-id: 696
@@ -123,8 +123,8 @@ modules:
     sources:
       - type: extra-data
         filename: doom2df-win.zip
-        url: "https://doom2d.org/doom2d_forever/latest/doom2df-win32.zip"
-        sha256: "10a3bd50b10f0ba74cdedf16080681177c81145cba0336dd7782d17da497189b"
+        url: https://doom2d.org/doom2d_forever/latest/doom2df-win32.zip
+        sha256: 10a3bd50b10f0ba74cdedf16080681177c81145cba0336dd7782d17da497189b
         size: 60590731
       - type: script
         dest-filename: apply_extra
