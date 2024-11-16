@@ -5,8 +5,6 @@ sdk: org.freedesktop.Sdk
 command: io.github.fgsfdsfgs.perfect_dark.sh
 
 finish-args:
-  # multiarch is required for 32bit binaries
-  - --allow=multiarch
   # hardware 3D and controller access
   - --device=all
   # X11 + XShm access
