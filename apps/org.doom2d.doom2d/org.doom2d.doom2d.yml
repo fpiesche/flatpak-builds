@@ -1,0 +1,139 @@
+app-id: org.doom2d.doom2d
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+command: Doom2DF
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.freepascal
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # network access
+  - --share=network
+
+build-options:
+  env:
+    PPC_CONFIG_PATH: /usr/lib/sdk/freepascal/etc
+    FPCDIR: /usr/lib/sdk/freepascal/fpcsrc
+    FPC_DIR: /usr/lib/sdk/freepascal/fpcsrc
+    LAZARUSDIR: /usr/lib/sdk/freepascal/share/lazarus
+
+modules:
+  - ../shared-modules/linux-audio/fluidsynth2.json
+  - name: libxmp
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/libxmp/libxmp/zipball/libxmp-4.6.0
+        dest-filename: libxmp.zip
+        sha256: 1955a7c7eb2e6c3ba2da689d115d10f89c6e5e261577e67cd0ad176bea1b97ef
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/libxmp/libxmp/releases/latest
+          version-query: .tag_name | sub("^libxmp-"; "")
+          url-query: .zipball_url
+
+  - name: enet
+    sources:
+      - sha256: 1e0b4bc0b7127a2d779dd7928f0b31830f5b3dcb7ec9588c5de70033e8d2434a
+        type: archive
+        url: https://github.com/lsalzman/enet/archive/v1.3.17.tar.gz
+        x-checker-data:
+          type: anitya
+          project-id: 696
+          url-template: https://github.com/lsalzman/enet/archive/v$version.tar.gz
+      - type: script # cf. https://github.com/lsalzman/enet/blob/master/README
+        dest-filename: autogen.sh
+        commands:
+          - autoreconf -ifv
+
+  - name: doom2d
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://repo.or.cz/d2df-sdl.git
+        commit: 0722185740e8e3644a63c09a71ebf7fde7606011
+        x-checker-data:
+          type: html
+          url: https://repo.or.cz/d2df-sdl.git/refs
+          version-pattern: .*class="current_head">.*\/commit\/([0-9a-f]{40})">heads\/master.*
+      - type: patch
+        path: fix-home-dir.patch
+    subdir: src/game
+    build-commands:
+      - |
+        . /usr/lib/sdk/freepascal/enable.sh
+        mkdir tmp bin
+        fpc -dUSE_SDL2 -dUSE_OPENGL -dUSE_OPENAL -dUSE_VORBIS -dUSE_FLUIDSYNTH -dUSE_XMP \
+          -g -gl -O3 -FE./bin -FU./tmp Doom2DF.lpr
+        install -Dm 755 bin/Doom2DF /app/bin/
+        fpc -dUSE_SDL2 -dUSE_OPENGL -dUSE_OPENAL -dUSE_VORBIS -dUSE_FLUIDSYNTH -dUSE_XMP -dHEADLESS \
+          -g -gl -O3 -FE./bin -FU./tmp Doom2DF.lpr
+        install -Dm 755 bin/Doom2DF /app/bin/Doom2DF_H
+    post-install:
+      - desktop-file-edit --set-icon=${FLATPAK_ID} ../../rpm/res/doom2df.desktop
+      - install -Dm 644 ../../rpm/res/doom2df.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm 644 ../../rpm/res/doom2df.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+
+  - name: doom2d-editor
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://repo.or.cz/d2df-editor.git/snapshot/7fe67265f79c80b0263dff8645faf299962efbb2.tar.gz
+        sha256: 276667a7f943f59dd7a3498691142d1d9c4cfad407e04e79bab6c6fa0158ed12
+        dest-filename: doom2d-editor.tar.gz
+        x-checker-data:
+          type: html
+          url: https://repo.or.cz/d2df-editor.git/refs
+          version-pattern: .*class="current_head">.*\/commit\/([0-9a-f]{40})">heads\/master.*
+          url-template: https://repo.or.cz/d2df-editor.git/snapshot/$version.tar.gz
+    subdir: src/editor
+    build-commands:
+      - |
+        . /usr/lib/sdk/freepascal/enable.sh
+        lazbuild --widgetset=gtk3 --cpu=$FLATPAK_ARCH Editor.lpi
+    post-install:
+      - install -Dm 755 ${FLATPAK_BUILDER_BUILDDIR}/bin/* /app/bin/
+      - desktop-file-edit --set-icon=${FLATPAK_ID}.editor ../../rpm/res/doom2df_editor.desktop
+      - desktop-file-edit --set-key=Exec --set-value=editor ../../rpm/res/doom2df_editor.desktop
+      - install -Dm 644 ../../rpm/res/doom2df_editor.desktop /app/share/applications/${FLATPAK_ID}.editor.desktop
+      - install -Dm 644 ../../rpm/res/doom2df-editor.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.editor.png
+
+  - name: metadata
+    buildsystem: simple
+    sources:
+      - type: file
+        path: org.doom2d.doom2d.metainfo.xml
+      - type: file
+        path: org.doom2d.doom2d.releases.xml
+    build-commands:
+      # metadata file
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
+
+  - name: game-data
+    buildsystem: simple
+    sources:
+      - type: extra-data
+        filename: doom2df-win.zip
+        url: "https://doom2d.org/doom2d_forever/latest/doom2df-win32.zip"
+        sha256: "10a3bd50b10f0ba74cdedf16080681177c81145cba0336dd7782d17da497189b"
+        size: 60590731
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - mkdir -p /app/extra/doom2df
+          - unzip doom2df-win.zip -d tmp && rm doom2df-win.zip
+          - mv -v tmp/data tmp/maps tmp/wads /app/extra/doom2df/
+          - rm -rf tmp
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+
+
