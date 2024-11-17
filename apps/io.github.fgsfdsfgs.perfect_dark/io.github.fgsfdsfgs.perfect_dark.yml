@@ -30,7 +30,7 @@ modules:
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
           commit-query: .commit.sha
     post-install:
-      - install -Dm 755 ./pd.$(arch) /app/bin/pd.ntsc
+      - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.ntsc
       # metadata file
       - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
@@ -56,7 +56,7 @@ modules:
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
           commit-query: .commit.sha
     post-install:
-      - install -Dm 755 ./pd.pal.$(arch) /app/bin/pd.pal
+      - install -Dm 755 ./pd.pal.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.pal
 
   - name: perfect_dark_jpn
     buildsystem: cmake-ninja
@@ -72,7 +72,7 @@ modules:
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
           commit-query: .commit.sha
     post-install:
-      - install -Dm 755 ./pd.jpn.$(arch) /app/bin/pd.jpn
+      - install -Dm 755 ./pd.jpn.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.jpn
 
   - name: perfect_dark_netplay_ntsc
     buildsystem: cmake-ninja
@@ -90,7 +90,7 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.$(arch) /app/bin/netplay/pd.ntsc
+      - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.ntsc
       # Netplay launcher
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
@@ -115,7 +115,7 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.pal.$(arch) /app/bin/netplay/pd.pal
+      - install -Dm 755 ./pd.pal.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.pal
 
   - name: perfect_dark_netplay_jpn
     no-make-install: true
@@ -133,4 +133,4 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.jpn.$(arch) /app/bin/netplay/pd.jpn
+      - install -Dm 755 ./pd.jpn.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.jpn
