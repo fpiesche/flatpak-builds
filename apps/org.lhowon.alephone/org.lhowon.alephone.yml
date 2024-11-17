@@ -83,7 +83,7 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/aleph-one-marathon/alephone/zipball/release-20240822
+        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20240822
         dest-filename: alephone.zip
         sha256: 657df1e0ba61455a461bca8f9d3c85abbb970e87733df27fe0ff13b3f94504e7
         x-checker-data:
@@ -111,24 +111,28 @@ modules:
       - /share/man
       - /share/mime
     post-install:
-      - mkdir -p /app/lib/ffmpeg /app/lib/x86_64-linux-gnu/dri/intel-vaapi-driver /app/share/icons/hicolor/256x256/apps
+      - mkdir -p /app/lib/ffmpeg /app/lib/x86_64-linux-gnu/dri/intel-vaapi-driver
+        /app/share/icons/hicolor/256x256/apps
       # Aleph One main shortcut
       - desktop-file-edit --set-icon=${FLATPAK_ID} flatpak/alephone.desktop
       - desktop-file-edit --set-key=Exec --set-value=alephone flatpak/alephone.desktop
       - install -Dm755 flatpak/alephone.desktop -T /app/share/applications/${FLATPAK_ID}.desktop
       # Marathon shortcut
       - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon flatpak/marathon.desktop
-      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon" flatpak/marathon.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon"
+        flatpak/marathon.desktop
       - desktop-file-edit --set-key=Name --set-value="Marathon" flatpak/marathon.desktop
       - install -Dm755 flatpak/marathon.desktop -T /app/share/applications/${FLATPAK_ID}.marathon.desktop
       # Marathon 2 shortcut
       - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon2 flatpak/marathon2.desktop
-      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon2" flatpak/marathon2.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon2"
+        flatpak/marathon2.desktop
       - desktop-file-edit --set-key=Name --set-value="Marathon 2 - Durandal" flatpak/marathon2.desktop
       - install -Dm755 flatpak/marathon2.desktop -T /app/share/applications/${FLATPAK_ID}.marathon2.desktop
       # Marathon Infinity shortcut
       - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon-infinity flatpak/marathon-infinity.desktop
-      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon-infinity" flatpak/marathon-infinity.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon-infinity"
+        flatpak/marathon-infinity.desktop
       - desktop-file-edit --set-key=Name --set-value="Marathon Infinity" flatpak/marathon-infinity.desktop
       - install -Dm755 flatpak/marathon-infinity.desktop -T /app/share/applications/${FLATPAK_ID}.marathon-infinity.desktop
 
@@ -136,7 +140,7 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/aleph-one-marathon/alephone/zipball/release-20240822
+        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20240822
         dest-filename: alephone.zip
         sha256: 657df1e0ba61455a461bca8f9d3c85abbb970e87733df27fe0ff13b3f94504e7
         x-checker-data:
