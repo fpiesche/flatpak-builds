@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
+<component type="desktop-application">
+  <id>org.lhowon.alephone</id>
+  <name>Aleph One</name>
+  <developer id="org.lhowon.alephone-contributors">
+    <name>Aleph One Contributors</name>
+    <url>https://github.com/Aleph-One-Marathon/alephone/graphs/contributors</url>
+  </developer>
+  <summary> Aleph One is the open source continuation of Bungie’s Marathon 2 game engine.</summary>
+  <icon type="remote">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.png</icon>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  <launchable type="desktop-id">org.lhowon.alephone.desktop</launchable>
+  <url type="homepage">https://alephone.lhowon.org/</url>
+  <url type="contact">https://discord.gg/NvF3pdV</url>
+  <description>
+    <p>Aleph One is the open source continuation of Bungie’s Marathon® 2 game engine. Available for macOS, Windows, and Linux, Aleph One supports Marathon, Marathon 2 and Marathon Infinity natively. Many third party scenarios and net maps are also available.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2398520/ss_2dda9b8806ad51196e69db0014eb4122b46a8664.1920x1080.jpg?t=1724468746</image>
+      <caption>Marathon Infinity</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2398490/ss_810599d8e4b4791ab4227bfb1075a0693f28089a.1920x1080.jpg?t=1724468706</image>
+      <caption>Marathon 2</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2398450/ss_ac991fa43bd53206d5b496f9ec787e3bbb7e0f58.1920x1080.jpg?t=1724340515</image>
+      <caption>Marathon</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://simplici7y.s3.amazonaws.com/static/screenshots/1916/ArchangaelDeath_0005.png</image>
+      <caption>Marathon: Trojan</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">http://nardo.bungie.org/shots/courtyard_after.jpg</image>
+      <caption>Tempus Irae</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">http://eternal.bungie.org/images/screenshots/03-01.jpg</image>
+      <caption>Eternal X</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">http://eternal.bungie.org/images/screenshots/03-02.jpg</image>
+      <caption>Eternal X</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">http://eternal.bungie.org/images/screenshots/04-01.jpg</image>
+      <caption>Eternal X</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://simplici7y.s3.amazonaws.com/static/screenshots/2362/Apotheosis-X-screenshot-4.jpg</image>
+      <caption>Eternal X</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://simplici7y.s3.amazonaws.com/static/screenshots/2366/Apotheosis-X-screenshot-14.jpg</image>
+      <caption>Apotheosis X</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://lochnits.com/marathon/istoria/screenshots/1.png</image>
+      <caption>Istoria</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://lochnits.com/marathon/istoria/screenshots/4.png</image>
+      <caption>Istoria</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://lochnits.com/marathon/istoria/screenshots/6.png</image>
+      <caption>Istoria</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>Platformer</category>
+    <category>Shooter</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>alephone</binary>
+  </provides>
+  <keywords>
+    <keyword>boomer shooter</keyword>
+    <keyword>retro</keyword>
+    <keyword>online</keyword>
+  </keywords>
+  <releases type="external" url="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.releases.xml" />
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>

@@ -1,0 +1,10 @@
+<releases>
+  <release version="1.10" date="2024-08-22">
+  <url>https://github.com/Aleph-One-Marathon/alephone/releases/tag/release-20240822</url>
+  <description>
+    Along with support for Classic Marathon Infinity on Steam and an uploader for the Steam Workshop, this release also includes a new scenario chooser.
+
+    To use the scenario chooser, place the Aleph One executable in a folder containing scenario folders, or add a "Scenarios" folder to one of the original trilogy folders. The scenario chooser is not included with all-in-one Mac apps; use the standalone Aleph One app instead.
+  </description>
+  </release>
+</releases>
