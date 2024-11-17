@@ -16,8 +16,11 @@ finish-args:
   - --share=network
 
 modules:
-  - name: perfect_dark
-    buildsystem: simple
+  - name: perfect_dark_ntsc
+    buildsystem: cmake-ninja
+    no-make-install: true
+    config-opts:
+      - -DROMID=ntsc-final
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
@@ -26,13 +29,8 @@ modules:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
           commit-query: .commit.sha
-    build-commands:
-      - |
-        regions="ntsc pal jpn"
-        for region in ${regions}; do
-          make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
-          install -Dm 755 build/${region}-final-*/pd.* /app/bin/pd.${region}
-        done
+    post-install:
+      - install -Dm 755 ./pd.${FLATPAK_ARCH} /app/bin/pd.ntsc
       # metadata file
       - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
@@ -43,16 +41,44 @@ modules:
       - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -Dm 644 dist/linux/${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
-      # Netplay launcher
-      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
-      - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark
-        Netplay"
-      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
 
-  - name: perfect_dark_netplay
-    buildsystem: simple
+  - name: perfect_dark_pal
+    buildsystem: cmake-ninja
+    no-make-install: true
+    config-opts:
+      - -DROMID=pal-final
+    sources:
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        commit: 06dcbcc1b1df92b5b2f2966d55c3084136f8d7e4
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          commit-query: .commit.sha
+    post-install:
+      - install -Dm 755 ./pd.pal.${FLATPAK_ARCH} /app/bin/pd.pal
+
+  - name: perfect_dark_jpn
+    buildsystem: cmake-ninja
+    no-make-install: true
+    config-opts:
+      - -DROMID=jpn-final
+    sources:
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        commit: 06dcbcc1b1df92b5b2f2966d55c3084136f8d7e4
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          commit-query: .commit.sha
+    post-install:
+      - install -Dm 755 ./pd.jpn.${FLATPAK_ARCH} /app/bin/pd.jpn
+
+  - name: perfect_dark_netplay_ntsc
+    buildsystem: cmake-ninja
+    no-make-install: true
+    config-opts:
+      - -DROMID=ntsc-final
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
@@ -64,9 +90,47 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - |
-        regions="ntsc pal jpn"
-        for region in ${regions}; do
-          make -j${FLATPAK_BUILDER_N_JOBS} -f Makefile.port ROMID=${region}-final
-          install -Dm 755 build/${region}-final-*/pd.* /app/bin/netplay/pd.${region}
-        done
+      - install -Dm 755 ./pd.${FLATPAK_ARCH} /app/bin/netplay/pd.ntsc
+      # Netplay launcher
+      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
+      - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
+      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark
+        Netplay"
+      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
+
+  - name: perfect_dark_netplay_pal
+    buildsystem: cmake-ninja
+    no-make-install: true
+    config-opts:
+      - -DROMID=pal-final
+    sources:
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        commit: 7721297dc8a3cfaf09c21ca34cd12fb0b172fd30
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          commit-query: .commit.sha
+      - type: patch
+        path: fix-netplay-build.patch
+    build-commands:
+      - install -Dm 755 ./pd.pal.${FLATPAK_ARCH} /app/bin/netplay/pd.pal
+
+  - name: perfect_dark_netplay_jpn
+    no-make-install: true
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DROMID=jpn-final
+    sources:
+      - type: git
+        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        commit: 7721297dc8a3cfaf09c21ca34cd12fb0b172fd30
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          commit-query: .commit.sha
+      - type: patch
+        path: fix-netplay-build.patch
+    build-commands:
+      - install -Dm 755 ./pd.jpn.${FLATPAK_ARCH} /app/bin/netplay/pd.jpn
