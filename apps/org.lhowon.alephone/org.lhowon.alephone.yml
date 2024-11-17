@@ -1,0 +1,189 @@
+app-id: org.lhowon.alephone
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '23.08'
+sdk: org.freedesktop.Sdk
+command: alephone
+
+finish-args:
+  - --device=dri
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+
+add-extensions:
+  org.freedesktop.Platform.VAAPI.Intel:
+    directory: lib/x86_64-linux-gnu/dri/intel-vaapi-driver
+    version: *runtime-version
+    versions: *runtime-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: lib
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
+    version: *runtime-version
+    no-autodownload: true
+    autodelete: false
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=filesystem,system
+      - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.86.0/source/boost_1_86_0.tar.bz2
+        sha256: 1bed88e40401b2cb7a1f76d4bab499e352fa4d0c5f31c0dbae64e24d34d7513b
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          url-template: https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_${major}_${minor}_${patch}.tar.bz2
+    cleanup:
+      - /lib/*.a
+      - /lib/debug
+      - /lib/cmake
+
+  - name: zziplib
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://github.com/gdraheim/zziplib/archive/refs/tags/v0.13.78.tar.gz
+        sha256: feaeee7c34f18aa27bd3da643cc6a47d04d2c41753a59369d09102d79b9b0a31
+        x-checker-data:
+          type: anitya
+          project-id: 13802
+          url-template: https://github.com/gdraheim/zziplib/archive/refs/tags/v$version.tar.gz
+
+  - name: miniupnpc
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        sha256: 05b929679091b9921b6b6c1f25e39e4c8d1f4d46c8feb55a412aa697aee03a93
+        url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.8.tar.gz
+        x-checker-data:
+          type: anitya
+          project-id: 1986
+          url-template: https://miniupnp.tuxfamily.org/files/miniupnpc-$version.tar.gz
+    config-opts:
+      - -DUPNPC_BUILD_STATIC=FALSE
+      - -DUPNPC_BUILD_SHARED=TRUE
+      - -DUPNPC_BUILD_TESTS=FALSE
+      - -DUPNPC_BUILD_SAMPLE=FALSE
+    cleanup:
+      - /include
+      - /share/doc
+
+  - ../shared-modules/glu/glu-9.json
+
+  - name: alephone
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/aleph-one-marathon/alephone/zipball/release-20240822
+        dest-filename: alephone.zip
+        sha256: 657df1e0ba61455a461bca8f9d3c85abbb970e87733df27fe0ff13b3f94504e7
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+    build-commands:
+      - autoreconf -v -i
+      - >
+        ./configure
+        --prefix=/app
+        --with-boost-libdir=/app/lib
+        --with-sdl_image
+        --with-ffmpeg
+        --with-curl
+        --with-zzip
+        --with-png
+        --with-miniupnpc
+      - make -j${FLATPAK_BUILDER_N_JOBS}
+      - make install
+    cleanup:
+      - /lib/debug
+      - /share/icons
+      - /share/man
+      - /share/mime
+    post-install:
+      - mkdir -p /app/lib/ffmpeg /app/lib/x86_64-linux-gnu/dri/intel-vaapi-driver /app/share/icons/hicolor/256x256/apps
+      # Aleph One main shortcut
+      - desktop-file-edit --set-icon=${FLATPAK_ID} flatpak/alephone.desktop
+      - desktop-file-edit --set-key=Exec --set-value=alephone flatpak/alephone.desktop
+      - install -Dm755 flatpak/alephone.desktop -T /app/share/applications/${FLATPAK_ID}.desktop
+      # Marathon shortcut
+      - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon flatpak/marathon.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon" flatpak/marathon.desktop
+      - desktop-file-edit --set-key=Name --set-value="Marathon" flatpak/marathon.desktop
+      - install -Dm755 flatpak/marathon.desktop -T /app/share/applications/${FLATPAK_ID}.marathon.desktop
+      # Marathon 2 shortcut
+      - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon2 flatpak/marathon2.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon2" flatpak/marathon2.desktop
+      - desktop-file-edit --set-key=Name --set-value="Marathon 2 - Durandal" flatpak/marathon2.desktop
+      - install -Dm755 flatpak/marathon2.desktop -T /app/share/applications/${FLATPAK_ID}.marathon2.desktop
+      # Marathon Infinity shortcut
+      - desktop-file-edit --set-icon=${FLATPAK_ID}.marathon-infinity flatpak/marathon-infinity.desktop
+      - desktop-file-edit --set-key=Exec --set-value="alephone /app/extra/marathon-infinity" flatpak/marathon-infinity.desktop
+      - desktop-file-edit --set-key=Name --set-value="Marathon Infinity" flatpak/marathon-infinity.desktop
+      - install -Dm755 flatpak/marathon-infinity.desktop -T /app/share/applications/${FLATPAK_ID}.marathon-infinity.desktop
+
+  - name: icons
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/aleph-one-marathon/alephone/zipball/release-20240822
+        dest-filename: alephone.zip
+        sha256: 657df1e0ba61455a461bca8f9d3c85abbb970e87733df27fe0ff13b3f94504e7
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+    build-commands:
+      - install -Dm644 flatpak/alephone.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dm644 flatpak/marathon.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.marathon.png
+      - install -Dm644 flatpak/marathon2.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.marathon2.png
+      - install -Dm644 flatpak/marathon-infinity.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.marathon-infinity.png
+
+  - name: game-data
+    buildsystem: simple
+    sources:
+      - type: extra-data
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20240822/Marathon-20240822-Data.zip
+        sha256: ddae3368279ed74a9f5a6a6fa40fc8f016dcdec81cc46c763bdd090431865fba
+        size: 26408514
+        filename: marathon-data.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^Marathon-.*-Data.zip")).browser_download_url
+      - type: extra-data
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20240822/Marathon2-20240822-Data.zip
+        sha256: 9724d49cae24d7ca4cf9e9a23b403d774718c655b7d01559af5627f36184e232
+        size: 28902408
+        filename: marathon2-data.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^Marathon2-.*-Data.zip")).browser_download_url
+      - type: extra-data
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20240822/MarathonInfinity-20240822-Data.zip
+        sha256: 6ce2d8a8487beff5f77ab41bb3de346603c66ffbec67a755f335bcc44688c5fa
+        size: 31852152
+        filename: marathon-infinity-data.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^MarathonInfinity-.*-Data.zip")).browser_download_url
+      - type: file
+        path: apply_extra
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/
