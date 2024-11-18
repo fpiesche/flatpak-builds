@@ -8,6 +8,9 @@ build-options:
   build-args:
     - --share=network
 
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm18
+
 finish-args:
   # hardware 3D and controller access
   - --device=all
@@ -58,8 +61,11 @@ modules:
           version-query: .tag_name
       - type: patch
         path: fix-cmake-dist-version-check.patch
+    build-options:
+      append-path: /usr/lib/sdk/llvm18/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     build-commands:
-      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
+      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
       - cmake --build build-cmake --target GenerateSohOtr
       - cmake --build build-cmake
       - install -Dm755 build-cmake/soh/soh.elf -t /app/bin/
