@@ -58,7 +58,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
-          version-query: .tag_name
+          tag-query: .tag_name
       - type: patch
         path: fix-cmake-dist-version-check.patch
     build-options:
