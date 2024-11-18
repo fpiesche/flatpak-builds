@@ -1,0 +1,76 @@
+app-id: com.shipofharkinian.shipwright
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+command: com.shipofharkinian.shipwright.sh
+
+build-options:
+  build-args:
+    - --share=network
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=filesystem,system
+      - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.86.0/source/boost_1_86_0.tar.bz2
+        sha256: 1bed88e40401b2cb7a1f76d4bab499e352fa4d0c5f31c0dbae64e24d34d7513b
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          url-template: https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_${major}_${minor}_${patch}.tar.bz2
+    cleanup:
+      - /lib/*.a
+      - /lib/debug
+      - /lib/cmake
+  - ../shared-modules/glew/glew.json
+  - ../shared-modules/glu/glu-9.json
+
+  - name: shipwright
+    buildsystem: simple
+    cleanup:
+      - /share/cmake
+      - /lib/cmake
+      - /share/man
+      - /share/gch
+      - '*.a'
+      - /include
+    sources:
+      - type: git
+        url: https://github.com/harbourmasters/shipwright.git
+        tag: "8.0.6"
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
+          version-query: .tag_name
+      - type: patch
+        path: fix-cmake-dist-version-check.patch
+    build-commands:
+      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
+      - cmake --build build-cmake --target GenerateSohOtr
+      - cmake --build build-cmake
+      - install -Dm755 build-cmake/soh/soh.elf -t /app/bin/
+      # launcher script
+      - install -Dm755 scripts/linux/appimage/soh.sh /app/bin/${FLATPAK_ID}.sh
+      # Icon
+      - install -Dm644 soh/macosx/sohIcon.png /app/share/icons/hicolor/1024x1024/apps/${FLATPAK_ID}.png
+      # # metainfo
+      # - install -Dm644 ../distribution/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      # - install -Dm644 ../distribution/linux/${FLATPAK_ID}.releases.xml /app/share/releases/${FLATPAK_ID}.releases.xml
+      # desktop file
+      - desktop-file-edit --set-key=Name --set-value="Ship of Harkinian" scripts/linux/appimage/soh.desktop
+      - desktop-file-edit --set-icon="${FLATPAK_ID}" scripts/linux/appimage/soh.desktop
+      - install -Dm644 scripts/linux/appimage/soh.desktop /app/share/applications/${FLATPAK_ID}.desktop
