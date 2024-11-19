@@ -1,6 +1,6 @@
 app-id: com.shipofharkinian.shipwright
 runtime: org.freedesktop.Platform
-runtime-version: "24.08"
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: com.shipofharkinian.shipwright.sh
 
@@ -54,18 +54,20 @@ modules:
     sources:
       - type: git
         url: https://github.com/harbourmasters/shipwright.git
-        tag: "8.0.6"
+        tag: 8.0.6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
           tag-query: .tag_name
+        commit: 0bc6ca08e0549ec2ce780e6dd1295f84a194cc25
       - type: patch
         path: fix-cmake-dist-version-check.patch
     build-options:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     build-commands:
-      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
+      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang
+        -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
       - cmake --build build-cmake --target GenerateSohOtr
       - cmake --build build-cmake
       - install -Dm755 build-cmake/soh/soh.elf -t /app/bin/
