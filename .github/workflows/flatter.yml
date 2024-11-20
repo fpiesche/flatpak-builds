@@ -226,7 +226,6 @@ jobs:
           flatpak build-update-repo \
             --default-branch=main \
             --gpg-sign=${{ steps.gpg.outputs.fingerprint }} \
-            --prune \
             --title="Yellow Keycard" \
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
