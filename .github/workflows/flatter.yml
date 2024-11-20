@@ -225,7 +225,7 @@ jobs:
         run: |
           flatpak build-update-repo \
             --default-branch=main \
-            --gpg-sign=${{ steps.gpg.outputs.fingerprint }}
+            --gpg-sign=${{ steps.gpg.outputs.fingerprint }} \
             --generate-static-deltas \
             --prune \
             --title="Yellow Keycard" \
