@@ -14,8 +14,11 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
-  # default Steam library for auto-detecting game data
-  - --filesystem=~/.local/share/Steam/steamapps/
+  # default Steam folders for auto-detecting game data
+  - --filesystem=~/.steam/Steam
+  - --filesystem=~/.local/share/Steam
+  - --filesystem=~/.var/app/com.valvesoftware.Steam/.local/share/Steam
+  - --filesystem=~/.var/app/com.valvesoftware.Steam/.steam/Steam
 
 cleanup:
   - /include
