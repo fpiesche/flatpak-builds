@@ -44,6 +44,8 @@ modules:
   - name: ironwail
     buildsystem: cmake-ninja
     no-make-install: true
+    config-opts:
+      - -DENABLE_USERDIRS=true
     sources:
       - type: archive
         url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.8.0
@@ -54,6 +56,8 @@ modules:
           url: https://api.github.com/repos/andrei-drexler/ironwail/releases/latest
           version-query: .tag_name
           url-query: .zipball_url
+      - type: patch
+        path: io.github.andrei_drexler.ironwail.userdir.patch
       - type: file
         path: io.github.andrei_drexler.ironwail.sh
       - type: file
