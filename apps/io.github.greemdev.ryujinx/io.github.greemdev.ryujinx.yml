@@ -11,9 +11,9 @@ add-extensions:
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.dotnet8
 build-options:
-  prepend-path: "/usr/lib/sdk/dotnet8/bin"
-  append-ld-library-path: "/usr/lib/sdk/dotnet8/lib"
-  prepend-pkg-config-path: "/usr/lib/sdk/dotnet8/lib/pkgconfig"
+  prepend-path: /usr/lib/sdk/dotnet8/bin
+  append-ld-library-path: /usr/lib/sdk/dotnet8/lib
+  prepend-pkg-config-path: /usr/lib/sdk/dotnet8/lib/pkgconfig
 
 
 finish-args:
@@ -34,7 +34,7 @@ modules:
   - name: dotnet
     buildsystem: simple
     build-commands:
-    - /usr/lib/sdk/dotnet8/bin/install.sh
+      - /usr/lib/sdk/dotnet8/bin/install.sh
 
   - name: Ryujinx
     buildsystem: simple
@@ -85,20 +85,22 @@ modules:
     sources:
       - nuget_sources.json
       - type: file
-        url: https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/f20e1c8b1b8d0b43e074329ff8a42c8c7f6fca99/ryujinx-wrapper
-        sha256: "b650655fcda8033b37853b8fcce488268b20498a6ca788db6d6a28994761c776"
+        url: https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/887e33a0ee70329025e9a587fdb070da46e50a98/ryujinx-wrapper
+        sha256: b650655fcda8033b37853b8fcce488268b20498a6ca788db6d6a28994761c776
         dest-filename: ryujinx-wrapper
         x-checker-data:
           type: json
           url: https://api.github.com/repos/flathub/org.ryujinx.Ryujinx/branches/master
           version-query: .commit.sha
-          url-query: ("https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/" + .commit.sha + "/ryujinx-wrapper")
+          url-query: ("https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/"
+            + .commit.sha + "/ryujinx-wrapper")
       - type: file
         path: io.github.greemdev.ryujinx.metainfo.xml
       - type: git
         url: https://github.com/GreemDev/Ryujinx.git
-        tag: "1.2.76"
+        tag: 1.2.76
         x-checker-data:
           type: json
           url: https://api.github.com/repos/GreemDev/Ryujinx/releases/latest
           tag-query: .tag_name
+        commit: f8c53f03fdf7ba7ebe0591caf1e252693bd6af4f
