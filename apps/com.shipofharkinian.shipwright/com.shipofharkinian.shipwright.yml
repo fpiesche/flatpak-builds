@@ -66,10 +66,11 @@ modules:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     build-commands:
-      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang++
+      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
         -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
-      - cmake --build build-cmake --target GenerateSohOtr
-      - cmake --build build-cmake
+      - cmake --build build-cmake --config Release --target GenerateSohOtr
+      - install -Dm755 soh.otr /app/bin/soh
+      - cmake --build build-cmake --config Release
       - install -Dm755 build-cmake/soh/soh.elf -t /app/bin/
       # launcher script
       - install -Dm755 scripts/linux/appimage/soh.sh /app/bin/${FLATPAK_ID}.sh
