@@ -1,6 +1,6 @@
 app-id: com.shipofharkinian.shipwright
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: com.shipofharkinian.shipwright.sh
 
@@ -66,7 +66,7 @@ modules:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     build-commands:
-      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang
+      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_CXX_COMPILER=clang++
         -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
       - cmake --build build-cmake --target GenerateSohOtr
       - cmake --build build-cmake
