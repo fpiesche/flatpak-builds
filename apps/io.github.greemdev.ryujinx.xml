@@ -5,7 +5,10 @@
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>MIT</project_license>
     <name>Ryujinx</name>
-    <developer_name>Ryujinx team</developer_name>
+    <developer id="io.github.greemdev.ryujinx">
+        <name>GreemDev + RyujinX Contributors</name>
+        <url>https://github.com/greemdev/ryujinx/graphs/contributors</url>
+    </developer>
     <summary>A Nintendo Switch Emulator</summary>
     <categories>
         <category>Emulator</category>
