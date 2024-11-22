@@ -8,9 +8,6 @@ build-options:
   build-args:
     - --share=network
 
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm18
-
 finish-args:
   # hardware 3D and controller access
   - --device=all
@@ -19,6 +16,14 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
+
+cleanup:
+  - /share/cmake
+  - /lib/cmake
+  - /share/man
+  - /share/gch
+  - '*.a'
+  - /include
 
 modules:
   - name: boost
@@ -42,15 +47,11 @@ modules:
   - ../shared-modules/glew/glew.json
   - ../shared-modules/glu/glu-9.json
 
-  - name: shipwright
-    buildsystem: simple
-    cleanup:
-      - /share/cmake
-      - /lib/cmake
-      - /share/man
-      - /share/gch
-      - '*.a'
-      - /include
+  - name: soh-otr
+    buildsystem: cmake-ninja
+    builddir: true
+    make-args:
+      - GenerateSohOtr
     sources:
       - type: git
         url: https://github.com/harbourmasters/shipwright.git
@@ -62,23 +63,56 @@ modules:
         commit: 0bc6ca08e0549ec2ce780e6dd1295f84a194cc25
       - type: patch
         path: fix-cmake-dist-version-check.patch
-    build-options:
-      append-path: /usr/lib/sdk/llvm18/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+    post-install:
+      - install -Dm755 soh/soh.otr /app/bin/soh.otr
+      - install -Dm755 ZAPD/ZAPD.out /app/bin/zapd
+      # ZAPD support files
+      - cp -r ../soh/assets/xml/* /app/usr/assets/extractor/xmls/
+      - install -Dm644 ../soh/assets/extractor/* -t /app/usr/assets/extractor/
+      - install -Dm644 ../OTRExporter/CFG/filelists/* -t /app/usr/assets/extractor/filelists/
+      # version info file
+      - git tag > /app/usr/assets/port_version
+
+  - name: soh
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/harbourmasters/shipwright.git
+        tag: 8.0.6
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
+          tag-query: .tag_name
+        commit: 0bc6ca08e0549ec2ce780e6dd1295f84a194cc25
+      - type: patch
+        path: fix-cmake-dist-version-check.patch
+    post-install:
+      - install -Dm755 build-cmake/soh/soh.elf /app/bin/soh
+
+  - name: support-data
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/harbourmasters/shipwright.git
+        tag: 8.0.6
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
+          tag-query: .tag_name
+        commit: 0bc6ca08e0549ec2ce780e6dd1295f84a194cc25
+      - type: file
+        path: com.shipofharkinian.shipwright.png
+      - type: file
+        path: com.shipofharkinian.shipwright.sh
     build-commands:
-      - cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
-        -DCMAKE_LINKER=lld -DCMAKE_LIBRARY_PATH=/app/lib -DCMAKE_INCLUDE_PATH=/app/include
-      - cmake --build build-cmake --config Release --target GenerateSohOtr
-      - install -Dm755 soh.otr /app/bin/soh
-      - cmake --build build-cmake --config Release
-      - install -Dm755 build-cmake/soh/soh.elf -t /app/bin/
       # launcher script
-      - install -Dm755 scripts/linux/appimage/soh.sh /app/bin/${FLATPAK_ID}.sh
+      - install -Dm755 ${FLATPAK_ID}.sh -t /app/bin/
       # Icon
-      - install -Dm644 soh/macosx/sohIcon.png /app/share/icons/hicolor/1024x1024/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}
       # # metainfo
-      # - install -Dm644 ../distribution/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      # - install -Dm644 ../distribution/linux/${FLATPAK_ID}.releases.xml /app/share/releases/${FLATPAK_ID}.releases.xml
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.releases.xml -t /app/share/releases/
       # desktop file
       - desktop-file-edit --set-key=Name --set-value="Ship of Harkinian" scripts/linux/appimage/soh.desktop
       - desktop-file-edit --set-icon="${FLATPAK_ID}" scripts/linux/appimage/soh.desktop
