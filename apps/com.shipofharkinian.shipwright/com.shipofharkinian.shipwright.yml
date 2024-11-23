@@ -59,8 +59,8 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
       - -DCMAKE_LINKER=lld
-      - -DCMAKE_CXX=clang++
-      - -DCMAKE_C=clang
+      - -DCMAKE_CXX_COMPILER=clang++
+      - -DCMAKE_C_COMPILER=clang
     make-args:
       - GenerateSohOtr
     sources:
@@ -90,13 +90,12 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
-      env:
-        CC: clang
-        CXX: clang++
-        CFLAGS: -Wno-int-conversion
-        LD: lld
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
+      - -DCMAKE_LINKER=lld
+      - -DCMAKE_CXX_COMPILER=clang++
+      - -DCMAKE_C_COMPILER=clang
+      - -DCMAKE_C_FLAGS=-Wno-int-conversion -Wno-array-bounds
     sources:
       - type: git
         url: https://github.com/harbourmasters/shipwright.git
