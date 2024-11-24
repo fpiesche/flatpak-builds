@@ -1,0 +1,13 @@
+diff --git a/soh/CMakeLists.txt b/soh/CMakeLists.txt
+index 5c239ae..9592923 100644
+--- a/soh/CMakeLists.txt
++++ b/soh/CMakeLists.txt
+@@ -619,6 +619,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
+             -Wall -Wextra -Wno-error
+             -Wno-unused-parameter
+             -Wno-unused-function
++            -Wno-int-conversion
++            -Wno-array-bounds
+             -Wno-unused-variable
+             -Wno-missing-field-initializers
+             -Wno-parentheses

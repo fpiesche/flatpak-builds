@@ -96,6 +96,7 @@ modules:
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_C_FLAGS=-Wno-int-conversion -Wno-array-bounds
+      - -DCMAKE_CXX_FLAGS=-Wno-int-conversion -Wno-array-bounds
     sources:
       - type: git
         url: https://github.com/harbourmasters/shipwright.git
@@ -107,6 +108,8 @@ modules:
         commit: 0bc6ca08e0549ec2ce780e6dd1295f84a194cc25
       - type: patch
         path: fix-cmake-dist-version-check.patch
+      - type: patch
+        path: fix-cflags.patch
     post-install:
       - install -Dm755 build-cmake/soh/soh.elf /app/bin/soh
 
