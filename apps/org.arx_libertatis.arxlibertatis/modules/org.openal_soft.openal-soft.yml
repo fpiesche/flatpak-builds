@@ -4,8 +4,8 @@ config-opts:
   - -DALSOFT_EXAMPLES=OFF
 sources:
   - type: archive
-    url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.0
-    sha256: 9e10d07cd6d412f9538190f958a6cdd15d55a4b7a2438fcf31732041ca267fde
+    url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.1
+    sha256: 13619a3376d0e3219506a9ebf6f03e5650ad65856a5e8a86e40a67bc0a679c1e
     dest-filename: openal-soft.zip
     x-checker-data:
       type: json
