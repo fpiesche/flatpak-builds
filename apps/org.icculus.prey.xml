@@ -17,6 +17,11 @@
         going nowhere. Along with his people, he is abducted to a menacing mothership.</p>
     <p>This is a Flatpak distribution of Ryan C. Gordon's Linux port of the game, for
         ease of use as the game can be difficult to run on modern systems.</p>
+    <h2>PLEASE NOTE</h2>
+    <p>This Flatpak does <b>not</b> include the Prey game data or a CD key. You will need
+        to supply both. At least the files <code>pak000.pk4</code> through <code>pak004.pk4</code>
+        from a retail installation of Prey must be copied to
+        <code>$HOME/.var/app/org.icculus.prey/base/</code>.</p>
   </description>
   <screenshots>
     <screenshot type="default">
