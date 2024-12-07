@@ -42,6 +42,7 @@ add-extensions:
     versions: *gl-versions
     subdirectories: true
     autodelete: false
+    no-autodownload: false
     add-ld-path: lib
     merge-dirs: *gl-merge-dirs
     download-if: active-gl-driver
@@ -53,7 +54,7 @@ add-extensions:
     version: *gl-version
     versions: *gl-versions
     subdirectories: true
-    no-autodownload: true
+    no-autodownload: false
     merge-dirs: *gl-merge-dirs
     enable-if: active-gl-driver
     autoprune-unless: active-gl-driver
@@ -67,6 +68,10 @@ add-extensions:
     add-ld-path: lib
     download-if: have-intel-gpu
     autoprune-unless: have-intel-gpu
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
 
 modules:
   - name: glu-32bit
