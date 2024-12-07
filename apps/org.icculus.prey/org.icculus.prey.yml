@@ -143,6 +143,8 @@ modules:
       - type: file
         path: org.icculus.prey.metainfo.xml
       - type: file
+        path: org.icculus.prey.desktop
+      - type: file
         path: org.icculus.prey.sh
     build-commands:
       - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392 && rm prey-installer.bin
@@ -151,7 +153,7 @@ modules:
       - install -Dm755 data/prey-linux-x86/prey*.x86 /app/bin
       - install -Dm644 data/prey-linux-x86/libstdc++.so.5 /app/lib32/
       - install -Dm755 org.icculus.prey.sh /app/bin
-      - install -Dm 644 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
+      - install -Dm 644 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
     post-install:

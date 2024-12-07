@@ -4,7 +4,7 @@
   <id>org.icculus.prey</id>
   <name>Prey</name>
   <developer id="org.icculus.prey">
-    <name>Human Head Studios & Ryan C. Gordon</name>
+    <name>Human Head Studios; Ryan C. Gordon</name>
     <url>https://www.mobygames.com/game/23082/prey/credits/windows/?autoplatform=true</url>
   </developer>
   <summary>A sci-fi shooter with horror elements</summary>
@@ -20,22 +20,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/11960762-prey-macintosh-title.jpg</image>
+      <image type="source">https://cdn.mobygames.com/screenshots/11960762-prey-macintosh-title.jpg</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/11961144-prey-macintosh-game-intro-with-tommy-native-american-talking-to-.jpg</image>
-      <caption
-            >The protagonist talking to himself in the bathroom at the start of the game.</caption>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961144-prey-macintosh-game-intro-with-tommy-native-american-talking-to-.jpg</image>
+      <caption>The protagonist talking to himself in the bathroom at the start of the game.</caption>
     </screenshot>
     <screenshot>
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/11961162-prey-macintosh-all-of-us-are-transported-to-some-alien-ship.jpg</image>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961162-prey-macintosh-all-of-us-are-transported-to-some-alien-ship.jpg</image>
       <caption>Abduction</caption>
     </screenshot>
   </screenshots>
