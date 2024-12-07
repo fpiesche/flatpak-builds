@@ -99,6 +99,24 @@ modules:
         url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
         sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
 
+  - name: openal-soft
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DALSOFT_EXAMPLES=OFF
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.1
+        sha256: 13619a3376d0e3219506a9ebf6f03e5650ad65856a5e8a86e40a67bc0a679c1e
+        dest-filename: openal-soft.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/kcat/openal-soft/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+
   - name: patchelf
     sources:
       - type: archive
