@@ -1,0 +1,164 @@
+app-id: org.icculus.prey
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version "24.08"
+sdk: org.freedesktop.Sdk
+command: org.icculus.prey.sh
+
+finish-args:
+  # 32bit library support
+  - --allow=multiarch
+  - --env=LD_LIBRARY_PATH=/app/lib32
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Enable network for multiplayer
+  - --share=network
+
+# Parameters for 32-bit extensions
+x-gl-version: &gl-version "1.4"
+x-gl-versions: &gl-versions 24.08;1.4
+x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+x-compat-i386-opts: &compat_i386_opts
+  prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+  ldflags: -L/app/lib32
+  append-path: /usr/lib/sdk/toolchain-i386/bin
+  env:
+    CC: i686-unknown-linux-gnu-gcc
+    CXX: i686-unknown-linux-gnu-g++
+  libdir: /app/lib32
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: *runtime-version
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: *gl-merge-dirs
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.GL32.Debug:
+    directory: lib/debug/lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    merge-dirs: *gl-merge-dirs
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.VAAPI.Intel.i386:
+    directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
+    version: *runtime-version
+    versions: *runtime-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: lib
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
+
+modules:
+  - name: glu-32bit
+    buildsystem: meson
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
+        x-checker-data:
+          type: anitya
+          project-id: 13518
+          stable-only: true
+          url-template: https://archive.mesa3d.org/glu/glu-$version.tar.xz
+
+  - name: sdl12-compat-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
+        sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
+
+  - name: patchelf
+    sources:
+      - type: archive
+        url: https://github.com/NixOS/patchelf/releases/download/0.18.0/patchelf-0.18.0.tar.gz
+        sha256: 64de10e4c6b8b8379db7e87f58030f336ea747c0515f381132e810dbf84a86e7
+        x-checker-data:
+          type: anitya
+          project-id: 2598
+          stable-only: true
+          url-template: https://github.com/NixOS/patchelf/releases/download/$version/patchelf-$version.tar.gz
+    cleanup:
+      - /bin/patchelf
+      - /share
+
+  - name: prey
+    buildsystem: simple
+    sources:
+      - type: file
+        url: http://icculus.org/prey/downloads/prey-installer-02192009.bin
+        dest-filename: prey-installer.bin
+        sha256: b3d06fc51afbb5dc88d7e0f9d5267cd9d171edf9d18c84c5f66c8172da74b357
+      - type: file
+        path: org.icculus.prey.svg
+      - type: file
+        path: org.icculus.prey.metainfo.xml
+      - type: file
+        path: org.icculus.prey.sh
+    build-commands:
+      - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392 && rm prey-installer.bin
+      - unzip -qq prey-linux.zip && rm prey-linux.zip
+      - mkdir -p /app/bin /app/lib32
+      - install -Dm755 data/prey-linux-x86/prey*.x86 /app/bin
+      - install -Dm644 data/prey-linux-x86/libstdc++.so.5 /app/lib32/
+      - install -Dm755 org.icculus.prey.sh /app/bin
+      - install -Dm 644 ${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+    post-install:
+      # create extension mountpoints
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
+      # Fix RPATHs on Prey executables
+      - patchelf --shrink-rpath /app/bin/prey.x86
+      - patchelf --replace-needed ./libSDL-1.2.so.0 libSDL-1.2.so.0 /app/bin/prey.x86
+      - patchelf --shrink-rpath /app/bin/preyded.x86
+
+  - name: extra-data
+    buildsystem: simple
+    sources:
+      - type: extra-data
+        url: http://icculus.org/prey/downloads/prey-installer-02192009.bin
+        filename: prey-installer.bin
+        size: 45447932
+        sha256: b3d06fc51afbb5dc88d7e0f9d5267cd9d171edf9d18c84c5f66c8172da74b357
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392 && rm prey-installer.bin
+          - unzip -qq prey-linux.zip && rm prey-linux.zip
+          - mkdir /app/extra/prey
+          - install -Dm644 data/prey-linux-x86/base/gamex86.so /app/extra/prey/
+          - mv data/prey-linux-x86/base /app/extra/prey/
+          - mv data/prey-linux-data/base/* /app/extra/prey/base/
+          - rm -rf data guis meta scripts
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/
