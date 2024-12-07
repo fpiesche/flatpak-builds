@@ -38,8 +38,8 @@
         src='https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/{component/id}/{component/id}.png'
       />
       <xsl:variable name="install-html">
-        &lt;a href="<xsl:value-of select="component/id" />.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;
-        flatpak install ykc <xsl:value-of select="component/id" />
+        &lt;a href="<xsl:value-of select="component/id" />.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
+        flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo&lt;br/&gt;flatpak install ykc <xsl:value-of select="component/id" />
       </xsl:variable>
       <button
         type="button"
