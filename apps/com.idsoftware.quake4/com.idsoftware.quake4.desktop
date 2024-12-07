@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Game;Shooter
+Comment=A sci-fi first person shooter
+Exec=quake4.x86
+Icon=com.idsoftware.quake4
+Keywords=quake;shooter;fps
+Name=Quake 4
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application

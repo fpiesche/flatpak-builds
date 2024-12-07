@@ -1,0 +1,174 @@
+app-id: com.idsoftware.quake4
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version "24.08"
+sdk: org.freedesktop.Sdk
+command: com.idsoftware.quake4.sh
+
+finish-args:
+  # 32bit library support
+  - --allow=multiarch
+  - --env=LD_LIBRARY_PATH=/app/lib32
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Enable network for multiplayer
+  - --share=network
+
+# Parameters for 32-bit extensions
+x-gl-version: &gl-version "1.4"
+x-gl-versions: &gl-versions 24.08;1.4
+x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+x-compat-i386-opts: &compat_i386_opts
+  prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+  ldflags: -L/app/lib32
+  append-path: /usr/lib/sdk/toolchain-i386/bin
+  env:
+    CC: i686-unknown-linux-gnu-gcc
+    CXX: i686-unknown-linux-gnu-g++
+  libdir: /app/lib32
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: *runtime-version
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: *gl-merge-dirs
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.GL32.Debug:
+    directory: lib/debug/lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    merge-dirs: *gl-merge-dirs
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.VAAPI.Intel.i386:
+    directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
+    version: *runtime-version
+    versions: *runtime-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: lib
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+modules:
+  - name: glu-32bit
+    buildsystem: meson
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
+        x-checker-data:
+          type: anitya
+          project-id: 13518
+          stable-only: true
+          url-template: https://archive.mesa3d.org/glu/glu-$version.tar.xz
+
+  - name: sdl12-compat-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
+        sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
+    post-install:
+      - ln -s /app/lib32/libSDL-1.2.so.1.2.52 /app/lib32/libSDL-1.2.id.so.0
+
+  - name: openal-soft
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DALSOFT_EXAMPLES=OFF
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.1
+        sha256: 13619a3376d0e3219506a9ebf6f03e5650ad65856a5e8a86e40a67bc0a679c1e
+        dest-filename: openal-soft.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/kcat/openal-soft/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+
+  - name: quake4
+    buildsystem: simple
+    sources:
+      - type: file
+        url: https://www.quaddicted.com/files/idgames2/idstuff/quake4/linux/quake4-linux-1.4.2.x86.run
+        dest-filename: quake4.run
+        sha256: 9203b387b1a4075a1b9ad1eb7be32b49a88141a448d9330d9cbe1f40a145bd6a
+      - type: file
+        path: com.idsoftware.quake4.png
+      - type: file
+        path: com.idsoftware.quake4.desktop
+      - type: file
+        path: com.idsoftware.quake4.metainfo.xml
+      - type: file
+        path: com.idsoftware.quake4.sh
+    build-commands:
+      - chmod a+x quake4.run
+      - ./quake4.run --tar xf
+      - install -Dm755 bin/Linux/x86/*.x86 /app/bin
+      - install -Dm755 ${FLATPAK_ID}.sh /app/bin
+      - install -Dm644 ${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+    post-install:
+      # create extension mountpoints
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
+
+  - name: quake4-data
+    buildsystem: simple
+    sources:
+      - type: extra-data
+        url: https://www.quaddicted.com/files/idgames2/idstuff/quake4/linux/quake4-linux-1.4.2.x86.run
+        filename: quake4.run
+        sha256: 9203b387b1a4075a1b9ad1eb7be32b49a88141a448d9330d9cbe1f40a145bd6a
+        size: 287552973
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - mkdir -p /app/extra/quake4/q4base q4tmp
+          - chmod a+x quake4.run
+          - ./quake4.run --tar -xf -C q4tmp
+          - install -Dm644 q4tmp/q4base/*.pk4 q4tmp/q4base/*cfg q4tmp/us/q4base/* /app/extra/quake4/q4base/
+          - install -Dm644 q4tmp/q4base/zpak_*.pk4.off /app/extra/quake4/q4base/
+          - rename ".off" "" /app/extra/quake4/q4base/*.off
+          - mkdir -p /app/extra/quake4/q4mp/demos
+          - install -Dm644 q4tmp/q4mp/*.pk4 /app/extra/quake4/q4mp/
+          - install -Dm644 q4tmp/q4mp/demos/* /app/extra/quake4/q4mp/demos
+          - rm -rf q4tmp
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/

@@ -25,7 +25,7 @@ cleanup:
   - /lib/cmake
   - /share/man
   - /share/gch
-  - '*.a'
+  - "*.a"
   - /include
 
 modules:
@@ -75,12 +75,12 @@ modules:
       - type: patch
         path: fix-cmake-dist-version-check.patch
     post-install:
-      - install -Dm755 soh/soh.otr /app/bin/soh.otr
-      - install -Dm755 ZAPD/ZAPD.out /app/bin/zapd
+      - install -Dm755 soh.otr /app/bin/soh.otr
       # ZAPD support files
-      - cp -r ../soh/assets/xml/* /app/usr/assets/extractor/xmls/
-      - install -Dm644 ../soh/assets/extractor/* -t /app/usr/assets/extractor/
-      - install -Dm644 ../OTRExporter/CFG/filelists/* -t /app/usr/assets/extractor/filelists/
+      # - install -Dm755 ZAPD/ZAPD.out /app/bin/zapd
+      # - cp -r ../soh/assets/xml/* /app/usr/assets/extractor/xmls/
+      # - install -Dm644 ../soh/assets/extractor/* -t /app/usr/assets/extractor/
+      # - install -Dm644 ../OTRExporter/CFG/filelists/* -t /app/usr/assets/extractor/filelists/
       # version info file
       - git tag > /app/usr/assets/port_version
 
