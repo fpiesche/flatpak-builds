@@ -34,6 +34,7 @@ x-compat-i386-opts: &compat_i386_opts
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
+    no-autodownload: false
     version: *runtime-version
 
   org.freedesktop.Platform.GL32:
@@ -64,7 +65,7 @@ add-extensions:
     version: *runtime-version
     versions: *runtime-version
     autodelete: false
-    no-autodownload: true
+    no-autodownload: false
     add-ld-path: lib
     download-if: have-intel-gpu
     autoprune-unless: have-intel-gpu

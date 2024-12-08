@@ -35,6 +35,7 @@ add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
     version: *runtime-version
+    no-autodownload: false
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
