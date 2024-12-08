@@ -8,8 +8,8 @@ finish-args:
   # 32bit library support
   - --allow=multiarch
   - --env=LD_LIBRARY_PATH=/app/lib32
-  # hardware 3D and controller access
-  - --device=all
+  # hardware 3D
+  - --device=dri
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
