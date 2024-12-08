@@ -24,7 +24,7 @@ to\n<tt><b>$XDG_DATA_HOME/base/</b></tt>."
 done
 
 if [[ ! -f $XDG_DATA_HOME/q4base/autoexec.cfg ]]; then
-    echo '+seta sys_lang "english"' >> $XDG_DATA_HOME/q4base/autoexec.cfg
+    echo 'seta sys_lang "english"' >> $XDG_DATA_HOME/q4base/autoexec.cfg
 fi
 
 if [[ ! -r $HOME/.quake4/q4base/quake4key ]]; then
