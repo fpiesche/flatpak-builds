@@ -15,8 +15,6 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
-  # Enable network for multiplayer
-  - --share=network
 
 # Parameters for 32-bit extensions
 x-gl-version: &gl-version "1.4"
