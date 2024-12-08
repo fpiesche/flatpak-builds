@@ -1,6 +1,6 @@
 app-id: io.github.interkarma.daggerfall-unity
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: /app/bin/DaggerfallUnity.x86_64
 
@@ -9,7 +9,6 @@ finish-args:
   - --device=dri
   # X11 + XShm access
   - --share=ipc
-  - --socket=wayland
   - --socket=x11
   # Audio
   - --socket=pulseaudio
@@ -26,7 +25,8 @@ modules:
           type: json
           url: https://api.github.com/repos/Interkarma/daggerfall-unity/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name=="dfu_linux_64bit-" + $version + ".zip")
+          url-query:
+            .assets[] | select(.name=="dfu_linux_64bit-" + $version + ".zip")
             | .browser_download_url
       - type: file
         url: https://github.com/Interkarma/daggerfall-unity/raw/v1.0.0/Assets/Resources/DFUIcon.png
