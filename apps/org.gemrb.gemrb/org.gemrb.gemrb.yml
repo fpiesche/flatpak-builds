@@ -2,7 +2,7 @@ app-id: org.gemrb.gemrb
 runtime: org.freedesktop.Platform
 runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
-command: gemrb
+command: org.gemrb.gemrb.sh
 
 rename-desktop-file: gemrb.desktop
 rename-icon: gemrb
