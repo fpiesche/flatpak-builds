@@ -186,7 +186,7 @@ jobs:
         run: |
           mkdir -p _site/apps
           for file in apps/*/*.metainfo.xml; do xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file); done
-          rename ".metainfo.xml" ".xml" ./_site/apps/*.metainfo.xml
+          rename ".metainfo.xml" ".html" ./_site/apps/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
         if: ${{ env.PUBLISH }} == "true"
