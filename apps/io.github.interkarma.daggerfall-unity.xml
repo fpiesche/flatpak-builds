@@ -1,19 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
-<component type="desktop-application">
-  <id>io.github.interkarma.daggerfall-unity</id>
-  <name>Daggerfall Unity</name>
-  <developer id="io.github.interkarma.daggerfall-unity">
-    <name>Daggerfall Unity contributors</name>
-    <url>https://github.com/interkarma/daggerfall-unity/graphs/contributors</url>
-  </developer>
-  <summary>A modern port of The Elder Scrolls II: Daggerfall</summary>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
-  <launchable type="desktop-id">io.github.interkarma.daggerfall-unity.desktop</launchable>
-  <url type="homepage">https://www.dfworkshop.net/</url>
-  <url type="contact">https://forums.dfworkshop.net/</url>
-  <description>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><title>Daggerfall Unity on Yellow Keycard Flatpaks</title><meta name="description" content="A modern port of The Elder Scrolls II: Daggerfall"></meta><meta property="og:url" content="https://flatpak.yellowkeycard.net/io.github.interkarma.daggerfall-unity.xml"></meta><meta property="og:type" content="website"></meta><meta property="og:title" content="Daggerfall Unity on Yellow Keycard Flatpaks"></meta><meta property="og:description" content="A modern port of The Elder Scrolls II: Daggerfall"></meta><meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.png"></meta><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/styles.css"></link></head><body><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container"><a class="navbar-brand" href="https://flatpak.yellowkeycard.net/">Yellow Keycard Flatpaks</a></div></nav><div class="header"><div class="container"><img class="icon" height="128px" width="128px" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.png"></img><button type="button" class="btn install" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-html="true" data-bs-content='
+        &lt;a href="io.github.interkarma.daggerfall-unity.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
+        flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo&lt;br/&gt;flatpak install ykc io.github.interkarma.daggerfall-unity'>
+        Install
+      </button><h1>Daggerfall Unity<a class="homepage-link" href="https://www.dfworkshop.net/" target="_blank">🏠</a></h1><p class="developer">
+        by <a href="https://github.com/interkarma/daggerfall-unity/graphs/contributors">Daggerfall Unity contributors</a></p></div></div><div id="screenshotCarousel" class="carousel slide"><div class="carousel-indicators"><button type="button" data-bs-target="#screenshotCarousel" data-bs-slide-to="0" aria-label="1.0 release feature banner" class="active" aria-current="true"></button><button type="button" data-bs-target="#screenshotCarousel" data-bs-slide-to="1" aria-label="DREAM mod feature screenshots"></button><button type="button" data-bs-target="#screenshotCarousel" data-bs-slide-to="2" aria-label="World of Daggerfall mod screenshots"></button></div><div class="carousel-inner"><div class="carousel-item active"><img src="https://www.dfworkshop.net/wp-content/uploads/2023/12/screen.jpg" class="d-block" alt="1.0 release feature banner"></img><div class="carousel-caption d-none d-md-block"><h5>1.0 release feature banner</h5></div></div><div class="carousel-item"><img src="https://www.dfworkshop.net/wp-content/uploads/2023/12/image-5.png" class="d-block" alt="DREAM mod feature screenshots"></img><div class="carousel-caption d-none d-md-block"><h5>DREAM mod feature screenshots</h5></div></div><div class="carousel-item"><img src="https://www.dfworkshop.net/wp-content/uploads/2023/12/image-10.png" class="d-block" alt="World of Daggerfall mod screenshots"></img><div class="carousel-caption d-none d-md-block"><h5>World of Daggerfall mod screenshots</h5></div></div></div><button class="carousel-control-prev" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button></div><div class="container my-5"><h1>Daggerfall Unity</h1><div class="col-lg-8 px-0"><p class="fs-5"><description xmlns="">
     <p>Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.</p>
     <p>Experience the adventure and intrigue of Daggerfall with all of its original charm along with hundreds of fixes,
        quality of life enhancements, and extensive mod support.</p>
@@ -34,35 +26,11 @@
        such as textures, 3D models, and sound effects.</p>
     <p>You can get a copy of the original Daggerfall for free from Steam or GOG. Daggerfall Unity will ask for the location
        of your original Daggerfall game on first startup and then take care of everything else.</p>
-  </description>
-  <screenshots>
-    <screenshot type="default">
-      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/screen.jpg</image>
-      <caption>1.0 release feature banner</caption>
-    </screenshot>
-    <screenshot>
-      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/image-5.png</image>
-      <caption>DREAM mod feature screenshots</caption>
-    </screenshot>
-    <screenshot>
-      <image type="source">https://www.dfworkshop.net/wp-content/uploads/2023/12/image-10.png</image>
-      <caption>World of Daggerfall mod screenshots</caption>
-    </screenshot>
-  </screenshots>
-  <categories>
-    <category>Game</category>
-  </categories>
-  <releases>
-    <release version="1.0.0" date="2023-12-30"/>
-  </releases>
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-fantasy">intense</content_attribute>
-    <content_attribute id="violence-bloodshed">intense</content_attribute>
-    <content_attribute id="violence-desecration">moderate</content_attribute>
-    <content_attribute id="drugs-alcohol">moderate</content_attribute>
-    <content_attribute id="drugs-narcotics">moderate</content_attribute>
-    <content_attribute id="sex-themes">mild</content_attribute>
-    <content_attribute id="language-discrimination">moderate</content_attribute>
-    <content_attribute id="money-gambling">moderate</content_attribute>
-  </content_rating>
-</component>
+  </description></p></div></div><script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script><script>
+    const popoverTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="popover"]'
+    );
+    const popoverList = [...popoverTriggerList].map(
+      (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+    );
+    </script></body></html>

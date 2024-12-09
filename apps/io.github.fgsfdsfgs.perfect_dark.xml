@@ -1,46 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
-<component type="desktop-application">
-  <id>io.github.fgsfdsfgs.perfect_dark</id>
-  <name>Perfect Dark</name>
-  <developer id="io.github.fgsfdsfgs.perfect_dark">
-    <name>Perfect Dark Contributors</name>
-    <url>https://github.com/fgsfdsfgs/perfect_dark/graphs/contributors</url>
-  </developer>
-  <launchable type="desktop-id">io.github.fgsfdsfgs.perfect_dark.desktop</launchable>
-  <summary>Modern cross-platform port of Perfect Dark</summary>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
-  <url type="homepage">https://github.com/fgsfdsfgs/perfect_dark/</url>
-  <url type="contact">https://github.com/fgsfdsfgs/perfect_dark/</url>
-  <description>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><title>Perfect Dark on Yellow Keycard Flatpaks</title><meta name="description" content="Modern cross-platform port of Perfect Dark"></meta><meta property="og:url" content="https://flatpak.yellowkeycard.net/io.github.fgsfdsfgs.perfect_dark.xml"></meta><meta property="og:type" content="website"></meta><meta property="og:title" content="Perfect Dark on Yellow Keycard Flatpaks"></meta><meta property="og:description" content="Modern cross-platform port of Perfect Dark"></meta><meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fgsfdsfgs.perfect_dark/io.github.fgsfdsfgs.perfect_dark.png"></meta><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/styles.css"></link></head><body><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container"><a class="navbar-brand" href="https://flatpak.yellowkeycard.net/">Yellow Keycard Flatpaks</a></div></nav><div class="header"><div class="container"><img class="icon" height="128px" width="128px" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fgsfdsfgs.perfect_dark/io.github.fgsfdsfgs.perfect_dark.png"></img><button type="button" class="btn install" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-html="true" data-bs-content='
+        &lt;a href="io.github.fgsfdsfgs.perfect_dark.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
+        flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo&lt;br/&gt;flatpak install ykc io.github.fgsfdsfgs.perfect_dark'>
+        Install
+      </button><h1>Perfect Dark<a class="homepage-link" href="https://github.com/fgsfdsfgs/perfect_dark/" target="_blank">🏠</a></h1><p class="developer">
+        by <a href="https://github.com/fgsfdsfgs/perfect_dark/graphs/contributors">Perfect Dark Contributors</a></p></div></div><div id="screenshotCarousel" class="carousel slide"><div class="carousel-indicators"></div><div class="carousel-inner"></div><button class="carousel-control-prev" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button></div><div class="container my-5"><h1>Perfect Dark</h1><div class="col-lg-8 px-0"><p class="fs-5"><description xmlns="">
       <p>This is a port of Ryan Dywer's decompilation of classic N64 shooter Perfect Dark to modern systems.</p>
-  </description>
-  <!--
-  <screenshots>
-    <screenshot type="default">
-      <image type="source">https://gitlab.com/fpiesche/dxx-rebirth-assets/-/raw/c6e7e79eebe92905f84f07a635ffab5122a94bd1/d1x/screenshots/retromode.png</image>
-      <caption>"Retro mode": the default graphics setup, like the original game but in high resolution</caption>
-  <screenshots>
-  -->
-  <categories>
-    <category>Game</category>
-    <category>ActionGame</category>
-    <category>Shooter</category>
-  </categories>
-  <keywords>
-    <keyword>n64</keyword>
-    <keyword>scifi</keyword>
-    <keyword>cyberpunk</keyword>
-    <keyword>retro</keyword>
-    <keyword>sourceport</keyword>
-    <keyword>port</keyword>
-  </keywords>
-  <releases>
-    <release version="latest" date="2024-05-14"/>
-  </releases>
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-realistic">moderate</content_attribute>
-    <content_attribute id="violence-bloodshed">mild</content_attribute>
-  </content_rating>
-</component>
+  </description></p></div></div><script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script><script>
+    const popoverTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="popover"]'
+    );
+    const popoverList = [...popoverTriggerList].map(
+      (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+    );
+    </script></body></html>
