@@ -29,7 +29,7 @@ modules:
           type: json
           url: https://api.github.com/repos/gemrb/gemrb/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball-url
+          url-query: .zipball_url
       - type: file
         path: org.gemrb.gemrb.sh
     post-install:
