@@ -185,7 +185,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p _site/apps
-          find apps -name "*.metainfo.xml" -exec xmlstarlet tr _templates/app_page.xsl {} > ./_site/apps/{} \;
+          for file in apps/*/*.metainfo.xml; do xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file); done
           rename ".metainfo.xml" ".xml" ./_site/apps/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
