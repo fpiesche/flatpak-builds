@@ -27,7 +27,7 @@ modules:
         sha256: 8e0b93f3dccc3defb2e66d3e368eb00820ba3154f3300ac928206f26d53de123
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/gemrb.gemrb/releases/latest
+          url: https://api.github.com/repos/gemrb/gemrb/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: .zipball-url
       - type: file
