@@ -131,7 +131,7 @@ modules:
       - type: patch
         path: dsda-launcher-ui.patch
       - type: file
-        path: io.github.kraflab.dsda-doom.metainfo.yml
+        path: io.github.kraflab.dsda-doom.metainfo.xml
       - type: file
         url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/src/icons/dsda-launcher.svg
         sha256: b354bcc022f55d72dd0450fe44997175e5c2b41cd8684a3a5c3b851b1b289fcd
