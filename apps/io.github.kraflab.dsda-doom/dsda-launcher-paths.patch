@@ -1,0 +1,103 @@
+diff --git a/dsda-launcher/demodialog.cpp b/dsda-launcher/demodialog.cpp
+index 7cdce60..c454bb7 100644
+--- a/dsda-launcher/demodialog.cpp
++++ b/dsda-launcher/demodialog.cpp
+@@ -58,7 +58,7 @@ demodialog::demodialog(QStringList iwad_list, QWidget *parent)
+ #ifdef _WIN32
+         folder = QCoreApplication::applicationDirPath();
+ #else
+-        folder = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom";
++        folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom";
+ #endif
+         QDir path(folder);
+         QStringList files0 = path.entryList(QDir::Files);
+diff --git a/dsda-launcher/historylist.h b/dsda-launcher/historylist.h
+index 990b099..cf8be98 100644
+--- a/dsda-launcher/historylist.h
++++ b/dsda-launcher/historylist.h
+@@ -23,7 +23,7 @@ private:
+     Ui::historyList *ui;
+ 
+ #if defined(__APPLE__) || defined(__linux__)
+-    QString historyPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom/history.states";
++    QString historyPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom/history.states";
+ #else
+     QString historyPath;
+ #endif
+diff --git a/dsda-launcher/mainwindow.cpp b/dsda-launcher/mainwindow.cpp
+index 24e6dc9..a27ceab 100755
+--- a/dsda-launcher/mainwindow.cpp
++++ b/dsda-launcher/mainwindow.cpp
+@@ -696,7 +696,7 @@ void MainWindow::on_actionCheck_for_Updates_triggered()
+     if(port.exists())
+     {
+         QProcess *process = new QProcess;
+-        process->setWorkingDirectory(QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
++        process->setWorkingDirectory(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+         process->start(path, {"-v"});
+         process->waitForStarted();
+         std::string data;
+@@ -1405,7 +1405,7 @@ void MainWindow::Launch(QString iwadName, QStringList argList)
+         QFile port = QFile(execPath+"/../Resources/"+exeName+"");
+         if(port.exists())
+         {
+-            QString homePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
++            QString homePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+             argList.push_front(iwads_paths.at(ui->iwad_comboBox->findText(iwadName)).second);
+             argList.push_front("-iwad");
+             QProcess *process = new QProcess;
+@@ -1422,7 +1422,7 @@ void MainWindow::Launch(QString iwadName, QStringList argList)
+         }
+ #elif __linux__
+         QFile port = QFile(execPath+"/"+exeName);
+-        QString homePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
++        QString homePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+         argList.push_front(iwads_paths.at(ui->iwad_comboBox->findText(iwadName)).second);
+         //system(("cd ~/ && " + execPath+"/dsda-doom -iwad '"+homePath+"/.dsda-doom/"+ui->iwad_comboBox->currentText().toStdString()+".wad' "+arguments+" >> "+homePath+"/.dsda-doom/LogFile.txt &").c_str());
+         // Run "which" command to check if dsda-doom exists. if it does then no need to specify a path, just run a process with exeName.
+diff --git a/dsda-launcher/mainwindow.h b/dsda-launcher/mainwindow.h
+index 412d357..8aa3914 100755
+--- a/dsda-launcher/mainwindow.h
++++ b/dsda-launcher/mainwindow.h
+@@ -69,8 +69,8 @@ private:
+     void enable_disable_complevel_comboBox();
+ 
+     #if defined(__APPLE__) || defined(__linux__)
+-    QString dotfolder = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom";
+-    QString historyPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom/history.states";
++    QString dotfolder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom";
++    QString historyPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom/history.states";
+     #else
+     QString historyPath;
+     #endif
+diff --git a/dsda-launcher/settings.cpp b/dsda-launcher/settings.cpp
+index 78eea82..e6097dd 100644
+--- a/dsda-launcher/settings.cpp
++++ b/dsda-launcher/settings.cpp
+@@ -60,7 +60,7 @@ Settings::Settings(QWidget *parent) :
+ 
+     ui->maxSkillLevel_lineEdit->setValidator(new QRegularExpressionValidator (QRegularExpression("[0-9]{1}"), this));
+     ui->maxHistory_lineEdit->setValidator(new QRegularExpressionValidator (QRegularExpression("[0-9]{2}"), this));
+-    
++
+     // Keyboard shortcut
+     // Qt::CTRL is the CTRL key for Windows/Linux and is the CMD key for MacOS
+ 
+@@ -109,10 +109,10 @@ Settings::Settings(QWidget *parent) :
+         ui->IWADFolders_listWidget->addItem("%DOOMWADDIR%");
+ #else
+         ui->PWADFolders_listWidget->addItem("$DOOMWADPATH");
+-        ui->PWADFolders_listWidget->addItem(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom");
++        ui->PWADFolders_listWidget->addItem(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom");
+ 
+         ui->IWADFolders_listWidget->addItem("$DOOMWADDIR");
+-        ui->IWADFolders_listWidget->addItem(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.dsda-doom");
++        ui->IWADFolders_listWidget->addItem(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/.dsda-doom");
+ #endif
+     ui->PWADFolders_listWidget->item(0)->setFlags(QFlags<Qt::ItemFlag>());
+     ui->PWADFolders_listWidget->item(1)->setFlags(QFlags<Qt::ItemFlag>());
+@@ -563,4 +563,3 @@ void Settings::on_remember_checkBox_toggled(bool checked)
+ {
+     settings->setValue("remember", checked);
+ }
+-
