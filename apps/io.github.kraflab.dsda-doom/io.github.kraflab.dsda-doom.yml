@@ -53,17 +53,6 @@ modules:
           url-template: https://github.com/libsdl-org/SDL_image/releases/download/release-${version0}.${version1}.${version2}/SDL2_image-${version0}.${version1}.${version2}.tar.gz
 
   - ../shared-modules/libmad/libmad.json
-  - name: fluidsynth
-    buildsystem: cmake-ninja
-    sources:
-      - type: archive
-        url: https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.4.1.tar.gz
-        sha256: d1e64155ac902116ed3d4dea512719d8c04ab3877db2e8fb160284379f570a2f
-        x-checker-data:
-          type: anitya
-          project-id: 10437
-          stable-only: true
-          url-template: https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v$version.tar.gz
   - name: libdumb
     buildsystem: cmake-ninja
     builddir: true
@@ -71,14 +60,16 @@ modules:
       - -D BUILD_EXAMPLES=OFF
       - -D BUILD_ALLEGRO4=OFF
     sources:
-      - type: git
-        url: https://github.com/kode54/dumb
-        commit: 396caa4d31859045ccb5ef943fd430ca4026cce8
+      - type: archive
+        url: https://api.github.com/repos/kode54/dumb/zipball/396caa4d31859045ccb5ef943fd430ca4026cce8
+        sha256: 252df229612e7c534440130a32133325de6565d77c5c6fe16507f321ab7468a1
+        dest-filename: dumb.zip
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/kode54/dumb/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
+          url: https://api.github.com/repos/kode54/dumb/branches/master
+          version-query: .commit.sha
+          url-query: ("https://api.github.com/repos/kode54/dumb/zipball/"
+            + .commit.sha)
   - name: portmidi
     buildsystem: cmake-ninja
     sources:
@@ -107,12 +98,9 @@ modules:
           version-query: .tag_name | sub("^v"; "")
           url-query: .zipball_url
       - type: file
-        url: https://raw.githubusercontent.com/kraflab/dsda-doom/refs/heads/master/prboom2/ICONS/dsda-doom.svg
-        dest-filename: dsda-doom.svg
-        sha256: f330cd43f92bb19ccec7abcfaee1eb95a3c56f8e480a4c7aa1e2d6cdb06372bc
+        path: io.github.kraflab.dsda-doom.metainfo.xml
     post-install:
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dsda-doom.svg -t /app/share/icons/hicolor/scalable/apps/
-      # - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
   - name: dsda-doom-launcher
     buildsystem: simple
     build-options:
@@ -134,8 +122,6 @@ modules:
       - type: patch
         path: dsda-launcher-ui.patch
       - type: file
-        path: io.github.kraflab.dsda-doom.metainfo.xml
-      - type: file
         url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/src/icons/dsda-launcher.svg
         sha256: b354bcc022f55d72dd0450fe44997175e5c2b41cd8684a3a5c3b851b1b289fcd
     build-commands:
@@ -147,4 +133,3 @@ modules:
         Doom" icons/dsda-Launcher.desktop
       - install -Dm644 icons/dsda-Launcher.desktop -t /app/share/applications
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dsda-launcher.svg -t /app/share/icons/hicolor/scalable/apps/
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
