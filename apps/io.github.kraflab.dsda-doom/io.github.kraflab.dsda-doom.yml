@@ -78,7 +78,7 @@ modules:
           type: json
           url: https://api.github.com/repos/kode54/dumb/releases/latest
           version-query: .tag_name
-          url-query: .zipball-url
+          url-query: .zipball_url
   - name: portmidi
     buildsystem: cmake-ninja
     sources:
@@ -90,7 +90,7 @@ modules:
           type: json
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball-url
+          url-query: .zipball_url
 
   - name: dsda-doom
     buildsystem: cmake-ninja
@@ -105,7 +105,7 @@ modules:
           type: json
           url: https://api.github.com/repos/kraflab/dsda-doom/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball-url
+          url-query: .zipball_url
       - type: file
         url: https://raw.githubusercontent.com/kraflab/dsda-doom/refs/heads/master/prboom2/ICONS/dsda-doom.svg
         dest-filename: dsda-doom.svg
@@ -115,6 +115,9 @@ modules:
       # - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
   - name: dsda-doom-launcher
     buildsystem: simple
+    build-options:
+      env:
+        - QT_INSTALL_PREFIX=/app
     subdir: dsda-launcher
     sources:
       - type: archive
@@ -125,7 +128,7 @@ modules:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball-url
+          url-query: .zipball_url
       - type: patch
         path: dsda-launcher-paths.patch
       - type: patch
