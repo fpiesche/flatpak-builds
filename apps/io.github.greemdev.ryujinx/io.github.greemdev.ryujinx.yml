@@ -18,13 +18,16 @@ build-options:
   prepend-pkg-config-path: /usr/lib/sdk/dotnet8/lib/pkgconfig
 
 finish-args:
+  # X11
   - --share=ipc
   - --socket=x11
+  # Game controllers and 3D hardware
   - --device=all
   - --socket=pulseaudio
   - --share=network
-  - --filesystem=home:ro
+  # Screenshots
   - --filesystem=xdg-pictures:rw
+  # Discord rich presence
   - --filesystem=xdg-run/app/com.discordapp.Discord:create
   - --env=DOTNET_ROOT=/app/lib/dotnet
 
@@ -39,9 +42,6 @@ modules:
   - name: ryujinx
     buildsystem: simple
     build-options:
-      no-debuginfo: true
-      no-debuginfo-compression: true
-      strip: false
       arch:
         x86_64:
           env:
@@ -63,7 +63,6 @@ modules:
       - sed -r --in-place 's/\%\%RYUJINX_CONFIG_FILE_NAME\%\%/Config\.json/g;' src/Ryujinx.Common/ReleaseInformation.cs
       - mkdir -p /app/bin
       - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Version="$(git describe --tags)" -property:SourceRevisionId="$(git rev-parse --short HEAD)" -property:ExtraDefineConstants="DISABLE_UPDATER" src/Ryujinx --self-contained --source nuget-sources
-      - ls -la src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish
       - cp -r --remove-destination src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/* /app/bin/
       - chmod +x /app/bin/Ryujinx.sh
       - mkdir -p /app/lib/ffmpeg
