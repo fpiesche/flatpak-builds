@@ -62,8 +62,9 @@ modules:
       - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_REPO\%\%/io.github.greemdev.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
       - sed -r --in-place 's/\%\%RYUJINX_CONFIG_FILE_NAME\%\%/Config\.json/g;' src/Ryujinx.Common/ReleaseInformation.cs
       - mkdir -p /app/bin
-      - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Version="$(git describe --tags)" -property:SourceRevisionId="$(git rev-parse --short HEAD)" -property:ExtraDefineConstants="DISABLE_UPDATER" --self-contained --source nuget-sources src/Ryujinx
-      - cp -r --remove-destination /run/build/Ryujinx/src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/* /app/bin/
+      - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Version="$(git describe --tags)" -property:SourceRevisionId="$(git rev-parse --short HEAD)" -property:ExtraDefineConstants="DISABLE_UPDATER" src/Ryujinx --self-contained --source nuget-sources
+      - ls -la src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish
+      - cp -r --remove-destination src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/* /app/bin/
       - chmod +x /app/bin/Ryujinx.sh
       - mkdir -p /app/lib/ffmpeg
       - install -Dm644 $FLATPAK_ID.metainfo.xml /app/share/metainfo/$FLATPAK_ID.metainfo.xml
