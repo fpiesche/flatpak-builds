@@ -190,10 +190,10 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.6.5/gommon.2.6.5.nupkg",
-        "sha512": "ba95aae1ac18e8de25786374da5de3925b7e5e765e6d826eecf45b9e4c027f31180b00a8bf827fe9e64a7bc1912fbb9f34ed530247b236483a8e1a9ca4ad9484",
+        "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.6.8/gommon.2.6.8.nupkg",
+        "sha512": "8f2355e93920bcb33d82c237df3fcadcd634d8247829eb562b820ee9cde666639a598c630167d6c9a44d547a4de063ee73638e0678ea250d7db4921b115cb710",
         "dest": "nuget-sources",
-        "dest-filename": "gommon.2.6.5.nupkg"
+        "dest-filename": "gommon.2.6.8.nupkg"
     },
     {
         "type": "file",

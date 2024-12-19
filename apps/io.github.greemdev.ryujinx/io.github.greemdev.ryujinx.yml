@@ -36,7 +36,7 @@ modules:
     build-commands:
       - /usr/lib/sdk/dotnet8/bin/install.sh
 
-  - name: Ryujinx
+  - name: ryujinx
     buildsystem: simple
     build-options:
       no-debuginfo: true
@@ -53,12 +53,12 @@ modules:
         PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
         DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
-        RYUJINX_VERSION: 1.2.76
         RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: flathub
         RYUJINX_TARGET_RELEASE_CHANNEL_REPO: io.github.greemdev.ryujinx
         RYUJINX_TARGET_RELEASE_CHANNEL_NAME: main
     build-commands:
       - |
+        export RYUJINX_VERSION=$(curl -L https://api.github.com/repos/greemdev/ryujinx/releases/latest | jq '.tag_name')
         export RYUJINX_GIT_SHORT_HASH=$(git rev-parse --short HEAD)
         export RUNTIME_FRAMEWORK_VERSION=$(find nuget-sources -name 'microsoft.netcore.app.runtime.$RUNTIME.*' | grep -oP '(\d.\d.\d+.nupkg)' | grep -oP '(\d.\d.\d+)')
         echo "Runtime framework version: $RUNTIME_FRAMEWORK_VERSION"
