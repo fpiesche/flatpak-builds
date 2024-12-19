@@ -98,9 +98,9 @@ modules:
         path: io.github.greemdev.ryujinx.metainfo.xml
       - type: git
         url: https://github.com/GreemDev/Ryujinx.git
-        tag: 1.2.76
+        tag: 1.2.78
         x-checker-data:
           type: json
           url: https://api.github.com/repos/GreemDev/Ryujinx/releases/latest
           tag-query: .tag_name
-        commit: f8c53f03fdf7ba7ebe0591caf1e252693bd6af4f
+        commit: f07a9737db38b6605298545aa8b44f1a04051955
