@@ -38,8 +38,11 @@
     <category>Game</category>
   </categories>
   <releases type="external" url="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/net.shadps4.shadPS4/net.shadps4.shadPS4.releases.xml">
-    <release version="v.0.4.0" date="2024-11-03">
+    <release version=".5.0" date="2024-12-25">
       <description></description>
+    </release>
+    <release version="v.0.4.0" date="2024-11-03">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1"/>

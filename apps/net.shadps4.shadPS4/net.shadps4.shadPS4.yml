@@ -98,14 +98,14 @@ modules:
       # don't include submodules, which shadps4 depends on (in the externals directory)
       - type: git
         url: https://github.com/shadps4-emu/shadPS4
-        tag: v.0.4.0
+        tag: v0.5.0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
     # TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
-        commit: 67dfc7916c25441fa86ad228e017361b6bf35775
+        commit: 195929953ba0784c5a676dc95e62aa5ffef9373b
       - type: file
         path: net.shadps4.shadPS4.metainfo.xml
       - type: file
