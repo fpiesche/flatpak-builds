@@ -84,3 +84,5 @@ modules:
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
+      - type: patch
+        path: libc_math.patch
