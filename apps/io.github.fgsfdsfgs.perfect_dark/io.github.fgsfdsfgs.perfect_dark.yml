@@ -24,7 +24,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: 26b3b91433caafcf8764f965d2dd654ec286dfd7
+        commit: 23d5a5771a149bb1b18b0ec4e33caa20c21bfdf0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
@@ -50,7 +50,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: 26b3b91433caafcf8764f965d2dd654ec286dfd7
+        commit: 23d5a5771a149bb1b18b0ec4e33caa20c21bfdf0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
@@ -66,7 +66,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: 26b3b91433caafcf8764f965d2dd654ec286dfd7
+        commit: 23d5a5771a149bb1b18b0ec4e33caa20c21bfdf0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
