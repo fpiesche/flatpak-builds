@@ -4,11 +4,6 @@ runtime-version: '6.7'
 sdk: org.kde.Sdk
 command: shadps4
 
-# TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
-rename-icon: shadps4
-rename-desktop-file: shadps4.desktop
-# TODO: ^^^^^ These can go away once shadPS4 PRs 1494 and 1495 are merged ^^^^^
-
 finish-args:
   # gamepad and 3D hardware support
   - --device=dri
@@ -63,23 +58,6 @@ modules:
           url-query: .zipball_url
     cleanup:
       - '*'
-  #
-  # - name: libfmt
-  #   buildsystem: cmake-ninja
-  #   config-opts:
-  #     - -DFMT_TEST=OFF
-  #   sources:
-  #     - type: archive
-  #       url: https://api.github.com/repos/fmtlib/fmt/zipball/11.0.2
-  #       dest-filename: fmtlib.zip
-  #       sha256: 441b654cfeca7dab0b457e8c327b150f4af3fbf908f55d2adb0d2a27fcfcfa41
-  #       x-checker-data:
-  #           type: json
-  #           url: https://api.github.com/repos/fmtlib/fmt/releases/latest
-  #           version-query: .tag_name
-  #           url-query: .zipball_url
-  #   cleanup:
-  #     - '*'
 
   - name: shadps4
     buildsystem: cmake-ninja
@@ -93,6 +71,7 @@ modules:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO=ON
     sources:
       # We're using a git source here rather than a zipball because zip/tarballs
       # don't include submodules, which shadps4 depends on (in the externals directory)
@@ -104,16 +83,3 @@ modules:
           url: https://api.github.com/repos/shadps4-emu/shadps4/releases/latest
           tag-query: .tag_name
           version-query: .tag_name | sub("^v."; "")
-    # TODO: vvvvv These can go away once shadPS4 PRs 1494 and 1495 are merged vvvvv
-        commit: a1a98966eee07e7ecf3a5e3836b5f2ecde5664b0
-      - type: file
-        path: net.shadps4.shadPS4.metainfo.xml
-      - type: file
-        path: net.shadps4.shadPS4.releases.xml
-      - type: file
-        path: net.shadps4.shadPS4.svg
-    post-install:
-      - install -Dm 644 ../${FLATPAK_ID}.releases.xml -t /app/share/metainfo/releases/
-      - install -Dm 644 ../${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
-      - install -Dm 644 ../${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
-    # TODO: ^^^^^ These can go away once shadPS4 PRs 1494 and 1495 are merged ^^^^^
