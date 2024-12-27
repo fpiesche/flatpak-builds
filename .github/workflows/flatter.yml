@@ -3,9 +3,6 @@ name: Flatter
 on:
   workflow_dispatch:
     inputs:
-      publish:
-        type: boolean
-        description: Publish builds
       appids:
         type: string
         description: app IDs to build
@@ -134,6 +131,7 @@ jobs:
           name: ${{ matrix.app.appid }}_${{ matrix.arch }}
 
   deploy:
+    if: ${{ github.ref }} == "refs/heads/main"
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: flatter
@@ -146,14 +144,8 @@ jobs:
       name: github-pages
 
     steps:
-      - name: Determine whether to publish
-        run: |
-          PUBLISH=false
-          if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ inputs.publish }}" == "true" ]]; then PUBLISH=true; fi
-          echo PUBLISH=$PUBLISH >> $GITHUB_ENV
 
       - name: Install required packages
-        if: ${{ env.PUBLISH }} == "true"
         run: |
           apk update && apk add --no-cache \
             util-linux-misc bash \
@@ -162,18 +154,15 @@ jobs:
             flatpak
 
       - name: Checkout
-        if: ${{ env.PUBLISH }} == "true"
         uses: actions/checkout@v4
 
       - name: Get build artifacts
-        if: ${{ env.PUBLISH }} == "true"
         uses: actions/download-artifact@v4
         with:
           path: _site/repo
           merge-multiple: true
 
       - name: Setup GPG
-        if: ${{ env.PUBLISH }} == "true"
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -181,7 +170,6 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Assemble web listings
-        if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
           mkdir -p _site/apps
@@ -189,7 +177,6 @@ jobs:
           rename ".metainfo.xml" ".html" ./_site/apps/*.metainfo.xml
 
       - name: Generate Flatpak repository and app reference files
-        if: ${{ env.PUBLISH }} == "true"
         shell: bash
         run: |
           gpg --export florian@yellowkeycard.net | base64 -w 0 > _site/ykc.gpg
@@ -209,7 +196,6 @@ jobs:
             _templates/ykc.flatpakrepo.j2
 
       - name: Generate index.html file
-        if: ${{ env.PUBLISH }} == "true"
         run: |
           touch _site/index.html
           npm i markdown-to-html-cli -g
@@ -221,7 +207,6 @@ jobs:
             --github-corners "https://github.com/fpiesche/flatpak-builds"
 
       - name: Update repo metadata
-        if: ${{ env.PUBLISH }} == "true"
         run: |
           flatpak build-update-repo \
             --default-branch=main \
@@ -232,7 +217,6 @@ jobs:
             _site/repo/
 
       - name: Publish repo
-        if: ${{ env.PUBLISH }} == "true"
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
