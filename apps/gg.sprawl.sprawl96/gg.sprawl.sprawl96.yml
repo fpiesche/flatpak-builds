@@ -34,36 +34,61 @@ modules:
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
           version-query: .tag_name | sub("^libxmp-"; "")
           url-query: .zipball_url
-  - name: qsprawl
+  - name: sprawl96-data
+    buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/VoidForce/QSprawl/zipball/1.1
-        dest-filename: qsprawl.zip
-        sha256: a42a9d6be83b73198af0c859022894a293ea43269161d3f6d9d20c19e7c4f7c3
+        url: https://cdn.discordapp.com/attachments/1276568030591193169/1322307370671542453/sprawl96_v1.2_release.zip?ex=67706634&is=676f14b4&hm=ccac03798b085abe76d03909d5cc3c68607930b0375be204199a0f7e36baa834&
+        dest-filename: sprawl96.zip
+        sha256: 94c4be7b94c91e8b7683b6a50a40585be7eadd2440dd361ab14d0e79fb20e76e
+    build-commands:
+      - mkdir -p /app/bin/sprawl/music
+      - install -vm644 -t /app/bin/sprawl/ pak0.pak sprawl.pak sprawl.dat
+      - install -vm644 -t /app/bin/sprawl/music music/*
+      - mv /app/bin/sprawl/pak0.pak /app/bin/sprawl/pak2.pak
+  - name: librequake-data
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: "https://github.com/lavenderdotpet/LibreQuake/releases/download/v0.08-beta/full.zip"
+        sha256: "b360ff9b2ba3c01da79616fb8d433abe4bbcbe38ec10b8eb71884eba3ac09534"
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/voidforce/qsprawl/releases/latest
+          url: https://api.github.com/repos/lavenderdotpet/LibreQuake/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .assets[] | select(.name=="full.zip") | .browser_download_url
+    build-commands:
+      - mkdir -p /app/bin/sprawl
+      - install -vm644 -t /app/bin/sprawl id1/pak0.pak id1/pak1.pak
+  - name: qsprawl
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/VoidForce/QSprawl/zipball/0aaec351aa6ffa4906d368b43165f4627563a560
+        dest-filename: qsprawl.zip
+        sha256: fff875d2f9688d3998b5f717c2c23098ce6d46edc84749532384b6c6c76218fd
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/voidforce/qsprawl/branches/main
+          tag-query: .tag
+          commit-query: .commit.sha
       - type: file
         path: gg.sprawl.sprawl96.sh
-      - type: file
-        path: gg.sprawl.sprawl96.metainfo.xml
-      - type: file
-        path: gg.sprawl.sprawl96.svg
-      - type: file
-        path: gg.sprawl.sprawl96.desktop
+      - type: patch
+        path: makefile-installer.patch
+      - type: patch
+        path: userdir-log.patch
+      - type: patch
+        path: remove-registered-check.patch
     buildsystem: simple
     build-commands:
       # Build
       - cd Quake && make -j${FLATPAK_BUILDER_JOBS} LDFLAGS=-L/app/lib USE_CODEC_FLAC=1
-        USE_CODEC_OPUS=1 USE_CODEC_XMP=1
-      # Install main data and executable
-      - install -m744 Quake/ironwail /app/bin/sprawl96
-      - install -D -m755 -t /app/bin/ Quake/ironwail.pak
-      # Install metadata and launcher files
-      - install -D -m744 -t /app/bin/ gg.sprawl.sprawl96.sh
-      - install -D -m755 gg.sprawl.sprawl96.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -D -m755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - desktop-file-edit --set-key=Exec --set-value=gg.sprawl.sprawl96.sh ${FLATPAK_ID}.desktop
-      - install -D -m755 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+        USE_CODEC_OPUS=1 USE_CODEC_XMP=1 DO_USERDIRS=1 DEBUG=1
+      - cd Quake && make install PREFIX=/app
+    post-install:
+      # move sprawl96.pak
+      - mv /app/share/games/quake/sprawl96.pak /app/bin/
+      # Install launcher script
+      - install -Dm744 -t /app/bin/ ${FLATPAK_ID}.sh
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh /app/share/applications/${FLATPAK_ID}.desktop

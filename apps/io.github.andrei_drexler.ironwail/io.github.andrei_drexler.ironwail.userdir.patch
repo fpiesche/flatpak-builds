@@ -21,3 +21,46 @@ index 58f7316b..26aab52a 100644
  
  /* what would be a maximum path for a file in the user's directory...
   * $HOME/SYS_USERDIR/game_dir/dirname1/dirname2/dirname3/filename.ext
+diff --git a/Quake/host_cmd.c b/Quake/host_cmd.c
+index 58f7316b..26aab52a 100644
+--- a/Quake/host_cmd.c
++++ b/Quake/host_cmd.c
+@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+ */
+ 
++#include "common.h"
+ #include "quakedef.h"
+ #include "q_ctype.h"
+ #include "json.h"
+@@ -1405,7 +1406,7 @@ void SaveList_Init (void)
+ 		FileList_Add (savename, &savelist);
+ 	}
+ 
+-	if ((size_t) q_snprintf (dirname, sizeof (dirname), "%s/autosave", com_gamedir) < sizeof (dirname))
++	if ((size_t) q_snprintf (dirname, sizeof (dirname), "%s/autosave/%s", host_parms->userdir, com_gamedir) < sizeof (dirname))
+ 	{
+ 		for (find = Sys_FindFirst (dirname, "sav"); find; find = Sys_FindNext (find))
+ 		{
+@@ -1413,7 +1414,7 @@ void SaveList_Init (void)
+ 			if (find->attribs & FA_DIRECTORY)
+ 				continue;
+ 			COM_StripExtension (find->name, filename, sizeof (filename));
+-			if ((size_t) q_snprintf (savename, sizeof (savename), "autosave/%s", filename) < sizeof (savename))
++			if ((size_t) q_snprintf (savename, sizeof (savename), "%s/autosave/%s/%s", host_parms->userdir, com_gamedir, filename) < sizeof (savename))
+ 				FileList_Add (savename, &savelist);
+ 		}
+ 	}
+diff --git a/Quake/menu.c b/Quake/menu.c
+index 58f7316b..26aab52a 100644
+--- a/Quake/menu.c
++++ b/Quake/menu.c
+@@ -2066,7 +2066,7 @@ void M_Menu_Skill_f (void)
+ 
+ 	m_skill_canresume = false;
+ 	m_skill_lastplayed = 0;
+-	q_snprintf (autosave, sizeof (autosave), "%s/autosave/%s.sav", com_gamedir, m_skill_mapname);
++	q_snprintf (autosave, sizeof (autosave), "%s/autosave/%s/%s.sav", host_parms->userdir, com_gamedir, m_skill_mapname);
+ 	if (Sys_FileExists (autosave))
+ 	{
+ 		time_t now, lastplayed;
