@@ -23,8 +23,8 @@ modules:
       - -DLIBXMP_DISABLE_PROWIZARD=ON
     sources:
       - type: archive
-        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.6.0.tar.gz
-        sha256: 032ed31e9a334078e59dc5e2ca7a14b950712fef8e838328b727570ddbd3dc12
+        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.6.1.tar.gz
+        sha256: df35079c519d54e7e6ef811f4cde4cbd2456154956bd54a4f6e5053a2501668e
         dest-filename: libxmp.tar.gz
         x-checker-data:
           type: anitya
@@ -33,7 +33,7 @@ modules:
 
   - name: sdl_mixer
     config-opts:
-        - --enable-music-mod-xmp=yes
+      - --enable-music-mod-xmp=yes
     sources:
       - type: archive
         url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.0.tar.gz
@@ -62,7 +62,8 @@ modules:
       - type: file
         path: io.github.sergiou87.open-supaplex.metainfo.xml
     build-commands:
-      - cd linux && make -j${FLATPAK_BUILDER_N_JOBS} CFLAGS='-DFILE_FHS_XDG_DIRS -DFILE_DATA_PATH=/app/usr/share/OpenSupaplex -DHAVE_SDL2 -I/usr/include/SDL2 -I/app/include/SDL2'
+      - cd linux && make -j${FLATPAK_BUILDER_N_JOBS} CFLAGS='-DFILE_FHS_XDG_DIRS -DFILE_DATA_PATH=/app/usr/share/OpenSupaplex
+        -DHAVE_SDL2 -I/usr/include/SDL2 -I/app/include/SDL2'
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
       - install -Dm 644 ${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
       - install -Dm 644 ${FLATPAK_ID}.desktop -t /app/share/applications
