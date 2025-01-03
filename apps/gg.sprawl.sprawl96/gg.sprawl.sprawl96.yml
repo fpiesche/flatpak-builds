@@ -38,7 +38,7 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://cdn.discordapp.com/attachments/1276568030591193169/1322307370671542453/sprawl96_v1.2_release.zip?ex=67706634&is=676f14b4&hm=ccac03798b085abe76d03909d5cc3c68607930b0375be204199a0f7e36baa834&
+        url: https://drive.usercontent.google.com/download?export=download&confirm=yes&id=1ip_KFlA8BFRMbnvuOvTl2V_B-HOcqEHc
         dest-filename: sprawl96.zip
         sha256: 94c4be7b94c91e8b7683b6a50a40585be7eadd2440dd361ab14d0e79fb20e76e
     build-commands:
