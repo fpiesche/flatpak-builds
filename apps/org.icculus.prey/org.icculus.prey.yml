@@ -136,7 +136,7 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: http://icculus.org/prey/downloads/prey-installer-02192009.bin
+        url: https://icculus.org/prey/downloads/prey-installer-02192009.bin
         dest-filename: prey-installer.bin
         sha256: b3d06fc51afbb5dc88d7e0f9d5267cd9d171edf9d18c84c5f66c8172da74b357
       - type: file
@@ -172,7 +172,7 @@ modules:
     buildsystem: simple
     sources:
       - type: extra-data
-        url: http://icculus.org/prey/downloads/prey-installer-02192009.bin
+        url: https://icculus.org/prey/downloads/prey-installer-02192009.bin
         filename: prey-installer.bin
         size: 45447932
         sha256: b3d06fc51afbb5dc88d7e0f9d5267cd9d171edf9d18c84c5f66c8172da74b357
