@@ -1,6 +1,6 @@
 app-id: com.idsoftware.quake4
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version "24.08"
+runtime-version: &runtime-version '24.08'
 sdk: org.freedesktop.Sdk
 command: com.idsoftware.quake4.sh
 
@@ -19,7 +19,7 @@ finish-args:
   - --persist=.quake4
 
 # Parameters for 32-bit extensions
-x-gl-version: &gl-version "1.4"
+x-gl-version: &gl-version '1.4'
 x-gl-versions: &gl-versions 24.08;1.4
 x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
 x-compat-i386-opts: &compat_i386_opts
@@ -111,8 +111,8 @@ modules:
         x86_64: *compat_i386_opts
     sources:
       - type: archive
-        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.1
-        sha256: 13619a3376d0e3219506a9ebf6f03e5650ad65856a5e8a86e40a67bc0a679c1e
+        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.2
+        sha256: c5ccadc829e08d35eca12e35e731519090a3a12c350d88f359864b78bcc00b66
         dest-filename: openal-soft.zip
         x-checker-data:
           type: json
@@ -164,7 +164,8 @@ modules:
           - mkdir -p /app/extra/quake4/q4base q4tmp
           - chmod a+x quake4.run
           - ./quake4.run --tar -xf -C q4tmp
-          - install -Dm644 q4tmp/q4base/*.pk4 q4tmp/q4base/*cfg q4tmp/us/q4base/* /app/extra/quake4/q4base/
+          - install -Dm644 q4tmp/q4base/*.pk4 q4tmp/q4base/*cfg q4tmp/us/q4base/*
+            /app/extra/quake4/q4base/
           - install -Dm644 q4tmp/q4base/zpak_*.pk4.off /app/extra/quake4/q4base/
           - rename ".off" "" /app/extra/quake4/q4base/*.off
           - mkdir -p /app/extra/quake4/q4mp/demos
