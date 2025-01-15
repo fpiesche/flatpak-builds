@@ -2,95 +2,30 @@ app-id: io.github.greemdev.ryujinx
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-command: ryujinx-wrapper
-
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    version: '24.08'
-    directory: lib/ffmpeg
-    add-ld-path: .
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.dotnet8
-
-build-options:
-  prepend-path: /usr/lib/sdk/dotnet8/bin
-  append-ld-library-path: /usr/lib/sdk/dotnet8/lib
-  prepend-pkg-config-path: /usr/lib/sdk/dotnet8/lib/pkgconfig
+command: ryujinx-rebase
 
 finish-args:
   # X11
   - --share=ipc
   - --socket=x11
-  # Game controllers and 3D hardware
-  - --device=all
-  - --socket=pulseaudio
-  - --share=network
-  # Screenshots
-  - --filesystem=xdg-pictures:rw
-  # Discord rich presence
-  - --filesystem=xdg-run/app/com.discordapp.Discord:create
-  - --env=DOTNET_ROOT=/app/lib/dotnet
-
-rename-icon: ryujinx
 
 modules:
-  - name: dotnet
-    buildsystem: simple
-    build-commands:
-      - /usr/lib/sdk/dotnet8/bin/install.sh
-
   - name: ryujinx
     buildsystem: simple
-    build-options:
-      arch:
-        x86_64:
-          env:
-            RUNTIME: linux-x64
-        aarch64:
-          env:
-            RUNTIME: linux-arm64
-      env:
-        PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
-        DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
-        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
     build-commands:
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_VERSION\%\%/$(git describe --tags)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_GIT_HASH\%\%/$(git rev-parse --short HEAD)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_NAME\%\%/main/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_OWNER\%\%/flathub/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_SOURCE_REPO\%\%/io.github.greemdev.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_REPO\%\%/io.github.greemdev.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place 's/\%\%RYUJINX_CONFIG_FILE_NAME\%\%/Config\.json/g;' src/Ryujinx.Common/ReleaseInformation.cs
-      - mkdir -p /app/bin
-      - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Platform=anyCPU -property:Version=$(git describe --tags) -property:SourceRevisionId=$(git rev-parse --short HEAD) -property:ExtraDefineConstants=DISABLE_UPDATER src/Ryujinx --self-contained --source nuget-sources
-      - cp -r --remove-destination src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/* /app/bin/
-      - chmod +x /app/bin/Ryujinx.sh
-      - mkdir -p /app/lib/ffmpeg
-      - install -Dm644 $FLATPAK_ID.metainfo.xml /app/share/metainfo/$FLATPAK_ID.metainfo.xml
-      - install -Dm755 ryujinx-wrapper /app/bin/ryujinx-wrapper
-      - install -Dm644 distribution/misc/Logo.svg /app/share/icons/hicolor/scalable/apps/ryujinx.svg
-      - install -Dm644 distribution/linux/mime/Ryujinx.xml /app/share/mime/packages/$FLATPAK_ID.mime.xml
-      - install -Dm644 distribution/linux/Ryujinx.desktop /app/share/applications/$FLATPAK_ID.desktop
-      - desktop-file-edit --set-key="Exec" --set-value="ryujinx-wrapper %f" /app/share/applications/$FLATPAK_ID.desktop
+      - install -Dm755 ryujinx-rebase -t /app/bin/
+      - install -Dm644 $FLATPAK_ID.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 $FLATPAK_ID.desktop -t /app/share/applications/
+      - install -Dm644 Logo.svg /app/share/icons/hicolor/scalable/apps/$FLATPAK_ID.svg
     sources:
-      - nuget_sources.json
-      - type: file
-        url: https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/887e33a0ee70329025e9a587fdb070da46e50a98/ryujinx-wrapper
-        sha256: b650655fcda8033b37853b8fcce488268b20498a6ca788db6d6a28994761c776
-        dest-filename: ryujinx-wrapper
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/flathub/org.ryujinx.Ryujinx/branches/master
-          version-query: .commit.sha
-          url-query: ("https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/"
-            + .commit.sha + "/ryujinx-wrapper")
       - type: file
         path: io.github.greemdev.ryujinx.metainfo.xml
-      - type: git
-        url: https://github.com/GreemDev/Ryujinx.git
-        tag: 1.2.78
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/GreemDev/Ryujinx/releases/latest
-          tag-query: .tag_name
-        commit: f07a9737db38b6605298545aa8b44f1a04051955
+      - type: file
+        path: io.github.greemdev.ryujinx.desktop
+      - type: file
+        url: https://cdn.jsdelivr.net/gh/ryubing/ryujinx/distribution/misc/Logo.svg
+        sha256: 6d8329413c64e2eb8a1706d2cf97e89fc5083b0654468bd6feefe47e61faaad2
+      - type: script
+        dest-filename: ryujinx-rebase
+        commands:
+          - zenity --error --text="This fork of Ryujinx has been renamed to io.github.ryubing.ryujinx. Please switch to this application instead."

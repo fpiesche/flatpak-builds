@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
+<component type="desktop-application">
+    <id>io.github.ryubing.ryujinx</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
+    <name>Ryujinx</name>
+    <developer id="io.github.ryubing.ryujinx">
+        <name>GreemDev + RyujinX Contributors</name>
+        <url>https://github.com/ryubing/ryujinx/graphs/contributors</url>
+    </developer>
+    <summary>Nintendo Switch Emulator</summary>
+    <categories>
+        <category>Emulator</category>
+        <category>Game</category>
+    </categories>
+    <description>
+        <p>Ryujinx is an open-source Nintendo Switch emulator written in C#</p>
+        <p>This emulator aims at providing excellent accuracy and performance, a user-friendly interface, and consistent builds.</p>
+    </description>
+    <launchable type="desktop-id">io.github.ryubing.ryujinx.desktop</launchable>
+    <provides>
+        <binary>Ryujinx</binary>
+        <mediatype>application/x-nx-nca</mediatype>
+        <mediatype>application/x-nx-nro</mediatype>
+        <mediatype>application/x-nx-nso</mediatype>
+        <mediatype>application/x-nx-nsp</mediatype>
+        <mediatype>application/x-nx-xci</mediatype>
+    </provides>
+    <url type="homepage">https://github.com/Ryubing/Ryujinx</url>
+    <url type="bugtracker">https://github.com/ryubing/Ryujinx/issues</url>
+    <url type="faq">https://github.com/ryubing/Ryujinx/wiki/Frequently-Asked-Questions</url>
+    <url type="help">https://github.com/ryubing/Ryujinx/wiki/Ryujinx-Setup-%26-Configuration-Guide</url>
+    <screenshots>
+        <screenshot type="default">
+            <caption>Main screen</caption>
+            <image>https://cdn.jsdelivr.net/gh/ryubing/Ryujinx/docs/shell.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>The Legend of Zelda: Breath of the Wild running in fullscreen on Ryujinx</caption>
+            <image>https://cdn.jsdelivr.net/gh/flathub/org.ryujinx.Ryujinx/screenshots/01.jpg</image>
+        </screenshot>
+        <screenshot>
+            <caption>Metroid Dread running in fullscreen on Ryujinx</caption>
+            <image>https://cdn.jsdelivr.net/gh/flathub/org.ryujinx.Ryujinx/screenshots/02.jpg</image>
+        </screenshot>
+        <screenshot>
+            <caption>Pokémon Legends: Arceus in fullscreen on Ryujinx</caption>
+            <image>https://cdn.jsdelivr.net/gh/flathub/org.ryujinx.Ryujinx/screenshots/03.jpg</image>
+        </screenshot>
+    </screenshots>
+    <releases>
+        <release version="1.2.78" date="2024-12-19" />
+        <release version="1.2.76" date="2024-11-19" />
+    </releases>
+    <content_rating type="oars-1.1"/>
+    <requires>
+        <kernel version="4.1" compare="ge">Linux</kernel>
+        <memory>8192</memory>
+    </requires>
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>tablet</control>
+    </supports>
+    <recommends>
+        <control>gamepad</control>
+    </recommends>
+    <!-- For Gnome Software (https://gitlab.gnome.org/GNOME/gnome-software/-/blob/main/doc/kudos.md) -->
+    <kudos>
+        <kudo>HiDpiIcon</kudo>
+        <kudo>ModernToolkit</kudo>
+    </kudos>
+</component>
