@@ -131,10 +131,10 @@ modules:
         sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
         size: 48439905
       - type: extra-data
-        filename: freepats.tar.xz
-        url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
-        sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
-        size: 25093512
+        filename: freepats.tar.bz2
+        url: https://git.launchpad.net/ubuntu/+source/freepats/plain/upstream/freepats-20060219.tar.bz2
+        sha256: 0261ea1057b232183fa472432d5cedb0dca33698a5319328cdf193d4b2193c8a
+        size: 25791733
       - type: extra-data
         filename: bg_autonotes.txt
         url: https://cdn.jsdelivr.net/gh/exult/exult/data/bg/autonotes.txt
