@@ -1,6 +1,6 @@
 app-id: org.icculus.prey
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version "24.08"
+runtime-version: &runtime-version '24.08'
 sdk: org.freedesktop.Sdk
 command: org.icculus.prey.sh
 
@@ -19,7 +19,7 @@ finish-args:
   - --persist=.prey
 
 # Parameters for 32-bit extensions
-x-gl-version: &gl-version "1.4"
+x-gl-version: &gl-version '1.4'
 x-gl-versions: &gl-versions 24.08;1.4
 x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d
 x-compat-i386-opts: &compat_i386_opts
@@ -109,8 +109,8 @@ modules:
         x86_64: *compat_i386_opts
     sources:
       - type: archive
-        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.1
-        sha256: 13619a3376d0e3219506a9ebf6f03e5650ad65856a5e8a86e40a67bc0a679c1e
+        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.2
+        sha256: c5ccadc829e08d35eca12e35e731519090a3a12c350d88f359864b78bcc00b66
         dest-filename: openal-soft.zip
         x-checker-data:
           type: json
@@ -148,7 +148,8 @@ modules:
       - type: file
         path: org.icculus.prey.sh
     build-commands:
-      - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392 && rm prey-installer.bin
+      - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392
+        && rm prey-installer.bin
       - unzip -qq prey-linux.zip && rm prey-linux.zip
       - mkdir -p /app/bin /app/lib32
       - install -Dm755 data/prey-linux-x86/prey*.x86 /app/bin
@@ -179,7 +180,8 @@ modules:
       - type: script
         dest-filename: apply_extra
         commands:
-          - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes skip=191392 && rm prey-installer.bin
+          - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes
+            skip=191392 && rm prey-installer.bin
           - unzip -qq prey-linux.zip && rm prey-linux.zip
           - mkdir /app/extra/prey
           - install -Dm644 data/prey-linux-x86/base/gamex86.so /app/extra/prey/
