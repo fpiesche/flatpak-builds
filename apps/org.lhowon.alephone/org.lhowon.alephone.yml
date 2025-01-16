@@ -60,14 +60,15 @@ modules:
 
   - name: miniupnpc
     buildsystem: cmake-ninja
+    subdir: miniupnpc
     sources:
       - type: archive
-        sha256: 025c9ab95677f02a69bc64ac0a747f07e02ba99cf797bc679a5a552fed8d990c
-        url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.3.0.tar.gz
+        sha256: e5513066dfdeb3a043dbf809617e292e1edb63da1d6ceb4d15586b8d19a98f8b
+        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_0.tar.gz
         x-checker-data:
           type: anitya
           project-id: 1986
-          url-template: https://miniupnp.tuxfamily.org/files/miniupnpc-$version.tar.gz
+          url-template: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_${major}_${minor}_${patch}.tar.gz
     config-opts:
       - -DUPNPC_BUILD_STATIC=FALSE
       - -DUPNPC_BUILD_SHARED=TRUE
