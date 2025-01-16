@@ -54,16 +54,26 @@ modules:
         DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
     build-commands:
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_VERSION\%\%/$(git describe --tags)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_GIT_HASH\%\%/$(git rev-parse --short HEAD)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_NAME\%\%/main/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_OWNER\%\%/flathub/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_SOURCE_REPO\%\%/io.github.ryubing.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_REPO\%\%/io.github.ryubing.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_BUILD_VERSION\%\%/$(git describe --tags)/g;"
+        src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_BUILD_GIT_HASH\%\%/$(git rev-parse --short
+        HEAD)/g;" src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_NAME\%\%/main/g;"
+        src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_OWNER\%\%/flathub/g;"
+        src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_SOURCE_REPO\%\%/io.github.ryubing.ryujinx/g;"
+        src/Ryujinx.Common/ReleaseInformation.cs
+      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_REPO\%\%/io.github.ryubing.ryujinx/g;"
+        src/Ryujinx.Common/ReleaseInformation.cs
       - sed -r --in-place 's/\%\%RYUJINX_CONFIG_FILE_NAME\%\%/Config\.json/g;' src/Ryujinx.Common/ReleaseInformation.cs
       - mkdir -p /app/bin
-      - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Platform=anyCPU -property:Version=$(git describe --tags) -property:SourceRevisionId=$(git rev-parse --short HEAD) -property:ExtraDefineConstants=DISABLE_UPDATER src/Ryujinx --self-contained --source nuget-sources
-      - cp -r --remove-destination src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/* /app/bin/
+      - dotnet publish -c Release -r $RUNTIME -property:DebugType=embedded -property:Platform=anyCPU
+        -property:Version=$(git describe --tags) -property:SourceRevisionId=$(git
+        rev-parse --short HEAD) -property:ExtraDefineConstants=DISABLE_UPDATER src/Ryujinx
+        --self-contained --source nuget-sources
+      - cp -r --remove-destination src/Ryujinx/bin/Release/net8.0/$RUNTIME/publish/*
+        /app/bin/
       - chmod +x /app/bin/Ryujinx.sh
       - mkdir -p /app/lib/ffmpeg
       - install -Dm644 $FLATPAK_ID.metainfo.xml /app/share/metainfo/$FLATPAK_ID.metainfo.xml
@@ -75,7 +85,7 @@ modules:
     sources:
       - nuget_sources.json
       - type: file
-        url: https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/887e33a0ee70329025e9a587fdb070da46e50a98/ryujinx-wrapper
+        url: https://raw.githubusercontent.com/flathub/org.ryujinx.Ryujinx/5b8509c6751502eae5955f767bbf51f1f77c95f4/ryujinx-wrapper
         sha256: b650655fcda8033b37853b8fcce488268b20498a6ca788db6d6a28994761c776
         dest-filename: ryujinx-wrapper
         x-checker-data:
