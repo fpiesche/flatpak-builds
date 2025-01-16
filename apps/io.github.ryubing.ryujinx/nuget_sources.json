@@ -792,7 +792,7 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.net.illink.tasks/8.0.11/microsoft.net.illink.tasks.8.0.11.nupkg",
+        "url": "https://globalcdn.nuget.org/packages/microsoft.net.illink.tasks.8.0.11.nupkg?packageVersion=8.0.12",
         "sha512": "043527c762d2bfc0962b75806cf9cd5adedd79574b067e1567964d512460e1637f5a2d71f8ce16420776cab5beaa7492479965f402a158d52c8865567fe3ac69",
         "dest": "nuget-sources",
         "dest-filename": "microsoft.net.illink.tasks.8.0.11.nupkg"
