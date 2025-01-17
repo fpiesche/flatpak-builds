@@ -132,7 +132,7 @@ modules:
         size: 48439905
       - type: extra-data
         filename: freepats.tar.bz2
-        url: https://git.launchpad.net/ubuntu/+source/freepats/plain/upstream/freepats-20060219.tar.bz2
+        url: https://mse.uk.distfiles.macports.org/freepats/freepats-20060219.tar.bz2
         sha256: 0261ea1057b232183fa472432d5cedb0dca33698a5319328cdf193d4b2193c8a
         size: 25791733
       - type: extra-data
