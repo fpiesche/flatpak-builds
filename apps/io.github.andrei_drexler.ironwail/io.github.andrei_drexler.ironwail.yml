@@ -28,7 +28,6 @@ cleanup:
   - /lib/pkgconfig
 
 modules:
-  - ../shared-modules/libmad/libmad.json
   - name: libxmp
     buildsystem: autotools
     sources:
