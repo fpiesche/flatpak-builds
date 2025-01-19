@@ -108,9 +108,9 @@ modules:
     subdir: dsda-launcher
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/zipball/v1.3.1-hotfix
+        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/zipball/v1.4
         dest-filename: dsda-doom-launcher.zip
-        sha256: c2a64266b4a895f5a769ede38131856201b41426c2213a9b80378e8ee3f637b5
+        sha256: 0daf82a6e93429576095974499a212885681dfa844dd7b4e34de1015e82c8476
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
