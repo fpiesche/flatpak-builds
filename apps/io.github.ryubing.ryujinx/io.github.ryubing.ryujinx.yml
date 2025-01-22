@@ -98,8 +98,8 @@ modules:
         path: io.github.ryubing.ryujinx.metainfo.xml
       - type: git
         url: https://github.com/Ryubing/Ryujinx.git
-        commit: f07a9737db38b6605298545aa8b44f1a04051955
-        tag: 1.2.78
+        commit: a1c0c70ec2932896d42680aab19c185f46b921de
+        tag: 1.2.80
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Ryubing/Ryujinx/releases/latest
