@@ -1,7 +1,7 @@
-diff --git a/dsda-launcher/mainwindow.ui b/dsda-launcher/mainwindow.ui
+diff --git a/src/mainwindow.ui b/src/mainwindow.ui
 index 8ed1573..3a6c91f 100644
---- a/dsda-launcher/mainwindow.ui
-+++ b/dsda-launcher/mainwindow.ui
+--- a/src/mainwindow.ui
++++ b/src/mainwindow.ui
 @@ -1,4 +1,4 @@
 -<?xml version="1.0" encoding="UTF-8"?>
 +<?xml version="1.0" encoding="UTF-8" ?>

@@ -1,7 +1,7 @@
-diff --git a/dsda-launcher/demodialog.cpp b/dsda-launcher/demodialog.cpp
+diff --git a/src/demodialog.cpp b/src/demodialog.cpp
 index 7cdce60..c454bb7 100644
---- a/dsda-launcher/demodialog.cpp
-+++ b/dsda-launcher/demodialog.cpp
+--- a/src/demodialog.cpp
++++ b/src/demodialog.cpp
 @@ -58,7 +58,7 @@ demodialog::demodialog(QStringList iwad_list, QWidget *parent)
  #ifdef _WIN32
          folder = QCoreApplication::applicationDirPath();
@@ -11,10 +11,10 @@ index 7cdce60..c454bb7 100644
  #endif
          QDir path(folder);
          QStringList files0 = path.entryList(QDir::Files);
-diff --git a/dsda-launcher/historylist.h b/dsda-launcher/historylist.h
+diff --git a/src/historylist.h b/src/historylist.h
 index 990b099..cf8be98 100644
---- a/dsda-launcher/historylist.h
-+++ b/dsda-launcher/historylist.h
+--- a/src/historylist.h
++++ b/src/historylist.h
 @@ -23,7 +23,7 @@ private:
      Ui::historyList *ui;
  
@@ -24,10 +24,10 @@ index 990b099..cf8be98 100644
  #else
      QString historyPath;
  #endif
-diff --git a/dsda-launcher/mainwindow.cpp b/dsda-launcher/mainwindow.cpp
+diff --git a/src/mainwindow.cpp b/src/mainwindow.cpp
 index 24e6dc9..a27ceab 100755
---- a/dsda-launcher/mainwindow.cpp
-+++ b/dsda-launcher/mainwindow.cpp
+--- a/src/mainwindow.cpp
++++ b/src/mainwindow.cpp
 @@ -696,7 +696,7 @@ void MainWindow::on_actionCheck_for_Updates_triggered()
      if(port.exists())
      {
@@ -55,10 +55,10 @@ index 24e6dc9..a27ceab 100755
          argList.push_front(iwads_paths.at(ui->iwad_comboBox->findText(iwadName)).second);
          //system(("cd ~/ && " + execPath+"/dsda-doom -iwad '"+homePath+"/.dsda-doom/"+ui->iwad_comboBox->currentText().toStdString()+".wad' "+arguments+" >> "+homePath+"/.dsda-doom/LogFile.txt &").c_str());
          // Run "which" command to check if dsda-doom exists. if it does then no need to specify a path, just run a process with exeName.
-diff --git a/dsda-launcher/mainwindow.h b/dsda-launcher/mainwindow.h
+diff --git a/src/mainwindow.h b/src/mainwindow.h
 index 412d357..8aa3914 100755
---- a/dsda-launcher/mainwindow.h
-+++ b/dsda-launcher/mainwindow.h
+--- a/src/mainwindow.h
++++ b/src/mainwindow.h
 @@ -69,8 +69,8 @@ private:
      void enable_disable_complevel_comboBox();
  
@@ -70,10 +70,10 @@ index 412d357..8aa3914 100755
      #else
      QString historyPath;
      #endif
-diff --git a/dsda-launcher/settings.cpp b/dsda-launcher/settings.cpp
+diff --git a/src/settings.cpp b/src/settings.cpp
 index 78eea82..e6097dd 100644
---- a/dsda-launcher/settings.cpp
-+++ b/dsda-launcher/settings.cpp
+--- a/src/settings.cpp
++++ b/src/settings.cpp
 @@ -60,7 +60,7 @@ Settings::Settings(QWidget *parent) :
  
      ui->maxSkillLevel_lineEdit->setValidator(new QRegularExpressionValidator (QRegularExpression("[0-9]{1}"), this));
