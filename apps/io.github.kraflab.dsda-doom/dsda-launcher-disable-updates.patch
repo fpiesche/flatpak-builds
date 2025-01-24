@@ -1,0 +1,150 @@
+diff --git a/src/mainwindow.ui b/src/mainwindow.ui
+index 07f23af..d896095 100644
+--- a/src/mainwindow.ui
++++ b/src/mainwindow.ui
+@@ -1294,7 +1294,6 @@ font: 13pt &quot;Arial&quot;;</string>
+     <addaction name="actionOpenSettings"/>
+     <addaction name="actionAbout"/>
+     <addaction name="actionGithubDsdalauncher"/>
+-    <addaction name="actionCheckForUpdatesDsdalauncher"/>
+     <addaction name="actionTips"/>
+    </widget>
+    <widget class="QMenu" name="menudsda_doom">
+@@ -1302,7 +1301,6 @@ font: 13pt &quot;Arial&quot;;</string>
+      <string>dsda-doom</string>
+     </property>
+     <addaction name="actionGithubDsdadoom"/>
+-    <addaction name="actionCheckForUpdatesDsdadoom"/>
+    </widget>
+    <widget class="QMenu" name="menuAdvanced">
+     <property name="title">
+@@ -1344,11 +1342,6 @@ font: 13pt &quot;Arial&quot;;</string>
+     <string>Github</string>
+    </property>
+   </action>
+-  <action name="actionCheckForUpdatesDsdalauncher">
+-   <property name="text">
+-    <string>Check for Updates</string>
+-   </property>
+-  </action>
+   <action name="actionSettings">
+    <property name="text">
+     <string>Settings</string>
+@@ -1369,11 +1362,6 @@ font: 13pt &quot;Arial&quot;;</string>
+     <string>What is this?</string>
+    </property>
+   </action>
+-  <action name="actionCheckForUpdatesDsdadoom">
+-   <property name="text">
+-    <string>Check for Updates</string>
+-   </property>
+-  </action>
+   <action name="actionGithubDsdadoom">
+    <property name="text">
+     <string>Github</string>
+diff --git a/src/settings.cpp b/src/settings.cpp
+index bd6a42d..5dc4045 100644
+--- a/src/settings.cpp
++++ b/src/settings.cpp
+@@ -158,12 +158,6 @@ void Settings::ReadSettings()
+         ui->maxHistory_lineEdit->setText("20");
+     }
+ 
+-    if (!settings->value("updaterStartLauncher").isNull()) ui->updaterStartLauncher_checkBox->setChecked(settings->value("updaterStartLauncher").toBool());
+-    else settings->setValue("updaterStartLauncher", true);
+-
+-    if (!settings->value("updaterStartGame").isNull()) ui->updaterStartGame_checkBox->setChecked(settings->value("updaterStartGame").toBool());
+-    else settings->setValue("updaterStartGame", true);
+-
+     settings->sync();
+ }
+ 
+@@ -537,7 +531,3 @@ void Settings::on_minusIWADFolders_toolButton_clicked()
+ void Settings::on_endoom_checkBox_clicked(bool checked) { settings->setValue("endoom", checked); }
+ 
+ void Settings::on_remember_checkBox_toggled(bool checked) { settings->setValue("remember", checked); }
+-
+-void Settings::on_updaterStartLauncher_checkBox_toggled(bool checked) { settings->setValue("updaterStartLauncher", checked); }
+-
+-void Settings::on_updaterStartGame_checkBox_toggled(bool checked) { settings->setValue("updaterStartGame", checked); }
+diff --git a/src/settings.h b/src/settings.h
+index 10d1184..e0e0e0d 100644
+--- a/src/settings.h
++++ b/src/settings.h
+@@ -71,9 +71,6 @@ private slots:
+ 
+   void on_remember_checkBox_toggled(bool checked);
+ 
+-  void on_updaterStartLauncher_checkBox_toggled(bool checked);
+-  void on_updaterStartGame_checkBox_toggled(bool checked);
+-
+ private:
+   Ui::Settings *ui;
+   void ReadSettings();
+diff --git a/src/settings.ui b/src/settings.ui
+index 5c09c9c..b83caf3 100644
+--- a/src/settings.ui
++++ b/src/settings.ui
+@@ -998,62 +998,6 @@ border-radius:3px</string>
+      </property>
+     </widget>
+    </widget>
+-   <widget class="QWidget" name="tab_3">
+-    <attribute name="title">
+-     <string>Updates</string>
+-    </attribute>
+-    <widget class="QCheckBox" name="updaterStartLauncher_checkBox">
+-     <property name="geometry">
+-      <rect>
+-       <x>220</x>
+-       <y>45</y>
+-       <width>121</width>
+-       <height>22</height>
+-      </rect>
+-     </property>
+-     <property name="toolTip">
+-      <string>Show Endoom screen on game exit</string>
+-     </property>
+-     <property name="text">
+-      <string>dsda-launcher</string>
+-     </property>
+-     <property name="checked">
+-      <bool>true</bool>
+-     </property>
+-    </widget>
+-    <widget class="QLabel" name="label">
+-     <property name="geometry">
+-      <rect>
+-       <x>180</x>
+-       <y>20</y>
+-       <width>201</width>
+-       <height>16</height>
+-      </rect>
+-     </property>
+-     <property name="text">
+-      <string>Check for Updates on Start:</string>
+-     </property>
+-    </widget>
+-    <widget class="QCheckBox" name="updaterStartGame_checkBox">
+-     <property name="geometry">
+-      <rect>
+-       <x>220</x>
+-       <y>70</y>
+-       <width>111</width>
+-       <height>22</height>
+-      </rect>
+-     </property>
+-     <property name="toolTip">
+-      <string>Show Endoom screen on game exit</string>
+-     </property>
+-     <property name="text">
+-      <string>dsda-doom</string>
+-     </property>
+-     <property name="checked">
+-      <bool>true</bool>
+-     </property>
+-    </widget>
+-   </widget>
+   </widget>
+  </widget>
+  <resources/>
