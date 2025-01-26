@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Fan remake of Sonic Triple Trouble in Genesis style
+Exec=com.wixsite.stt16bit.sh
+Icon=com.wixsite.stt16bit
+Keywords=sonic;fangame;sonic the hedgehog;sage
+Name=Sonic Triple Trouble 16-Bit
+StartupNotify=true
+Terminal=false
+Type=Application

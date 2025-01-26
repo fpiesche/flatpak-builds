@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.wixsite.stt16bit</id>
+  <name>Sonic Triple Trouble 16-Bit</name>
+  <developer id="com.wixsite.stt16bit">
+    <name>Noah N. Copeland</name>
+    <url>https://linktr.ee/NoahNCopeland/</url>
+  </developer>
+  <summary>Fan remake of Sonic Triple Trouble in Genesis style</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>proprietary</project_license>
+  <launchable type="desktop-id">com.wixsite.stt16bit.desktop</launchable>
+  <url type="homepage">https://stt16bit.wixsite.com/sonictripletrouble16/</url>
+  <description>
+    <p>What if there was a lost Sonic game from the 1990's? Imagine a hidden Sega Genesis game buried in storage. A fan-made remake of the Sega Game Gear title, Sonic Triple Trouble from 1994, Sonic Triple Trouble 16-bit is labor-of-love passion project created by a team of dedicated Sonic fans for the Sonic fanbase.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://static.wixstatic.com/media/89f603_3b831d174e1645ba9fab1e3f2b9e3a53~mv2.png</image>
+      <caption>Players can swap between Sonic and Tails at any time</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://static.wixstatic.com/media/89f603_d72b826588964653acee72c21e45ddce~mv2.png</image>
+      <caption>Play as Amy Rose!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://static.wixstatic.com/media/89f603_81ff3fccbd7749afb861d21fa025c0b2~mv2.png</image>
+      <caption>Boss fights!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://static.wixstatic.com/media/89f603_a03f7be269ab49209f6bee1f9c943415~mv2.png</image>
+      <caption>Special effects that were impossible on the Game Gear</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="1.1.0" date="2023-05-27" />
+    <release version="1.0" date="2022-08-02" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
