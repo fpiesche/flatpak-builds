@@ -44,7 +44,7 @@ modules:
       - type: script
         dest-filename: io.github.stardropsmh.sonic-and-the-fallen-star.sh
         commands:
-          - WINEPREFIX=$XDG_DATA_HOME/wine
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
           - wine "/app/extra/Sonic and the Fallen Star.exe"
       - type: script
         dest-filename: apply_extra
