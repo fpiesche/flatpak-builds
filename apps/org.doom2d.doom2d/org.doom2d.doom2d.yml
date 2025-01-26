@@ -135,5 +135,3 @@ modules:
           - rm -rf tmp
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
-
-
