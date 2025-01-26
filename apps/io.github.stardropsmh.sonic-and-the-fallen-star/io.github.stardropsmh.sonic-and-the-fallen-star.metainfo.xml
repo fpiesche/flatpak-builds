@@ -8,7 +8,7 @@
   </developer>
   <summary>Sonic the Hedgehog fan game</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>proprietary</project_license>
+  <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">io.github.stardropsmh.sonic-and-the-fallen-star.desktop</launchable>
   <url type="homepage">https://stardropsmh.github.io/sonic-and-the-fallen-star/</url>
   <description>

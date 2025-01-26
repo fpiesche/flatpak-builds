@@ -8,7 +8,7 @@
   </developer>
   <summary>Fan remake of Sonic Triple Trouble in Genesis style</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>proprietary</project_license>
+  <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">com.wixsite.stt16bit.desktop</launchable>
   <url type="homepage">https://stt16bit.wixsite.com/sonictripletrouble16/</url>
   <description>
