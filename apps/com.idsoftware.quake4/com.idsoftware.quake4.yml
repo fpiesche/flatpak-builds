@@ -124,10 +124,6 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: https://www.quaddicted.com/files/idgames2/idstuff/quake4/linux/quake4-linux-1.4.2.x86.run
-        dest-filename: quake4.run
-        sha256: 9203b387b1a4075a1b9ad1eb7be32b49a88141a448d9330d9cbe1f40a145bd6a
-      - type: file
         path: com.idsoftware.quake4.png
       - type: file
         path: com.idsoftware.quake4.desktop
@@ -136,9 +132,6 @@ modules:
       - type: file
         path: com.idsoftware.quake4.sh
     build-commands:
-      - chmod a+x quake4.run
-      - ./quake4.run --tar xf
-      - install -Dm755 bin/Linux/x86/*.x86 /app/bin
       - install -Dm755 ${FLATPAK_ID}.sh /app/bin
       - install -Dm644 ${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
@@ -164,6 +157,7 @@ modules:
           - mkdir -p /app/extra/quake4/q4base q4tmp
           - chmod a+x quake4.run
           - ./quake4.run --tar -xf -C q4tmp
+          - install -Dm755 q4tmp/bin/Linux/x86/*.x86 /app/extra/quake4/
           - install -Dm644 q4tmp/q4base/*.pk4 q4tmp/q4base/*cfg q4tmp/us/q4base/*
             /app/extra/quake4/q4base/
           - install -Dm644 q4tmp/q4base/zpak_*.pk4.off /app/extra/quake4/q4base/

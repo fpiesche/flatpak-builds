@@ -1,52 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>com.idsoftware.quake4</id>
   <name>Quake 4</name>
   <developer id="com.idsoftware.quake4">
     <name>id Software, Raven Software</name>
-    <url
-        >https://www.mobygames.com/game/19650/quake-4/credits/windows/?autoplatform=true</url>
+    <url>https://www.mobygames.com/game/19650/quake-4/credits/windows/?autoplatform=true</url>
   </developer>
-  <summary>A sci-fi shooter</summary>
+  <summary>Sci-fi first-person shooter</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">com.idsoftware.quake4.desktop</launchable>
-  <url
-        type="homepage"
-    >https://web.archive.org/web/20120626014852/http://www.ravensoft.com/games/quake/view-game/</url>
+  <url type="homepage">https://web.archive.org/web/20120626014852/http://www.ravensoft.com/games/quake/view-game/</url>
   <description>
-    <p
-        >Quake 4 is the true sequel to Quake II, continuing the Strogg vs. Humans storyline
+    <p>Quake 4 is the true sequel to Quake II, continuing the Strogg vs. Humans storyline
         from the point where Quake II ended.</p>
-    <p
-        >This is a Flatpak distribution of the official Linux port of the game, for
+    <p>This is a Flatpak distribution of the official Linux port of the game, for
         ease of use as the game can be difficult to run on modern systems.</p>
     <h2>PLEASE NOTE</h2>
-    <p>This Flatpak does <b
-            >not</b> include the Quake 4 game data or a CD key. You will need
-        to supply both. At least the files <code>pak001.pk4</code> through <code
-            >pak012.pk4</code>
+    <p>This Flatpak does <b>not</b> include the Quake 4 game data or a CD key. You will need
+        to supply both. At least the files <code>pak001.pk4</code> through <code>pak012.pk4</code>
         from a retail installation of Quake 4 must be copied to
         <code>$HOME/.var/app/com.idsoftware.quake4/q4base/</code>.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/10357456-quake-4-windows-title-screen.jpg</image>
+      <image type="source">https://cdn.mobygames.com/screenshots/10357456-quake-4-windows-title-screen.jpg</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/10357459-quake-4-windows-assault-on-the-strogg-planet-introduction.jpg</image>
+      <image type="source">https://cdn.mobygames.com/screenshots/10357459-quake-4-windows-assault-on-the-strogg-planet-introduction.jpg</image>
       <caption>Assault on the Strogg homeworld from the introduction.</caption>
     </screenshot>
     <screenshot>
-      <image
-                type="source"
-            >https://cdn.mobygames.com/screenshots/10192490-quake-4-windows-waiting-for-an-operation.jpg</image>
+      <image type="source">https://cdn.mobygames.com/screenshots/10192490-quake-4-windows-waiting-for-an-operation.jpg</image>
       <caption>They call this Stroggification?</caption>
     </screenshot>
   </screenshots>

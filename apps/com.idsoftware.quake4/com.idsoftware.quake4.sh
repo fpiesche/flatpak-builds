@@ -1,4 +1,5 @@
 #!/bin/bash
+PATH=$PATH:/app/extra
 if [[ ! -d $XDG_DATA_HOME/q4base ]]; then mkdir $XDG_DATA_HOME/q4base; fi
 if [[ ! -d $XDG_DATA_HOME/q4mp ]]; then mkdir $XDG_DATA_HOME/q4mp; fi
 for q4path in q4base q4mp; do
