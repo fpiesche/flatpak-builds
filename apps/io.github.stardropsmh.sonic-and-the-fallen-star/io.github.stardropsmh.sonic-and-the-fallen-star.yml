@@ -1,0 +1,73 @@
+app-id: io.github.stardropsmh.sonic-and-the-fallen-star
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: io.github.stardropsmh.sonic-and-the-fallen-star.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win32
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.winehq.Wine.DLLs
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: sonic-and-the-fallen-star
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: io.github.stardropsmh.sonic-and-the-fallen-star.sh
+        commands:
+          - WINEPREFIX=$XDG_DATA_HOME/wine
+          - wine "/app/extra/Sonic and the Fallen Star.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip sonic-and-the-fallen-star.zip -d tmp && rm sonic-and-the-fallen-star.zip
+          - export EXTRACT_DIR=$(dirname "$(find tmp -name 'Sonic and the Fallen Star.exe')")
+          - echo "Found $EXTRACT_DIR"
+          - mv "$EXTRACT_DIR"/* /app/extra/
+          - rm -rf tmp
+      - type: file
+        path: io.github.stardropsmh.sonic-and-the-fallen-star.png
+      - type: file
+        path: io.github.stardropsmh.sonic-and-the-fallen-star.desktop
+      - type: file
+        path: io.github.stardropsmh.sonic-and-the-fallen-star.metainfo.xml
+      - type: extra-data
+        url: https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/Sonic%20and%20the%20Fallen%20Star%20%28V1.1.1%20Edit%204%29.zip
+        filename: sonic-and-the-fallen-star.zip
+        size: 285845544
+        sha256: b21eb6ef02725d7b6d9fcd5731c59f3d8c4fb6c535b40737ebfa0f4642813f9c
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml

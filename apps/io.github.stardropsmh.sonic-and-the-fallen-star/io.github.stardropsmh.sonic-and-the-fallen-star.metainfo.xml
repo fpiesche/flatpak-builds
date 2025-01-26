@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.stardropsmh.sonic-and-the-fallen-star</id>
+  <name>Sonic and the Fallen Star</name>
+  <developer id="io.github.stardropsmh.sonic-and-the-fallen-star">
+    <name>Sonic and the Fallen Star team</name>
+    <url>https://stardropsmh.github.io/sonic-and-the-fallen-star/</url>
+  </developer>
+  <summary>Sonic the Hedgehog fan game</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>proprietary</project_license>
+  <launchable type="desktop-id">io.github.stardropsmh.sonic-and-the-fallen-star.desktop</launchable>
+  <url type="homepage">https://stardropsmh.github.io/sonic-and-the-fallen-star/</url>
+  <description>
+    <p> Sonic and the Fallen Star is a 2D classic Sonic game featuring: 9 zones, in-game cutscenes, and an original soundtrack. Play as either Sonic or Tails to take down Dr. Robotnik's evil plans and gather the pieces of the Mystic Star.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/SAGEScreenshots1.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/SAGEScreenshots2.png</image>
+      <caption>All new zone artwork</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/SAGEScreenshots3.png</image>
+      <caption>Classic Sonic gameplay</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/SAGEScreenshots4.png</image>
+      <caption>Bosses fights</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="1.1.1 (edit 4)" date="2022-08-22" />
+    <release version="1.0" date="2022-08-06" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
