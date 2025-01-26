@@ -1,0 +1,78 @@
+app-id: jp.ne.sakura.rpgex.littleworld
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: jp.ne.sakura.rpgex.littleworld.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  # - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win64
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.winehq.Wine.DLLs
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: littleworld
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: jp.ne.sakura.rpgex.littleworld.sh
+        commands:
+          - if [[ ! -d "$XDG_DATA_HOME/SaveFile" ]]; then mkdir "$XDG_DATA_HOME/SaveFile"; fi
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - wine "/app/extra/Game.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - tar xvf hwnt.tar.bz2 && rm hwnt.tar.bz2
+          - tar xvf hwnt-patch.tar.bz2 && rm hwnt-patch.tar.bz2
+          - ln -s $HOME/.var/app/jp.ne.sakura.rpgex.littleworld/data/SaveFile /app/extra/SaveFile
+          - rm -rf tmp
+      - type: file
+        path: jp.ne.sakura.rpgex.littleworld.png
+      - type: file
+        path: jp.ne.sakura.rpgex.littleworld.desktop
+      - type: file
+        path: jp.ne.sakura.rpgex.littleworld.metainfo.xml
+      - type: extra-data
+        url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20v22%5D.tar.bz2
+        filename: hwnt.tar.bz2
+        size: 1112688466
+        sha256: 84fec9510172d51d9e6a6d135ad1cd6b77fcbdacf486f3693cfa9dfddad36bba
+      - type: extra-data
+        url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20v22%20Non-JP%20Locale%20Patch.tar.bz2
+        filename: hwnt-patch.tar.bz2
+        size: 3931815
+        sha256: 8b0f167caede059bdefd00d9cc2aa60a0a5aefb3ddf7419ee971e947e03fcf5d
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
