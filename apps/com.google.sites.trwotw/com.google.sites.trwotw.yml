@@ -54,7 +54,7 @@ modules:
           - export EXTRACT_DIR=$(dirname "$(find . -name 'War of the Worlds.exe')")
           - echo "Found $EXTRACT_DIR"
           - mv "$EXTRACT_DIR"/* /app/extra/
-          - rmdir $EXTRACT_DIR
+          - rmdir "$EXTRACT_DIR"
       - type: file
         path: com.google.sites.trwotw.png
       - type: file
