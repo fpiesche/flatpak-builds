@@ -1,0 +1,74 @@
+app-id: com.google.sites.trwotw
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: com.google.sites.trwotw.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  # - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win64
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.winehq.Wine.DLLs
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: trwotw
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: com.google.sites.trwotw.sh
+        commands:
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - wine "/app/extra/War of the Worlds.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - echo "Extracting game..."
+          - tar xvf trwotw.tar.bz2 && rm trwotw.tar.bz2
+          - export EXTRACT_DIR=$(dirname "$(find . -name 'War of the Worlds.exe')")
+          - echo "Found $EXTRACT_DIR"
+          - mv "$EXTRACT_DIR"/* /app/extra/
+          - rmdir $EXTRACT_DIR
+      - type: file
+        path: com.google.sites.trwotw.png
+      - type: file
+        path: com.google.sites.trwotw.desktop
+      - type: file
+        path: com.google.sites.trwotw.metainfo.xml
+      - type: extra-data
+        url: https://archive.org/download/tomb-raider-war-of-the-worlds/Tomb%20Raider%20War%20of%20the%20Worlds%20%5Bv1.1%5D.tar.bz2
+        filename: trwotw.tar.bz2
+        size: 2218699343
+        sha256: bde79dc996d45b121fb2d6978f2b3b5995e49be945a17afeb4031bfafe84f047
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
