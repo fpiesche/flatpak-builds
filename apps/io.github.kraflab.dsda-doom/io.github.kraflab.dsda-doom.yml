@@ -51,6 +51,8 @@ modules:
           project-id: 4781
           stable-only: true
           url-template: https://github.com/libsdl-org/SDL_image/releases/download/release-${version0}.${version1}.${version2}/SDL2_image-${version0}.${version1}.${version2}.tar.gz
+          versions:
+            "<": "3.0.0"
 
   - ../shared-modules/libmad/libmad.json
   - name: libdumb
