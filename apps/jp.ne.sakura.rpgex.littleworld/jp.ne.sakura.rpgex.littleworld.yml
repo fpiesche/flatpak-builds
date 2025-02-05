@@ -65,11 +65,21 @@ modules:
         filename: hwnt.tar.bz2
         size: 1112688466
         sha256: 84fec9510172d51d9e6a6d135ad1cd6b77fcbdacf486f3693cfa9dfddad36bba
+        x-checker-data:
+          type: json
+          url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
+          version-query: ".translation.releases[0].version"
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20" + $version + "%5D.tar.bz2"'
       - type: extra-data
         url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20v22%20Non-JP%20Locale%20Patch.tar.bz2
         filename: hwnt-patch.tar.bz2
         size: 3931815
         sha256: 8b0f167caede059bdefd00d9cc2aa60a0a5aefb3ddf7419ee971e947e03fcf5d
+        x-checker-data:
+          type: json
+          url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
+          version-query: ".translation.releases[0].version"
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20" + $version + "%20Non-JP%20Locale%20Patch.tar.bz2"'
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
