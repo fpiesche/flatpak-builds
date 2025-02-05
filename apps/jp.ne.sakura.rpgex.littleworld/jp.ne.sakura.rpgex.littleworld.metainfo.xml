@@ -32,8 +32,7 @@
     <category>Game</category>
   </categories>
   <releases>
-    <release version="1.1" date="2021-12-19" />
-    <release version="1.0" date="2021-12-13" />
+    <release version="v22" date="2023-03-21" />
   </releases>
   <content_rating type="oars-1.1" />
 </component>
