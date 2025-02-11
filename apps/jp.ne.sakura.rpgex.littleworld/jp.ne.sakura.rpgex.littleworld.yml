@@ -47,32 +47,122 @@ modules:
           - if [[ ! -d "$XDG_DATA_HOME/SaveFile" ]]; then mkdir "$XDG_DATA_HOME/SaveFile"; fi
           - export WINEPREFIX=$XDG_DATA_HOME/wine
           - wine "/app/extra/Game.exe"
-      - type: script
-        dest-filename: apply_extra
-        commands:
-          - tar xvf hwnt.tar.bz2 && rm hwnt.tar.bz2
-          - tar xvf hwnt-patch.tar.bz2 && rm hwnt-patch.tar.bz2
-          - ln -s $HOME/.var/app/jp.ne.sakura.rpgex.littleworld/data/SaveFile /app/extra/SaveFile
-          - rm -rf tmp
       - type: file
         path: jp.ne.sakura.rpgex.littleworld.png
       - type: file
         path: jp.ne.sakura.rpgex.littleworld.desktop
       - type: file
         path: jp.ne.sakura.rpgex.littleworld.metainfo.xml
+      - type: file
+        path: rgsstool.py
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - set -e
+          # Extract main game
+          - tar --strip-components=1 -xvf hwnt-jp.tar.bz2 && rm hwnt-jp.tar.bz2
+          - python /app/bin/rgsstool.py -x Game.rgss2a && rm Game.rgss2a
+          # Install translation patch
+          - tar -xvf hwnt-translation.tar.bz2 && rm hwnt-translation.tar.bz2
+          - tar -xvf hwnt-locale-patch.tar.bz2 && rm hwnt-locale-patch.tar.bz2
+          # Rename character art
+          - cd Graphics/Characters; for file in 01*; do ln -s "$file" "$(echo $file | sed s/ドーラ/Dora/g)"; done
+          # - rename -v "ドーラ" "Dora" Graphics/Characters/01*
+          # - rename -v "シキ" "Shiki" Graphics/Characters/02*
+          # - rename -v "ナタリー" "Natalie" Graphics/Characters/03*
+          # - rename -v "ジャニス" "Janice" Graphics/Characters/04*
+          # - rename -v "ラヴィ" "Lavie" Graphics/Characters/05*
+          # - rename -v "メル" "Mel" Graphics/Characters/06*
+          # - rename -v "ヨウコ" "Yoko" Graphics/Characters/07*
+          # - rename -v "ショコラ" "Chocolat" Graphics/Characters/08*
+          # - rename -v "ユノー" "Yuno" Graphics/Characters/09*
+          # - rename -v "メリッサ" "Melissa" Graphics/Characters/10*
+          # - rename -v "ツバメ" "Tsubame" Graphics/Characters/11*
+          # - rename -v "メシュレイア" "Meshleia" Graphics/Characters/12*
+          # - rename -v "ジャコウ" "Jacou" Graphics/Characters/14*
+          # - rename -v "ケリー" "Kelly" Graphics/Characters/41*
+          # - rename -v "フレデリカ" "Frederica" Graphics/Characters/42*
+          # - rename -v "プリムローズ" "Primrose" Graphics/Characters/07*
+          # - rename -v "プリムローズ" "Primrose" Graphics/Characters/41*
+          # - rename -v "プリムローズ" "Primrose" Graphics/Characters/49*
+          # - rename -v "ヴァイオレット" "Violette" Graphics/Characters/07*
+          # - rename -v "ヴァイオレット" "Violette" Graphics/Characters/51*
+          # # Rename background art
+          # - rename -v "箱舟" "The Ark" Graphics/Parallaxes/*
+          # - rename -v "バトルコロシアム" "Battle Colosseum" Graphics/Parallaxes/*
+          # - rename -v "棘の城" "Castle of Thorns" Graphics/Parallaxes/*
+          # - rename -v "凍らせし過去の洞窟" "Cavern of Frozen Past" Graphics/Parallaxes/*
+          # - rename -v "時計屋敷" "Clock Residence" Graphics/Parallaxes/*
+          # - rename -v "サイバネティックス社" "Cybernetics Corp" Graphics/Parallaxes/*
+          # - rename -v "情熱に渇く砂漠" "Desert of Passionate Thirst" Graphics/Parallaxes/*
+          # - rename -v "架空間デニフィリア" "Falspace Denipheria" Graphics/Parallaxes/*
+          # - rename -v "旗艦ニルヴァーナ" "Flagship Nirvana" Graphics/Parallaxes/*
+          # - rename -v "大聖堂ヴァルハラ" "Grand Cathedral Valhalla" Graphics/Parallaxes/*
+          # - rename -v "帽子図書館" "Hat Library" Graphics/Parallaxes/*
+          # - rename -v "帽子世界" "Hat World" Graphics/Parallaxes/*
+          # - rename -v "聖地セフィロト" "Holy Land Sephirot" Graphics/Parallaxes/*
+          # - rename -v "時の狭間" "Interstice in Time" Graphics/Parallaxes/*
+          # - rename -v "8月32日の島" "The Island of August 32nd" Graphics/Parallaxes/*
+          # - rename -v "ジュリエッタの研究室" "Julietta's Laboratory" Graphics/Parallaxes/*
+          # - rename -v "ケルクホフスの秘匿牢獄" "Kerckhoff's Hidden Jail" Graphics/Parallaxes/*
+          # - rename -v "ミンミンの精神世界" "Minmin's Mental World" Graphics/Parallaxes/*
+          # - rename -v "NPG機関" "NPG Facility" Graphics/Parallaxes/NPG*
+          # - rename -v "無人のテーマパーク" "Peopleless Theme Park" Graphics/Parallaxes/*
+          # - rename -v "涙の惑星" "Planet of Tears" Graphics/Parallaxes/*
+          # - rename -v "獲物に飢えた荒野" "Prey-Starved Wasteland" Graphics/Parallaxes/*
+          # - rename -v "始原の洞窟" "Primordial Cavern" Graphics/Parallaxes/*
+          # - rename -v "始原の森" "Primordial Forest" Graphics/Parallaxes/*
+          # - rename -v "始原の雪原" "Primordial Snowfield" Graphics/Parallaxes/*
+          # - rename -v "流砂の迷宮" "Quicksand Labyrinth" Graphics/Parallaxes/*
+          # - rename -v "断罪の遺跡" "Ruins of Judgement" Graphics/Parallaxes/*
+          # - rename -v "眠りの塔・ブラックアウト" "Sleeping Tower Blackout" Graphics/Parallaxes/*
+          # - rename -v "眠りの塔・胡蝶の間" "Sleeping Tower Butterfly Space" Graphics/Parallaxes/*
+          # - rename -v "時間列車ユグドラシル" "Time Train Yggdrasil" Graphics/Parallaxes/*
+          # - rename -v "玩具デパート" "Toy Department" Graphics/Parallaxes/*
+          # - rename -v "玩具工場エリュシオン" "Toy Factory Elysion" Graphics/Parallaxes/*
+          # - rename -v "ロシュ限界の双子惑星" "The Twin Planets of Roche's Limit" Graphics/Parallaxes/*
+          # - rename -v "武器墓場ベルフィナーレ" "Weapon Graveyard Belle Finale" Graphics/Parallaxes/*
+          # - rename -v "魔女の森" "Witch's Forest" Graphics/Parallaxes/*
+          # - rename -v "禅の間" "Zen Space" Graphics/Parallaxes/*
+          # # My Home art
+          # - rename -v "ホーム" "My Home" Graphics/Parallaxes/*
+          # # Character-specific backgrounds
+          # - rename -v "ドーラ" "Dora" Graphics/Parallaxes/*
+          # - rename -v "ナタリー" "Natalie" Graphics/Parallaxes/*
+          # - rename -v "シキ" "Shiki" Graphics/Parallaxes/*
+          # - rename -v "ジャニス" "Janice" Graphics/Parallaxes/*
+          # - rename -v "ラヴィ" "Lavie" Graphics/Parallaxes/*
+          # - rename -v "メル" "Mel" Graphics/Parallaxes/*
+          # Remove a large stray file
+          # - rm Graphics/Cutin/*.psd
+          # Symlink savedata path
+          - rmdir /app/extra/SaveFile && ln -s $HOME/.var/app/jp.ne.sakura.rpgex.littleworld/data/SaveFile /app/extra/SaveFile
+      # Original Japanese game data
       - type: extra-data
-        url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20v22%5D.tar.bz2
-        filename: hwnt.tar.bz2
-        size: 1112688466
-        sha256: 84fec9510172d51d9e6a6d135ad1cd6b77fcbdacf486f3693cfa9dfddad36bba
+        url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BJP%5D%5Bv239%5D.tar.bz2
+        filename: hwnt-jp.tar.bz2
+        size: 830629079
+        sha256: 19414639072e1362596b88447f3c3a19b34a7e0f5cdd9f156dfee3f87098e88e
+        x-checker-data:
+          type: json
+          url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
+          version-query: ".game.releases[0].version"
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BJP%5D%5Bv" + $version + "%5D.tar.bz2"'
+      # Translation patch
+      - type: extra-data
+        url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20Patch%20v22%5D.tar.bz2
+        filename: hwnt-translation.tar.bz2
+        size: 58586694
+        sha256: feb5a8bf9de0087a7bfd772db7eeb33ceee6a785d7391ec313d2007b9fd6418e
         x-checker-data:
           type: json
           url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
           version-query: ".translation.releases[0].version"
-          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20" + $version + "%5D.tar.bz2"'
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20Patch%20v" + $version + "%5D.7z"'
+      # Fix for non-Japanese locales
       - type: extra-data
         url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20v22%20Non-JP%20Locale%20Patch.tar.bz2
-        filename: hwnt-patch.tar.bz2
+        filename: hwnt-locale-patch.tar.bz2
         size: 3931815
         sha256: 8b0f167caede059bdefd00d9cc2aa60a0a5aefb3ddf7419ee971e947e03fcf5d
         x-checker-data:
@@ -84,5 +174,5 @@ modules:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
       - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
-      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh rgsstool.py
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
