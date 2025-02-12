@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Puzzle platformer with a level editor
+Exec=se.remar.castle.sh
+Icon=se.remar.castle
+Keywords=indie;retro;puzzle;remar
+Name=Castle of Elite
+StartupNotify=true
+Terminal=false
+Type=Application

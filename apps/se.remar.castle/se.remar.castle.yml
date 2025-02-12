@@ -1,0 +1,75 @@
+app-id: se.remar.castle
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: se.remar.castle.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win32
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.winehq.Wine.DLLs
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: castle
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: se.remar.castle.sh
+        commands:
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - cd /app/extra && wine "castle gm7.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip castle.zip && rm castle.zip && rm -rf "source code"
+          - ln -s $HOME/.var/app/se.remar.castle/data/castlesave.sav /app/extra/castlesave.sav
+      - type: file
+        path: se.remar.castle.png
+      - type: file
+        path: se.remar.castle.desktop
+      - type: file
+        path: se.remar.castle.metainfo.xml
+      - type: extra-data
+        url: http://remar.se/daniel/games/castle.zip
+        filename: castle.zip
+        size: 5997973
+        sha256: dd64cdfc815f4b4bb81407dd0f92869255513ac68ea2589751ed18ccdd83f26e
+        x-checker-data:
+          type: html
+          url: http://remar.se/daniel/castle.php
+          version-pattern: "Download Version ([\\d.-]+) \\(.*"
+          url-template: http://remar.se/daniel/games/castle.zip
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
