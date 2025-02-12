@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>se.remar.herocore</id>
+  <name>Hero Core</name>
+  <developer id="se.remar.herocore">
+    <name>Daniel Remar</name>
+    <url>https://bsky.app/profile/sonicgalactic.bsky.social</url>
+  </developer>
+  <summary>Sprawling action-exploration shooter</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">se.remar.herocore.desktop</launchable>
+  <url type="homepage">http://remar.se/daniel/herocore.php</url>
+  <description>
+    <p>Flip Hero returns for the final battle against his nemesis Cruiser Tetron - but can he really stop the reign of the machine warlord for all time? Like the first game, the controls are simple and the gameplay is easy to learn. The non-linear game world allows you to tackle the boss machines in nearly any order, or head straight for Tetron's headquarters if you know how.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.mobygames.com/screenshots/12332749-hero-core-windows-title-screen.jpg</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12324927-hero-core-windows-intro.jpg</image>
+      <caption>Intro</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12325611-hero-core-windows-start-of-the-game.jpg</image>
+      <caption>Start of the game</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12324876-hero-core-windows-select-a-route.jpg</image>
+      <caption>Choose a route</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12324879-hero-core-windows-several-enemies.jpg</image>
+      <caption>Some enemies</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12326897-hero-core-windows-save-point.jpg</image>
+      <caption>A save point</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/12324924-hero-core-windows-destroy-the-ball.jpg</image>
+      <caption>ORB</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="1.5" date="2021-07-11" />
+    <release version="1.0" date="2010-05-01" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
