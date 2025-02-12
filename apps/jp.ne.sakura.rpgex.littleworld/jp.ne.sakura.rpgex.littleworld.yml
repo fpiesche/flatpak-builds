@@ -147,7 +147,7 @@ modules:
           type: json
           url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
           version-query: ".game.releases[0].version"
-          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BJP%5D%5Bv" + $version + "%5D.tar.bz2"'
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BJP%5D%5B" + $version + "%5D.tar.bz2"'
       # Translation patch
       - type: extra-data
         url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20Patch%20v22%5D.tar.bz2
@@ -158,7 +158,7 @@ modules:
           type: json
           url: https://archive.org/download/hat-world-new-testament/hatworld_releases.json
           version-query: ".translation.releases[0].version"
-          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20Patch%20v" + $version + "%5D.7z"'
+          url-query: '"https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20%5BEnglish%20Patch%20" + $version + "%5D.7z"'
       # Fix for non-Japanese locales
       - type: extra-data
         url: https://archive.org/download/hat-world-new-testament/Hat%20World%20New%20Testament%20v22%20Non-JP%20Locale%20Patch.tar.bz2
