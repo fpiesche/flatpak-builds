@@ -36,9 +36,9 @@ modules:
       - --enable-music-mod-xmp=yes
     sources:
       - type: archive
-        url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.0.tar.gz
+        url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.1.tar.gz
         dest-filename: sdl2_mixer.tar.gz
-        sha256: 1146f00815c8ad22c3d48fbe31ae23dc5997936ebf30b4b3aeab6eab7ea1db3e
+        sha256: 63804b4b2ba503865c0853f102231aeff489b1dfc6dea4750a69e2a8ef54b2bb
         x-checker-data:
           type: anitya
           project-id: 4782
