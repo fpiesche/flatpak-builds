@@ -44,15 +44,15 @@ modules:
       - -DCMAKE_INSTALL_LIBDIR=lib
     sources:
       - type: archive
-        url: https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.4/SDL2_image-2.8.4.tar.gz
-        sha256: f7c06a8783952cfe960adccdd3d8472b63ab31475b4390d10cfdcc1aea61238f
+        url: https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.5/SDL2_image-2.8.5.tar.gz
+        sha256: 8bc4c57f41e2c0db7f9b749b253ef6cecdc6f0b689ecbe36ee97b50115fff645
         x-checker-data:
           type: anitya
           project-id: 4781
           stable-only: true
           url-template: https://github.com/libsdl-org/SDL_image/releases/download/release-${version0}.${version1}.${version2}/SDL2_image-${version0}.${version1}.${version2}.tar.gz
           versions:
-            "<": "3.0.0"
+            <: 3.0.0
 
   - ../shared-modules/libmad/libmad.json
   - name: libdumb
