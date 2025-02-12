@@ -2,7 +2,7 @@ app-id: io.github.interkarma.daggerfall-unity
 runtime: org.freedesktop.Platform
 runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
-command: /app/bin/DaggerfallUnity.x86_64
+command: io.github.interkarma.daggerfall-unity.sh
 
 finish-args:
   # hardware 3D
@@ -14,20 +14,9 @@ finish-args:
   - --socket=pulseaudio
 
 modules:
-  - name: dfu
+  - name: daggerfall-unity
     only-arches: x86_64
     sources:
-      - type: file
-        url: https://github.com/Interkarma/daggerfall-unity/releases/download/v1.1.1/dfu_linux_64bit-v1.1.1.zip
-        sha256: be3c476ae92972f42448757719266ad82c04868eb7b6f3a3c90fcfcf1490849a
-        dest-filename: dfu-linux.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/Interkarma/daggerfall-unity/releases/latest
-          version-query: .tag_name
-          url-query:
-            .assets[] | select(.name=="dfu_linux_64bit-" + $version + ".zip")
-            | .browser_download_url
       - type: file
         url: https://github.com/Interkarma/daggerfall-unity/raw/v1.0.0/Assets/Resources/DFUIcon.png
         sha256: d353d022c96792857527ac03c204fd6178d65d8cbcbd14dc6e6b975232b95125
@@ -36,11 +25,66 @@ modules:
         path: io.github.interkarma.daggerfall-unity.metainfo.xml
       - type: file
         path: io.github.interkarma.daggerfall-unity.desktop
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - set -e
+          # Extract Daggerfall game data
+          - mkdir Daggerfall_Data
+          - unzip daggerfall-data.zip -d Daggerfall_Data && rm daggerfall-data.zip
+          # Extract Daggerfall Unity
+          - unzip dfu-linux.zip && rm dfu-linux.zip
+          # Create symlinks for mod and quest pack directories
+          - |
+            symlink_dirs="Mods QuestPacks"
+            for subdir in ${symlink_dirs}; do
+              if [[ -d /app/extra/DaggerfallUnity_Data/StreamingAssets/$subdir ]]; then
+                rm -rf /app/extra/DaggerfallUnity_Data/StreamingAssets/$subdir
+              fi
+              echo "Linking XDG_DATA_HOME/$subdir to DFU data."
+              ln -s $HOME/.var/app/io.github.interkarma.daggerfall-unity/data/$subdir /app/extra/DaggerfallUnity_Data/StreamingAssets/$subdir
+            done
+      - type: script
+        dest-filename: io.github.interkarma.daggerfall-unity.sh
+        commands:
+          - set -e
+          - export DFU_CONFIG_PATH="$XDG_CONFIG_HOME/unity3d/Daggerfall Workshop/Daggerfall Unity/"
+          - export DFU_SETTINGS_INI="$DFU_CONFIG_PATH/settings.ini"
+          - |
+            symlink_dirs="Mods QuestPacks"
+            for subdir in ${symlink_dirs}; do
+              if [[ ! -d $XDG_DATA_HOME/$subdir ]]; then mkdir -p $XDG_DATA_HOME/$subdir; fi
+            done
+            if [[ ! -f "$DFU_SETTINGS_INI" ]]; then
+              echo "Copying default settings to $DFU_SETTINGS_INI"
+              mkdir -p "$DFU_CONFIG_PATH"
+              cp /app/bin/settings.ini.default "$DFU_SETTINGS_INI"
+            fi
+          - sed -i "s:\$XDG_DATA_HOME:$XDG_DATA_HOME:" "$DFU_SETTINGS_INI"
+          - /app/extra/DaggerfallUnity.x86_64
+      - type: file
+        path: settings.ini.default
+      - type: extra-data
+        url: https://github.com/Interkarma/daggerfall-unity/releases/download/v1.1.1/dfu_linux_64bit-v1.1.1.zip
+        sha256: be3c476ae92972f42448757719266ad82c04868eb7b6f3a3c90fcfcf1490849a
+        size: 58809717
+        filename: dfu-linux.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Interkarma/daggerfall-unity/releases/latest
+          version-query: .tag_name
+          url-query:
+            .assets[] | select(.name=="dfu_linux_64bit-" + $version + ".zip")
+            | .browser_download_url
+      - type: extra-data
+        url: https://drive.usercontent.google.com/download?id=0B0i8ZocaUWLGWHc1WlF3dHNUNTQ&export=download&confirm=yes
+        size: 152372819
+        sha256: 8be67a4ebb76ed684968f49d29cbbe57b0c10dc4554d111d64356a2355be5083
+        filename: daggerfall-data.zip
     buildsystem: simple
     build-commands:
-      # Extract DFU release
-      - unzip dfu-linux.zip -d /app/bin
+      - install -Dm755 -t /app/bin apply_extra io.github.interkarma.daggerfall-unity.sh settings.ini.default
       # Install metadata and launcher files
-      - install -D -m755 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
-      - install -D -m755 -t /app/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
+      - install -D -m644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -D -m644 -t /app/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       - install -D -m755 -t /app/share/applications/ ${FLATPAK_ID}.desktop

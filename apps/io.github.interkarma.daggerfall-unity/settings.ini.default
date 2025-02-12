@@ -1,0 +1,4 @@
+[Daggerfall]
+MyDaggerfallPath = /app/extra/Daggerfall_Data
+MyDaggerfallUnitySavePath = $XDG_DATA_HOME/Saves
+MyDaggerfallUnityScreenshotsPath = $XDG_DATA_HOME/Screenshots

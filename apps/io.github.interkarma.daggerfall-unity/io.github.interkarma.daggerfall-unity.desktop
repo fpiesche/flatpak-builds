@@ -2,7 +2,7 @@
 Categories=Game;RolePlaying
 Comment[en_US]=A modernised version of The Elder Scrolls II: Daggerfall
 Comment=A modernised version of The Elder Scrolls II: Daggerfall
-Exec=DaggerfallUnity.x86_64
+Exec=io.github.interkarma.daggerfall-unity.sh
 GenericName[en_US]=
 GenericName=
 Icon=io.github.interkarma.daggerfall-unity
