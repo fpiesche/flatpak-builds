@@ -1,0 +1,87 @@
+app-id: se.remar.iji
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: se.remar.iji.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win32
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.winehq.Wine.DLLs
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: iji
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: se.remar.iji.sh
+        commands:
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - cd /app/extra && wine "iji.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip iji.zip && rm iji.zip && rm -rf "source code"
+          - unzip -o -d music ijimusic.zip && rm ijimusic.zip
+          - ln -s $HOME/.var/app/se.remar.iji/data/ijisave.sav /app/extra/ijisave.sav
+          - ln -s $HOME/.var/app/se.remar.iji/data/ijisaveext.sav /app/extra/ijisaveext.sav
+      - type: file
+        path: se.remar.iji.png
+      - type: file
+        path: se.remar.iji.desktop
+      - type: file
+        path: se.remar.iji.metainfo.xml
+      - type: extra-data
+        url: http://remar.se/daniel/games/iji.zip
+        filename: iji.zip
+        size: 46824928
+        sha256: f536a16239993543b3b73c14bb7da26cedf6046e00995835ecfc7db8313fbe8f
+        x-checker-data:
+          type: html
+          url: http://remar.se/daniel/iji.php
+          version-pattern: "Download Version ([\\d.-]+) \\(.*"
+          url-template: http://remar.se/daniel/games/iji.zip
+      - type: extra-data
+        url: http://remar.se/daniel/games/ijimusic.zip
+        filename: ijimusic.zip
+        size: 50160836
+        sha256: b1c32666b2604007687cde34fdc64980a5ef1f2415e0bf957a5ccac7fc57528c
+        x-checker-data:
+          type: html
+          url: http://remar.se/daniel/iji.php
+          version-pattern: "Download high-quality soundtrack for ([\\d.-]+) \\(optional\\)"
+          url-template: http://remar.se/daniel/games/ijimusic.zip
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
