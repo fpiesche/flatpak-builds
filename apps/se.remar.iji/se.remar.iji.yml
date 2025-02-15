@@ -67,7 +67,7 @@ modules:
         x-checker-data:
           type: html
           url: http://remar.se/daniel/iji.php
-          version-pattern: "Download Version ([\\d.-]+) \\(.*"
+          version-pattern: "Download</a> <b>Version ([\\d.-]+)</b>"
           url-template: http://remar.se/daniel/games/iji.zip
       - type: extra-data
         url: http://remar.se/daniel/games/ijimusic.zip
@@ -77,7 +77,7 @@ modules:
         x-checker-data:
           type: html
           url: http://remar.se/daniel/iji.php
-          version-pattern: "Download high-quality soundtrack for ([\\d.-]+) \\(optional\\)"
+          version-pattern: "Download high-quality soundtrack for ([\\d.-]+)</a> \\(optional\\)"
           url-template: http://remar.se/daniel/games/ijimusic.zip
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
