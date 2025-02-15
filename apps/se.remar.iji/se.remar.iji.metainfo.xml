@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>se.remar.iji</id>
-  <name>Castle of Elite</name>
+  <name>Iji</name>
   <developer id="se.remar.iji">
     <name>Daniel Remar</name>
     <url>https://remar.se/</url>
