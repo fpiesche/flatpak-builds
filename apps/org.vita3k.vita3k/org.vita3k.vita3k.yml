@@ -1,0 +1,97 @@
+app-id: org.vita3k.vita3k
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '23.08'
+sdk: org.freedesktop.Sdk
+command: Vita3K
+
+finish-args:
+  - --device=dri
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
+    version: *runtime-version
+    no-autodownload: true
+    autodelete: false
+
+sdk-extensions:
+  - org.freedesktop.Platform.ffmpeg-full
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=filesystem,system
+      - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/boost/boost/1.87.0/boost_1_87_0.tar.bz2
+        sha256: af57be25cb4c4f4b413ed692fe378affb4352ea50fbe294a11ef548f4d527d89
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          url-template: https://downloads.sourceforge.net/boost/boost/$version/boost_${major}_${minor}_${patch}.tar.bz2
+    cleanup:
+      - /lib/*.a
+      - /lib/debug
+      - /lib/cmake
+
+  - name: rapidjson
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DRAPIDJSON_BUILD_DOC=OFF
+      - -DRAPIDJSON_BUILD_EXAMPLES=OFF
+      - -DRAPIDJSON_BUILD_TESTS=OFF
+      - -DRAPIDJSON_BUILD_THIRDPARTY_GTEST=OFF
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://github.com/Tencent/rapidjson/archive/refs/tags/v1.1.0.tar.gz
+        sha256: bf7ced29704a1e696fbccf2a2b4ea068e7774fa37f6d7dd4039d0787f8bed98e
+        x-checker-data:
+          type: anitya
+          project-id: 7422
+          stable-only: true
+          url-template: https://github.com/Tencent/rapidjson/archive/refs/tags/v$version.tar.gz
+
+  - name: discord-rpc
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_SHARED_LIBS=ON
+      - -DBUILD_EXAMPLES=OFF
+    cleanup:
+      - /include
+    sources:
+      # - type: git
+      #   url: https://github.com/discord/discord-rpc.git
+      #   commit: 963aa9f3e5ce81a4682c6ca3d136cddda614db33
+      - type: archive
+        url: https://github.com/discord/discord-rpc/archive/refs/tags/v3.4.0.zip
+        sha256: ee39d9f7d756d7124fbbabd237a8d414eb461e873fd939562ab278582b918bdd
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/discord/discord-rpc/releases/latest
+          url-query: .zipball_url
+
+  - name: vita3k
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DUSE_VITA3K_UPDATE=OFF
+    sources:
+      - type: git
+        url: https://github.com/Vita3K/Vita3K.git
+        commit: 0b5ee986c9710b4ace99ca2001c75074ba203ba3
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/vita3k/vita3k/tags
+          commit-query: .[0].commit.sha
