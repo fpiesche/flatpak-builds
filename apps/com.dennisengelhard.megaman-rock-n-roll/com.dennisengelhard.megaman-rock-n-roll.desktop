@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game;Development
+Comment=Mega Man fan game
+Exec=com.dennisengelhard.megaman-rock-n-roll.sh
+Icon=com.dennisengelhard.megaman-rock-n-roll
+Keywords=fangame;mega man
+Name=Mega Man: Rock'n'Roll
+StartupNotify=true
+Terminal=false
+Type=Application
