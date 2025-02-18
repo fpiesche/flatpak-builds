@@ -44,7 +44,7 @@ modules:
         x-checker-data:
           type: html
           url: https://dennisengelhard.com/rock-n-roll/
-          pattern: "<link>(https://dennisengelhard.com/wp-content/uploads/\\d{4}/\\d{2}/megaman_rocknroll_linux_([\\d\\.]+\\d).zip)</link>"
+          pattern: "(https://dennisengelhard.com/wp-content/uploads/\\d{4}/\\d{2}/megaman_rocknroll_linux_([\\d\\.]+\\d).zip)"
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
