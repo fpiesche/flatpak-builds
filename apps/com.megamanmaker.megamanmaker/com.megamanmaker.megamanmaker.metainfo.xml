@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.megamanmaker.megamanmaker</id>
+  <name>Mega Man Maker</name>
+  <developer id="com.megamanmaker.megamanmaker">
+    <name>Mega Man Maker Team</name>
+    <url>https://megamanmaker.com/team</url>
+  </developer>
+  <summary>Mega Man-themed game creation tool</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.megamanmaker.megamanmaker.desktop</launchable>
+  <url type="homepage">https://megamanmaker.com/</url>
+  <description>
+    <p>Jump, shoot, create! Mega Man Maker is a fan game all about creating your own Mega Man levels and sharing them with the world! Alternatively, play one of many levels created by other users, from full-length Robot Master stages to unique puzzle levels. There's content for everyone to enjoy, all for the low price of nothing!</p>
+    <p>Mega Man and all related content is (C)Capcom. Mega Man Maker and its development team are not affiliated with Capcom in any way. Mega Man Maker is a non-profit game made by the fans for no financial gain.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://megamanmaker.com/img/screenshots/1.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://megamanmaker.com/img/screenshots/2.png</image>
+      <caption>Build your own levels!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://megamanmaker.com/img/screenshots/3.png</image>
+      <caption>Play other people's creations!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://megamanmaker.com/img/screenshots/8.png</image>
+      <caption>Play and make with others!</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="1.9.4.3" date="2025-01-13" />
+    <release version="1.9.4.2" date="2025-01-05" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
