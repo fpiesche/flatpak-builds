@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
+<component type="desktop-application">
+  <id>net.duke4.m210.buildgdx</id>
+  <name>BuildGDX</name>
+  <developer id="net.duke4.m210">
+    <name>BuildM210 Projects</name>
+    <url>https://m210.duke4.net/</url>
+  </developer>
+  <summary>Java-based cross-platform port of the Build game engine</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0-only</project_license>
+  <launchable type="desktop-id">net.duke4.m210.buildgdx.desktop</launchable>
+  <url type="homepage">https://m210.duke4.net/</url>
+  <url type="contact">https://discord.com/invite/kTVu6KU</url>
+  <description>
+    <p>BuildGDX is a port of the Build Engine games based on Java's libGDX framework v1.13.0.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-Seppuku_Station-0003.png</image>
+      <caption>Shadow Warrior</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-e1m1redneck.grp-0000.png</image>
+      <caption>Redneck Rampage</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-e1m1duke3d.grp-0000.png</image>
+      <caption>Duke Nukem 3D</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-secret6.map-0000.png</image>
+      <caption>Blood</caption>
+    </screenshot>
+</screenshots>
+  <categories>
+    <category>Game</category>
+    <category>Shooter</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>BuildGDX.jar</binary>
+  </provides>
+  <keywords>
+    <keyword>boomer shooter</keyword>
+    <keyword>retro</keyword>
+  </keywords>
+  <releases>
+    <release version="v1.18" date="2025-01-11" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>

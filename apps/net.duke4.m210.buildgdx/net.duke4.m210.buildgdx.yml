@@ -1,0 +1,62 @@
+app-id: net.duke4.m210.buildgdx
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+command: net.duke4.m210.buildgdx.sh
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # network access
+  - --share=network
+  # Add JRE to system path
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+modules:
+  - ../shared-modules/linux-audio/fluidsynth2.json
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+
+  - name: buildgdx
+    buildsystem: simple
+    sources:
+      - type: extra-data
+        filename: buildgdx.zip
+        url: https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx
+        size: 21136045
+        x-data-checker:
+          type: html
+          url: https://m210.duke4.net/
+          version-pattern: "BuildGDX Release v([\\d+.-]+)</strong><br /></a>buildgdx.zip</td>"
+          url-template: https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip buildgdx.zip && rm buildgdx.zip && rm *.txt *.bat
+      - type: script
+        dest-filename: net.duke4.m210.buildgdx.sh
+        commands:
+          - if [[ ! -d $XDG_DATA_HOME ]]; then mkdir -p $XDG_DATA_HOME; fi
+          - ln -s -T $XDG_DATA_HOME $HOME/.m210projects
+          - java -jar /app/extra/BuildGDX.jar $@
+      - type: file
+        path: net.duke4.m210.buildgdx.desktop
+      - type: file
+        path: net.duke4.m210.buildgdx.png
+      - type: file
+        path: net.duke4.m210.buildgdx.metainfo.xml
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - install -Dm644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
