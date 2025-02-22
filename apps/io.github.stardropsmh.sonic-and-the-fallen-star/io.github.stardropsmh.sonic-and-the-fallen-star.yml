@@ -53,6 +53,7 @@ modules:
           - export EXTRACT_DIR=$(dirname "$(find tmp -name 'Sonic and the Fallen Star.exe')")
           - echo "Found $EXTRACT_DIR"
           - mv "$EXTRACT_DIR"/* /app/extra/
+          - ln -s /app/extra/Data/ $XDG_DATA_HOME
           - rm -rf tmp
       - type: file
         path: io.github.stardropsmh.sonic-and-the-fallen-star.png
