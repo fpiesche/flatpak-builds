@@ -44,7 +44,7 @@ modules:
       - type: script
         dest-filename: io.github.stardropsmh.sonic-and-the-fallen-star.sh
         commands:
-          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          # - export WINEPREFIX=$XDG_DATA_HOME/wine
           - wine "/app/extra/Sonic and the Fallen Star.exe"
       - type: script
         dest-filename: apply_extra
@@ -53,7 +53,7 @@ modules:
           - export EXTRACT_DIR=$(dirname "$(find tmp -name 'Sonic and the Fallen Star.exe')")
           - echo "Found $EXTRACT_DIR"
           - mv "$EXTRACT_DIR"/* /app/extra/
-          - ln -s /app/extra/Data/ $XDG_DATA_HOME
+          - ln -vs $HOME/.var/app/io.github.stardropsmh.sonic-and-the-fallen-star/data /app/extra/Data
           - rm -rf tmp
       - type: file
         path: io.github.stardropsmh.sonic-and-the-fallen-star.png
