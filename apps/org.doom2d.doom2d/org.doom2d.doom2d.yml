@@ -31,9 +31,9 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://api.github.com/repos/libxmp/libxmp/zipball/libxmp-4.6.1
+        url: https://api.github.com/repos/libxmp/libxmp/zipball/libxmp-4.6.2
         dest-filename: libxmp.zip
-        sha256: 88a2edd48aaf61899b0a379daabc68148482a300884113ba61cc248d10faa12b
+        sha256: cf1aae7a213e2f0859d1daa845534dc814bc41a2627671d436ec0afe25e72d47
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
