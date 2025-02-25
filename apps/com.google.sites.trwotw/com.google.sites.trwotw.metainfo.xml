@@ -12,7 +12,13 @@
   <launchable type="desktop-id">com.google.sites.trwotw.desktop</launchable>
   <url type="homepage">https://sites.google.com/view/trwotw/</url>
   <description>
-    <p>Lara is one of the survivors of a pandemic of an unknown disease. Formerly, she was a historian and archaeologist. Today she lives in a bunker called Asylum with a group of other survivors. The life of community members revolves around caring for the common good, supplies, and security. Lara's role most often comes down to participating in the expeditions looking for medicines or food. Croft believes in the existence of a 'mythical' medicine and she hopes to find some proofs in the ruins of the Medical Pavilion. Soon their peace is interrupted.</p>
+    <p>Lara is one of the survivors of a pandemic of an unknown disease. Formerly, she was
+      a historian and archaeologist. Today she lives in a bunker called Asylum with a group
+      of other survivors. The life of community members revolves around caring for the
+      common good, supplies, and security. Lara's role most often comes down to
+      participating in the expeditions looking for medicines or food. Croft believes in the
+      existence of a 'mythical' medicine and she hopes to find some proofs in the ruins
+      of the Medical Pavilion. Soon their peace is interrupted.</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -30,7 +36,24 @@
   </screenshots>
   <categories>
     <category>Game</category>
+    <category>ActionGame</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>wine</binary>
+    <binary>War of the Worlds.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>tomb raider</keyword>
+    <keyword>fan game</keyword>
+    <keyword>retro</keyword>
+  </keywords>
   <releases>
     <release version="1.1" date="2021-12-19" />
     <release version="1.0" date="2021-12-13" />

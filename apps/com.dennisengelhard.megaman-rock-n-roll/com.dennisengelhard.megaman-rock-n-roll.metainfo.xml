@@ -22,7 +22,26 @@
   </screenshots>
   <categories>
     <category>Game</category>
+    <category>ActionGame</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>MegaMan_RocknRoll</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>megaman</keyword>
+    <keyword>mega man</keyword>
+    <keyword>capcom</keyword>
+    <keyword>sage</keyword>
+    <keyword>fangame</keyword>
+    <keyword>fan game</keyword>
+  </keywords>
   <releases>
     <release version="1.3" date="2021-01-03" />
     <release version="1.0" date="2019-11-25" />
