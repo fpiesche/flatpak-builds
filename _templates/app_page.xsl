@@ -30,36 +30,44 @@
       </div>
     </nav>
     <div class="header">
+      <div class="toast align-items-right" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+          Terminal installation commands copied to clipboard!
+        </div>
+      </div>
       <div class="container">
-      <img
+        <img
         class="icon"
         height="128px"
         width="128px"
         src='https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/{component/id}/{component/id}.png'
-      />
-      <xsl:variable name="install-html">
-        &lt;a href="appstream://<xsl:value-of select="component/id" />"&gt;Install&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
-        &lt;a href="<xsl:value-of select="component/id" />.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
-        flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo&lt;br/&gt;flatpak install ykc <xsl:value-of select="component/id" />
-      </xsl:variable>
-      <button
-        type="button"
-        class="btn install"
-        data-bs-container="body"
-        data-bs-toggle="popover"
-        data-bs-placement="left"
-        data-bs-html="true"
-      >
-      <xsl:attribute name="data-bs-content"><xsl:copy-of select="$install-html" /></xsl:attribute>
-        Install
-      </button>
-      <h1>
-        <xsl:value-of select="component/name"/>
-        <a class="homepage-link" href='{component/url[@type="homepage"]}' target="_blank">🏠</a>
-      </h1>
-      <p class="developer">
-        by <a href="{component/developer/url}"><xsl:value-of select="component/developer/name"/></a>
-      </p>
+        />
+        <xsl:variable name="install-html">
+          &lt;a href="appstream://<xsl:value-of select="component/id" />"&gt;Install&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
+          &lt;a href="<xsl:value-of select="component/id" />.flatpakref"&gt;Download .flatpakref&lt;/a&gt; OR &lt;br/&gt;&lt;br/&gt;
+          flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo&lt;br/&gt;flatpak install ykc <xsl:value-of select="component/id" />
+        </xsl:variable>
+        <div class="dropdown">
+          <button
+            type="button"
+            class="btn btn-secondary dropdown-toggle"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Install
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="appstream://{component/id}">Install</a>
+            <a class="dropdown-item" href="{component/id}.flatpakref">Download .flatpakref</a>
+            <a class="dropdown-item" href="#" onclick="copyCommand()">Copy terminal command</a>
+          </div>
+        </div>
+        <h1>
+          <xsl:value-of select="component/name"/>
+          <a class="homepage-link" href='{component/url[@type="homepage"]}' target="_blank">🏠</a>
+        </h1>
+        <p class="developer">
+          by <a href="{component/developer/url}"><xsl:value-of select="component/developer/name"/></a>
+        </p>
       </div>
     </div>
       <div id="screenshotCarousel" class="carousel slide">
@@ -131,12 +139,19 @@
       crossorigin="anonymous"
     ></script>
     <script>
-    const popoverTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="popover"]'
-    );
-    const popoverList = [...popoverTriggerList].map(
-      (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
-    );
+      const copyCommand = async () => {
+        try {
+          await navigator.clipboard.writeText("flatpak remote-add --user --if-not-exists ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo &amp;&amp; flatpak install ykc <xsl:value-of select="component/id" />");
+          var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+          var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+          })
+          toastList.forEach(toast => toast.show())
+        } catch (error) {
+          console.error("Failed to copy to clipboard:", error);
+          // Optional: Handle and display the error to the user
+        }
+      };
     </script>
   </body>
 </html>
