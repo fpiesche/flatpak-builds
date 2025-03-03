@@ -44,7 +44,6 @@ modules:
       - type: script
         dest-filename: io.github.sonicgalactic.sh
         commands:
-          - export WINEPREFIX=$XDG_DATA_HOME/wine
           - cd /app/extra
           - wine "SonicGalactic.exe"
       - type: script
@@ -54,6 +53,7 @@ modules:
           - export EXTRACT_DIR=$(dirname "$(find tmp -name 'SonicGalactic.exe')")
           - echo "Found $EXTRACT_DIR"
           - mv -v "$EXTRACT_DIR"/* /app/extra/
+          - ln -vs $HOME/.var/app/io.github.sonicgalactic/data/savedata.sav /app/extra/savedata.sav
           - rm -rf tmp
       - type: file
         path: io.github.sonicgalactic.png
