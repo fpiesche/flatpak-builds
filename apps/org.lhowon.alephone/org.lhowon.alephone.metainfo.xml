@@ -92,7 +92,11 @@
     <keyword>retro</keyword>
     <keyword>online</keyword>
   </keywords>
-  <releases type="external" url="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.releases.xml" />
+  <releases type="external" url="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.releases.xml">
+    <release version="release-20250302" date="2025-03-03">
+      <description></description>
+    </release>
+  </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">intense</content_attribute>
     <content_attribute id="violence-bloodshed">intense</content_attribute>
