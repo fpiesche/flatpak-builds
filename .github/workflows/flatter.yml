@@ -76,7 +76,7 @@ jobs:
   flatter:
     name: ${{ matrix.app.appid }} ${{ matrix.arch.name }}
     needs: builds
-    runs-on: ${{ matrix.arch.runner }}}
+    runs-on: ${{ matrix.arch.runner }}
     container:
       image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version }}
       options: --privileged
