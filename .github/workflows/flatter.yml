@@ -53,7 +53,7 @@ jobs:
           APP_LIST=($APPS)
 
           # Generate JSON matrix for build jobs
-          MATRIX="{\"arch\": [\"x86_64\", \"aarch64\"], \"app\": []}"
+          MATRIX="{\"arch\": [{\"name": \"x86_64\", \"runner\": \"ubuntu-latest\"}, {\"name\": \"aarch64\", \"runner\": \"ubuntu-24.04-arm\"}], \"app\": []}"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             echo "Generating matrix entry for $APPID..."
@@ -74,9 +74,9 @@ jobs:
           echo "::endgroup::"
 
   flatter:
-    name: ${{ matrix.app.appid }} ${{ matrix.arch }}
+    name: ${{ matrix.app.appid }} ${{ matrix.arch.name }}
     needs: builds
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.arch.runner }}}
     container:
       image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version }}
       options: --privileged
@@ -90,20 +90,13 @@ jobs:
 
     steps:
       - name: Checkout
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Setup QEMU
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) && matrix.arch == 'aarch64' }}
-        id: qemu
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
-
       - name: Setup GPG
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -111,7 +104,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Build
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: flatpak
         uses: andyholmes/flatter@main
         with:
@@ -120,16 +113,16 @@ jobs:
             --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
           flatpak-builder-args: |
             --install-deps-from=flathub
-          arch: ${{ matrix.arch }}
+          arch: ${{ matrix.arch.name }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
 
       - name: Upload build as artifact
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
-          name: ${{ matrix.app.appid }}_${{ matrix.arch }}
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}
 
   deploy:
     if: ${{ github.ref }} == "refs/heads/main"
