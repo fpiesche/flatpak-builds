@@ -63,8 +63,8 @@ modules:
     subdir: miniupnpc
     sources:
       - type: archive
-        sha256: 52547d5974ebb3eaf738f841a34a37570b09f948c3f1cb779d183f441a271614
-        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_1.tar.gz
+        sha256: 3088257b017450fe5426fa7fba04eb2aca06cb577e15256d4df7a512ece360f0
+        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_2.tar.gz
         x-checker-data:
           type: anitya
           project-id: 1986
@@ -136,12 +136,12 @@ modules:
         commands:
           - mkdir tmp
           - for game in "marathon" "marathon2" "marathon-infinity"; do
-          -   echo "Installing $game..."
-          -   mkdir -p /app/extra/$game
-          -   unzip -d tmp $game-data.zip
-          -   rm $game-data.zip
-          -   mv "tmp/$(ls tmp)/"* /app/extra/$game
-          -   rm -rf tmp/*
+          - echo "Installing $game..."
+          - mkdir -p /app/extra/$game
+          - unzip -d tmp $game-data.zip
+          - rm $game-data.zip
+          - mv "tmp/$(ls tmp)/"* /app/extra/$game
+          - rm -rf tmp/*
           - done
       - type: script
         dest-filename: autogen.sh
