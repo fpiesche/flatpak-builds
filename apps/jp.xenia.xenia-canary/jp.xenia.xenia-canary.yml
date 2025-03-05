@@ -30,12 +30,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary
-        tag: experimental
-        commit: a4412ad40d985acd11f28b50277b07aff51c44ca
+        branch: canary_experimental
+        commit: 60318a5db66516614295146e5d455e4b6fda1be7
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/xenia-canary/xenia-canary/git/ref/tags/experimental
-          commit-query: .object.sha
+          url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
+          commit-query: .commit.sha
       - type: file
         path: jp.xenia.xenia-canary.desktop
       - type: file
@@ -43,7 +43,8 @@ modules:
       - type: script
         dest-filename: jp.xenia.xenia-canary.sh
         commands:
-          - xenia_canary --config=$XDG_DATA_HOME/xenia-canary-config.toml $@
+          - if [[ ! -f $XDG_DATA_HOME/xenia-canary.config.toml ]]; then touch $XDG_DATA_HOME/xenia-canary.config.toml; fi
+          - xenia_canary --config=$XDG_DATA_HOME/xenia-canary.config.toml $@
     build-commands:
       - ./xb premake
       - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
