@@ -1,0 +1,58 @@
+app-id: org.vkdoom.vkdoom
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: vkdoom
+
+finish-args:
+  # gamepad support
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - share/doc
+  - share/games
+
+modules:
+  - name: zmusic
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/zdoom/ZMusic/archive/1.1.14.tar.gz
+        dest-filename: zmusic.tar.gz
+        sha256: f04410fe4ea08136f37703e7715c27df4c8532ace1e721cf40c6f303a93acc54
+        x-checker-data:
+          type: anitya
+          project-id: 153600
+          stable-only: true
+          url-template: "https://github.com/zdoom/ZMusic/archive/$version.tar.gz"
+      - type: patch
+        path: fix-libxmp-playback.patch
+  - name: vkdoom
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/dpjudas/vkdoom
+        commit: 1c5cb1d1fb56dd2618f1375dc0b02f26a9f2446d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/dpjudas/VkDoom/git/ref/tags/nightly
+          commit-query: .object.sha
+      - type: file
+        path: org.vkdoom.vkdoom.metainfo.xml
+      - type: file
+        path: org.vkdoom.vkdoom.svg
+      - type: file
+        path: org.vkdoom.vkdoom.desktop
+    post-install:
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications/
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps/
+      - mv -v /app/share/games/vkdoom/* /app/bin
