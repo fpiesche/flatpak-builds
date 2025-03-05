@@ -4,8 +4,6 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: jp.xenia.xenia-canary.sh
 
-rename-icon: '256'
-
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
 
