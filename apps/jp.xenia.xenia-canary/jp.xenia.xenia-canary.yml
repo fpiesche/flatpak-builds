@@ -1,0 +1,56 @@
+app-id: jp.xenia.xenia-canary
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: jp.xenia.xenia-canary.sh
+
+rename-icon: '256'
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm18
+
+finish-args:
+  # gamepad+DRI support
+  - --device=all
+  # Wayland
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+
+modules:
+  - name: xenia-canary
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/llvm18/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+      env:
+        - CMAKE_C_COMPILER=clang
+        - CMAKE_CXX_COMPILER=clang++
+        - CMAKE_LINKER=lld
+    sources:
+      - type: git
+        url: https://github.com/xenia-canary/xenia-canary
+        tag: experimental
+        commit: a4412ad40d985acd11f28b50277b07aff51c44ca
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/xenia-canary/xenia-canary/git/ref/tags/experimental
+          commit-query: .object.sha
+      - type: file
+        path: jp.xenia.xenia-canary.desktop
+      - type: file
+        path: jp.xenia.xenia-canary.metainfo.xml
+      - type: script
+        dest-filename: jp.xenia.xenia-canary.sh
+        commands:
+          - xenia-canary --config=$XDG_DATA_HOME/xenia-canary-config.toml $@
+    build-commands:
+      - ./xb premake
+      - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
+      - ./xb build --no_premake --config release --target xenia-base
+      - install -Dm644 assets/icon/256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm755 ${FLATPAK_ID}.sh /app/bin/
+      - install -Dm755 ${FLATPAK_ID}.desktop /app/share/applications/
+      - install -Dm755 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/
