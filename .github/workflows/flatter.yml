@@ -145,7 +145,6 @@ jobs:
       name: github-pages
 
     steps:
-
       - name: Install required packages
         run: |
           apk update && apk add --no-cache \
