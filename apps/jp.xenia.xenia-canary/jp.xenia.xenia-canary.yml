@@ -50,7 +50,7 @@ modules:
       - ./xb premake
       - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
       - ./xb build --no_premake --config release --target xenia-base
-      - install -Dm755 xenia_canary -t /app/bin/
+      - install -Dm755 build/bin/Linux/Release/xenia_canary -t /app/bin/
       - install -Dm644 assets/icon/256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm755 ${FLATPAK_ID}.sh -t /app/bin/
       - install -Dm755 ${FLATPAK_ID}.desktop -t /app/share/applications/
