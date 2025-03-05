@@ -53,7 +53,7 @@ jobs:
           APP_LIST=($APPS)
 
           # Generate JSON matrix for build jobs
-          MATRIX="{\"arch\": [{\"name": \"x86_64\", \"runner\": \"ubuntu-latest\"}, {\"name\": \"aarch64\", \"runner\": \"ubuntu-24.04-arm\"}], \"app\": []}"
+          MATRIX="{\"arch\": [{\"name\": \"x86_64\", \"runner\": \"ubuntu-latest\"}, {\"name\": \"aarch64\", \"runner\": \"ubuntu-24.04-arm\"}], \"app\": []}"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             echo "Generating matrix entry for $APPID..."
