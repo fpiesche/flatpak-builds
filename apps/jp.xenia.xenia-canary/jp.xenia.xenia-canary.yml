@@ -18,6 +18,8 @@ finish-args:
   - --socket=pulseaudio
 
 modules:
+  - ../shared-modules/gtk2/gtk2.json
+
   - name: xenia-canary
     buildsystem: simple
     build-options:
