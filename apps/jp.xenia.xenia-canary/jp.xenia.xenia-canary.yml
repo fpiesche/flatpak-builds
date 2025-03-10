@@ -18,7 +18,17 @@ finish-args:
   - --socket=pulseaudio
 
 modules:
-  - ../shared-modules/gtk2/gtk2.json
+  - name: premake5
+    buildsystem: simple
+    build-commands:
+      - make -C build/gmake2.unix config=release
+      - install -Dm755 -t "${FLATPAK_DEST}/bin" bin/release/premake5
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://github.com/premake/premake-core/releases/download/v5.0.0-beta3/premake-5.0.0-beta3-src.zip
+        sha256: 4b2b1fe9772ca1caf689c07e8c32f108b8393922956f602ddaf404f73467bd83
 
   - name: xenia-canary
     buildsystem: simple
