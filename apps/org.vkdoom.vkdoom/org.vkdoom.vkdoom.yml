@@ -31,7 +31,7 @@ modules:
           type: anitya
           project-id: 153600
           stable-only: true
-          url-template: "https://github.com/zdoom/ZMusic/archive/$version.tar.gz"
+          url-template: https://github.com/zdoom/ZMusic/archive/$version.tar.gz
       - type: patch
         path: fix-libxmp-playback.patch
   - name: vkdoom
@@ -40,7 +40,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/dpjudas/vkdoom
-        commit: 1c5cb1d1fb56dd2618f1375dc0b02f26a9f2446d
+        commit: bf64d6b9b64ec57fd34d790093cd901c4dbc8fba
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dpjudas/VkDoom/git/ref/tags/nightly
