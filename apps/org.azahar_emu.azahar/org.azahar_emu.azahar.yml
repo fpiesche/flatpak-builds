@@ -1,0 +1,44 @@
+app-id: org.azahar_emu.azahar
+runtime: org.kde.Platform
+runtime-version: '6.8'
+sdk: org.kde.Sdk
+command: azahar
+
+rename-icon: azahar
+rename-desktop-file: azahar.desktop
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - include
+  - lib/*.a
+  - lib/*.la
+  - lib/pkgconfig
+  - share/icons/hicolor/512x512
+
+modules:
+  - name: azahar-emu
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
+      - -DUSE_SYSTEM_SDL2=ON
+      - -DENABLE_TESTS=OFF
+      - -DENABLE_LTO=ON
+      - -DENABLE_NATIVE_OPTIMIZATION=ON
+    sources:
+      - type: git
+        url: https://github.com/azahar-emu/azahar
+        tag: "2120.1"
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/azahar-emu/azahar/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url

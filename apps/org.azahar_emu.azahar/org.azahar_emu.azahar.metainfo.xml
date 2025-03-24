@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <id>org.azahar_emu.azahar</id>
+  <name>Azahar</name>
+  <developer id="org.azahar_emu.azahar">
+    <name>Azahar Contributors</name>
+    <url>https://github.com/azahar-emu/azahar/graphs/contributors</url>
+  </developer>
+  <summary>Nintendo 3DS emulator based on Citra</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <url type="homepage">https://azahar-emu.org/</url>
+  <description>
+    <p>Azahar is an open-source 3DS emulator based on Citra.</p>
+    <p>The project was born as a merge between PabloMK7's Citra fork and Lime3DS.</p>
+    <p>Our mission is to create the definitive platform for future development of Citra, a discontinued 3DS emulator.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://azahar-emu.org/resources/blogs/one-year-citra-takedown/kirby_after.jpg</image>
+      <caption>Fixes for some longstanding issues!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://azahar-emu.org/resources/blogs/one-year-citra-takedown/mystery_after.jpg</image>
+      <caption>Improved colour blending</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://azahar-emu.org/resources/blogs/one-year-citra-takedown/tales_goofy.png</image>
+      <caption>More games working</caption>
+    </screenshot>
+    </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="2120.1" date="2025-03-22"/>
+  </releases>
+  <content_rating type="oars-1.1"></content_rating>
+</component>
