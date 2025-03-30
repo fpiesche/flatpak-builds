@@ -111,8 +111,8 @@ modules:
         x86_64: *compat_i386_opts
     sources:
       - type: archive
-        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.2
-        sha256: c5ccadc829e08d35eca12e35e731519090a3a12c350d88f359864b78bcc00b66
+        url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.3
+        sha256: 8eca75eaf2ff33905d3bfb68db7716672b54d5049d98f0804df6a034233e9620
         dest-filename: openal-soft.zip
         x-checker-data:
           type: json
