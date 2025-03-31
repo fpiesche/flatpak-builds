@@ -33,7 +33,10 @@
     <category>Game</category>
   </categories>
   <releases>
+    <release version="2120.2" date="2025-03-31">
+      <description></description>
+    </release>
     <release version="2120.1" date="2025-03-22"/>
   </releases>
-  <content_rating type="oars-1.1"></content_rating>
+  <content_rating type="oars-1.1"/>
 </component>
