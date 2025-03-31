@@ -136,6 +136,9 @@ jobs:
       contents: write
     environment:
       name: github-pages
+    concurrency:
+      group: repo-update
+      cancel-in-progress: false
 
     steps:
       - name: Install required packages
@@ -146,10 +149,16 @@ jobs:
             git rsync \
             flatpak
 
-      - name: Checkout
+      - name: Check out base repo
         uses: actions/checkout@v4
 
-      - name: Get build artifacts
+      - name: Check out current repo
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: _site/repo/
+
+      - name: Grab build artifacts
         uses: actions/download-artifact@v4
         with:
           path: _site/repo
