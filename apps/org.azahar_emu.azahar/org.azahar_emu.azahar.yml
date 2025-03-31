@@ -35,8 +35,8 @@ modules:
       - -DENABLE_NATIVE_OPTIMIZATION=ON
     sources:
       - type: archive
-        url: https://api.github.com/repos/azahar-emu/azahar/zipball/2120.1
-        sha256: 39b98bb8c28ac37fc085fa1facfef200edc63a0e6395e275746a206be794dda1
+        url: https://api.github.com/repos/azahar-emu/azahar/zipball/2120.2
+        sha256: 338cbbf4e03e6054594e2808d7b80988c6ec82d37ddb5182b4c4290a0e8f6481
         x-checker-data:
           type: json
           url: https://api.github.com/repos/azahar-emu/azahar/releases/latest
