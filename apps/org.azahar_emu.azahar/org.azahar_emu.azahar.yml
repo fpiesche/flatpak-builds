@@ -34,9 +34,9 @@ modules:
       - -DENABLE_LTO=ON
       - -DENABLE_NATIVE_OPTIMIZATION=ON
     sources:
-      - type: git
-        url: https://github.com/azahar-emu/azahar
-        tag: "2120.1"
+      - type: archive
+        url: https://api.github.com/repos/azahar-emu/azahar/zipball/2120.1
+        sha256: 39b98bb8c28ac37fc085fa1facfef200edc63a0e6395e275746a206be794dda1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/azahar-emu/azahar/releases/latest
