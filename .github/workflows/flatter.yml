@@ -118,12 +118,24 @@ jobs:
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
 
-      - name: Upload build as artifact
+      - name: Upload repo as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
-          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.zip
+
+      - name: Build single-file bundle
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        run: |
+          flatpak build-bundle "${{ steps.flatpak.outputs.repository }}" "${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak" "${{ matrix.app.appid }}"
+
+      - name: Upload repo as artifact
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
 
   deploy:
     if: ${{ github.ref }} == "refs/heads/main"
@@ -153,7 +165,7 @@ jobs:
       - name: Check out base repo
         uses: actions/checkout@v4
 
-      - name: Check out current repo
+      - name: Check out current Flatpak repo
         uses: actions/checkout@v4
         with:
           ref: refs/heads/gh-pages
