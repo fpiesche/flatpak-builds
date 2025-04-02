@@ -36,6 +36,8 @@ modules:
         path: fix-libxmp-playback.patch
   - name: vkdoom
     buildsystem: cmake-ninja
+    config-opts:
+      - -DSYSTEMINSTALL=ON
     builddir: true
     sources:
       - type: git
