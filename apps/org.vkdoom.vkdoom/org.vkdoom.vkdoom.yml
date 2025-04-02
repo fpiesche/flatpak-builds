@@ -36,11 +36,13 @@ modules:
         path: fix-libxmp-playback.patch
   - name: vkdoom
     buildsystem: cmake-ninja
+    config-opts:
+      - -DSYSTEMINSTALL=ON
     builddir: true
     sources:
       - type: git
         url: https://github.com/dpjudas/vkdoom
-        commit: 178d486b6f04730d18ada99562b25c96d80f2ace
+        commit: 9967cfb3192149165c138034c6e6936401705233
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dpjudas/VkDoom/git/ref/tags/nightly
@@ -55,4 +57,4 @@ modules:
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications/
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps/
-      - mv -v /app/share/games/vkdoom/* /app/bin
+      # - mv -v /app/share/games/doom/* /app/bin
