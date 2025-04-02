@@ -55,4 +55,4 @@ modules:
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications/
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps/
-      - mv -v /app/share/games/vkdoom/* /app/bin
+      # - mv -v /app/share/games/doom/* /app/bin
