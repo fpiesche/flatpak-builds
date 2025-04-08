@@ -36,6 +36,7 @@ modules:
     sources:
       - type: archive
         url: https://api.github.com/repos/azahar-emu/azahar/zipball/2120.2
+        dest-filename: azahar.zip
         sha256: 338cbbf4e03e6054594e2808d7b80988c6ec82d37ddb5182b4c4290a0e8f6481
         x-checker-data:
           type: json
