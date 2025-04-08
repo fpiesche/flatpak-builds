@@ -35,7 +35,7 @@ modules:
       - -DENABLE_NATIVE_OPTIMIZATION=ON
     sources:
       - type: git
-        url: https://github.com/repos/azahar-emu/azahar
+        url: https://github.com/azahar-emu/azahar
         tag: 2120.2
         commit: 32bb14f0d26dc48954711137e87e0c8395609f1e
         x-checker-data:
