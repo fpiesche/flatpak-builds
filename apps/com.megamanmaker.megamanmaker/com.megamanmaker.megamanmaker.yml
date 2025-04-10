@@ -27,7 +27,6 @@ finish-args:
   - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
 
 inherit-extensions:
-  - org.winehq.Wine.DLLs
   - org.freedesktop.Platform.GL32
   - org.freedesktop.Platform.Compat.i386
   - org.winehq.Wine.mono
