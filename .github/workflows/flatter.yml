@@ -108,6 +108,8 @@ jobs:
     name: ${{ matrix.app.appid }} appstream lint
     needs: builds
     if: ${{ matrix.arch.name }} == "aarch64"
+    strategy:
+      matrix: ${{fromJson(needs.builds.outputs.matrix)}}
     runs-on: ${{ matrix.arch.runner }}
     container: ghcr.io/flathub/flatpak-builder-lint:latest
     strategy:
