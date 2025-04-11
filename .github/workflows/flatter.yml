@@ -188,7 +188,7 @@ jobs:
           path: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
 
-  builddir_lint:
+  builddir-lint:
     name: ${{ matrix.app.appid }} ${{ matrix.arch.name }} builddir lint
     needs:
       - builds
