@@ -60,14 +60,23 @@ jobs:
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
-            METAINFO_FILE=${manifest%.*}.metainfo.xml
+            METAINFO_FILE="${manifest%.*}.metainfo.xml"
             if [ -f apps/${APPID}/flathub.json ]; then
               echo "Reading required architectures from apps/${APPID}/flathub.json..."
               MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json)
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"metainfo\": \"$METAINFO_FILE\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
+            echo "::group::Variables"
+            echo "MATRIX=$MATRIX"
+            echo "APPID=$APPID"
+            echo "MANIFEST_FILENAME=$MANIFEST_FILENAME"
+            echo "MANIFEST_SDK=$MANIFEST_SDK"
+            echo "MANIFEST_SDK_VERSION=$MANIFEST_SDK_VERSION"
+            echo "MANIFEST_ARCHES=$MANIFEST_ARCHES"
+            echo "METAINFO_FILE=$METAINFO_FILE"
+            echo "::endgroup::"
+            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES, \"metainfo\": \"$METAINFO_FILE\"}")
           done
           echo "::group::Output"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
