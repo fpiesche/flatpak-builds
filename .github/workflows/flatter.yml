@@ -124,7 +124,7 @@ jobs:
         run: |
           for tag in branding recommends supports provides keywords; do
             echo "::group::Checking for $tag..."
-            if [[ grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo }}" ]]; then
+            if grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo }}"; then
               echo "OK"
             else
               echo "::warning file=${{ matrix.app.metainfo }},line=1,col=1::Missing optional tag $tag"
