@@ -115,7 +115,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Check metainfo.xml
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo_file }}"
 
       - name: Build
@@ -137,7 +137,7 @@ jobs:
         run: flatpak-builder-lint --exceptions builddir _build
 
       - name: Upload build as artifact
-        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
