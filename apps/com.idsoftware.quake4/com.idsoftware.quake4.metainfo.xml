@@ -16,8 +16,7 @@
         from the point where Quake II ended.</p>
     <p>This is a Flatpak distribution of the official Linux port of the game, for
         ease of use as the game can be difficult to run on modern systems.</p>
-    <h2>PLEASE NOTE</h2>
-    <p>This Flatpak does <b>not</b> include the Quake 4 game data or a CD key. You will need
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Quake 4 game data or a CD key. You will need
         to supply both. At least the files <code>pak001.pk4</code> through <code>pak012.pk4</code>
         from a retail installation of Quake 4 must be copied to
         <code>$HOME/.var/app/com.idsoftware.quake4/q4base/</code>.</p>

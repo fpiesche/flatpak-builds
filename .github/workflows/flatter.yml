@@ -107,6 +107,7 @@ jobs:
 
   metainfo-lint:
     name: ${{ matrix.app.appid }} appstream lint
+    if: runner.arch == 'ARM64'
     needs: builds
     strategy:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
@@ -232,7 +233,7 @@ jobs:
         if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: "*_builddir.zip"
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}

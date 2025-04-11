@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>org.gemrb.gemrb</id>
-  
   <name>GemRB</name>
+  <developer id="org.gemrb.gemrb">
+    <name>GemRB Contributors</name>
+    <url>https://github.com/gemrb/gemrb/graphs/contributors</url>
+  </developer>
+  <url type="homepage">https://gemrb.org/</url>
+  <url type="vcs-browser">https://github.com/gemrb/gemrb</url>
+  <url type="bugtracker">https://github.com/gemrb/gemrb/issues</url>
+  <url type="contact">https://gemrb.org/Feedback.html</url>
+  <url type="contribute">https://github.com/gemrb/gemrb/blob/master/CONTRIBUTING.md</url>
+  <url type="faq">https://gemrb.org/Common-problems.html</url>
+  <url type="help">https://gemrb.org/Documentation.html</url>
+  <branding>
+    <color type="primary" scheme_preference="light">#e8d5b7</color>
+    <color type="primary" scheme_preference="dark">#2b261c</color>
+  </branding>
   <summary>GemRB is a portable open-source implementation of Bioware’s Infinity Engine</summary>
-  
   <metadata_license>CC-BY-SA-4.0</metadata_license>
   <project_license>GPL-2.0-or-later</project_license>
-  
   <recommends>
     <control>pointing</control>
     <control>keyboard</control>
+  </recommends>
+  <supports>
     <control>touch</control>
     <control>gamepad</control>
-  </recommends>
-  
+  </supports>
   <description>
     <p>
       The goal of the project is to make the Infinity Engine games available on a wide range of platforms forever, fix or avoid old bugs, add new features and provide a superb platform for mod development.
@@ -35,4 +48,11 @@
       <description></description>
     </release>
   </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-desecration">mild</content_attribute>
+    <content_attribute id="drugs-alcohol">mild</content_attribute>
+    <content_attribute id="sex-themes">mild</content_attribute>
+    <content_attribute id="language-humor">mild</content_attribute>
+  </content_rating>
 </component>

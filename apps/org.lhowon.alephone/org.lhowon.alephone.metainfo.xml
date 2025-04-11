@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>org.lhowon.alephone</id>
   <name>Aleph One</name>
@@ -7,8 +6,7 @@
     <name>Aleph One Contributors</name>
     <url>https://github.com/Aleph-One-Marathon/alephone/graphs/contributors</url>
   </developer>
-  <summary> Aleph One is the open source continuation of Bungie’s Marathon 2 game engine.</summary>
-  <icon type="remote">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.png</icon>
+  <summary> Aleph One is the open source continuation of Bungie’s Marathon 2 game engine</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-only</project_license>
   <launchable type="desktop-id">org.lhowon.alephone.desktop</launchable>
@@ -35,19 +33,19 @@
       <caption>Marathon: Trojan</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://nardo.bungie.org/shots/courtyard_after.jpg</image>
+      <image type="source">https://nardo.bungie.org/shots/courtyard_after.jpg</image>
       <caption>Tempus Irae</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://eternal.bungie.org/images/screenshots/03-01.jpg</image>
+      <image type="source">https://eternal.bungie.org/images/screenshots/03-01.jpg</image>
       <caption>Eternal X</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://eternal.bungie.org/images/screenshots/03-02.jpg</image>
+      <image type="source">https://eternal.bungie.org/images/screenshots/03-02.jpg</image>
       <caption>Eternal X</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://eternal.bungie.org/images/screenshots/04-01.jpg</image>
+      <image type="source">https://eternal.bungie.org/images/screenshots/04-01.jpg</image>
       <caption>Eternal X</caption>
     </screenshot>
     <screenshot>
@@ -73,7 +71,6 @@
   </screenshots>
   <categories>
     <category>Game</category>
-    <category>Platformer</category>
     <category>Shooter</category>
     <category>ActionGame</category>
   </categories>
