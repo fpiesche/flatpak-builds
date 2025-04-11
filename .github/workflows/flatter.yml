@@ -60,13 +60,14 @@ jobs:
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
+            METAINFO_FILE=${manifest%.*}.metainfo.xml
             if [ -f apps/${APPID}/flathub.json ]; then
               echo "Reading required architectures from apps/${APPID}/flathub.json..."
               MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json)
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
+            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"metainfo\": \"$METAINFO_FILE\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
           done
           echo "::group::Output"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
@@ -104,6 +105,10 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Check metainfo.xml
+        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
+        run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo_file }}"
+
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: flatpak
@@ -118,8 +123,12 @@ jobs:
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
 
-      - name: Upload repo as artifact
-        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+      - name: Run linter
+        id: flatpak-builder-lint
+        run: flatpak-builder-lint --exceptions builddir _build
+
+      - name: Upload build as artifact
+        if: ${{ contains(matrix.app.only-arches, matrix.arch) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
