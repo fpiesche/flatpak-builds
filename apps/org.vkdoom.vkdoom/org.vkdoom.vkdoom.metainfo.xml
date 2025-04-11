@@ -20,18 +20,36 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://vkdoom.org/assets/disdain-openarea-high-c96ca3fd.webp</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vkdoom.vkdoom/org.vkdoom.vkdoom.screenshot-disdain.png</image>
       <caption>VKDoom is currently made primarily for Disdain, which uses lightmaps to great effect.</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://vkdoom.org/assets/elementalism-blue-high-fb142bf1.webp</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vkdoom.vkdoom/org.vkdoom.vkdoom.screenshot-elementalism.png</image>
       <caption>A scene from Elementalism with soft ray-traced shadowing turned on, courtesy of Bauul.</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://vkdoom.org/assets/velvetic-high-03626036.webp</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vkdoom.vkdoom/org.vkdoom.vkdoom.screenshot-velvetic.png</image>
       <caption>A map from BREAK//POINT by Velvetic — VKDoom works well even with more vanilla textures.</caption>
     </screenshot>
   </screenshots>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>vkdoom</binary>
+  </provides>
+  <keywords>
+    <keyword>retro</keyword>
+    <keyword>fps</keyword>
+    <keyword>vulkan</keyword>
+    <keyword>shooter</keyword>
+    <keyword>sourceport</keyword>
+    <keyword>doom</keyword>
+  </keywords>
   <categories>
     <category>Game</category>
   </categories>
