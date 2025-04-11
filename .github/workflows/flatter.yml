@@ -233,7 +233,7 @@ jobs:
         if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: "*_builddir.zip"
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
