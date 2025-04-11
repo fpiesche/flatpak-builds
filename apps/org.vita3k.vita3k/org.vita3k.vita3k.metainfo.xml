@@ -7,12 +7,21 @@
     <url>https://github.com/vita3k/vita3k/graphs/contributors</url>
   </developer>
   <summary>Experimental PlayStation Vita emulator</summary>
-  <icon type="remote">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vita3k.vita3k/org.vita3k.vita3k.png</icon>
+  <branding>
+    <color type="primary" scheme_preference="light">#f05f40</color>
+    <color type="primary" scheme_preference="dark">#181818</color>
+  </branding>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">org.vita3k.vita3k.desktop</launchable>
   <url type="homepage">https://vita3k.org/</url>
-  <url type="contact">https://discord.gg/6aGwQzh</url>
+  <url type="vcs-browser">https://github.com/vita3k/Vita3K</url>
+  <url type="bugtracker">https://github.com/vita3k/Vita3K/issues</url>
+  <url type="contact">https://vita3k.org/#community</url>
+  <url type="contribute">https://vita3k.org/#contribute</url>
+  <url type="donate">https://vita3k.org/#donate</url>
+  <url type="faq">https://vita3k.org/faq.html</url>
+  <url type="help">https://vita3k.org/quickstart.html</url>
   <description>
     <p>Vita3K is the world's first functional experimental open-source PlayStation Vita emulator for Windows, Linux, macOS and Android.</p>
   </description>
@@ -47,7 +56,6 @@
     <category>Emulator</category>
   </categories>
   <supports>
-    <control>gamepad</control>
     <control>keyboard</control>
     <control>pointing</control>
   </supports>
