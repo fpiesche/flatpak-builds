@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.ref }}
       - name: Get changed manifests
         if: ${{ github.event_name }} == "push"
         id: changed_files_action
@@ -106,7 +107,7 @@ jobs:
 
   metainfo-lint:
     name: ${{ matrix.app.appid }} appstream lint
-    # if: matrix.arch.name == 'aarch64'
+    if: matrix.arch.name == 'aarch64'
     needs: builds
     strategy:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
@@ -118,6 +119,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.ref }}
       - name: Lint metainfo.xml
         run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo }}"
       - name: Check for optional tags
@@ -249,6 +251,9 @@ jobs:
             flatpak
       - name: Check out base repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
       - name: Check out current Flatpak repo
         uses: actions/checkout@v4
         with:
