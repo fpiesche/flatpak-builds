@@ -75,6 +75,7 @@ modules:
           type: json
           url: https://api.github.com/repos/vita3k/vita3k/tags
           commit-query: .[0].commit.sha
+        commit: 05690eb3441cc34ef03cdde4fc633db1b3c52a97
       - type: patch
         path: org.vita3k.vita3k.use-system-ffmpeg.patch
     post-install:
