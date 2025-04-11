@@ -1,3 +1,4 @@
+---
 name: Flatter
 
 on:
@@ -51,7 +52,20 @@ jobs:
           APP_LIST=($APPS)
 
           # Generate JSON matrix for build jobs
-          MATRIX="{\"arch\": [{\"name\": \"x86_64\", \"runner\": \"ubuntu-latest\"}, {\"name\": \"aarch64\", \"runner\": \"ubuntu-24.04-arm\"}], \"app\": []}"
+          MATRIX="{\
+                    \"arch\": \
+                    [ \
+                      { \
+                        \"name\": \"x86_64\", \
+                        \"runner\": \"ubuntu-latest\" \
+                      }, \
+                      { \
+                        \"name\": \"aarch64\", \
+                        \"runner\": \"ubuntu-24.04-arm\"\
+                      } \
+                    ], \
+                    \"app\": [] \
+                  }"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             echo "Generating matrix entry for $APPID..."
@@ -74,7 +88,16 @@ jobs:
             echo "MANIFEST_ARCHES=$MANIFEST_ARCHES"
             echo "METAINFO_FILE=$METAINFO_FILE"
             echo "::endgroup::"
-            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES, \"metainfo\": \"$METAINFO_FILE\"}")
+            MATRIX=$(echo $MATRIX | \
+              jq -c ".app[.app | length] |=
+              .app + {
+                      \"appid\": \"$APPID\",
+                      \"manifest\": \"$MANIFEST_FILENAME\",
+                      \"sdk\": \"$MANIFEST_SDK\",
+                      \"sdk-version\": \"$MANIFEST_SDK_VERSION\",
+                      \"only-arches\": \"$MANIFEST_ARCHES\",
+                      \"metainfo\": \"$METAINFO_FILE\"
+                    }")
           done
           echo "::group::Output"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
@@ -153,7 +176,10 @@ jobs:
       - name: Build single-file bundle
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: |
-          flatpak build-bundle "${{ steps.flatpak.outputs.repository }}" "${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak" "${{ matrix.app.appid }}"
+          flatpak build-bundle \
+            "${{ steps.flatpak.outputs.repository }}" \
+            "${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak" \
+            "${{ matrix.app.appid }}"
       - name: Upload bundle as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
@@ -161,7 +187,7 @@ jobs:
           path: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
 
-  builddir-lint:
+  builddir_lint:
     name: ${{ matrix.app.appid }} ${{ matrix.arch.name }} builddir lint
     needs: flatter
     runs-on: ${{ matrix.arch.runner }}
@@ -176,9 +202,9 @@ jobs:
           path: _build
       - name: Lint build dir
         run: flatpak-builder-lint --exceptions builddir _build
-    - name: Delete builddir artifacts
-      uses: geekyeggo/delete-artifact@v5
-      with:
+      - name: Delete builddir artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
           name: "*_builddir.zip"
 
   deploy:
@@ -227,7 +253,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p _site/apps
-          for file in apps/*/*.metainfo.xml; do xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file); done
+          for file in apps/*/*.metainfo.xml; do
+            xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file);
+          done
           rename ".metainfo.xml" ".html" ./_site/apps/*.metainfo.xml
       - name: Generate Flatpak repository and app reference files
         shell: bash
@@ -273,4 +301,4 @@ jobs:
       - name: Delete repo artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
-            name: "*_repo.zip"
+          name: "*_repo.zip"
