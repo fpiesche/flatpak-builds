@@ -57,13 +57,17 @@ modules:
   - name: doom2d
     buildsystem: simple
     sources:
-      - type: git
-        url: https://repo.or.cz/d2df-sdl.git
-        commit: 0722185740e8e3644a63c09a71ebf7fde7606011
+      - type: archive
+        url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/15a52061a8fbb2730db5f909f8f25dbae71e8717
+        sha256: ed077af01bca02b302363bd609caa3116b992f0ef526e643fa2ba032577b97b4
+        dest-filename: doom2d.zip
         x-checker-data:
-          type: html
-          url: https://repo.or.cz/d2df-sdl.git/refs
-          version-pattern: .*class="current_head">.*\/commit\/([0-9a-f]{40})">heads\/master.*
+          type: json
+          url: https://api.github.com/repos/Doom2D/Doom2D-Forever/branches/master
+          version-query: .commit.sha
+          url-query: ("https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/" + .commit.sha)
+      - type: file
+        path: org.doom2d.doom2d.metainfo.xml
       - type: patch
         path: fix-home-dir.patch
     subdir: src/game
@@ -76,24 +80,25 @@ modules:
         install -Dm 755 bin/Doom2DF /app/bin/
         fpc -dUSE_SDL2 -dUSE_OPENGL -dUSE_OPENAL -dUSE_VORBIS -dUSE_FLUIDSYNTH -dUSE_XMP -dHEADLESS \
           -g -gl -O3 -FE./bin -FU./tmp Doom2DF.lpr
-        install -Dm 755 bin/Doom2DF /app/bin/Doom2DF_H
+        install -Dm755 -t /app/bin/ bin/Doom2DF
     post-install:
       - desktop-file-edit --set-icon=${FLATPAK_ID} ../../rpm/res/doom2df.desktop
       - install -Dm 644 ../../rpm/res/doom2df.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -Dm 644 ../../rpm/res/doom2df.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
 
   - name: doom2d-editor
     buildsystem: simple
     sources:
       - type: archive
-        url: https://repo.or.cz/d2df-editor.git/snapshot/7fe67265f79c80b0263dff8645faf299962efbb2.tar.gz
-        sha256: 276667a7f943f59dd7a3498691142d1d9c4cfad407e04e79bab6c6fa0158ed12
-        dest-filename: doom2d-editor.tar.gz
+        url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/15a52061a8fbb2730db5f909f8f25dbae71e8717
+        dest-filename: doom2d-editor.zip
+        sha256: 095441fc9307253cf08e254fb454c716f3b4d31e6e6ff85521888f0986cc6252
         x-checker-data:
-          type: html
-          url: https://repo.or.cz/d2df-editor.git/refs
-          version-pattern: .*class="current_head">.*\/commit\/([0-9a-f]{40})">heads\/master.*
-          url-template: https://repo.or.cz/d2df-editor.git/snapshot/$version.tar.gz
+          type: json
+          url: https://api.github.com/repos/Doom2D/Doom2D-Forever/branches/d2df-editor.git
+          version-query: .commit.sha
+          url-query: ("https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/" + .commit.sha)
     subdir: src/editor
     build-commands:
       - |
@@ -105,18 +110,6 @@ modules:
       - desktop-file-edit --set-key=Exec --set-value=editor ../../rpm/res/doom2df_editor.desktop
       - install -Dm 644 ../../rpm/res/doom2df_editor.desktop /app/share/applications/${FLATPAK_ID}.editor.desktop
       - install -Dm 644 ../../rpm/res/doom2df-editor.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.editor.png
-
-  - name: metadata
-    buildsystem: simple
-    sources:
-      - type: file
-        path: org.doom2d.doom2d.metainfo.xml
-      - type: file
-        path: org.doom2d.doom2d.releases.xml
-    build-commands:
-      # metadata file
-      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
 
   - name: game-data
     buildsystem: simple
