@@ -117,8 +117,16 @@ jobs:
         with:
           submodules: true
           ref: ${{ github.ref }}
-      - name: Check metainfo.xml
+      - name: Lint metainfo.xml
         run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo_file }}"
+      - name: Check for optional tags
+        run: |
+          for tag in branding recommends supports provides keywords; do
+            grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo_file }}"
+            if [[ $? == 1 ]]; do
+              echo "::warning file=${{ matrix.app.metainfo_file }},line=1,col=1::Missing optional tag $tag"
+            fi
+          done
 
   flatter:
     name: ${{ matrix.app.appid }} ${{ matrix.arch.name }} build
