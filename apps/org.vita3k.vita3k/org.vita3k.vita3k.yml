@@ -71,10 +71,10 @@ modules:
         branch: patch-1
         # url: https://github.com/vita3k/Vita3K.git
         # commit: 05690eb3441cc34ef03cdde4fc633db1b3c52a97
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/vita3k/vita3k/tags
-          commit-query: .[0].commit.sha
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/vita3k/vita3k/tags
+        #   commit-query: .[0].commit.sha
       - type: patch
         path: org.vita3k.vita3k.use-system-ffmpeg.patch
     post-install:
