@@ -55,7 +55,11 @@
     <keyword>sourceport</keyword>
     <keyword>port</keyword>
   </keywords>
-  <releases type="external" url="https://raw.githubusercontent.com/openenroth/openenroth/master/distribution/linux/io.github.openenroth.openenroth.releases.xml" />
+  <releases>
+    <release version="nightly" date="2024-01-01">
+        <description>The current nightly release for OpenEnroth.</description>
+    </release>
+  </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">intense</content_attribute>
     <content_attribute id="violence-desecration">mild</content_attribute>

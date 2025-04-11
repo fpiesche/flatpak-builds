@@ -12,7 +12,8 @@
   <project_license>GPL-2.0</project_license>
   <url type="homepage">https://github.com/fpiesche/f2bgl/</url>
   <description>
-    <p>A reimplementation of the engine for Fade to Black.</p>
+    <p>F2BGL is a re-implementation of the engine used in the game Fade To Black made by Delphine Software and released in 1995.</p>
+    <p>You will need the original files of the PC release or PC demo.</p>
   </description>
   <screenshots>
     <screenshot type="default">
