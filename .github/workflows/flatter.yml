@@ -106,6 +106,7 @@ jobs:
 
   metainfo-lint:
     name: ${{ matrix.app.appid }} appstream lint
+    if: matrix.arch.name == 'aarch64'
     needs: builds
     strategy:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
