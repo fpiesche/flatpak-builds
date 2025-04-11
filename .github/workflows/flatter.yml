@@ -95,7 +95,7 @@ jobs:
                       \"manifest\": \"$MANIFEST_FILENAME\",
                       \"sdk\": \"$MANIFEST_SDK\",
                       \"sdk-version\": \"$MANIFEST_SDK_VERSION\",
-                      \"only-arches\": \"$MANIFEST_ARCHES\",
+                      \"only-arches\": $MANIFEST_ARCHES,
                       \"metainfo\": \"$METAINFO_FILE\"
                     }")
           done
