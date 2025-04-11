@@ -1,0 +1,5 @@
+{
+    "org.vkdoom.vkdoom": {
+        "appstream-external-screenshot-url": "This isn't flathub so we don't care about screenshots not being mirrored."
+    }
+}

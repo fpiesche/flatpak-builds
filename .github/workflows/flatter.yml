@@ -1,3 +1,4 @@
+---
 name: Flatter
 
 on:
@@ -24,14 +25,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+          ref: ${{ github.ref }}
       - name: Get changed manifests
         if: ${{ github.event_name }} == "push"
         id: changed_files_action
         uses: tj-actions/changed-files@v45
         with:
           files: apps/*/*.yml
-
       - name: Assemble build matrix
         id: builds
         run: |
@@ -53,29 +53,94 @@ jobs:
           APP_LIST=($APPS)
 
           # Generate JSON matrix for build jobs
-          MATRIX="{\"arch\": [{\"name\": \"x86_64\", \"runner\": \"ubuntu-latest\"}, {\"name\": \"aarch64\", \"runner\": \"ubuntu-24.04-arm\"}], \"app\": []}"
+          MATRIX="{\
+                    \"arch\": \
+                    [ \
+                      { \
+                        \"name\": \"x86_64\", \
+                        \"runner\": \"ubuntu-latest\" \
+                      }, \
+                      { \
+                        \"name\": \"aarch64\", \
+                        \"runner\": \"ubuntu-24.04-arm\"\
+                      } \
+                    ], \
+                    \"app\": [] \
+                  }"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             echo "Generating matrix entry for $APPID..."
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
+            METAINFO_FILE="${manifest%.*}.metainfo.xml"
             if [ -f apps/${APPID}/flathub.json ]; then
               echo "Reading required architectures from apps/${APPID}/flathub.json..."
               MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json)
             else
               MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
             fi
-            MATRIX=$(echo $MATRIX | jq -c ".app[.app | length] |= .app + {\"appid\": \"$APPID\", \"manifest\": \"$MANIFEST_FILENAME\", \"sdk\": \"$MANIFEST_SDK\", \"sdk-version\": \"$MANIFEST_SDK_VERSION\", \"only-arches\": $MANIFEST_ARCHES}")
+            echo "::group::Variables"
+            echo "MATRIX=$MATRIX"
+            echo "APPID=$APPID"
+            echo "MANIFEST_FILENAME=$MANIFEST_FILENAME"
+            echo "MANIFEST_SDK=$MANIFEST_SDK"
+            echo "MANIFEST_SDK_VERSION=$MANIFEST_SDK_VERSION"
+            echo "MANIFEST_ARCHES=$MANIFEST_ARCHES"
+            echo "METAINFO_FILE=$METAINFO_FILE"
+            echo "::endgroup::"
+            MATRIX=$(echo $MATRIX | \
+              jq -c ".app[.app | length] |=
+              .app + {
+                      \"appid\": \"$APPID\",
+                      \"manifest\": \"$MANIFEST_FILENAME\",
+                      \"sdk\": \"$MANIFEST_SDK\",
+                      \"sdk-version\": \"$MANIFEST_SDK_VERSION\",
+                      \"only-arches\": $MANIFEST_ARCHES,
+                      \"metainfo\": \"$METAINFO_FILE\"
+                    }")
           done
           echo "::group::Output"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo $MATRIX | jq
           echo "::endgroup::"
 
-  flatter:
-    name: ${{ matrix.app.appid }} ${{ matrix.arch.name }}
+  metainfo-lint:
+    name: ${{ matrix.app.appid }} appstream lint
     needs: builds
+    strategy:
+      matrix: ${{fromJson(needs.builds.outputs.matrix)}}
+      fail-fast: false
+    runs-on: ${{ matrix.arch.runner }}
+    container: ghcr.io/flathub/flatpak-builder-lint:latest
+    steps:
+      - name: Checkout
+        if: matrix.arch.name == 'aarch64'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+      - name: Lint metainfo.xml
+        if: matrix.arch.name == 'aarch64'
+        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json appstream "${{ matrix.app.metainfo }}"
+      - name: Check for optional tags
+        if: matrix.arch.name == 'aarch64'
+        run: |
+          for tag in branding recommends supports provides keywords; do
+            echo "::group::Checking for $tag..."
+            if grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo }}"; then
+              echo "OK"
+            else
+              echo "::warning file=${{ matrix.app.metainfo }},line=1,col=1::Missing optional tag $tag"
+            fi
+            echo "::endgroup::"
+          done
+
+  flatter:
+    name: ${{ matrix.app.appid }} ${{ matrix.arch.name }} build
+    needs:
+      - builds
+      - metainfo-lint
     runs-on: ${{ matrix.arch.runner }}
     container:
       image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version }}
@@ -84,10 +149,9 @@ jobs:
       pages: write
       id-token: write
       contents: write
-
     strategy:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
-
+      fail-fast: false
     steps:
       - name: Checkout
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
@@ -95,7 +159,6 @@ jobs:
         with:
           submodules: true
           ref: ${{ github.ref }}
-
       - name: Setup GPG
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: gpg
@@ -103,7 +166,6 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: flatpak
@@ -117,31 +179,66 @@ jobs:
           arch: ${{ matrix.arch.name }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
-
+      - name: Upload build dir as artifact
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        uses: actions/upload-artifact@v4
+        with:
+          path: _build
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
       - name: Upload repo as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
-          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.zip
-
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_repo.zip
       - name: Build single-file bundle
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: |
-          flatpak build-bundle "${{ steps.flatpak.outputs.repository }}" "${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak" "${{ matrix.app.appid }}"
-
-      - name: Upload repo as artifact
+          flatpak build-bundle \
+            "${{ steps.flatpak.outputs.repository }}" \
+            "${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak" \
+            "${{ matrix.app.appid }}"
+      - name: Upload bundle as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
 
+  builddir-lint:
+    name: ${{ matrix.app.appid }} ${{ matrix.arch.name }} builddir lint
+    needs:
+      - builds
+      - flatter
+    runs-on: ${{ matrix.arch.runner }}
+    container: ghcr.io/flathub/flatpak-builder-lint:latest
+    strategy:
+      matrix: ${{fromJson(needs.builds.outputs.matrix)}}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          ref: ${{ github.ref }}
+      - name: Download ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
+          path: _build
+      - name: Lint build dir
+        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
+      - name: Delete builddir artifacts
+        if: always()
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: "*_builddir.zip"
+
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    needs: flatter
+    needs: builddir-lint
     container:
       image: node:current-alpine
     permissions:
@@ -152,7 +249,6 @@ jobs:
     concurrency:
       group: repo-update
       cancel-in-progress: false
-
     steps:
       - name: Install required packages
         run: |
@@ -161,36 +257,36 @@ jobs:
             jinja2-cli xmlstarlet gpg gpg-agent \
             git rsync \
             flatpak
-
       - name: Check out base repo
         uses: actions/checkout@v4
-
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
       - name: Check out current Flatpak repo
         uses: actions/checkout@v4
         with:
           ref: refs/heads/gh-pages
           path: _site/repo/
-
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
         with:
+          pattern: "*_repo.zip"
           path: _site/repo
           merge-multiple: true
-
       - name: Setup GPG
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
       - name: Assemble web listings
         shell: bash
         run: |
           mkdir -p _site/apps
-          for file in apps/*/*.metainfo.xml; do xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file); done
+          for file in apps/*/*.metainfo.xml; do
+            xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file);
+          done
           rename ".metainfo.xml" ".html" ./_site/apps/*.metainfo.xml
-
       - name: Generate Flatpak repository and app reference files
         shell: bash
         run: |
@@ -209,7 +305,6 @@ jobs:
             -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 -w 0)" \
             -o _site/ykc.flatpakrepo \
             _templates/ykc.flatpakrepo.j2
-
       - name: Generate index.html file
         run: |
           touch _site/index.html
@@ -220,7 +315,6 @@ jobs:
             --title "yellow keycard flatpak repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
-
       - name: Update repo metadata
         run: |
           flatpak build-update-repo \
@@ -230,8 +324,12 @@ jobs:
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
             _site/repo/
-
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+      - name: Delete repo artifacts
+        if: always()
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: "*_repo.zip"
