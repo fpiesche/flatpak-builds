@@ -115,16 +115,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true
-          ref: ${{ github.ref }}
+          fetch-depth: 0
       - name: Lint metainfo.xml
-        run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo_file }}"
+        run: flatpak-builder-lint --exceptions appstream "${{ matrix.app.metainfo }}"
       - name: Check for optional tags
         run: |
           for tag in branding recommends supports provides keywords; do
-            grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo_file }}"
+            grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo }}"
             if [[ $? == 1 ]]; do
-              echo "::warning file=${{ matrix.app.metainfo_file }},line=1,col=1::Missing optional tag $tag"
+              echo "::warning file=${{ matrix.app.metainfo }},line=1,col=1::Missing optional tag $tag"
             fi
           done
 
