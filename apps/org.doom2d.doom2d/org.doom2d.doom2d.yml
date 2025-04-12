@@ -59,7 +59,7 @@ modules:
     sources:
       - type: archive
         url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/15a52061a8fbb2730db5f909f8f25dbae71e8717
-        sha256: ed077af01bca02b302363bd609caa3116b992f0ef526e643fa2ba032577b97b4
+        sha256: 63421adb2e5b90c1231677af45ecf0f0c55f6a32b566b1ce4bb1ae4e85d97da1
         dest-filename: doom2d.zip
         x-checker-data:
           type: json
