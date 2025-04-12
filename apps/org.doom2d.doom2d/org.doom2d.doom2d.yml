@@ -58,8 +58,8 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/15a52061a8fbb2730db5f909f8f25dbae71e8717
-        sha256: 63421adb2e5b90c1231677af45ecf0f0c55f6a32b566b1ce4bb1ae4e85d97da1
+        url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/8a06280d3288ebed72042e4b9b766dac8f36282c
+        sha256: 6c9585a823f8800d2e02f796e502a85b331fc8631334660a5960c15412408f37
         dest-filename: doom2d.zip
         x-checker-data:
           type: json
@@ -93,7 +93,7 @@ modules:
       - type: archive
         url: https://api.github.com/repos/Doom2D/Doom2D-Forever/zipball/15a52061a8fbb2730db5f909f8f25dbae71e8717
         dest-filename: doom2d-editor.zip
-        sha256: 095441fc9307253cf08e254fb454c716f3b4d31e6e6ff85521888f0986cc6252
+        sha256: 63421adb2e5b90c1231677af45ecf0f0c55f6a32b566b1ce4bb1ae4e85d97da1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Doom2D/Doom2D-Forever/branches/d2df-editor.git
