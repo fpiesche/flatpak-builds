@@ -266,7 +266,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: refs/heads/gh-pages
-          path: _site/repo/
+          path: _site/
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -315,6 +315,17 @@ jobs:
             --title "yellow keycard flatpak repo" \
             --description "Various things missing from Flathub" \
             --github-corners "https://github.com/fpiesche/flatpak-builds"
+      - name: Check site status
+        run: |
+          echo "::group::_site"
+          ls -la _site
+          echo "::endgroup::"
+          echo "::group::_site/repo"
+          ls -la _site/repo
+          echo "::endgroup::"
+          echo "::group::Full tree"
+          tree _site
+          echo "::endgroup::"
       - name: Update repo metadata
         run: |
           flatpak build-update-repo \
