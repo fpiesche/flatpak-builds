@@ -30,7 +30,7 @@ modules:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary
         branch: canary_experimental
-        # commit: 2941b672d6001079b35bc20a390cc141cc18133e
+        commit: afe74e3d7230287f7b78698f8e661e96a96e46f1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
@@ -44,10 +44,8 @@ modules:
       - type: script
         dest-filename: jp.xenia.xenia-canary.sh
         commands:
-          - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content --cache_root=$XDG_CACHE_HOME $@
+          - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content --cache_root=$XDG_CACHE_HOME/xenia --mount_cache=false $@
     build-commands:
-      # - ./xb premake
-      # # - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
       - ./xb build --config release --target xenia-base
       - install -Dm755 build/bin/Linux/Release/xenia_canary -t /app/bin/
       - install -Dm644 assets/icon/256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
