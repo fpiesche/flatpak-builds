@@ -17,18 +17,6 @@ finish-args:
   - --socket=pulseaudio
 
 modules:
-  - name: premake5
-    buildsystem: simple
-    build-commands:
-      - make -C build/gmake2.unix config=release
-      - install -Dm755 -t "${FLATPAK_DEST}/bin" bin/release/premake5
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://github.com/premake/premake-core/releases/download/v5.0.0-beta3/premake-5.0.0-beta3-src.zip
-        sha256: 4b2b1fe9772ca1caf689c07e8c32f108b8393922956f602ddaf404f73467bd83
-
   - name: xenia-canary
     buildsystem: simple
     build-options:
@@ -42,11 +30,13 @@ modules:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary
         branch: canary_experimental
-        commit: 60318a5db66516614295146e5d455e4b6fda1be7
+        # commit: 2941b672d6001079b35bc20a390cc141cc18133e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
           commit-query: .commit.sha
+      - type: patch
+        path: fix-warning.patch
       - type: file
         path: jp.xenia.xenia-canary.desktop
       - type: file
@@ -56,9 +46,9 @@ modules:
         commands:
           - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content --cache_root=$XDG_CACHE_HOME $@
     build-commands:
-      - ./xb premake
-      - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
-      - ./xb build --no_premake --config release --target xenia-base
+      # - ./xb premake
+      # # - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
+      - ./xb build --config release --target xenia-base
       - install -Dm755 build/bin/Linux/Release/xenia_canary -t /app/bin/
       - install -Dm644 assets/icon/256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm755 ${FLATPAK_ID}.sh -t /app/bin/
