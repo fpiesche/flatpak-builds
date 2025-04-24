@@ -10,10 +10,9 @@ sdk-extensions:
 finish-args:
   # gamepad+DRI support
   - --device=all
-  # Wayland
+  # X11
   - --share=ipc
-  - --socket=wayland
-  - --socket=fallback-x11
+  - --socket=x11
   # Audio
   - --socket=pulseaudio
 
@@ -55,8 +54,7 @@ modules:
       - type: script
         dest-filename: jp.xenia.xenia-canary.sh
         commands:
-          - if [[ ! -f $XDG_DATA_HOME/xenia-canary.config.toml ]]; then touch $XDG_DATA_HOME/xenia-canary.config.toml; fi
-          - xenia_canary --config=$XDG_DATA_HOME/xenia-canary.config.toml $@
+          - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content --cache_root=$XDG_CACHE_HOME $@
     build-commands:
       - ./xb premake
       - for file in build/*.cmake; do sed -i "s/stdc++fs//" "$file"; done
