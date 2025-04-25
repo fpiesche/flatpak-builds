@@ -74,6 +74,8 @@ modules:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/tags
           commit-query: .[] | select(.name == "nightly") | .commit.sha
+      - type: file
+        path: io.github.openenroth.openenroth.metainfo.xml
 
     post-install:
       - install -Dm755 src/Bin/OpenEnroth/OpenEnroth /app/bin/OpenEnroth
@@ -82,8 +84,7 @@ modules:
       # Icon
       - install -Dm644 ../distribution/linux/${FLATPAK_ID}.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       # metainfo
-      - install -Dm644 ../distribution/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm644 ../distribution/linux/${FLATPAK_ID}.releases.xml /app/share/releases/${FLATPAK_ID}.releases.xml
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # desktop file
       - install -Dm644 ../distribution/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - desktop-file-edit --set-key=Exec --set-value="${FLATPAK_ID}.sh" /app/share/applications/${FLATPAK_ID}.desktop
