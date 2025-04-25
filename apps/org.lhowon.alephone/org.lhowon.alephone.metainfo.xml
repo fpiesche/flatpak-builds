@@ -9,6 +9,10 @@
   <summary> Aleph One is the open source continuation of Bungie’s Marathon 2 game engine</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-only</project_license>
+  <branding>
+    <color type="primary" scheme_preference="light">#8ff0a4</color>
+    <color type="primary" scheme_preference="dark">#003300</color>
+  </branding>
   <launchable type="desktop-id">org.lhowon.alephone.desktop</launchable>
   <url type="homepage">https://alephone.lhowon.org/</url>
   <url type="contact">https://discord.gg/NvF3pdV</url>
@@ -90,8 +94,17 @@
     <keyword>online</keyword>
   </keywords>
   <releases>
-    <release version="release-20250302" date="2025-03-03">
-      <description></description>
+    <release version="1.10.1" date="2025-03-02">
+      <url>https://github.com/Aleph-One-Marathon/alephone/releases/tag/release-20250302</url>
+      <description>
+        <p>This is a bug fix release. Highlights:</p>
+        <ul>
+          <li>Uses HUD filtering preference for Lua HUD images</li>
+          <li>Physics file is no longer mandatory for gathering using dedicated servers</li>
+          <li>It is now possible to mix workshop scenarios and local scenarios in the Steam version of Classic Marathon Infinity</li>
+          <li>Fixes an issue interpolating ephemera</li>
+        </ul>
+      </description>
     </release>
   </releases>
   <content_rating type="oars-1.1">
