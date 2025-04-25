@@ -5,10 +5,22 @@ sdk: org.freedesktop.Sdk
 command: alephone
 
 finish-args:
-  - --device=dri
+  # X11
+  - --share=ipc
   - --socket=x11
+  # Hardware 3D, audio and network for multiplayer
+  - --device=dri
   - --socket=pulseaudio
   - --share=network
+
+cleanup:
+  - /include
+  - /lib/*.a
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
 
 add-extensions:
   org.freedesktop.Platform.VAAPI.Intel:
@@ -42,10 +54,6 @@ modules:
           project-id: 6845
           stable-only: true
           url-template: https://downloads.sourceforge.net/boost/boost/$version/boost_${major}_${minor}_${patch}.tar.bz2
-    cleanup:
-      - /lib/*.a
-      - /lib/debug
-      - /lib/cmake
 
   - name: zziplib
     buildsystem: cmake-ninja
@@ -74,9 +82,6 @@ modules:
       - -DUPNPC_BUILD_SHARED=TRUE
       - -DUPNPC_BUILD_TESTS=FALSE
       - -DUPNPC_BUILD_SAMPLE=FALSE
-    cleanup:
-      - /include
-      - /share/doc
 
   - ../shared-modules/glu/glu-9.json
 
@@ -101,6 +106,8 @@ modules:
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
           version-query: .tag_name
           url-query: .zipball_url
+      - type: file
+        path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
         url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/Marathon-20250302-Data.zip
         sha256: e517465537d85f721d582948cd4a2e9a1868171bd3df83b3c57a7f850748af85
@@ -141,17 +148,12 @@ modules:
           - unzip -d tmp $game-data.zip
           - rm $game-data.zip
           - mv "tmp/$(ls tmp)/"* /app/extra/$game
-          - rm -rf tmp/*
+          - rm -rf tmp
           - done
       - type: script
         dest-filename: autogen.sh
         commands:
           - autoreconf -v -i
-    cleanup:
-      - /lib/debug
-      - /share/icons
-      - /share/man
-      - /share/mime
     post-install:
       - mkdir -p /app/lib/ffmpeg /app/lib/x86_64-linux-gnu/dri/intel-vaapi-driver
         /app/share/icons/hicolor/256x256/apps
@@ -183,3 +185,4 @@ modules:
       - install -Dm755 flatpak/marathon-infinity.desktop -T /app/share/applications/${FLATPAK_ID}.marathon-infinity.desktop
       # Game data installation script
       - install -Dm755 apply_extra /app/bin/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/

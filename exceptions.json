@@ -1,5 +1,95 @@
 {
+    "com.dennisengelhard.megaman-rock-n-roll": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "com.idsoftware.quake4": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "com.megamanmaker.megamanmaker": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "com.shipofharkinian.shipwright": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "com.thedarkmod.tdm": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "com.wixsite.stt16bit": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "dev.lostartefacts.tr1x": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.andrei_drexler.ironwail": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.antrad.abuse_1996": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.elasota.aerofoil": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.fgsfdsfgs.perfect_dark": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.fpiesche.f2bgl": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.funkincrew.funkin": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.interkarma.daggerfall-unity": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.kraflab.dsda-doom": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.openenroth.openenroth": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.sergiou87.open-supaplex": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.sonicgalactic": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.stardropsmh.sonic-and-the-fallen-star": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "jp.ne.sakura.rpgex.littleworld": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "net.duke4.m210.buildgdx": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.arx_libertatis.arxlibertatis": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.azahar_emu.azahar": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.gemrb.gemrb": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.icculus.prey": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.lhowon.alephone": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "org.vita3k.vita3k": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "org.vkdoom.vkdoom": {
-        "appstream-external-screenshot-url": "This isn't flathub so we don't care about screenshots not being mirrored."
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "se.remar.castle": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "se.remar.herocore": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "se.remar.iji": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     }
 }
