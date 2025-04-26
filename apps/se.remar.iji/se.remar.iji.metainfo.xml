@@ -39,11 +39,9 @@
   <categories>
     <category>Game</category>
   </categories>
-  <supports>
-  </supports>
-  <recommends>
+  <requires>
     <control>keyboard</control>
-  </recommends>
+  </requires>
   <provides>
     <binary>iji.exe</binary>
   </provides>

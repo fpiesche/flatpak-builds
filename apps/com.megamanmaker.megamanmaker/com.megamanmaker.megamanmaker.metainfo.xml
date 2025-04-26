@@ -41,6 +41,7 @@
     <category>Game</category>
   </categories>
   <supports>
+    <control>gamepad</control>
   </supports>
   <recommends>
     <control>keyboard</control>
