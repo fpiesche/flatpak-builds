@@ -51,12 +51,9 @@
   <categories>
     <category>Game</category>
   </categories>
-  <supports>
-  </supports>
-  <recommends>
+  <requires>
     <control>keyboard</control>
-    <control>pointing</control>
-  </recommends>
+  </requires>
   <provides>
     <binary>herocore gm5.exe</binary>
     <binary>herocore gm7.exe</binary>

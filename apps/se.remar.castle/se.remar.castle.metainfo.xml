@@ -39,12 +39,9 @@
   <categories>
     <category>Game</category>
   </categories>
-  <supports>
-  </supports>
-  <recommends>
+  <requires>
     <control>keyboard</control>
-    <control>pointing</control>
-  </recommends>
+  </requires>
   <provides>
     <binary>castle gm5.exe</binary>
     <binary>castle gm7.exe</binary>
