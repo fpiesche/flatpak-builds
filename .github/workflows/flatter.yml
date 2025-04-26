@@ -233,7 +233,6 @@ jobs:
         run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
       - name: Delete builddir artifacts
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
