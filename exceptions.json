@@ -59,6 +59,9 @@
     "jp.ne.sakura.rpgex.littleworld": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "jp.xenia.xenia-canary": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "net.duke4.m210.buildgdx": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },

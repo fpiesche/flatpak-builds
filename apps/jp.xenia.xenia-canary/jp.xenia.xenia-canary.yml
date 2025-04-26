@@ -44,7 +44,8 @@ modules:
       - type: script
         dest-filename: jp.xenia.xenia-canary.sh
         commands:
-          - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content --cache_root=$XDG_CACHE_HOME/xenia --mount_cache=false $@
+          - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content
+            --cache_root=$XDG_CACHE_HOME/xenia --mount_cache=false $@
     build-commands:
       - ./xb build --config release --target xenia-base
       - install -Dm755 build/bin/Linux/Release/xenia_canary -t /app/bin/
