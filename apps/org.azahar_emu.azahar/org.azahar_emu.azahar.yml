@@ -35,11 +35,15 @@ modules:
       - -DENABLE_LTO=ON
       - -DENABLE_NATIVE_OPTIMIZATION=ON
     sources:
+      - type: file
+        path: org.azahar_emu.azahar.metainfo.xml
       - type: git
         url: https://github.com/azahar-emu/azahar
-        tag: '2120.2'
-        commit: 32bb14f0d26dc48954711137e87e0c8395609f1e
+        tag: '2120.3'
+        commit: 00e3bbbdf2a5e7789cb54742bc99ba2ea2d0d240
         x-checker-data:
           type: json
           url: https://api.github.com/repos/azahar-emu/azahar/releases/latest
           tag-query: .tag_name
+    post-install:
+      - install -vDm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
