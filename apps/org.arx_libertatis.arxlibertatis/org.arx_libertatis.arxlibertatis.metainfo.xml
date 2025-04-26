@@ -10,6 +10,10 @@
   <summary>A cross-platform port of Arx Fatalis, a first-person role-playing game</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
+  <branding>
+    <color type="primary" scheme_preference="light">#e8cc8e</color>
+    <color type="primary" scheme_preference="dark">#1c1c1c</color>
+  </branding>
   <launchable type="desktop-id">org.arx_libertatis.arxlibertatis.desktop</launchable>
   <url type="homepage">https://www.arx-libertatis.org/</url>
   <url type="bugtracker">https://bugs.arx-libertatis.org/</url>
@@ -17,8 +21,8 @@
   <url type="vcs-browser">https://github.com/arx/ArxLibertatis</url>
   <url type="contact">https://arx-libertatis.org/contact</url>
   <description>
-    <p>Arx Libertatis is an improved, cross-platform and open source engine for Arx Fatalis, a 2002 first-person role-playing game /
-      dungeon crawler / immersive sim developed by Arkane Studios.</p>
+    <p>Arx Libertatis is an improved, cross-platform and open source engine for Arx Fatalis, a 2002 first-person
+      role-playing game / dungeon crawler / immersive sim developed by Arkane Studios.</p>
     <p>Arx Fatalis features crafting, melee and ranged combat, as well as a unique casting system where the player draws runes in
       real time to effect the desired spell.</p>
     <p>Arx Libertatis updates and improves Arx Fatalis by supporting modern systems, porting the game to new systems, as well as
@@ -65,6 +69,20 @@
   <categories>
     <category>Game</category>
   </categories>
+  <provides>
+    <binary>arx</binary>
+    <binary>arx-install-data</binary>
+    <binary>arxsavetool</binary>
+    <binary>arxunpak</binary>
+    <binary>arxtool</binary>
+  </provides>
+  <keywords>
+    <keyword>role playing game</keyword>
+    <keyword>rpg</keyword>
+    <keyword>fantasy</keyword>
+    <keyword>arx</keyword>
+    <keyword>underworld</keyword>
+  </keywords>
   <releases>
     <release version="1.2.1" date="2022-04-10"/>
   </releases>
@@ -88,7 +106,4 @@
   <requires>
     <internet>offline-only</internet>
   </requires>
-  <provides>
-    <binary>arx</binary>
-  </provides>
 </component>

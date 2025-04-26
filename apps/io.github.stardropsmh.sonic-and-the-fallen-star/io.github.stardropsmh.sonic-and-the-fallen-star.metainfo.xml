@@ -6,6 +6,10 @@
     <name>Sonic and the Fallen Star team</name>
     <url>https://stardropsmh.github.io/sonic-and-the-fallen-star/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#bdebea</color>
+    <color type="primary" scheme_preference="dark">#3830a0</color>
+  </branding>
   <summary>Sonic the Hedgehog fan game</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -29,12 +33,29 @@
     </screenshot>
     <screenshot>
       <image type="source">https://archive.org/download/sonic-and-the-fallen-star-v-1.1.1-edit-4/SAGEScreenshots4.png</image>
-      <caption>Bosses fights</caption>
+      <caption>Boss fights</caption>
     </screenshot>
   </screenshots>
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>Sonic and the Fallen Star.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>sonic</keyword>
+    <keyword>sonic the hedgehog</keyword>
+    <keyword>sage</keyword>
+    <keyword>fangame</keyword>
+    <keyword>fan game</keyword>
+  </keywords>
   <releases>
     <release version="1.1.1 (edit 4)" date="2022-08-22" />
     <release version="1.0" date="2022-08-06" />

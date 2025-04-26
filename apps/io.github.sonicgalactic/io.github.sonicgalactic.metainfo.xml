@@ -6,6 +6,10 @@
     <name>Sonic Galactic team</name>
     <url>https://bsky.app/profile/sonicgalactic.bsky.social</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#f1eaf0</color>
+    <color type="primary" scheme_preference="dark">#854ac5</color>
+  </branding>
   <summary>Sonic the Hedgehog fan game</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -50,6 +54,23 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>SonicGalactic.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>sonic</keyword>
+    <keyword>sonic the hedgehog</keyword>
+    <keyword>sage</keyword>
+    <keyword>fangame</keyword>
+    <keyword>fan game</keyword>
+  </keywords>
   <releases>
     <release version="1.1.1 (edit 4)" date="2022-08-22" />
     <release version="1.0" date="2022-08-06" />

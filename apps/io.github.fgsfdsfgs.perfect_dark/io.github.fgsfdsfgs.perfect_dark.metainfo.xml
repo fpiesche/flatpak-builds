@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>io.github.fgsfdsfgs.perfect_dark</id>
   <name>Perfect Dark</name>
@@ -8,21 +7,57 @@
     <url>https://github.com/fgsfdsfgs/perfect_dark/graphs/contributors</url>
   </developer>
   <launchable type="desktop-id">io.github.fgsfdsfgs.perfect_dark.desktop</launchable>
+  <branding>
+    <color type="primary" scheme_preference="light">#5c85c1</color>
+    <color type="primary" scheme_preference="dark">#292b55</color>
+  </branding>
   <summary>Modern cross-platform port of Perfect Dark</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <url type="homepage">https://github.com/fgsfdsfgs/perfect_dark/</url>
   <url type="contact">https://github.com/fgsfdsfgs/perfect_dark/</url>
   <description>
-      <p>This is a port of Ryan Dywer's decompilation of classic N64 shooter Perfect Dark to modern systems.</p>
+      <p>This is a port of Ryan Dywer's decompilation of classic N64 shooter Perfect Dark to modern systems.
+        The base game is fully playable with some graphical enhancements and a range of options added, as well
+        as a network multiplayer option!</p>
   </description>
-  <!--
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://gitlab.com/fpiesche/dxx-rebirth-assets/-/raw/c6e7e79eebe92905f84f07a635ffab5122a94bd1/d1x/screenshots/retromode.png</image>
-      <caption>"Retro mode": the default graphics setup, like the original game but in high resolution</caption>
-  <screenshots>
-  -->
+      <image type="source">https://i.kinja-img.com/image/upload/ee306c165903d3e5ecbf19733a7045bd.jpg</image>
+      <caption>Single-player mode</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image type="source">https://i.kinja-img.com/image/upload/68bcd62a1560d14cbfe06e65aae71798.jpg</image>
+      <caption>Combat Simulator multiplayer mode, with bots</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image type="source">https://i.kinja-img.com/image/upload/e476085b2d6a4a8d9516483910889e5f.jpg</image>
+      <caption>Special effects that were often problematic in emulation work perfectly!</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image type="source">https://i.kinja-img.com/image/upload/c27b61909e6b2326a9511ab63be92615.jpg</image>
+      <caption>A range of options is available to configure the game to your needs</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image type="source">https://i.kinja-img.com/image/upload/7e5336bd46686433ba06c848830a0151.jpg</image>
+      <caption>Some graphical options</caption>
+    </screenshot>
+  </screenshots>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>pd.jpn</binary>
+    <binary>pd.ntsc</binary>
+    <binary>pd.pal</binary>
+    <binary>pd-netplay.jpn</binary>
+    <binary>pd-netplay.ntsc</binary>
+    <binary>pd-netplay.pal</binary>
+  </provides>
   <categories>
     <category>Game</category>
     <category>ActionGame</category>
@@ -37,7 +72,7 @@
     <keyword>port</keyword>
   </keywords>
   <releases>
-    <release version="latest" date="2024-05-14"/>
+    <release version="latest" date="2025-03-30"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-realistic">moderate</content_attribute>

@@ -6,6 +6,10 @@
     <name>Noah N. Copeland</name>
     <url>https://linktr.ee/NoahNCopeland/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#e5e5e5</color>
+    <color type="primary" scheme_preference="dark">#141c1d</color>
+  </branding>
   <summary>Fan remake of Sonic Triple Trouble in Genesis style</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -35,6 +39,23 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>Sonic Triple Trouble 16-Bit.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>sonic</keyword>
+    <keyword>sonic the hedgehog</keyword>
+    <keyword>sage</keyword>
+    <keyword>fangame</keyword>
+    <keyword>fan game</keyword>
+  </keywords>
   <releases>
     <release version="1.1.0" date="2023-05-27" />
     <release version="1.0" date="2022-08-02" />

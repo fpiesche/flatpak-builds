@@ -6,6 +6,10 @@
     <name>Enu</name>
     <url>https://rpgex.sakura.ne.jp/home/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#52d4c4</color>
+    <color type="primary" scheme_preference="dark">#6d4836</color>
+  </branding>
   <summary>RPG inspired by the SaGa series</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -31,6 +35,22 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>Game.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>role playing</keyword>
+    <keyword>jrpg</keyword>
+    <keyword>anime</keyword>
+    <keyword>rpg maker</keyword>
+  </keywords>
   <releases>
     <release version="v22" date="2023-03-21" />
   </releases>

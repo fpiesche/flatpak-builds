@@ -13,6 +13,15 @@ finish-args:
   - --share=ipc
   - --socket=x11
 
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+
 modules:
   - name: megaman-rock-n-roll
     buildsystem: simple

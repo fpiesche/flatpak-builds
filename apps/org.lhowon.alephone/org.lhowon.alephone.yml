@@ -15,7 +15,7 @@ finish-args:
 
 cleanup:
   - /include
-  - /lib/*.a
+  - "*.a"
   - /lib/cmake
   - /lib/pkgconfig
   - /share/aclocal

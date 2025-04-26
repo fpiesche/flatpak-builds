@@ -6,14 +6,17 @@
     <name>dsda-doom contributors</name>
     <url>https://github.com/kraflab/dsda-doom/graphs/contributors</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#eaeaec</color>
+    <color type="primary" scheme_preference="dark">#3cbce5</color>
+  </branding>
   <summary>A vanilla-faithful Doom source port</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">io.github.kraflab.dsda-doom.desktop</launchable>
   <url type="homepage">https://github.com/kraflab/dsda-doom</url>
   <description>
-    <p
-        >dsda-doom is a successor of prboom+ with extra tooling for demo recording and playback,
+    <p>dsda-doom is a successor of prboom+ with extra tooling for demo recording and playback,
         with a focus on speedrunning and quality of life.</p>
     <p>dsda-doom includes many new features, such as:</p>
       <ul>
@@ -34,16 +37,32 @@
       <caption>axolotl.wad, an MBF21 map</caption>
     </screenshot>
     <screenshot>
-      <image
-                type="source"
-            >https://static.doomworld.com/monthly_2021_05/1.png.05feefd25f4bf6576c19ef4449f6abc6.png</image>
+      <image type="source">https://static.doomworld.com/monthly_2021_05/1.png.05feefd25f4bf6576c19ef4449f6abc6.png</image>
       <caption>Delirium, an MBF21 map set</caption>
     </screenshot>
   </screenshots>
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>dsda-doom</binary>
+    <binary>dsda-launcher</binary>
+  </provides>
+  <keywords>
+    <keyword>shooter</keyword>
+    <keyword>fps</keyword>
+    <keyword>port</keyword>
+    <keyword>speedrunning</keyword>
+  </keywords>
   <releases>
+    <release version="0.29.0" date="2025-04-08" />
+    <release version="0.28.3" date="2025-01-17" />
     <release version="0.28.2" date="2024-10-25" />
   </releases>
   <content_rating type="oars-1.1">

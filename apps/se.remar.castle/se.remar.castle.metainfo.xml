@@ -6,6 +6,10 @@
     <name>Daniel Remar</name>
     <url>https://remar.se/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#e0e0ff</color>
+    <color type="primary" scheme_preference="dark">#8a52ff</color>
+  </branding>
   <summary>Puzzle platformer with a level editor</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -35,6 +39,21 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>castle gm5.exe</binary>
+    <binary>castle gm7.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>puzzle</keyword>
+    <keyword>platformer</keyword>
+    <keyword>indie</keyword>
+  </keywords>
   <releases>
     <release version="9" date="2024-08-29" />
     <release version="1.0" date="2005-01-01" />

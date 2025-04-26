@@ -48,6 +48,10 @@
     <keyword>emulator</keyword>
     <keyword>3ds</keyword>
   </keywords>
+  <provides>
+    <binary>azahar</binary>
+    <binary>azahar-room</binary>
+  </provides>
   <releases>
     <release version="2120.3" date="2025-04-15">
       <description>

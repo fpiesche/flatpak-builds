@@ -6,6 +6,15 @@ base: org.winehq.Wine
 base-version: stable-24.08
 command: com.megamanmaker.megamanmaker.sh
 
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+
 finish-args:
   # hardware 3D and gamepads
   - --device=all

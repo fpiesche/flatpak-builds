@@ -7,6 +7,10 @@
     <name>f2bgl Contributors</name>
     <url>https://github.com/fpiesche/f2bgl/graphs/contributors</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#7c8c93</color>
+    <color type="primary" scheme_preference="dark">#2b3134</color>
+  </branding>
   <summary>A modern cross-platform port of Fade to Black</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
@@ -52,6 +56,22 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>f2bgl</binary>
+  </provides>
+  <keywords>
+    <keyword>action</keyword>
+    <keyword>shooter</keyword>
+    <keyword>flashback</keyword>
+    <keyword>retro</keyword>
+  </keywords>
   <releases>
     <release version="v1.0.2" date="2024-10-05">
       <description></description>

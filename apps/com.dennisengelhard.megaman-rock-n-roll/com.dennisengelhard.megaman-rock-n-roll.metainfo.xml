@@ -6,6 +6,10 @@
     <name>Dennis Engelhard</name>
     <url>https://dennisengelhard.com</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#3cbce5</color>
+    <color type="primary" scheme_preference="dark">#6e0808</color>
+  </branding>
   <summary>Mega Man fan game</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>

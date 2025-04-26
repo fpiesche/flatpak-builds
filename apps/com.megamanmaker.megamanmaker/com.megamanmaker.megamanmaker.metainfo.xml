@@ -6,6 +6,10 @@
     <name>Mega Man Maker Team</name>
     <url>https://megamanmaker.com/team</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#a6e7ff</color>
+    <color type="primary" scheme_preference="dark">#06101a</color>
+  </branding>
   <summary>Mega Man-themed game creation tool</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -36,6 +40,23 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>MegaMaker.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>megaman</keyword>
+    <keyword>mega man</keyword>
+    <keyword>capcom</keyword>
+    <keyword>game design</keyword>
+    <keyword>level design</keyword>
+  </keywords>
   <releases>
     <release version="1.9.4.3" date="2025-01-13" />
     <release version="1.9.4.2" date="2025-01-05" />

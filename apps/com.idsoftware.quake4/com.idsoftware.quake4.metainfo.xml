@@ -6,6 +6,10 @@
     <name>id Software, Raven Software</name>
     <url>https://www.mobygames.com/game/19650/quake-4/credits/windows/?autoplatform=true</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#b4ca38</color>
+    <color type="primary" scheme_preference="dark">#001103</color>
+  </branding>
   <summary>Sci-fi first-person shooter</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -38,6 +42,18 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>q4ded.x86</binary>
+    <binary>quake4smp.x86</binary>
+    <binary>quake4.x86</binary>
+  </provides>
   <releases>
     <release version="1.4.2" date="2007-06-18" />
     <release version="1.0.0" date="2005-10-20" />

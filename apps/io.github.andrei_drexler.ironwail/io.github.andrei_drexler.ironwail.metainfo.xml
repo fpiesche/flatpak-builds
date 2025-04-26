@@ -6,6 +6,10 @@
     <name>Andrei Drexler, Ironwail Contributors</name>
     <url>https://github.com/andrei-drexler/ironwail/graphs/contributors</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#dab983</color>
+    <color type="primary" scheme_preference="dark">#1f0e0f</color>
+  </branding>
   <summary>A modern port of the original Quake engine, focused on performance</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>
@@ -64,6 +68,16 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>ironwail</binary>
+  </provides>
   <releases>
     <release version="v0.8.0" date="2024-11-10">
       <description></description>

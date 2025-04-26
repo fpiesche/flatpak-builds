@@ -25,6 +25,7 @@ cleanup:
   - /include
   - '*.a'
   - '*.la'
+  - /lib/cmake
   - /lib/pkgconfig
 
 modules:

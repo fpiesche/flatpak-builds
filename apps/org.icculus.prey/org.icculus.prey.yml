@@ -70,6 +70,13 @@ add-extensions:
     download-if: have-intel-gpu
     autoprune-unless: have-intel-gpu
 
+cleanup:
+  - /include
+  - /lib32/*.a
+  - /lib32/cmake
+  - /lib32/pkgconfig
+  - /share/aclocal
+
 sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
@@ -99,6 +106,8 @@ modules:
       - type: archive
         url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
         sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
+    cleanup:
+      - /bin/sdl-config
 
   - name: openal-soft
     buildsystem: cmake-ninja
@@ -117,6 +126,8 @@ modules:
           url: https://api.github.com/repos/kcat/openal-soft/releases/latest
           version-query: .tag_name
           url-query: .zipball_url
+    cleanup:
+      - /bin/openal-info
 
   - name: patchelf
     sources:

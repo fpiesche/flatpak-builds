@@ -6,6 +6,10 @@
     <name>Daniel Remar</name>
     <url>https://remar.se/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#ffffff</color>
+    <color type="primary" scheme_preference="dark">#000000</color>
+  </branding>
   <summary>Sprawling action-exploration shooter</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -47,6 +51,20 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>herocore gm5.exe</binary>
+    <binary>herocore gm7.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>indie</keyword>
+  </keywords>
   <releases>
     <release version="1.5" date="2021-07-11" />
     <release version="1.0" date="2010-05-01" />

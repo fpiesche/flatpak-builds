@@ -45,7 +45,7 @@ modules:
       - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=date_time,filesystem,iostreams,program_options,system
       - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
     cleanup:
-      - /lib/*.a
+      - "*.a"
       - /lib/debug
       - /lib/cmake
 

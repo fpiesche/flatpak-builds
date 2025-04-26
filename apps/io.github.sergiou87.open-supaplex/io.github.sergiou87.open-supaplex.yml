@@ -13,6 +13,13 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
+cleanup:
+  - /include
+  - "*.a"
+  - "*.la"
+  - /lib/cmake
+  - /lib/pkgconfig
+
 modules:
   - name: libxmp
     buildsystem: cmake-ninja

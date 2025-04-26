@@ -55,6 +55,15 @@
     <keyword>sourceport</keyword>
     <keyword>port</keyword>
   </keywords>
+  <supports>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>OpenEnroth</binary>
+  </provides>
   <releases>
     <release version="nightly" date="2024-01-01">
         <description>The current nightly release for OpenEnroth.</description>

@@ -13,6 +13,12 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+
 modules:
   - ../shared-modules/linux-audio/fluidsynth2.json
   - name: wildmidi

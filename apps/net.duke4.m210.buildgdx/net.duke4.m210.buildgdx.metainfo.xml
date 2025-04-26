@@ -7,6 +7,10 @@
     <name>BuildM210 Projects</name>
     <url>https://m210.duke4.net/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#6d80bf</color>
+    <color type="primary" scheme_preference="dark">#6c2626</color>
+  </branding>
   <summary>Java-based cross-platform port of the Build game engine</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>

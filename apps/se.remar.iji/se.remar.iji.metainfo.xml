@@ -6,6 +6,10 @@
     <name>Daniel Remar</name>
     <url>https://remar.se/</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#9cbaf7</color>
+    <color type="primary" scheme_preference="dark">#212c5a</color>
+  </branding>
   <summary>Huge action-adventure platformer</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
@@ -35,6 +39,19 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
+  <provides>
+    <binary>iji.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>rpg</keyword>
+    <keyword>platformer</keyword>
+    <keyword>indie</keyword>
+  </keywords>
   <releases>
     <release version="9" date="2021-11-07" />
     <release version="1.0" date="2008-09-01" />

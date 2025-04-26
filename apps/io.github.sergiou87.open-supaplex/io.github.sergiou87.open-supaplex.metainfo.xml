@@ -7,6 +7,10 @@
     <name>Open Supaplex contributors</name>
     <url>https://github.com/sergiou87/open-supaplex/graphs/contributors</url>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#b0b0b0</color>
+    <color type="primary" scheme_preference="dark">#606060</color>
+  </branding>
   <summary>A reverse-engineered port of Supaplex</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT AND GPL-3.0</project_license>
@@ -42,6 +46,15 @@
   <categories>
     <category>Game</category>
   </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
+  <provides>
+    <binary>opensupaplex</binary>
+  </provides>
   <releases>
     <release version="nightly" date="2024-09-30" />
     <release version="7.1.2" date="2020-08-21" />

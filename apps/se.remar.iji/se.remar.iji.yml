@@ -25,6 +25,15 @@ finish-args:
   - --env=WINEARCH=win32
   - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
 
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+
 inherit-extensions:
   - org.freedesktop.Platform.GL32
   - org.freedesktop.Platform.Compat.i386

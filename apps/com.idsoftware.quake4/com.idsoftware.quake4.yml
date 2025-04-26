@@ -18,6 +18,15 @@ finish-args:
   # home directory persistence to save settings
   - --persist=.quake4
 
+cleanup:
+  - /bin/openal-info
+  - /bin/sdl-config
+  - /include
+  - /lib32/*.a
+  - /lib32/cmake
+  - /lib32/pkgconfig
+  - /share/aclocal
+
 # Parameters for 32-bit extensions
 x-gl-version: &gl-version '1.4'
 x-gl-versions: &gl-versions 24.08;1.4

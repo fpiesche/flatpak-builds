@@ -15,8 +15,8 @@ finish-args:
 
 cleanup:
   - /include
-  - /lib/*.a
-  - /lib/*.la
+  - "*.a"
+  - "*.la"
   - /lib/pkgconfig
   - /share/pixmaps
 

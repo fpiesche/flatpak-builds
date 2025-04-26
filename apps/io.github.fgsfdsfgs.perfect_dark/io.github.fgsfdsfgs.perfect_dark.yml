@@ -90,7 +90,7 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.ntsc
+      - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd-netplay.ntsc
       # Netplay launcher
       - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
@@ -115,7 +115,7 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.pal.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.pal
+      - install -Dm 755 ./pd.pal.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd-netplay.pal
 
   - name: perfect_dark_netplay_jpn
     no-make-install: true
@@ -133,4 +133,4 @@ modules:
       - type: patch
         path: fix-netplay-build.patch
     build-commands:
-      - install -Dm 755 ./pd.jpn.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/netplay/pd.jpn
+      - install -Dm 755 ./pd.jpn.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd-netplay.jpn

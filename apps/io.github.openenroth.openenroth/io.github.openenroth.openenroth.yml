@@ -31,6 +31,14 @@ add-extensions:
     no-autodownload: false
     autodelete: false
 
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+
 modules:
   - name: libdwarf
     buildsystem: cmake-ninja
@@ -44,6 +52,9 @@ modules:
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: .zipball_url
+    cleanup:
+      - /bin/dwarfdump
+      - /share/dwarfdump
 
   - name: openenroth
     buildsystem: cmake-ninja
@@ -51,13 +62,6 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/llvm18/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
-    cleanup:
-      - /share/cmake
-      - /lib/cmake
-      - /share/man
-      - /share/gch
-      - '*.a'
-      - /include
     config-opts:
       - -DOE_BUILD_TESTS=OFF
       - -DOE_BUILD_TOOLS=OFF

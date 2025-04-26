@@ -20,10 +20,15 @@ build-options:
   cxxflags: -O2 -g
 
 cleanup:
+  - /bin/openal-info
   - /include
-  - /lib/*.a
-  - /lib/*.la
+  - "*.a"
+  - "*.la"
+  - /lib/cmake
   - /lib/pkgconfig
+  - /share/aclocal
+  - /share/blender
+  - /share/man
   - /share/pixmaps
 
 modules:

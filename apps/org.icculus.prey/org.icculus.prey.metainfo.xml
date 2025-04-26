@@ -6,7 +6,11 @@
     <name>Human Head Studios; Ryan C. Gordon</name>
     <url>https://www.mobygames.com/game/23082/prey/credits/windows/?autoplatform=true</url>
   </developer>
-  <summary>A sci-fi shooter with horror elements</summary>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>Sci-fi shooter with horror elements</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">org.icculus.prey.desktop</launchable>
@@ -37,7 +41,25 @@
   </screenshots>
   <categories>
     <category>Game</category>
+    <category>ActionGame</category>
   </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>preyded.x86</binary>
+    <binary>prey.x86</binary>
+  </provides>
+  <keywords>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+    <keyword>horror</keyword>
+    <keyword>prey</keyword>
+  </keywords>
   <releases>
     <release version="02192009" date="2009-02-19" />
   </releases>

@@ -17,11 +17,11 @@ finish-args:
   - --socket=pulseaudio
 
 cleanup:
-  - include
-  - lib/*.a
-  - lib/*.la
-  - lib/pkgconfig
-  - share/icons/hicolor/512x512
+  - /include
+  - "*.a"
+  - "*.la"
+  - "/lib/static"
+  - "/share/icons/hicolor/512x512"
 
 modules:
   - name: azahar-emu
