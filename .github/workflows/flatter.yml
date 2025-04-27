@@ -349,11 +349,11 @@ jobs:
         with:
           name: "*_repo.zip"
   merge:
-    if: ${{ github.event_name == "pull_request" }}
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs: builddir-lint
     permissions:
-      pull_requests: write
+      pull-requests: write
       contents: write
     steps:
       - name: Merge Pull Request
