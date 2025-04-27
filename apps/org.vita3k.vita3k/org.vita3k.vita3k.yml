@@ -5,8 +5,11 @@ sdk: org.freedesktop.Sdk
 command: Vita3K
 
 finish-args:
-  - --device=dri
+  # X11
   - --socket=x11
+  - --share=ipc
+  # Hardware 3D, audio and network
+  - --device=dri
   - --socket=pulseaudio
   - --share=network
 

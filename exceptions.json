@@ -15,13 +15,15 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "com.wixsite.stt16bit": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appid-url-not-reachable": "The app ID is the full domain"
     },
     "dev.lostartefacts.tr1x": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "io.github.andrei_drexler.ironwail": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "finish-args-flatpak-appdata-folder-access": "Ironwail has access to Steam's Flatpak data directory"
     },
     "io.github.antrad.abuse_1996": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -51,7 +53,8 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "io.github.sonicgalactic": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appid-code-hosting-too-few-components": "App ID is the GitHub Pages domain"
     },
     "io.github.stardropsmh.sonic-and-the-fallen-star": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"

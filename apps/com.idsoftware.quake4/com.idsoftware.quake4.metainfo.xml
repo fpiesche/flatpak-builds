@@ -27,16 +27,16 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.mobygames.com/screenshots/10357456-quake-4-windows-title-screen.jpg</image>
-      <caption>Title screen</caption>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006651.jpg</image>
+      <caption>The squad</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.mobygames.com/screenshots/10357459-quake-4-windows-assault-on-the-strogg-planet-introduction.jpg</image>
-      <caption>Assault on the Strogg homeworld from the introduction.</caption>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006643.jpg</image>
+      <caption>Fight giant Strogg bosses</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.mobygames.com/screenshots/10192490-quake-4-windows-waiting-for-an-operation.jpg</image>
-      <caption>They call this Stroggification?</caption>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006646.jpg</image>
+      <caption>Enemies have new tactics after the first invasion in Quake 2</caption>
     </screenshot>
   </screenshots>
   <categories>

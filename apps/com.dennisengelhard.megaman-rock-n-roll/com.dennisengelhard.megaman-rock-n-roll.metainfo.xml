@@ -20,8 +20,20 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://images.launchbox-app.com/c3b9b830-eeac-48c3-b6df-a47a423e33b7.jpg</image>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a02b032dc4.jpg</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e82fe54.jpg</image>
       <caption>A new threat has appeared</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e87acd5.jpg</image>
+      <caption>New bosses!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e894fb0.jpg</image>
+      <caption>Play as Roll</caption>
     </screenshot>
   </screenshots>
   <categories>
