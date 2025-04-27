@@ -29,10 +29,12 @@ modules:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
           commit-query: .commit.sha
+      - type: file
+        path: io.github.fgsfdsfgs.perfect_dark.metainfo.xml
     post-install:
       - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.ntsc
       # metadata file
-      - install -Dm 644 dist/linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
       - sed -i "s/.x86_64//" dist/linux/${FLATPAK_ID}.sh && sed -i "s/pd\"/pd.ntsc\"/"
         dist/linux/${FLATPAK_ID}.sh
