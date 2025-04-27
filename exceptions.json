@@ -32,7 +32,8 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "io.github.fgsfdsfgs.perfect_dark": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "io.github.fpiesche.f2bgl": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
