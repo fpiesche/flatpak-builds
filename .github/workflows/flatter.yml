@@ -228,14 +228,14 @@ jobs:
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
           path: _build
-      - name: Lint build dir
-        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
-      - name: Delete builddir artifacts
+      - name: Delete builddir artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: geekyeggo/delete-artifact@v5
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
+      - name: Lint build dir
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -320,6 +320,9 @@ jobs:
             --github-corners "https://github.com/fpiesche/flatpak-builds"
       - name: Check site status
         run: |
+          echo "::group::File size"
+          du -hsb _site
+          echo "::endgroup::"
           echo "::group::_site"
           ls -la _site
           echo "::endgroup::"
@@ -342,10 +345,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-          single-commit: true
+          # single-commit: true
       - name: Delete repo artifacts
         if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
           name: "*_repo.zip"
-

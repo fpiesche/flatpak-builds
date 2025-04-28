@@ -36,6 +36,7 @@
     },
     "io.github.fgsfdsfgs.perfect_dark": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "io.github.fpiesche.f2bgl": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -75,17 +76,16 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing"
     },
-    "org.azahar_emu.azahar": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
-    },
     "org.icculus.prey": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     },
     "org.lhowon.alephone": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "org.vita3k.vita3k": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     },
     "org.vkdoom.vkdoom": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -94,9 +94,11 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "se.remar.herocore": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     },
     "se.remar.iji": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     }
 }
