@@ -320,6 +320,9 @@ jobs:
             --github-corners "https://github.com/fpiesche/flatpak-builds"
       - name: Check site status
         run: |
+          echo "::group::File size"
+          du -hs --apparent-size _site
+          echo "::endgroup::"
           echo "::group::_site"
           ls -la _site
           echo "::endgroup::"
@@ -342,7 +345,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-          single-commit: true
+          # single-commit: true
       - name: Delete repo artifacts
         if: always()
         uses: geekyeggo/delete-artifact@v5
