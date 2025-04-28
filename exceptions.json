@@ -1,12 +1,12 @@
 {
     "com.dennisengelhard.megaman-rock-n-roll": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "com.idsoftware.quake4": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub",
-        "appid-url-not-reachable": "idsoftware.com definitely exists"
+        "appid-url-not-reachable": "idsoftware.com definitely exists",
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -74,13 +74,7 @@
     },
     "org.arx_libertatis.arxlibertatis": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
-    },
-    "org.azahar_emu.azahar": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
-    },
-    "org.gemrb.gemrb": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "org.icculus.prey": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
