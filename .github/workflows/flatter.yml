@@ -321,7 +321,7 @@ jobs:
       - name: Check site status
         run: |
           echo "::group::File size"
-          du -hs --apparent-size _site
+          du -hsb _site
           echo "::endgroup::"
           echo "::group::_site"
           ls -la _site
