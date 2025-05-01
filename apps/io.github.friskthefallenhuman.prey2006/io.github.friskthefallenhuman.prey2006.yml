@@ -1,0 +1,83 @@
+app-id: io.github.friskthefallenhuman.prey2006
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+command: io.github.friskthefallenhuman.prey2006.sh
+
+finish-args:
+  # hardware 3D
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # home directory persistence to save settings
+  # - --persist=.prey
+
+
+cleanup:
+  - include
+  - "*.a"
+  - "*.la"
+  - lib/cmake
+  - lib/pkgconfig
+  - share/aclocal
+
+modules:
+  - name: backtrace
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/ianlancetaylor/libbacktrace/archive/793921876c981ce49759114d7bb89bb89b2d3a2d.zip
+        sha256: 5c7fa8a3319cbc352f991a443997ac65913215354cb10f4b59f4b349e68373d7
+
+  - name: prey2006
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    subdir: neo
+    sources:
+      - type: archive
+        url: https://github.com/FriskTheFallenHuman/Prey2006/archive/2bb0405195087dacfd54d734c9a71dd81225d9ab.zip
+        sha256: 87748ad2bd0adb36455d1cf15dfa91675a2c7b8b601b8c06a477e22b1ddb041b
+        x-checker-data:
+          type: anitya
+          project-id: 377932
+          url-template: https://github.com/FriskTheFallenHuman/Prey2006/archive/refs/tags/$version.tar.gz
+      - type: file
+        path: io.github.friskthefallenhuman.prey2006.svg
+      - type: file
+        path: io.github.friskthefallenhuman.prey2006.desktop
+      - type: file
+        path: io.github.friskthefallenhuman.prey2006.metainfo.xml
+      - type: file
+        path: io.github.friskthefallenhuman.prey2006.sh
+      - type: shell
+        commands:
+          - mkdir /app/bin
+    post-install:
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh /app/bin
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+
+  # - name: extra-data
+  #   buildsystem: simple
+  #   sources:
+  #     - type: extra-data
+  #       url: https://icculus.org/prey/downloads/prey-installer-02192009.bin
+  #       filename: prey-installer.bin
+  #       size: 45447932
+  #       sha256: b3d06fc51afbb5dc88d7e0f9d5267cd9d171edf9d18c84c5f66c8172da74b357
+  #     - type: script
+  #       dest-filename: apply_extra
+  #       commands:
+  #         - dd status=none if=prey-installer.bin of=prey-linux.zip iflag=skip_bytes
+  #           skip=191392 && rm prey-installer.bin
+  #         - unzip -qq prey-linux.zip && rm prey-linux.zip
+  #         - mkdir -p /app/extra/prey/base
+  #         - mv data/prey-linux-data/base/* /app/extra/prey/base/
+  #         - rm -rf data guis meta scripts
+  #   build-commands:
+  #     - install -Dm755 apply_extra /app/bin/
