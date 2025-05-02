@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <component type="desktop-application">
-  <id>com.idsoftware.quake4</id>
+  <id>io.github.glkarin.quake4</id>
   <name>Quake 4</name>
-  <developer id="com.idsoftware.quake4">
-    <name>id Software, Raven Software</name>
-    <url>https://www.mobygames.com/game/19650/quake-4/credits/windows/?autoplatform=true</url>
+  <developer id="io.github.glkarin">
+    <name>id Software, Raven Software; glKarin; idtech4a++ Contributors</name>
+    <url>https://github.com/glKarin/com.n0n3m4.diii4a/graphs/contributors</url>
   </developer>
   <branding>
     <color type="primary" scheme_preference="light">#b4ca38</color>
@@ -13,7 +13,7 @@
   <summary>Sci-fi first-person shooter</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
-  <launchable type="desktop-id">com.idsoftware.quake4.desktop</launchable>
+  <launchable type="desktop-id">io.github.glkarin.quake4.desktop</launchable>
   <url type="homepage">https://web.archive.org/web/20120626014852/http://www.ravensoft.com/games/quake/view-game/</url>
   <description>
     <p>Quake 4 is the true sequel to Quake II, continuing the Strogg vs. Humans storyline
@@ -23,7 +23,7 @@
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Quake 4 game data or a CD key. You will need
         to supply both. At least the files <code>pak001.pk4</code> through <code>pak012.pk4</code>
         from a retail installation of Quake 4 must be copied to
-        <code>$HOME/.var/app/com.idsoftware.quake4/q4base/</code>.</p>
+        <code>$HOME/.var/app/io.github.glkarin.quake4/q4base/</code>.</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -50,13 +50,10 @@
     <control>pointing</control>
   </recommends>
   <provides>
-    <binary>q4ded.x86</binary>
-    <binary>quake4smp.x86</binary>
-    <binary>quake4.x86</binary>
+    <binary>Quake4</binary>
   </provides>
   <releases>
-    <release version="1.4.2" date="2007-06-18" />
-    <release version="1.0.0" date="2005-10-20" />
+    <release version="v1.1.0harmattan63" date="2025-04-02" />
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">intense</content_attribute>
