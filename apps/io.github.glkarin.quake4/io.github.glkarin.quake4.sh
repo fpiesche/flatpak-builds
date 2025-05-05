@@ -19,7 +19,7 @@ for gamedata_file in $XDG_DATA_HOME/q4base/pak{001..012}.pk4; do
 Please ensure you have copied the necessary game data files
 (at least <tt>pak001.pk4</tt> through <tt>pak012.pk4</tt> and
 <tt>pak022.pk4</tt> through <tt>pak025.pk4</tt>)
-to\n<tt><b>$XDG_DATA_HOME/base/</b></tt>."
+to\n<tt><b>$XDG_DATA_HOME/q4base/</b></tt>."
         exit 1
     fi
 done
@@ -28,11 +28,4 @@ if [[ ! -f $XDG_DATA_HOME/q4base/autoexec.cfg ]]; then
     echo 'seta sys_lang "english"' >> $XDG_DATA_HOME/q4base/autoexec.cfg
 fi
 
-if [[ ! -r $HOME/.quake4/q4base/quake4key ]]; then
-    if [[ -r $XDG_DATA_HOME/q4base/quake4key ]]; then
-        mkdir -p $HOME/.quake4/q4base
-        ln -s $XDG_DATA_HOME/q4base/quake4key $HOME/.quake4/q4base/quake4key
-    fi
-fi
-
-quake4smp.x86 +set fs_basepath $XDG_DATA_HOME $@
+/app/extra/quake4/quake4smp.x86 +set fs_basepath $XDG_DATA_HOME $@

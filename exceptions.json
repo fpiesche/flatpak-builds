@@ -3,10 +3,15 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing"
     },
-    "com.idsoftware.quake4": {
+    "io.github.glkarin.quake4": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appid-url-not-reachable": "idsoftware.com definitely exists",
-        "appstream-missing-screenshots": "Screenshots are not missing"
+        "appstream-missing-screenshots": "Screenshots are not missing",
+	"appid-url-not-reachable": "Repo name for this is a mess"
+    },
+    "io.github.glkarin.prey": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are not missing",
+	"appid-url-not-reachable": "Repo name for this is a mess"
     },
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
