@@ -44,9 +44,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v0.12.0
+        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v2.0.0
         dest-filename: libdwarf.zip
-        sha256: 698888b92ff08c7a0c82195cf2a5988061810221edb5e1918f0afc2702c44c75
+        sha256: 720ab662b039d075b7140f89632062e778efa2d280ae0c4fd6e2aa3a5cc9623d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
