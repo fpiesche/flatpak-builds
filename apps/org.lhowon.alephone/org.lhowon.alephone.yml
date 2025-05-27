@@ -15,7 +15,7 @@ finish-args:
 
 cleanup:
   - /include
-  - "*.a"
+  - '*.a'
   - /lib/cmake
   - /lib/pkgconfig
   - /share/aclocal
@@ -71,8 +71,8 @@ modules:
     subdir: miniupnpc
     sources:
       - type: archive
-        sha256: 3088257b017450fe5426fa7fba04eb2aca06cb577e15256d4df7a512ece360f0
-        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_2.tar.gz
+        sha256: 8cf2c833b3e76fc4893ff29c2a376e3394962449e5970e373c0a91421724d222
+        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_3.tar.gz
         x-checker-data:
           type: anitya
           project-id: 1986
