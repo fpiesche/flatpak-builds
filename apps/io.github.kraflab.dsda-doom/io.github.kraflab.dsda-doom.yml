@@ -65,9 +65,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/PortMidi/portmidi/zipball/v2.0.4
+        url: https://api.github.com/repos/PortMidi/portmidi/zipball/v2.0.5
         dest-filename: portmidi.zip
-        sha256: 4dc10cc8b6ea4a27abdff68b7f09f4336bff41a3c25bbbd0c73e10780520d47e
+        sha256: 896818217007b2d890559ddf8fef61de0e434b648589983273e8308967c00c6d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
