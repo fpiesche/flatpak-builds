@@ -80,9 +80,9 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://api.github.com/repos/kraflab/dsda-doom/zipball/v0.29.0
+        url: https://api.github.com/repos/kraflab/dsda-doom/zipball/v0.29.1
         dest-filename: dsda-doom.zip
-        sha256: 40d2ff8d86e3defede8d7d1119816d2632ed301ace167075f8e562399465917c
+        sha256: 6a3adc81a16a0e53247a24312c048b4d8310cc39b2ab3dda58224fbea75b04de
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kraflab/dsda-doom/releases/latest
