@@ -1,0 +1,49 @@
+diff --git a/src/libtrx/filesystem.c b/src/libtrx/filesystem.c
+index dfad8903..f0aea8e1 100644
+--- a/src/libtrx/filesystem.c
++++ b/src/libtrx/filesystem.c
+@@ -396,11 +396,39 @@ bool File_Load(const char *path, char **output_data, size_t *output_size)
+ {
+     ASSERT(output_data != NULL);
+ 
+-    MYFILE *fp = File_Open(path, FILE_OPEN_READ);
+-    if (!fp) {
+-        LOG_ERROR("Can't open file %s", path);
+-        *output_data = NULL;
+-        return false;
++    MYFILE *fp;
++
++    if (File_IsAbsolute(path)) {
++        fp = File_Open(path, FILE_OPEN_READ);
++        if (!fp) {
++            LOG_ERROR("Can't open file %s", path);
++            *output_data = NULL;
++            return false;
++        }
++    }
++    else {
++        char *xdg_data_path = Memory_Alloc(1024);
++        strcat(xdg_data_path, getenv("XDG_DATA_HOME"));
++        strcat(xdg_data_path, "/");
++        strcat(xdg_data_path, path);
++        fp = File_Open(xdg_data_path, FILE_OPEN_READ);
++        Memory_FreePointer(&xdg_data_path);
++        if (!fp) {
++            char *xdg_config_path = Memory_Alloc(1024);
++            strcat(xdg_config_path, getenv("XDG_CONFIG_HOME"));
++            strcat(xdg_config_path, "/");
++            strcat(xdg_config_path, path);
++            fp = File_Open(xdg_config_path, FILE_OPEN_READ);
++            Memory_FreePointer(&xdg_config_path);
++            if (!fp) {
++                fp = File_Open(path, FILE_OPEN_READ);
++                if (!fp) {
++                    LOG_ERROR("Can't open file %s", path);
++                    *output_data = NULL;
++                    return false;
++                }
++            }
++        }
+     }
+ 
+     size_t data_size = File_Size(fp);

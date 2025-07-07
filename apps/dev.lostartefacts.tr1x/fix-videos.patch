@@ -1,0 +1,48 @@
+diff --git a/src/libtrx/engine/video.c b/src/libtrx/engine/video.c
+index a5b0f3a2..3530bcbf 100644
+--- a/src/libtrx/engine/video.c
++++ b/src/libtrx/engine/video.c
+@@ -1856,11 +1856,6 @@ fail:
+ VIDEO *Video_Open(const char *const file_path)
+ {
+     LOG_DEBUG("Playing video: %s", file_path);
+-    if (!File_Exists(file_path)) {
+-        LOG_ERROR("Video does not exist: %s", file_path);
+-        return NULL;
+-    }
+-
+     int flags = SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER;
+     if (SDL_Init(flags)) {
+         LOG_ERROR("Could not initialize SDL - %s", SDL_GetError());
+@@ -1872,13 +1867,30 @@ VIDEO *Video_Open(const char *const file_path)
+ 
+     VIDEO *const result = Memory_Alloc(sizeof(VIDEO));
+ 
+-    result->priv = M_StreamOpen(file_path);
++    char *xdg_path = Memory_Alloc(1024);
++    strcat(xdg_path, getenv("XDG_DATA_HOME"));
++    strcat(xdg_path, "/");
++    strcat(xdg_path, file_path);
++    if (!File_Exists(file_path) && !File_Exists(xdg_path)) {
++        LOG_ERROR("Video does not exist: %s", file_path);
++        return NULL;
++    }
++    else if (File_Exists(xdg_path)) {
++        result->priv = M_StreamOpen(xdg_path);
++    }
++    else {
++        result->priv = M_StreamOpen(file_path);
++
++    }
++
+     if (result->priv == NULL) {
++        Memory_FreePointer(&xdg_path);
+         Memory_Free(result);
+         LOG_ERROR("Failed to initialize video!");
+         return NULL;
+     }
+ 
++    Memory_FreePointer(&xdg_path);
+     result->path = Memory_DupStr(file_path);
+     result->is_playing = true;
+     return result;

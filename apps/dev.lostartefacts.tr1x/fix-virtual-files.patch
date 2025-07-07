@@ -1,0 +1,31 @@
+diff --git a/src/libtrx/virtual_file.c b/src/libtrx/virtual_file.c
+index c57ad2fa..02258538 100644
+--- a/src/libtrx/virtual_file.c
++++ b/src/libtrx/virtual_file.c
+@@ -6,14 +6,25 @@
+ 
+ #include <assert.h>
+ #include <string.h>
++#include <stdlib.h>
+ 
+ VFILE *VFile_CreateFromPath(const char *const path)
+ {
+-    MYFILE *fp = File_Open(path, FILE_OPEN_READ);
++    char *xdg_path = Memory_Alloc(1024);
++    strcat(xdg_path, getenv("XDG_DATA_HOME"));
++    strcat(xdg_path, "/");
++    strcat(xdg_path, path);
++    MYFILE *fp;
++    fp = File_Open(xdg_path, FILE_OPEN_READ);
++    if (!fp) {
++        LOG_ERROR("Can't open file %s", xdg_path);
++        fp = File_Open(path, FILE_OPEN_READ);
++    }
+     if (!fp) {
+         LOG_ERROR("Can't open file %s", path);
+         return NULL;
+     }
++    Memory_FreePointer(&xdg_path);
+ 
+     const size_t data_size = File_Size(fp);
+     char *data = Memory_Alloc(data_size);

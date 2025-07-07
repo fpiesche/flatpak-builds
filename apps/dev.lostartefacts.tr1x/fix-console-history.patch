@@ -1,0 +1,27 @@
+diff --git a/src/libtrx/game/console/history.c b/src/libtrx/game/console/history.c
+index e9f8bece..9eedb6b7 100644
+--- a/src/libtrx/game/console/history.c
++++ b/src/libtrx/game/console/history.c
+@@ -4,6 +4,8 @@
+ #include "memory.h"
+ #include "utils.h"
+ #include "vector.h"
++#include <stdlib.h>
++#include <string.h>
+ 
+ #define MAX_HISTORY_ENTRIES 30
+ 
+@@ -46,8 +48,12 @@ void M_DumpToJSON(JSON_OBJECT *const root_obj)
+ void Console_History_Init(void)
+ {
+     m_History = Vector_Create(sizeof(char *));
++    const char *config_path = Memory_Alloc(1024);
++    strcat(config_path, getenv("XDG_CONFIG_HOME"));
++    strcat(config_path, m_Path);
++
+     ConfigFile_Read(&(CONFIG_IO_ARGS) {
+-        .default_path = m_Path,
++        .default_path = config_path,
+         .enforced_path = NULL,
+         .action = &M_LoadFromJSON,
+     });

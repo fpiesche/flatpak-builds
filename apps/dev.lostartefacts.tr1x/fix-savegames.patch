@@ -1,0 +1,68 @@
+diff --git a/src/tr1/game/savegame/savegame.c b/src/tr1/game/savegame/savegame.c
+index 304d69c8..a84a56e4 100644
+--- a/src/tr1/game/savegame/savegame.c
++++ b/src/tr1/game/savegame/savegame.c
+@@ -29,6 +29,7 @@
+ #include <stdint.h>
+ #include <stdio.h>
+ #include <string.h>
++#include <stdlib.h>
+ 
+ #define SAVES_DIR "saves"
+ 
+@@ -452,8 +453,11 @@ bool Savegame_Save(const int32_t slot_num)
+ {
+     GAME_INFO *const game_info = &g_GameInfo;
+     bool ret = true;
++    char *save_dir = Memory_Alloc(1024);
++    strcat(save_dir, getenv("XDG_DATA_HOME"));
++    strcat(save_dir, SAVES_DIR);
+ 
+-    File_CreateDirectory(SAVES_DIR);
++    File_CreateDirectory(save_dir);
+ 
+     Savegame_PersistGameToCurrentInfo(g_CurrentLevel);
+ 
+@@ -469,8 +473,8 @@ bool Savegame_Save(const int32_t slot_num)
+         if (strategy->allow_save) {
+             char *filename = strategy->get_save_filename(slot_num);
+             char *full_path =
+-                Memory_Alloc(strlen(SAVES_DIR) + strlen(filename) + 2);
+-            sprintf(full_path, "%s/%s", SAVES_DIR, filename);
++                Memory_Alloc(strlen(save_dir) + strlen(filename) + 2);
++            sprintf(full_path, "%s/%s", save_dir, filename);
+ 
+             MYFILE *fp = File_Open(full_path, FILE_OPEN_WRITE);
+             if (fp) {
+@@ -485,6 +489,7 @@ bool Savegame_Save(const int32_t slot_num)
+                 ret = false;
+             }
+ 
++            Memory_FreePointer(&save_dir);
+             Memory_FreePointer(&filename);
+             Memory_FreePointer(&full_path);
+         }
+@@ -565,10 +570,12 @@ void Savegame_ScanSavedGames(void)
+         while (strategy->format) {
+             if (!savegame_info->format && strategy->allow_load) {
+                 char *filename = strategy->get_save_filename(i);
+-
++                char *save_dir = Memory_Alloc(1024);
++                strcat(save_dir, getenv("XDG_DATA_HOME"));
++                strcat(save_dir, SAVES_DIR);
+                 char *full_path =
+-                    Memory_Alloc(strlen(SAVES_DIR) + strlen(filename) + 2);
+-                sprintf(full_path, "%s/%s", SAVES_DIR, filename);
++                    Memory_Alloc(strlen(save_dir) + strlen(filename) + 2);
++                sprintf(full_path, "%s/%s", save_dir, filename);
+ 
+                 MYFILE *fp = NULL;
+                 if (!fp) {
+@@ -588,6 +595,7 @@ void Savegame_ScanSavedGames(void)
+                     File_Close(fp);
+                 }
+ 
++                Memory_FreePointer(&save_dir);
+                 Memory_FreePointer(&filename);
+                 Memory_FreePointer(&full_path);
+             }

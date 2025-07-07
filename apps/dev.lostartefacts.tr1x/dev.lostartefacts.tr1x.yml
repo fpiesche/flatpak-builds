@@ -1,0 +1,106 @@
+app-id: dev.lostartefacts.tr1x
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+command: dev.lostartefacts.tr1x.sh
+
+finish-args:
+  # gamepad support
+  - --device=all
+  # wayland
+  - --share=ipc
+  - --socket=x11
+  # - --socket=wayland
+  # - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+
+# add-extensions:
+#   org.freedesktop.Platform.ffmpeg-full:
+#     version: "24.08"
+#     directory: lib/ffmpeg
+#     add-ld-path: .
+
+modules:
+  - org.ffmpeg.ffmpeg.yml
+  - name: uthash
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://github.com/troydhanson/uthash.git
+        tag: v2.3.0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/troydhanson/uthash/releases/latest
+          tag-query: .tag
+          commit-query: .commit.sha
+    build-commands:
+      - mkdir -p /app/include
+      - install -D include/* /app/include
+
+  - name: tr1x
+    buildsystem: meson
+    config-opts:
+      - --wrap-mode=nodownload
+      - -Dstaticdeps=false
+    subdir: src/tr1
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/lostartefacts/trx/zipball/tr1-4.7.1
+        dest-filename: tr1x.zip
+        sha256: 734019a90303b7f42cb1aec682d07ef8c14cb246b00be8abfe399b469a6b8c41
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/lostartefacts/trx/releases/latest
+          version-query: .tag_name | sub("^tr1-"; "")
+          url-query: .zipball_url
+      - type: patch
+        path: fix-basedir.patch
+      - type: patch
+        path: fix-config-files.patch
+      - type: patch
+        path: fix-console-history.patch
+      - type: script
+        path: fix-savegames.patch
+      - type: patch
+        path: fix-screenshots.patch
+      - type: patch
+        path: fix-virtual-files.patch
+      - type: patch
+        path: fix-videos.patch
+      - type: script
+        dest-filename: dev.lostartefacts.tr1x.sh
+        commands:
+          - cd /app/bin
+          - ./TR1X
+      - type: file
+        path: dev.lostartefacts.tr1x.png
+      - type: file
+        path: dev.lostartefacts.tr1x.desktop
+      # - type: file
+      #   dest-filename: dev.lostartefacts.tr1x.metainfo.xml
+    post-install:
+      - install -Dm755 $FLATPAK_BUILDER_BUILDDIR/dev.lostartefacts.tr1x.sh /app/bin
+      - install -Dm644 $FLATPAK_BUILDER_BUILDDIR/${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps/
+      - install -Dm644 $FLATPAK_BUILDER_BUILDDIR/${FLATPAK_ID}.desktop -t /app/share/applications/
+      # - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - cp -rv $FLATPAK_BUILDER_BUILDDIR/data/tr1/ship/* /app/bin/
+
+  # - name: tr2x
+  #   buildsystem: meson
+  #   config-opts:
+  #     - --wrap-mode=nodownload
+  #     - -Dstaticdeps=false
+  #   subdir: src/tr2
+  #   sources:
+  #     - type: archive
+  #       url: https://api.github.com/repos/lostartefacts/trx/zipball/tr2-0.8
+  #       dest-filename: tr2x.zip
+  #       sha256: 226b4ce44c3f7f28489ddf12720a03240cf0702355726c29ba3ca0bc4d717788
+  #       x-checker-data:
+  #         type: json
+  #         url: https://api.github.com/repos/lostartefacts/trx/releases/latest
+  #         version-query: .tag_name | sub("^tr2-"; "")
+  #         url-query: .zipball_url
+  #   post-install:
+  #     - cp -rv $FLATPAK_BUILDER_BUILDDIR/data/tr2/ship/* /app/bin/

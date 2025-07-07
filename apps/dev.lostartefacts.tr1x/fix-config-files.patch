@@ -1,0 +1,64 @@
+diff --git a/src/libtrx/config/file.c b/src/libtrx/config/file.c
+index 11d0ab5b..4a4ca14c 100644
+--- a/src/libtrx/config/file.c
++++ b/src/libtrx/config/file.c
+@@ -7,6 +7,7 @@
+ 
+ #include <assert.h>
+ #include <string.h>
++#include <stdlib.h>
+ 
+ #define EMPTY_ROOT "{}"
+ #define ENFORCED_KEY "enforced_config"
+@@ -178,8 +179,13 @@ bool ConfigFile_Write(const CONFIG_IO_ARGS *const args)
+     bool updated = false;
+     char *data = M_WriteToJSON(args->action, old_data, enforced_data);
+ 
++    char *xdg_path = Memory_Alloc(1024);
++    strcat(xdg_path, getenv("XDG_CONFIG_HOME"));
++    strcat(xdg_path, "/");
++    strcat(xdg_path, args->default_path);
++
+     if (old_data == NULL || strcmp(data, old_data) != 0) {
+-        MYFILE *const fp = File_Open(args->default_path, FILE_OPEN_WRITE);
++        MYFILE *const fp = File_Open(xdg_path, FILE_OPEN_WRITE);
+         if (fp == NULL) {
+             LOG_ERROR("Failed to write settings!");
+         } else {
+@@ -189,6 +195,7 @@ bool ConfigFile_Write(const CONFIG_IO_ARGS *const args)
+         }
+     }
+ 
++    Memory_FreePointer(&xdg_path);
+     Memory_FreePointer(&data);
+     Memory_FreePointer(&old_data);
+     Memory_FreePointer(&enforced_data);
+diff --git a/src/tr1/config.c b/src/tr1/config.c
+index e8a04a4c..3360ee64 100644
+--- a/src/tr1/config.c
++++ b/src/tr1/config.c
+@@ -15,6 +15,8 @@
+ #include <libtrx/log.h>
+ 
+ #include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ CONFIG g_Config = { 0 };
+ 
+@@ -164,6 +166,15 @@ static void M_DumpControllerLayout(
+ 
+ const char *Config_GetPath(const CONFIG_FILE_TYPE file_type)
+ {
++    if (file_type == CFT_ENFORCED) {
++        return Shell_GetGameflowPath();
++    }
++    else {
++        const char config_path[1024];
++        strcat(config_path, getenv("XDG_DATA_HOME"));
++        strcat(config_path, m_ConfigPath);
++        return config_path;
++    }
+     return file_type == CFT_ENFORCED ? Shell_GetGameflowPath() : m_ConfigPath;
+ }
+ 

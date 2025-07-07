@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Game;Shooter
+Comment=A reverse engineered source port of Tomb Raider
+Exec=dev.lostartefacts.tr1x.sh
+Icon=dev.lostartefacts.tr1x
+Keywords=quake;shooter;fps
+Name=TR1X
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
