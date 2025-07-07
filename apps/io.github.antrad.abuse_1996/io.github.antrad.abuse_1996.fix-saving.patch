@@ -1,0 +1,22 @@
+diff --git a/src/sdlport/setup.cpp b/src/sdlport/setup.cpp
+index e8e79b7..33b7291 100644
+--- a/src/sdlport/setup.cpp
++++ b/src/sdlport/setup.cpp
+@@ -602,7 +602,7 @@ void setup( int argc, char **argv )
+     CoTaskMemFree(appData);
+     free( savedir );
+ #else
+-    if( (homedir = getenv( "HOME" )) != NULL )
++    if( (homedir = getenv( "XDG_DATA_HOME" )) != NULL )
+     {
+         savedir = (char *)malloc( strlen( homedir ) + 9 );
+         sprintf( savedir, "%s/.abuse/", homedir );
+@@ -670,7 +670,7 @@ void setup( int argc, char **argv )
+     parseCommandLine(argc,argv);
+ 
+ 	//AR override save game directory to local directory
+-	if(settings.local_save) set_save_filename_prefix("user/");
++	if(settings.local_save) set_save_filename_prefix(getenv("XDG_DATA_HOME"));
+ 
+ 	printf("Setting save dir to %s\n", get_save_filename_prefix());
+ 

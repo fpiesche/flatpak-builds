@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Side-scrolling shooter
+Exec=abuse
+Icon=io.github.antrad.abuse_1996
+Keywords=abuse;crackdotcom;shooter
+Name=Abuse 1996
+StartupNotify=true
+Terminal=false
+Type=Application
