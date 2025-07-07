@@ -1,0 +1,92 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 056bd99db..007dcd08d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -221,35 +221,42 @@ include_directories(
+ 		"${PROJECT_SOURCE_DIR}/idlib"
+ )
+ 
+-find_package(ZLIB REQUIRED CONFIG)
+-find_package(minizip REQUIRED CONFIG)
+-find_package(CURL REQUIRED CONFIG)
++include(FindPkgConfig)
++# find_package(ZLIB REQUIRED CONFIG)
++# find_package(minizip REQUIRED CONFIG)
++# find_package(CURL REQUIRED CONFIG)
+ find_package(OpenAL REQUIRED CONFIG)
+ find_package(Ogg REQUIRED CONFIG)
+-find_package(Vorbis REQUIRED CONFIG)
+-find_package(JPEG REQUIRED CONFIG)
+-find_package(PNG REQUIRED CONFIG)
++# find_package(Vorbis REQUIRED CONFIG)
++# find_package(JPEG REQUIRED CONFIG)
++# find_package(PNG REQUIRED CONFIG)
+ find_package(ffmpeg REQUIRED CONFIG)
+ find_package(pugixml REQUIRED CONFIG)
+ find_package(MbedTLS REQUIRED CONFIG)
+ find_package(glfw3 REQUIRED CONFIG)
+ find_package(doctest REQUIRED CONFIG)
+ find_package(tracy REQUIRED CONFIG)
++pkg_check_modules(ZLIB zlib REQUIRED)
++pkg_check_modules(minizip minizip REQUIRED)
++pkg_check_modules(CURL libcurl REQUIRED)
++pkg_check_modules(Vorbis vorbis REQUIRED)
++pkg_check_modules(JPEG libjpeg REQUIRED)
++pkg_check_modules(PNG libpng REQUIRED)
+ 
+ target_link_libraries(TheDarkMod
+-		ZLIB::ZLIB
+-		minizip::minizip
+-		CURL::libcurl
++		ZLIB
++		minizip
++		libcurl
+ 		OpenAL::OpenAL
+-		vorbis::vorbis
++		vorbis
+ 		Ogg::ogg
+-		JPEG::JPEG
+-		PNG::PNG
+-		ffmpeg::ffmpeg
++		libjpeg
++		libpng
++		ffmpeg
+ 		glfw
+ 		pugixml::pugixml
+ 		doctest::doctest
+-		tracy::tracy
++		tracy
+ )
+ 
+ if (WIN32)
+@@ -258,18 +265,18 @@ if (WIN32)
+ elseif (UNIX)
+ 	target_link_libraries(TheDarkMod pthread dl stdc++fs X11 Xext Xxf86vm)
+ 	# strip debug symbols from executable and put them into a separate symbols file
+-	add_custom_command(
+-			TARGET TheDarkMod POST_BUILD
+-			COMMAND objcopy --only-keep-debug "$<TARGET_FILE:TheDarkMod>" "$<TARGET_FILE:TheDarkMod>.debug"
+-	)
+-	add_custom_command(
+-			TARGET TheDarkMod POST_BUILD
+-			COMMAND strip --strip-debug --strip-unneeded "$<TARGET_FILE:TheDarkMod>"
+-	)
+-	add_custom_command(
+-			TARGET TheDarkMod POST_BUILD
+-			COMMAND objcopy "--add-gnu-debuglink=$<TARGET_FILE:TheDarkMod>.debug" "$<TARGET_FILE:TheDarkMod>"
+-	)
++	# add_custom_command(
++	# 		TARGET TheDarkMod POST_BUILD
++	# 		COMMAND objcopy --only-keep-debug "$<TARGET_FILE:TheDarkMod>" "$<TARGET_FILE:TheDarkMod>.debug"
++	# )
++	# add_custom_command(
++	# 		TARGET TheDarkMod POST_BUILD
++	# 		COMMAND strip --strip-debug --strip-unneeded "$<TARGET_FILE:TheDarkMod>"
++	# )
++	# add_custom_command(
++	# 		TARGET TheDarkMod POST_BUILD
++	# 		COMMAND objcopy "--add-gnu-debuglink=$<TARGET_FILE:TheDarkMod>.debug" "$<TARGET_FILE:TheDarkMod>"
++	# )
+ endif ()
+ 
+ if (COPY_EXE)
