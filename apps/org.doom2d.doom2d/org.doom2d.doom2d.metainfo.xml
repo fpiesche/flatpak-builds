@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.doom2d.doom2d</id>
+  <name>Doom2D Forever</name>
+  <developer id="org.doom2d.doom2d-contributors">
+    <name>Doom2D Forever Contributors</name>
+    <url>https://repo.or.cz/d2df-editor.git</url>
+  </developer>
+  <summary>A Doom-themed platformer with online multiplayer</summary>
+  <icon type="remote">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.doom2d.doom2d/org.doom2d.doom2d.png</icon>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0-only</project_license>
+  <launchable type="desktop-id">org.doom2d.doom2d.desktop</launchable>
+  <url type="homepage">https://www.doom2d.org/</url>
+  <url type="contact">https://discord.gg/sGpJwMy</url>
+  <description>
+    <p>Doom2D Forever is a modern remake of the 1996 game Doom2D by Prikol Software, a side-scrolling arcade shooter based on id Software's Doom (1993) with gameplay akin to the original Duke Nukem games.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://doom2d.org/landing/img/bg.png</image>
+      <caption>A large, complex map</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://doom2d.org/landing/img/portfolio/1.png</image>
+      <caption>Split-screen cooperative gameplay</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://doom2d.org/landing/img/portfolio/2.png</image>
+      <caption>Deathmatch</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://doom2d.org/landing/img/portfolio/4.png</image>
+      <caption>Capture the Flag multiplayer mode</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://doom2d.org/landing/img/portfolio/6.png</image>
+      <caption>Map editor included</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>Shooter</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>Doom2DF</binary>
+  </provides>
+  <keywords>
+    <keyword>boomer shooter</keyword>
+    <keyword>retro</keyword>
+    <keyword>platformer</keyword>
+    <keyword>doom</keyword>
+    <keyword>online</keyword>
+  </keywords>
+  <releases>
+    <release version="0.667-0722185" date="2024-11-16" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>
