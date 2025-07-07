@@ -1,0 +1,7 @@
+{
+  "end-of-life": "This package has graduated to Flathub",
+  "end-of-life-rebase": "net.sourceforge.uhexen2.uhexen2",
+  "name": "Hexen II: Hammer of Thyrion",
+  "summary": "A modernized source port of Hexen II",
+  "icon-url": "https://cdn.jsdelivr.net/gh/flathub/net.sourceforge.uhexen2.uhexen2/net.sourceforge.uhexen2.uhexen2.svg"
+}
