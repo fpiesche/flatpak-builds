@@ -1,0 +1,95 @@
+app-id: io.github.funkincrew.funkin
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: io.github.funkincrew.funkin.sh
+
+finish-args:
+  # gamepad support
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Discord RPC
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
+
+
+modules:
+  - name: funkin
+    modules:
+      - name: gamemode
+        buildsystem: meson
+        config-opts:
+          - -Dwith-sd-bus-provider=no-daemon
+          - -Dwith-examples=false
+        sources:
+          - type: git
+            url: https://github.com/FeralInteractive/gamemode
+            tag: 1.8.1
+            x-checker-data:
+              type: git
+              tag-pattern: ^([\\d.]+)$
+    sources:
+      - type: archive
+        url: https://github.com/HaxeFoundation/neko/releases/download/v2-3-0/neko-2.3.0-linux64.tar.gz
+        sha256: 26dda28d0a51407f26218ba9c2c355c8eb23cf2b0b617274b00e4b9170fe69eb
+        dest: haxe/
+        x-checker-data:
+          type: anitya
+          project-id: 10885
+          url-template: https://github.com/HaxeFoundation/neko/releases/download/v$version/neko-$version-linux64.tar.gz
+      - type: archive
+        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.5/haxe-4.3.5-linux64.tar.gz
+        sha256: 382b57cb877a4edfd9bef997e910ab3dfafdcb5887b5d45b93161fcc246d808b
+        dest: haxe/
+        x-checker-data:
+          type: anitya
+          project-id: 7883
+          url-template: https://github.com/HaxeFoundation/haxe/releases/download/$version/haxe-$version-linux64.tar.gz
+
+      # Haxe packages required
+      - io.github.funkincrew.funkin.haxelib-dependencies.yml
+
+      # Main Funkin repo
+      - type: git
+        url: https://github.com/FunkinCrew/Funkin
+        tag: v0.5.2
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+      # redirect crash logs, mods directory and list to XDG_DATA_HOME
+      # - type: patch
+      #   path: fnf-psychengine-fix_user_data.patch
+      # launcher script
+      - type: script
+        dest-filename: io.github.funkincrew.funkin.sh
+        commands:
+          # Set up Discord RPC access
+          - |
+            for i in {0..9}; do
+              test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$i;
+            done
+          # Create mods directory if it doesn't exist yet
+          - if [[ ! -d $XDG_DATA_HOME/mods ]]; then mkdir $XDG_DATA_HOME/mods; fi
+          # launch game
+          - cd /app/bin
+          - ./PsychEngine
+    builddir: true
+    buildsystem: simple
+    build-commands:
+      # build
+      - |
+        export PATH=$PATH:$(pwd)/haxe
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/haxe
+        haxelib setup ./setup
+        ./haxe/haxelib run lime build Project.xml linux
+        mkdir -p /app/bin && cp -r export/release/linux/bin/* /app/bin/
+      # Install launchers
+      - |
+        install -m755 io.github.funkincrew.funkin.sh -t /app/bin/
+        desktop-file-edit --set-key=Exec --set-value=io.github.funkincrew.funkin.sh assets/meta/io.github.funkincrew.funkin.desktop
+        install -Dm 644 assets/meta/io.github.funkincrew.funkin.desktop -t /app/share/applications
+        install -Dm 644 assets/meta/io.github.funkincrew.funkin.png -t /app/share/icons/hicolor/512x512/apps
+        install -Dm 644 assets/meta/io.github.funkincrew.funkin.metainfo.xml -t /app/share/metainfo

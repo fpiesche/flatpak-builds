@@ -1,0 +1,140 @@
+  - type: file
+    url: https://github.com/openfl/lime/releases/download/8.1.1/lime-haxelib.zip
+    sha256: c6736433697f8be37a0d9940ac8d1b448ec6f86daa1a82852787a10d37e07ed7
+    dest: psychengine-deps/
+    dest-filename: lime-8.1.1.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/openfl/lime/releases/latest
+      version-query: .tag_name
+      url-query: .assets[] | select(.name==\"lime-haxelib.zip\") | .browser_download_url
+  - type: file
+    url: https://github.com/openfl/openfl/releases/download/9.3.2/openfl-haxelib.zip
+    sha256: 9e8cbc475c0cc68075ef4b9a37577c7cb3ae1eab4e594645c7d31908d4a0cbd9
+    dest: psychengine-deps/
+    dest-filename: openfl-9.3.2.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/openfl/openfl/releases/latest
+      version-query: .tag_name
+      url-query: .assets[] | select(.name==\"openfl-haxelib.zip\") | .browser_download_url
+  - type: file
+    url: https://api.github.com/repos/HaxeFlixel/flixel/zipball/refs/tags/5.8.0
+    sha256: c747811e666c5397352d1894f6db1cdc7221c3dd2ad8e14d0d689cc3d2dcb9e3
+    dest: psychengine-deps/
+    dest-filename: flixel-5.6.2.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/HaxeFlixel/flixel/tags
+      version-query: .[0].name
+      url-query: .[0].zipball_url
+  - type: file
+    url: https://api.github.com/repos/HaxeFlixel/flixel-addons/zipball/refs/tags/3.2.2
+    sha256: ba048fce4da59d386697b280bc479f07fbff7575448fe75595d57361cd80bd12
+    dest: psychengine-deps/
+    dest-filename: flixel-addons-3.2.1.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/HaxeFlixel/flixel-addons/tags
+      version-query: .[0].name
+      url-query: .[0].zipball_url
+  - type: file
+    url: https://api.github.com/repos/HaxeFlixel/flixel-tools/zipball/refs/tags/1.5.1
+    sha256: dcf1e8a4de16ecb9b6c1ca5093bb0c0c04097e660275f5eed76f6026a897dca0
+    dest: psychengine-deps/
+    dest-filename: flixel-tools-1.5.1.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/HaxeFlixel/flixel-tools/tags
+      version-query: .[0].name
+      url-query: .[0].zipball_url
+  - type: file
+    url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.1
+    sha256: fa28321c5233f04fde22f8b5c870cb3fdca43c50abd62d1d9fce0e33c58dd973
+    dest: psychengine-deps/
+    dest-filename: flixel-ui-2.5.0.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/HaxeFlixel/flixel-ui/tags
+      version-query: .[0].name
+      url-query: .[0].zipball_url
+  - type: file
+    url: https://github.com/HaxeFoundation/hxcpp/releases/download/v4.3.21/hxcpp-4.3.21.zip
+    sha256: 0ba282f6807067055d5c80a74263d7784b1c691a71c3f19f37b932883e466031
+    dest: psychengine-deps/
+    dest-filename: hxcpp-4.3.21.zip
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/HaxeFoundation/hxcpp/releases/latest
+      version-query: .tag_name | sub(\"^v\"; \"\")
+      url-query: .assets[] | select(.name==\"hxcpp-\" + $version + \".zip\") | .browser_download_url
+
+# These dependencies use no tags in their git repositories.
+  - type: git
+    url: https://github.com/FunkinCrew/flixel.git
+    commit: 0acbd8591ba790d26ddf8452f5ae853b0978b1dd
+    dest: haxelib-deps/
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/FunkinCrew/flixel/branches/dev-6.0.0
+      tag-query: .tag
+      commit-query: .commit.sha
+
+  - type: git
+    url: https://github.com/FunkinCrew/FlxPartialSound.git
+    commit: 41f35ddb1eb9d10bc742e6f8b5bcc62f9ef8ad84
+    dest: haxelib-deps/
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/FunkinCrew/FlxPartialSound/branches/main
+      tag-query: .tag
+      commit-query: .commit.sha
+
+  - type: file
+    url: https://lib.haxe.org/p/hxCodec/3.0.2/download/
+    sha256: 1cc490fb667c321b85772a7912876495163ebca460f8419af17702c7f3d462fe
+    dest: psychengine-deps/
+    dest-filename: hxCodec-3.0.2.zip
+  - type: file
+    url: https://lib.haxe.org/p/SScript/10.1.618/download/
+    sha256: d81e02e171913ba4da464ea6ccf7ac339cfe2d2d944ac52cc4d868ced47812e1
+    dest: psychengine-deps/
+    dest-filename: SScript-10.1.618.zip
+  - type: file
+    url: https://github.com/JWambaugh/TJSON/archive/e9f93b9cd98e5becd63d219371d5e395b176e6c1.zip
+    sha256: 90ea73553b378ac2d64a387dd16ec3c8da1488134da1a613642fe0c46d059ce1
+    dest: psychengine-deps/
+    dest-filename: tjson-e9f93b9.zip
+  - type: file
+    url: https://github.com/ShadowMario/flxanimate/archive/6d11b11f65f822a2a2ad01018fa8bcea0437bf5a.zip
+    sha256: 7293d247b5a82abda2c4084922a5513c416d83f1b0857391f45848bbbcad3364
+    dest: psychengine-deps/
+    dest-filename: flxanimate-6d11b11.zip
+  - type: file
+    url: https://github.com/superpowers04/linc_luajit/archive/633fcc051399afed6781dd60cbf30ed8c3fe2c5a.zip
+    sha256: b1c49b0aa526541b4c5aadadc62f2790f43eab50ad4b5da97758e79d7c02c604
+    dest: psychengine-deps/
+    dest-filename: linc_luajit-633fcc0.zip
+
+# hxdiscord_rpc further depends on discord-rpc and rapidjson submodules.
+  - type: file
+    url: https://github.com/MAJigsaw77/hxdiscord_rpc/archive/c727f84b56a2fc200610a9119add988ee8cce8eb.zip
+    sha256: 3a2c32358fb0ccd27458e2078971b57849e2b8217de7b16e70b21c2943b7097d
+    dest: psychengine-deps/
+    dest-filename: hxdiscord_rpc-3a2c3235.zip
+  - type: archive
+    url: https://github.com/discord/discord-rpc/archive/963aa9f3e5ce81a4682c6ca3d136cddda614db33.zip
+    sha256: a91ec58748b6c55e2e91ab6288ad24a98306da99e24637a2ea97b19c37fc7ad2
+    dest: setup/hxdiscord_rpc/1,1,1/project/discord-rpc/
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/discord/discord-rpc/releases/latest
+      url-query: .zipball_url
+  - type: archive
+    url: https://github.com/Tencent/rapidjson/archive/6089180ecb704cb2b136777798fa1be303618975.zip
+    sha256: dc82a52bc0eb329dfda1b94cf6376d5bba91d9765d29b27807baee9ea6d68179
+    x-checker-data:
+      type: json
+      url: https://api.github.com/repos/Tencent/rapidjson/releases/latest
+      url-query: .zipball_url
+    dest: setup/hxdiscord_rpc/1,1,1/project/rapidjson/
