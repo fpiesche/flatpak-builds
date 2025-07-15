@@ -1,3 +1,4 @@
 {
+  "_submission-status": "Unsuitable for Flathub - Windows application with bundled wine",
   "only-arches": ["x86_64"]
 }
