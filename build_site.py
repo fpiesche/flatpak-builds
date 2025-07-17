@@ -50,6 +50,7 @@ def parse_app(app_id: str) -> dict:
         "description": etree.tostring(metainfo.xpath("description")[0], encoding="unicode"),
         "flathub_status": flathub_status,
         "flathub_id": flathub_id,
+        "flathub_url": f"https://flathub.org/apps/{flathub_id}" if "graduated to Flathub" in flathub_status else f"/apps/{flathub_id}.html",
         "developer_name": metainfo.xpath("developer/name")[0].text,
         "developer_url": metainfo.xpath("developer/url")[0].text,
         "developer_name": metainfo.xpath("developer/name")[0].text,

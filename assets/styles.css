@@ -1,6 +1,6 @@
 :root {
     --ykc-bg-dark: #024959;
-    --ykc-bg-dark-alpha: #024959a0;
+    --ykc-bg-dark-alpha: #024959b0;
     --ykc: #f5d505;
     --accent: #ea602e;
     --ykc-darker: #f28705;
@@ -17,8 +17,37 @@
     width: 64px;
 }
 
+.appid {
+    font-size: .8em;
+    margin-bottom: 1em;
+}
+
+main {
+    padding-top: 5em;
+}
+
+h2 {
+    margin-bottom: 1em;
+}
+
+.cmdline {
+    border-radius: .4em;
+    padding: .4em;
+    padding-left: .8em;
+    padding-right: .6em;
+    border: none;
+    font-family: monospace;
+    background-color: var(--ykc-bg-dark);
+    color: var(--ykc);
+}
+
+.cli-inline {
+    padding: .3em;
+    font-size: .8em;
+}
+
 main > .container {
-    padding-top: 6em;
+    padding-top: 2em;
     color: var(--ykc-bg-dark);
 }
 
@@ -58,6 +87,26 @@ a:hover {
     font-size: 1.5em;
     padding-left: 1em;
     padding-right: 1em;
+}
+
+.btn:active {
+    background-color: var(--accent) !important;
+}
+
+.install-column {
+    text-align: center;
+}
+
+.install-column > a {
+    width: 6em;
+}
+
+footer {
+    text-align: right;
+}
+
+.developer {
+    margin-bottom: 1em;
 }
 
 nav {
