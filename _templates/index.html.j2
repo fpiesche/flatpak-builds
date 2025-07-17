@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>yellow keycard flatpak repo</title>
+        <meta description="Various things missing from Flathub">
+
+        <meta property="og:url" content="https://flatpak.yellowkeycard.net/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="yellow keycard flatpaks" />
+        <meta property="og:description" content="retrp gaming and other flatpaks" />
+        <meta property="og:image" content="https://flatpak.yellowkeycard.net/assets/favicon.svg" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg">
+        <meta name="theme-color" content="#f5d505">
+
+        <!-- Bootstrap 5 -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+        <!-- Data Tables -->
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+        <link href="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.css" rel="stylesheet" integrity="sha384-d76uxpdVr9QyCSR9vVSYdOAZeRzNUN8A4JVqUHBVXyGxZ+oOfrZVHC/1Y58mhyNg" crossorigin="anonymous">
+        <script src="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.js" integrity="sha384-JRUjeYWWUGO171YFugrU0ksSC6CaWnl4XzwP6mNjnnDh4hfFGRyYbEXwryGwLsEp" crossorigin="anonymous"></script>
+        <link href="https://cdn.datatables.net/columncontrol/1.0.7/css/columnControl.dataTables.min.css" rel="stylesheet">
+        <script src="https://cdn.datatables.net/columncontrol/1.0.7/js/dataTables.columnControl.min.js"></script>
+        <script type="text/javascript">
+            function init_tables() {
+                const datatables = ["#flatpaks", "#graduates"]
+                datatables.forEach(function (item, index) {
+                    console.log("Initializing data table for " + item);
+                    new DataTable(
+                        item,
+                        {
+                            info: true,
+                            ordering: true,
+                            paging: true
+                        }
+                    );
+                });
+            }
+        </script>
+
+        <!-- Ko-fi button -->
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="assets/styles.css">
+        <link href="https://fonts.cdnfonts.com/css/jupiter-crash" rel="stylesheet">
+
+        <!-- Font Awesome CSS -->
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+    </head>
+
+
+    <body onLoad="init_tables();">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container">
+            <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+            <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+        </nav>
+
+        <!-- Main content -->
+        <main class="flex-shrink-0">
+            <div class="container">
+                This is a repository holding some Flatpak builds I've assembled which I have yet to submit to Flathub for a variety of reasons
+                - e.g. because the app is still going through developer changes and approval, the developers have gone missing or retired so
+                I can't get approval for a submission, or the licensing situation is unclear or incompatible with Flathub, or the developers
+                have specifically said they don't want their app to be listed on Flathub.
+            </div>
+
+            <div class="container">
+                <h2 id="setup">Setup</h2>
+                <code>flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo</code>
+
+                <h2>Current packages</h2>
+                <table id="flatpaks" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="search">App</th>
+                            <th>Install</th>
+                            <th>Submission status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in apps -%}
+                        {% if  not app.is_graduate %}
+                        <tr id="{{ app.id }}">
+                            <td>
+                                <a href="{{ app.listing_path }}">
+                                    <img class="app-icon-small" src="{{ app.icon_url }}" alt="{{ app.name }}" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ app.listing_path }}">
+                                    <h3>{{ app.name }}</h3>
+                                </a>
+                                {{ app.summary }}
+                            </td>
+                            <td><a class="btn btn-primary" href="appstream://{{ app.id }}" role="button">Install</a></td>
+                            <td>{{ app.flathub_status }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container">
+                <h2>Graduates</h2>
+                <p>These are some Flatpaks which used to be available here that have been replaced;
+                    in most cases they've been published on Flathub publicly with approval and help
+                    from the upstream projects.</p>
+                <table id="graduates" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>App</th>
+                            <th>Install</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in apps -%}
+                        {% if app.is_graduate %}
+                        <tr id="{{ app.flathub_id }}">
+                            <td>
+                                <a href="https://flathub.org/apps/{{ app.flathub_id }}">
+                                    <img src="{{ app.icon_url }}" style="height: auto; width: 128px" alt="{{ app.name }}" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/{{ app.flathub_id }}">
+                                    <h3>{{ app.name }}</h3>
+                                </a>
+                                {{ app.summary }}
+                            </td>
+                            <td><a class="btn btn-primary" href="appstream://{{ app.id }}" role="button">Install</a></td>
+                            <td>{{ app.flathub_status }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">🏳️‍🌈🏳️‍⚧️ made with 💕 by <a href="https://yellowkeycard.net/">Florian Piesche</a>. trans rights are human rights.</span>
+        </div>
+    </footer>
+
+    </body>
+</html>

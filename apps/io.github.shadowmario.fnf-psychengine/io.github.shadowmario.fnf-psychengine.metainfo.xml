@@ -3,9 +3,9 @@
   <id>io.github.shadowmario.fnf-psychengine</id>
   <launchable type="desktop-id">io.github.shadowmario.fnf-psychengine.desktop</launchable>
   <name>PsychEngine</name>
-  <developer id="github.com/shadowmario">
-    <name>ShadowMario</name>
-    <contact>https://github.com/ShadowMario/</contact>
+  <developer id="io.github.shadowmario.fnf-psychengine">
+    <name>ShadowMario, FNF-PsychEngine Contributors</name>
+    <url>https://github.com/ShadowMario/FNF-PsychEngine/graphs/contributors</url>
   </developer>
   <summary>Desktop implementation of Friday Night Funkin'</summary>
   <metadata_license>CC0-1.0</metadata_license>

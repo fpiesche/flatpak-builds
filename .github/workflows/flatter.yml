@@ -216,23 +216,27 @@ jobs:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
       fail-fast: false
     steps:
+
       - name: Checkout
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/checkout@v4
         with:
           submodules: true
           ref: ${{ github.ref }}
+
       - name: Download ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
           path: _build
+
       - name: Delete builddir artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: geekyeggo/delete-artifact@v5
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
+
       - name: Lint build dir
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
@@ -276,48 +280,13 @@ jobs:
           pattern: "*_repo.zip"
           path: _site/repo
           merge-multiple: true
-      - name: Setup GPG
-        id: gpg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Assemble web listings
+
+      - name: Build web frontend
         shell: bash
         run: |
-          mkdir -p _site/apps
-          for file in apps/*/*.metainfo.xml; do
-            xmlstarlet tr _templates/app_page.xsl $file > _site/apps/$(basename $file);
-          done
-          rename ".metainfo.xml" ".html" ./_site/apps/*.metainfo.xml
-      - name: Generate Flatpak repository and app reference files
-        shell: bash
-        run: |
-          gpg --export florian@yellowkeycard.net | base64 -w 0 > _site/ykc.gpg
-          for app in $(ls -1 apps); do
-            if [[ "$app" != "shared-modules" ]]; then
-              jinja2 \
-                -D app_id="$app" \
-                -D app_name="$(xmlstarlet sel -t -v //component/name apps/$app/$app.metainfo.xml)" \
-                -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 -w 0)" \
-                -o _site/apps/${app}.flatpakref \
-                _templates/app.flatpakref.j2
-            fi
-          done
-          jinja2 \
-            -D gpg_key="$(gpg --export florian@yellowkeycard.net | base64 -w 0)" \
-            -o _site/ykc.flatpakrepo \
-            _templates/ykc.flatpakrepo.j2
-      - name: Generate index.html file
-        run: |
-          touch _site/index.html
-          npm i markdown-to-html-cli -g
-          markdown-to-html \
-            --source README.md \
-            --output _site/index.html \
-            --title "yellow keycard flatpak repo" \
-            --description "Various things missing from Flathub" \
-            --github-corners "https://github.com/fpiesche/flatpak-builds"
+          pip install -r requirements.txt
+          python3 build_site.py _site
+
       - name: Check site status
         run: |
           echo "::group::File size"
@@ -332,6 +301,7 @@ jobs:
           echo "::group::Full tree"
           tree _site
           echo "::endgroup::"
+
       - name: Update repo metadata
         run: |
           flatpak build-update-repo \
@@ -341,11 +311,13 @@ jobs:
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
             _site/repo/
+
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-          # single-commit: true
+          single-commit: true
+
       - name: Delete repo artifacts
         if: always()
         uses: geekyeggo/delete-artifact@v5

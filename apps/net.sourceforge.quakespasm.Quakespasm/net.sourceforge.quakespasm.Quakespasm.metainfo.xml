@@ -2,7 +2,10 @@
 <component type="desktop-application">
   <id>net.sourceforge.quakespasm.Quakespasm</id>
   <name>Quakespasm</name>
-  <developer id="quakespasm.sourceforge.net"><name>Quakespasm contributors</name></developer>
+  <developer id="net.sourceforge.quakespasm.Quakespasm">
+    <name>Quakespasm contributors</name>
+    <url>https://github.com/sezero/quakespasm/graphs/contributors</url>
+  </developer>
   <summary>A modern port of the original Quake engine</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>

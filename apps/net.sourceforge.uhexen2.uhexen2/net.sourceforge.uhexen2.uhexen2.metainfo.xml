@@ -2,7 +2,10 @@
 <component type="desktop-application">
   <id>net.sourceforge.uhexen2.uhexen2</id>
   <name>Hexen II: Hammer of Thyrion</name>
-  <developer id="uhexen2.sourceforge.net"><name>uHexen2 Contributors</name></developer>
+  <developer id="net.sourceforge.uhexen2">
+    <name>uHexen2 Contributors</name>
+    <url>https://sourceforge.net/p/uhexen2/uhexen2/ci/master/tree/docs/AUTHORS</url>
+  </developer>
   <summary>A modernized source port of Hexen II</summary>
   <launchable type="desktop-id">net.sourceforge.uhexen2.uhexen2.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>

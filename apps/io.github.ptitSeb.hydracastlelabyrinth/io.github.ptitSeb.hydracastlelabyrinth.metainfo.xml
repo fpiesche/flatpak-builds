@@ -2,7 +2,10 @@
 <component type="desktop-application">
   <id>io.github.ptitSeb.hydracastlelabyrinth</id>
   <name>Hydra Castle Labyrinth</name>
-  <developer id="ptitseb.github.io/hydracastlelabyrinth/"><name>E.Hashimoto, Anonymous, HCL Contributors</name></developer>
+  <developer id="io.github.ptitseb.hydracastlelabyrinth">
+      <name>E.Hashimoto, Anonymous, HCL Contributors</name>
+      <url>https://github.com/ptitSeb/hydracastlelabyrinth/graphs/contributors</url>
+  </developer>
   <summary>A modern Linux port of the "metroidvania" game Hydra Castle Labyrinth</summary>
   <launchable type="desktop-id">io.github.ptitSeb.hydracastlelabyrinth.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
