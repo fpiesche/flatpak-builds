@@ -57,7 +57,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/sergiou87/open-supaplex
-        commit: 1a91d9b170ca5880c23c3996cce259321821bdf5
+        commit: 73df867bc9c14790a23b8d66c86388e09b7e5312
         x-checker-data:
           type: json
           url: https://api.github.com/repos/sergiou87/open-supaplex/branches/master
