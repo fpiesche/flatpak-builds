@@ -1,7 +1,4 @@
 {
-  "end-of-life": "This package has graduated to Flathub",
-  "end-of-life-rebase": "io.github.ptitSeb.hydracastlelabyrinth",
-  "name": "Hydra Castle Labyrinth",
-  "summary": "A modern Linux port of the \"metroidvania\" game Hydra Castle Labyrinth",
-  "icon-url": "https://cdn.jsdelivr.net/gh/ptitSeb/hydracastlelabyrinth/io.github.ptitSeb.hydracastlelabyrinth.png"
+  "end-of-life": "This package has graduated to Flathub.",
+  "end-of-life-rebase": "io.github.ptitSeb.hydracastlelabyrinth"
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<component type="desktop-application">
+  <id>org.icculus.prey</id>
+  <name>Prey</name>
+  <developer id="org.icculus.prey">
+    <name>Human Head Studios; Ryan C. Gordon</name>
+    <url>https://www.mobygames.com/game/23082/prey/credits/windows/?autoplatform=true</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>Sci-fi shooter with horror elements</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">org.icculus.prey.desktop</launchable>
+  <url type="homepage">https://icculus.org/prey/</url>
+  <description>
+    <p>Prey tells the story of Tommy, a Cherokee garage mechanic stuck on a reservation
+        going nowhere. Along with his people, he is abducted to a menacing mothership.</p>
+    <p>This is a Flatpak distribution of Ryan C. Gordon's Linux port of the game, for
+        ease of use as the game can be difficult to run on modern systems.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Prey game data or a CD key. You will need
+        to supply both. At least the files <code>pak000.pk4</code> through <code>pak004.pk4</code>
+        from a retail installation of Prey must be copied to
+        <code>$HOME/.var/app/org.icculus.prey/base/</code>.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.mobygames.com/screenshots/11960762-prey-macintosh-title.jpg</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961144-prey-macintosh-game-intro-with-tommy-native-american-talking-to-.jpg</image>
+      <caption>The protagonist talking to himself in the bathroom at the start of the game.</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961162-prey-macintosh-all-of-us-are-transported-to-some-alien-ship.jpg</image>
+      <caption>Abduction</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>preyded.x86</binary>
+    <binary>prey.x86</binary>
+  </provides>
+  <keywords>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+    <keyword>horror</keyword>
+    <keyword>prey</keyword>
+  </keywords>
+  <releases>
+    <release version="02192009" date="2009-02-19" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="drugs-alcohol">moderate</content_attribute>
+    <content_attribute id="drugs-narcotics">moderate</content_attribute>
+    <content_attribute id="sex-themes">mild</content_attribute>
+    <content_attribute id="language-discrimination">moderate</content_attribute>
+    <content_attribute id="money-gambling">moderate</content_attribute>
+  </content_rating>
+</component>

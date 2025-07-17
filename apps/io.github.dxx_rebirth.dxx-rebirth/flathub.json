@@ -1,7 +1,4 @@
 {
-  "end-of-life": "This package has graduated to Flathub",
-  "end-of-life-rebase": "io.github.dxx_rebirth.dxx-rebirth",
-  "name": "DXX-Rebirth",
-  "summary": "A modern cross-platform port of the Descent engine",
-  "icon-url": "https://cdn.jsdelivr.net/gh/dxx-rebirth/dxx-rebirth@master/contrib/packaging/linux/io.github.dxx_rebirth.dxx-rebirth.svg"
+  "end-of-life": "This package has graduated to Flathub.",
+  "end-of-life-rebase": "io.github.dxx_rebirth.dxx-rebirth"
 }

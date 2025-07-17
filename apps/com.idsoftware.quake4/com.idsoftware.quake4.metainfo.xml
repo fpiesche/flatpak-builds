@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<component type="desktop-application">
+  <id>com.idsoftware.quake4</id>
+  <name>Quake 4</name>
+  <developer id="com.idsoftware.quake4">
+    <name>id Software, Raven Software</name>
+    <url>https://www.mobygames.com/game/19650/quake-4/credits/windows/?autoplatform=true</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#b4ca38</color>
+    <color type="primary" scheme_preference="dark">#001103</color>
+  </branding>
+  <summary>Sci-fi first-person shooter</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.idsoftware.quake4.desktop</launchable>
+  <url type="homepage">https://web.archive.org/web/20120626014852/http://www.ravensoft.com/games/quake/view-game/</url>
+  <description>
+    <p>Quake 4 is the true sequel to Quake II, continuing the Strogg vs. Humans storyline
+        from the point where Quake II ended.</p>
+    <p>This is a Flatpak distribution of the official Linux port of the game, for
+        ease of use as the game can be difficult to run on modern systems.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Quake 4 game data or a CD key. You will need
+        to supply both. At least the files <code>pak001.pk4</code> through <code>pak012.pk4</code>
+        from a retail installation of Quake 4 must be copied to
+        <code>$HOME/.var/app/com.idsoftware.quake4/q4base/</code>.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006651.jpg</image>
+      <caption>The squad</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006643.jpg</image>
+      <caption>Fight giant Strogg bosses</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006646.jpg</image>
+      <caption>Enemies have new tactics after the first invasion in Quake 2</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>q4ded.x86</binary>
+    <binary>quake4smp.x86</binary>
+    <binary>quake4.x86</binary>
+  </provides>
+  <releases>
+    <release version="1.4.2" date="2007-06-18" />
+    <release version="1.0.0" date="2005-10-20" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>

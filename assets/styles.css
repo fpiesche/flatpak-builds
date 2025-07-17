@@ -1,10 +1,120 @@
-.header {
-    padding: 1em;
+:root {
+    --ykc-bg-dark: #024959;
+    --ykc-bg-dark-alpha: #024959b0;
+    --ykc: #f5d505;
+    --accent: #ea602e;
+    --ykc-darker: #f28705;
+    --ykc-medium: #f2b705;
+}
+
+.app-icon {
+    height: 128px;
+    width: 128px;
+}
+
+.app-icon-small {
+    height: 64px;
+    width: 64px;
+}
+
+.appid {
+    font-size: .8em;
+    margin-bottom: 1em;
+}
+
+main {
+    padding-top: 5em;
+}
+
+h2 {
+    margin-bottom: 1em;
+}
+
+.cmdline {
+    border-radius: .4em;
+    padding: .4em;
+    padding-left: .8em;
+    padding-right: .6em;
+    border: none;
+    font-family: monospace;
+    background-color: var(--ykc-bg-dark);
+    color: var(--ykc);
+}
+
+.cli-inline {
+    padding: .3em;
+    font-size: .8em;
+}
+
+main > .container {
+    padding-top: 2em;
+    color: var(--ykc-bg-dark);
+}
+
+.navbar-brand {
+    font-family: 'Jupiter Crash BRK', sans-serif;
+    font-size: 2em;
+    color: var(--ykc-bg-dark);
+}
+
+.navbar-brand:hover {
+    font-family: 'Jupiter Crash BRK', sans-serif;
+    font-size: 2em;
+    color: var(--ykc);
+}
+
+a {
+    color: var(--ykc-darker);
+}
+
+a:hover {
+    color: var(--ykc-medium);
+}
+
+.btn {
+    background-color: var(--ykc-darker);
+    border: var(--ykc-medium);
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: var(--ykc-medium);
+    border: var(--ykc);
+    font-weight: bold;
+}
+
+.btn-install {
+    font-size: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.btn:active {
+    background-color: var(--accent) !important;
+}
+
+.install-column {
+    text-align: center;
+}
+
+.install-column > a {
+    width: 6em;
+}
+
+footer {
+    text-align: right;
+}
+
+.developer {
+    margin-bottom: 1em;
+}
+
+nav {
+    background-color: var(--ykc-medium);
+    padding: .2em;
     margin-right: 0;
     margin-left: 0;
-    min-height: 160px;
     width: 100%;
-    background-color: lightsteelblue;
 }
 
 .header > div > h1 {
@@ -21,33 +131,8 @@
     margin-right: 1em;
 }
 
-#dropdownMenuButton {
-    float: right;
-    margin-top: 1em;
-    background-color: slateblue;
-    color: aliceblue;
-    font-weight: bold;
-    font-size: 2em;
-    color: white;
-}
-
-#dropdownMenuButton:hover {
-    background-color: aliceblue;
-    color: darkslateblue;
-    transition: .4s;
-}
-
-.dropdown-menu > a:hover {
-    background-color: slateblue !important;
-    color: aliceblue !important;
-}
-
-.toast {
-    position: absolute;
-    z-index: 100;
-    top: 5em;
-    right: 1em;
-    float: right;
+.carousel-inner {
+    margin-top: 2em;
 }
 
 .carousel-inner > div > img {
@@ -58,7 +143,7 @@
 
 .carousel-caption {
     border-radius: 0.5em;
-    background: #00000080;
+    background: var(--ykc-bg-dark-alpha);
     margin: 0 8em;
 }
 

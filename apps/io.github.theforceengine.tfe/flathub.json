@@ -1,7 +1,4 @@
 {
-  "end-of-life": "This package has graduated to Flathub",
-  "end-of-life-rebase": "io.github.theforceengine.tfe",
-  "name": "The Force Engine",
-  "summary": "A modern cross-platform port of “STAR WARS™: Dark Forces” with mod support",
-  "icon-url": "https://cdn.jsdelivr.net/gh/luciusdxl/TheForceEngine/TheForceEngine/TheForceEngine.svg"
+  "end-of-life": "This package has graduated to Flathub.",
+  "end-of-life-rebase": "io.github.theforceengine.tfe"
 }
