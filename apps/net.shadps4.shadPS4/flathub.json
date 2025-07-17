@@ -1,7 +1,4 @@
 {
-  "end-of-life": "This package has graduated to Flathub",
-  "end-of-life-rebase": "net.shadps4.shadPS4",
-  "name": "shadPS4 Emulator",
-  "summary": "PS4 emulator",
-  "icon-url": "https://cdn.jsdelivr.net/gh/shadps4-emu/shadPS4@main/src/images/net.shadps4.shadPS4.svg"
+  "end-of-life": "This package has graduated to Flathub.",
+  "end-of-life-rebase": "net.shadps4.shadPS4"
 }

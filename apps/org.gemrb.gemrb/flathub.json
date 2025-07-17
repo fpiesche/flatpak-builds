@@ -1,7 +1,4 @@
 {
-  "end-of-life": "This package has graduated to Flathub",
-  "end-of-life-rebase": "org.gemrb.gemrb",
-  "name": "GemRB",
-  "summary": "A portable open-source implementation of Bioware's Infinity Engine",
-  "icon-url": "https://cdn.jsdelivr.net/gh/gemrb/gemrb/artwork/logo04-rb_only.svg"
+  "end-of-life": "This package has graduated to Flathub.",
+  "end-of-life-rebase": "org.gemrb.gemrb"
 }
