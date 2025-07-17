@@ -85,7 +85,6 @@ def read_apps() -> list[dict]:
         if app_id == "shared-modules":
             continue
         app_spec = parse_app(app_id)
-        print(app_spec)
         yield app_spec
 
 
@@ -126,8 +125,9 @@ def build_site():
     
     apps_path = os.path.join(args.output_root, "apps")
     for app in read_apps():
-        with open(os.path.join(apps_path, f"{app['id']}.html"), "w") as listing_file:
-            listing_file.write(generate_listing(app))
+        if not app["is_graduate"]:
+            with open(os.path.join(apps_path, f"{app['id']}.html"), "w") as listing_file:
+                listing_file.write(generate_listing(app))
 
     with open(os.path.join(args.output_root, "ykc.flatpakrepo"), "w") as repo_file:
         repo_file.write(generate_flatpakrepo())
