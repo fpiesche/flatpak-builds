@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/_templates/app_page.xsl" ?>
 <component type="desktop-application">
   <id>io.github.openenroth.openenroth</id>
   <name>OpenEnroth</name>
@@ -17,7 +16,10 @@
   <project_license>LGPL-3.0</project_license>
   <url type="homepage">https://github.com/openenroth/openenroth/</url>
   <description>
-    <p>We are creating an extensible engine and modding environment to make it possible to play the original Might &amp; Magic VI-VIII games on modern platforms with improved graphics and quality-of-life features expected of modern titles, and make modding and installing and playing the mods a pleasurable experience.</p>
+    <p>We are creating an extensible engine and modding environment to make it possible to play the original
+      Might &amp; Magic VI-VIII games on modern platforms with improved graphics and quality-of-life features
+      expected of modern titles, and make modding and installing and playing the mods a pleasurable experience.
+    </p>
     <p>Currently only MM7 is playable.</p>
   </description>
   <screenshots>
@@ -55,16 +57,16 @@
     <keyword>sourceport</keyword>
     <keyword>port</keyword>
   </keywords>
-  <requires>
+  <recommends>
     <control>keyboard</control>
     <control>pointing</control>
-  </requires>
+  </recommends>
   <provides>
     <binary>OpenEnroth</binary>
   </provides>
   <releases>
     <release version="nightly" date="2024-01-01">
-        <description>The current nightly release for OpenEnroth.</description>
+        <description><p>The current nightly release for OpenEnroth.</p></description>
     </release>
   </releases>
   <content_rating type="oars-1.1">
