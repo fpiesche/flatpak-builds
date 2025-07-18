@@ -94,8 +94,6 @@
     },
     "org.vkdoom.vkdoom": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-	    "appid-url-not-reachable": "vkdoom.org is currently unavailable",
-	    "url-not-reachable": "vkdoom.org is currently unavailable"        
     },
     "se.remar.castle": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
