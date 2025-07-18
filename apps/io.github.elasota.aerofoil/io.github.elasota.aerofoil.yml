@@ -24,20 +24,18 @@ modules:
   - name: aerofoil
     buildsystem: cmake-ninja
     builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
     sources:
       - type: archive
         url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
         dest-filename: aerofoil.zip
-        sha256: e88540e9cc4e3355c31dad68443083c62616339984ac9dc2be9e399e6ec06f43
-        # x-checker-data:
-        #   type: json
-        #   url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
-        #   version-query: .tag_name
-        #   url-query: .zipball_url
+        sha256: 297b6fde96666731f3dc84f80ad22da72a6c6be310f3e07b3a1d1d8b6769724c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
     post-install:
-      - install -Dm 755 ../Resources/Linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
-      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 755 ../Resources/Linux/${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.releases.xml -t /app/share/metainfo/releases
+      - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
