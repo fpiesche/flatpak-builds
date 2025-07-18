@@ -57,6 +57,7 @@
     <keyword>sourceport</keyword>
     <keyword>port</keyword>
   </keywords>
+  <supports></supports>
   <recommends>
     <control>keyboard</control>
     <control>pointing</control>

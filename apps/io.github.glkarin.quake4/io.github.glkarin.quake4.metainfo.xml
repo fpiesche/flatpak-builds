@@ -52,6 +52,12 @@
   <provides>
     <binary>Quake4</binary>
   </provides>
+  <keywords>
+    <keyword>retro</keyword>
+    <keyword>shooter</keyword>
+    <keyword>fps</keyword>
+    <keyword>port</keyword>
+  </keywords>
   <releases>
     <release version="v1.1.0harmattan63" date="2025-04-02" />
   </releases>

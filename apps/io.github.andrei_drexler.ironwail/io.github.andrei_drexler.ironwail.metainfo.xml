@@ -75,6 +75,12 @@
     <control>keyboard</control>
     <control>pointing</control>
   </recommends>
+  <keywords>
+    <keyword>retro</keyword>
+    <keyword>shooter</keyword>
+    <keyword>fps</keyword>
+    <keyword>port</keyword>
+  </keywords>
   <provides>
     <binary>ironwail</binary>
   </provides>
