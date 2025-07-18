@@ -39,14 +39,12 @@
   <categories>
     <category>Game</category>
   </categories>
-  <requires>
-    <control>keyboard</control>
-  </requires>
   <provides>
     <binary>iji.exe</binary>
   </provides>
-  <supports></supports>
-  <recommends></recommends>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
   <keywords>
     <keyword>rpg</keyword>
     <keyword>platformer</keyword>

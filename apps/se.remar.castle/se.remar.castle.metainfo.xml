@@ -39,15 +39,13 @@
   <categories>
     <category>Game</category>
   </categories>
-  <requires>
-    <control>keyboard</control>
-  </requires>
   <provides>
     <binary>castle gm5.exe</binary>
     <binary>castle gm7.exe</binary>
   </provides>
-  <supports></supports>
-  <recommends></recommends>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
   <keywords>
     <keyword>puzzle</keyword>
     <keyword>platformer</keyword>
