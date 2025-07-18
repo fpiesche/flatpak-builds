@@ -15,8 +15,8 @@ finish-args:
 
 cleanup:
   - /include
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /lib/pkgconfig
   - /share/pixmaps
 
@@ -26,9 +26,9 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
+        url: https://api.github.com/repos/elasota/Aerofoil/zipball/1.1.2
         dest-filename: aerofoil.zip
-        sha256: 297b6fde96666731f3dc84f80ad22da72a6c6be310f3e07b3a1d1d8b6769724c
+        sha256: ae061f6d5eec51d1f8a901aa5e9132dfa1a22dda9e37fb170bce14b772e9c30f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
