@@ -25,15 +25,22 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     sources:
-      - type: archive
-        url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
-        dest-filename: aerofoil.zip
-        sha256: 297b6fde96666731f3dc84f80ad22da72a6c6be310f3e07b3a1d1d8b6769724c
+      # - type: archive
+      #   url: https://github.com/elasota/Aerofoil/archive/refs/heads/master.zip
+      #   dest-filename: aerofoil.zip
+      #   sha256: 297b6fde96666731f3dc84f80ad22da72a6c6be310f3e07b3a1d1d8b6769724c
+      #   x-checker-data:
+      #     type: json
+      #     url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
+      #     version-query: .tag_name
+      #     url-query: .zipball_url
+      - type: git
+        url: https://github.com/elasota/Aerofoil.git
+        commit: 89ed6ae29ba164f9e5d49f052e951d6f26f16a52
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/elasota/Aerofoil/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
+          url: https://api.github.com/repos/elasota/Aerofoil/branches/master
+          commit-query: .commit.sha
     post-install:
       - install -Dm 755 ../Resources/Linux/${FLATPAK_ID}.desktop -t /app/share/applications
       - install -Dm 644 ../Resources/Linux/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
