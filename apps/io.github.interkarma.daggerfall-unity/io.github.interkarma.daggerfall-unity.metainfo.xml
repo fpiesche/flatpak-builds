@@ -15,8 +15,9 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <launchable type="desktop-id">io.github.interkarma.daggerfall-unity.desktop</launchable>
-  <url type="homepage">https://www.dfworkshop.net/</url>
-  <url type="contact">https://forums.dfworkshop.net/</url>
+  <url type="homepage">https://github.com/interkarma/daggerfall-unity</url>
+  <!-- <url type="homepage">https://www.dfworkshop.net/</url>
+  <url type="contact">https://forums.dfworkshop.net/</url> -->
   <description>
     <p>Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.</p>
     <p>Experience the adventure and intrigue of Daggerfall with all of its original charm along with hundreds of fixes,

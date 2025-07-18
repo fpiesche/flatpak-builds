@@ -122,7 +122,11 @@ jobs:
           ref: ${{ github.ref }}
       - name: Lint metainfo.xml
         if: matrix.arch.name == 'aarch64'
-        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json appstream "${{ matrix.app.metainfo }}"
+        run: |
+          echo "::group::Exceptions for ${{ matrix.app.appid }}"
+          jq '."${{ matrix.app.appid }}"' exceptions.json
+          echo "::endgroup::"
+          flatpak-builder-lint --exceptions --user-exceptions exceptions.json appstream "${{ matrix.app.metainfo }}"
       - name: Check for optional tags
         if: matrix.arch.name == 'aarch64'
         run: |

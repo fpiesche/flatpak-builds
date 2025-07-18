@@ -6,12 +6,12 @@
     "io.github.glkarin.quake4": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing",
-	"appid-url-not-reachable": "Repo name for this is a mess"
+	    "appid-url-not-reachable": "Repo name for this is a mess"
     },
     "io.github.glkarin.prey": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing",
-	"appid-url-not-reachable": "Repo name for this is a mess"
+	    "appid-url-not-reachable": "Repo name for this is a mess"
     },
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -93,7 +93,7 @@
         "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     },
     "org.vkdoom.vkdoom": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
     },
     "se.remar.castle": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
