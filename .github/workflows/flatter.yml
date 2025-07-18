@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: _site/
-          name: site_build.zip
+          name: _site
 
   builds:
     name: Assemble build matrix
@@ -322,16 +322,13 @@ jobs:
       - name: Grab site artifact
         uses: actions/download-artifact@v4
         with:
-          pattern: "site_build.zip"
+          pattern: "_site"
           path: _site/
           merge-multiple: true
 
-      - name: Move site content into place
+      - name: Check site content
         run: |
-          ls -la
-          mv site_build.zip/* .
-          rmdir site_build.zip
-          rm -rf .github
+          ls -la _site/
 
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
