@@ -33,7 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: chown -R $(whoami) .
+    - name: Fix permissions
+      run: |
+        chown -R $(whoami) .
+        git config --global --add safe.directory /github/workspace
     - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
       env:
         GIT_AUTHOR_NAME: Flatpak External Data Checker
