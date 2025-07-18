@@ -54,6 +54,8 @@
   <requires>
     <control>keyboard</control>
   </requires>
+  <supports></supports>
+  <recommends></recommends>
   <provides>
     <binary>herocore gm5.exe</binary>
     <binary>herocore gm7.exe</binary>

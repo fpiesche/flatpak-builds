@@ -45,6 +45,8 @@
   <provides>
     <binary>iji.exe</binary>
   </provides>
+  <supports></supports>
+  <recommends></recommends>
   <keywords>
     <keyword>rpg</keyword>
     <keyword>platformer</keyword>

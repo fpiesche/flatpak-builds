@@ -55,6 +55,12 @@
   <provides>
     <binary>opensupaplex</binary>
   </provides>
+  <keywords>
+    <keyword>puzzle</keyword>
+    <keyword>boulderdash</keyword>
+    <keyword>supaplex</keyword>
+    <keyword>source port</keyword>
+  </keywords>
   <releases>
     <release version="nightly" date="2024-09-30" />
     <release version="7.1.2" date="2020-08-21" />
