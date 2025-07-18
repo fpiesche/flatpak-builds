@@ -124,7 +124,7 @@ jobs:
                       \"only-arches\": $MANIFEST_ARCHES,
                       \"metainfo\": \"$METAINFO_FILE\"
                     }")
-            APPIDS=$(echo $APPIDS) | \
+            APPIDS=$(echo $APPIDS | \
               jq -c ".app[.app | length] |=
                 .app + \"$APPID\"")
           done
