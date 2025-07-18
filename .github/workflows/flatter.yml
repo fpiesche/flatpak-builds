@@ -9,7 +9,10 @@ on:
         description: app IDs to build
   push:
     paths:
-      - "apps/*/*.yml"
+      - "apps/*"
+      - "_site/*"
+      - "_templates/*"
+      - "build_site.py"
     branches:
       - main
   pull_request:
