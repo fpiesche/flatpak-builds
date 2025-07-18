@@ -262,7 +262,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Install required packages
-        run: apt update && apt install -y flatpak
+        run: sudo apt update && sudo apt install -y --no-install-recommends flatpak
 
       - name: Check out base repo
         uses: actions/checkout@v4
