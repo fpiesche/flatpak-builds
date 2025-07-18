@@ -328,6 +328,7 @@ jobs:
 
       - name: Move site content into place
         run: |
+          ls -la
           mv site_build.zip/* .
           rmdir site_build.zip
           rm -rf .github
