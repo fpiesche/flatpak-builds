@@ -6,21 +6,28 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 import json
 from lxml import etree
-import os
 from pathlib import Path
-import shutil
+import re
 import subprocess
-import sys
 
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, directory=os.path.dirname(__file__), **kwargs)
+        super().__init__(*args, Path(__file__).parent, **kwargs)
 
 
 def inotify_filter(filename: str, watcher, boolean) -> bool:
-    if filename in [".git", "shared-modules", ".flatpak-builder", "build", "_site"]:
-        return False
+    excludes = [
+        ".flatpak-builder",
+        "^build$",
+        ".git",
+        "shared-modules",
+        ".*.html$",
+        ".*.flatpakrepo$"
+    ]
+    for pattern in excludes:
+        if re.match(pattern, filename):
+            return False
     else:
         return True
 
@@ -50,7 +57,7 @@ def parse_app(app_id: str) -> dict:
         "description": etree.tostring(metainfo.xpath("description")[0], encoding="unicode"),
         "flathub_status": flathub_status,
         "flathub_id": flathub_id,
-        "flathub_url": f"https://flathub.org/apps/{flathub_id}" if "graduated to Flathub" in flathub_status else f"/apps/{flathub_id}.html",
+        "flathub_url": f"https://flathub.org/apps/{flathub_id}" if "Flathub" in flathub_status else f"/apps/{flathub_id}.html",
         "developer_name": metainfo.xpath("developer/name")[0].text,
         "developer_url": metainfo.xpath("developer/url")[0].text,
         "developer_name": metainfo.xpath("developer/name")[0].text,
@@ -93,7 +100,7 @@ def generate_flatpakrepo():
     print("Generating .flatpakrepo file...")
     env = Environment(loader=FileSystemLoader("_templates"), undefined=StrictUndefined)
     template = env.get_template("ykc.flatpakrepo.j2")
-    with open("assets/ykc.gpg", "r") as pubkey_file:
+    with open("_site/ykc.gpg", "r") as pubkey_file:
         gpgkey = pubkey_file.read()
     return template.render({"gpg_key": gpgkey})
     
@@ -112,25 +119,21 @@ def generate_listing(app: dict) -> str:
     return template.render({"app": app})
 
 
-def build_site():
-    print("Copying static assets...")
-    shutil.copytree("assets", os.path.join(args.output_root, "assets"), dirs_exist_ok=True)
+def build_site(root: str):
+    print("Building site...")
+    root_path = Path(root)
 
-    for path in ["apps", "assets"]:
-        target = os.path.join(args.output_root, path)
-        print(f"Creating target directory {target}...")
-        os.makedirs(target, exist_ok=True)
-
-    with open(os.path.join(args.output_root, "index.html"), "w") as index_file:
+    with open(root_path /"index.html", "w") as index_file:
         index_file.write(generate_index(list(read_apps())))
     
-    apps_path = os.path.join(args.output_root, "apps")
+    apps_path = root_path / "apps"
+    apps_path.mkdir(exist_ok=True)
     for app in read_apps():
         if not app["is_graduate"]:
-            with open(os.path.join(apps_path, f"{app['id']}.html"), "w") as listing_file:
+            with open(apps_path / f"{app['id']}.html", "w") as listing_file:
                 listing_file.write(generate_listing(app))
 
-    with open(os.path.join(args.output_root, "ykc.flatpakrepo"), "w") as repo_file:
+    with open(root_path / "ykc.flatpakrepo", "w") as repo_file:
         repo_file.write(generate_flatpakrepo())
 
 
@@ -140,20 +143,20 @@ if __name__ == "__main__":
     parser.add_argument("output_root", help="Root output directory")
     args = parser.parse_args()
 
-    build_site()
+    build_site(root=args.output_root)
+    root_dir = Path(__file__).parent
 
     if args.serve:
-        root_dir = os.path.dirname(__file__)
         print(f"Monitoring {root_dir} for changes...")
         from inotifyrecursive import INotify, flags
         inotify = INotify()
         watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
         try:
-            server = subprocess.Popen([sys.executable, "-m", "http.server", "-d", args.output_root])
+            server = subprocess.Popen(["python", "-m", "http.server", "-d", args.output_root])
             wd = inotify.add_watch_recursive(root_dir, watch_flags, filter=inotify_filter)
             while True:
                 for event in inotify.read():
                     print(f"{event.name} changed; updating site")
-                    build_site()
+                    build_site(args.output_root)
         finally:
             server.terminate()
