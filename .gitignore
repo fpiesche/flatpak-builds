@@ -1,6 +1,14 @@
-build
-.flatpak-builder
+# Python artifacts
 __pycache__
-_site
 *.pyc
 venv
+
+# Flatpak build artifacts
+build
+.flatpak-builder
+repo
+
+# Site build artifacts
+_site/apps
+index.html
+*.flatpakrepo
