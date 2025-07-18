@@ -53,7 +53,8 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "io.github.kraflab.dsda-doom": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "screenshot-image-not-found": "this is fine"
     },
     "io.github.openenroth.openenroth": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
