@@ -35,7 +35,7 @@ jobs:
       - name: Upload build as artifact
         uses: actions/upload-artifact@v4
         with:
-          path: _site
+          path: _site/
           name: site_build.zip
 
   builds:
@@ -43,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.builds.outputs.matrix }}
+      appids: ${{ steps.builds.outputs.appids }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -90,6 +91,7 @@ jobs:
                     ], \
                     \"app\": [] \
                   }"
+          APPIDS="{ \"app\": [] }"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             echo "Generating matrix entry for $APPID..."
@@ -122,43 +124,52 @@ jobs:
                       \"only-arches\": $MANIFEST_ARCHES,
                       \"metainfo\": \"$METAINFO_FILE\"
                     }")
+            APPIDS=$(echo $APPIDS) | \
+              jq -c ".app[.app | length] |=
+                .app + \"$APPID\"")
           done
-          echo "::group::Output"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo "appids=$APPIDS" >> $GITHUB_OUTPUT
+          echo "::group::Matrix"
           echo $MATRIX | jq
+          echo "::endgroup::"
+          echo "::group::app IDs"
+          echo $APPIDS | jq
           echo "::endgroup::"
 
   metainfo-lint:
-    name: ${{ matrix.app.appid }} appstream lint
+    name: ${{ matrix.app }} appstream lint
     needs: builds
     strategy:
-      matrix: ${{fromJson(needs.builds.outputs.matrix)}}
+      matrix: ${{fromJson(needs.builds.outputs.appids)}}
       fail-fast: false
-    runs-on: ${{ matrix.arch.runner }}
+    runs-on: ubuntu-latest
     container: ghcr.io/flathub/flatpak-builder-lint:latest
     steps:
       - name: Checkout
-        if: matrix.arch.name == 'aarch64'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
       - name: Lint metainfo.xml
-        if: matrix.arch.name == 'aarch64'
         run: |
-          echo "::group::Exceptions for ${{ matrix.app.appid }}"
-          jq '."${{ matrix.app.appid }}"' exceptions.json
+          echo "::group::Exceptions for ${{ matrix.app }}"
+          jq '."${{ matrix.app }}"' exceptions.json
           echo "::endgroup::"
-          flatpak-builder-lint --exceptions --user-exceptions exceptions.json appstream "${{ matrix.app.metainfo }}"
+          flatpak-builder-lint \
+            --exceptions \
+            --user-exceptions exceptions.json \
+            appstream\
+            "apps/${{ matrix.app }}/${{ matrix.app }}.metainfo.xml"
       - name: Check for optional tags
         if: matrix.arch.name == 'aarch64'
         run: |
           for tag in branding recommends supports provides keywords; do
             echo "::group::Checking for $tag..."
-            if grep -zo "<$tag>.*</$tag>" "${{ matrix.app.metainfo }}"; then
+            if grep -zo "<$tag>.*</$tag>" "apps/${{ matrix.app }}/${{ matrix.app }}.metainfo.xml"; then
               echo "OK"
             else
-              echo "::warning file=${{ matrix.app.metainfo }},line=1,col=1::Missing optional tag $tag"
+              echo "::warning file=apps/${{ matrix.app }}/${{ matrix.app }}.metainfo.xml,line=1,col=1::Missing optional tag $tag"
             fi
             echo "::endgroup::"
           done
@@ -313,6 +324,13 @@ jobs:
         with:
           pattern: "site_build.zip"
           path: _site/
+          merge-multiple: true
+
+      - name: Move site content into place
+        run: |
+          mv site_build.zip/* .
+          rmdir site_build.zip
+          rm -rf .github
 
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
