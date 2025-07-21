@@ -15,8 +15,8 @@ finish-args:
 
 cleanup:
   - /include
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /lib/pkgconfig
   - /share/pixmaps
 
@@ -36,7 +36,7 @@ modules:
       #     url-query: .zipball_url
       - type: git
         url: https://github.com/elasota/Aerofoil.git
-        commit: 89ed6ae29ba164f9e5d49f052e951d6f26f16a52
+        commit: 75e5cceaf55c3b185dd106d21dd47252c639048f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/branches/master
