@@ -24,9 +24,9 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://github.com/zdoom/ZMusic/archive/1.1.14.tar.gz
+        url: https://github.com/zdoom/ZMusic/archive/1.2.0.tar.gz
         dest-filename: zmusic.tar.gz
-        sha256: f04410fe4ea08136f37703e7715c27df4c8532ace1e721cf40c6f303a93acc54
+        sha256: fc8419a5fa80faa2363a57711e4ec4670b3628aecf1dc9b4306f4add0ce09d2b
         x-checker-data:
           type: anitya
           project-id: 153600
