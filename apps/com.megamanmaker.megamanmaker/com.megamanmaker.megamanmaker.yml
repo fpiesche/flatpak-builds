@@ -8,7 +8,7 @@ command: com.megamanmaker.megamanmaker.sh
 
 cleanup:
   - /include
-  - "*.a"
+  - '*.a'
   - /lib/cmake
   - /lib/pkgconfig
   - /share/aclocal
@@ -67,14 +67,14 @@ modules:
       - type: file
         path: com.megamanmaker.megamanmaker.metainfo.xml
       - type: extra-data
-        url: https://megamanmaker.com/downloads/MegaManMaker_v1_9_4_3.zip
+        url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_1_2.zip
         filename: mega-man-maker.zip
-        size: 53612730
-        sha256: 860aab609d8531185bb3cbb8f527f1c0223032d3e531c97738e26d242333cd68
+        size: 83694792
+        sha256: 450ecbe90b977ca9edf5d2b0d553f58dee4a75b6f9658d7728ccf0a1d977d0af
         x-checker-data:
           type: html
           url: https://megamanmaker.com/
-          version-pattern: "The latest version is ([\\d.-]+)"
+          version-pattern: The latest version is ([\d.-]+)
           url-template: https://megamanmaker.com/downloads/MegaManMaker_v${version0}_${version1}_${version2}_${version3}.zip
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
