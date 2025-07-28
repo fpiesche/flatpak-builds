@@ -42,7 +42,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/dpjudas/vkdoom
-        commit: 378d99fcc448fe80c0e8dede6744e2da74e5c8d7
+        commit: 56ddcb9a2ecfc6d50587f4c6934e9a6051285b47
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dpjudas/VkDoom/git/ref/tags/nightly
