@@ -67,10 +67,10 @@ modules:
       - type: file
         path: com.megamanmaker.megamanmaker.metainfo.xml
       - type: extra-data
-        url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_1_2.zip
+        url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_1_3.zip
         filename: mega-man-maker.zip
-        size: 83694792
-        sha256: 450ecbe90b977ca9edf5d2b0d553f58dee4a75b6f9658d7728ccf0a1d977d0af
+        size: 83692997
+        sha256: 6a369f1d65a0a95b48838c004feb436e1a4d9c0ae3ec6f101da44968686b1e1c
         x-checker-data:
           type: html
           url: https://megamanmaker.com/
