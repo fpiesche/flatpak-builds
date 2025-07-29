@@ -1,0 +1,10 @@
+diff --git a/idlib/StdFilesystem.cpp b/idlib/StdFilesystem.cpp
+index 56d8921f2..6e3b56fa9 100644
+--- a/idlib/StdFilesystem.cpp
++++ b/idlib/StdFilesystem.cpp
+@@ -36,2 +36,2 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+-	#include <experimental/filesystem>
+-	namespace stdfsys = std::experimental::filesystem::v1;
++	#include <filesystem>
++	namespace stdfsys = filesystem;
+ 
