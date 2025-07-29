@@ -1,107 +1,8 @@
-diff --git a/framework/Common.cpp b/framework/Common.cpp
-index 356ea0a18..0ee667318 100644
---- a/framework/Common.cpp
-+++ b/framework/Common.cpp
-@@ -2774,8 +2774,10 @@ void idCommonLocal::Init( int argc, const char **argv, const char *cmdline )
- 		// init CVar system
- 		cvarSystem->Init();
- 
-+		#ifdef ENABLE_TRACY
- 		// potentially start trace profiler if requested
- 		InitTracing();
-+		#endif
- 
- 		// start file logging right away, before early console or whatever
- 		StartupVariable( "win_outputDebugString", false );
-diff --git a/framework/File.cpp b/framework/File.cpp
-index bc2e9e18e..dafe70e75 100644
---- a/framework/File.cpp
-+++ b/framework/File.cpp
-@@ -18,7 +18,7 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
- 
- 
- 
--#include <minizip/unzip.h>
-+#include <unzip.h>
- #include "minizip/minizip_extra.h"	//unzSeek
- 
- /*
-diff --git a/framework/FileSystem.cpp b/framework/FileSystem.cpp
-index b3a0e61a5..76ed8c7bd 100644
---- a/framework/FileSystem.cpp
-+++ b/framework/FileSystem.cpp
-@@ -18,10 +18,10 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
- 
- 
- 
--#include <minizip/unzip.h>
-+#include <unzip.h>
- #include "minizip/minizip_extra.h"	//unzReOpen
- //stgatilov: for pk4 repacking
--#include <minizip/zip.h>
-+#include <zip.h>
- 
- #ifdef WIN32
- 	#include <io.h>	// for _read
-diff --git a/framework/Tracing.cpp b/framework/Tracing.cpp
-index f19932364..916474103 100644
---- a/framework/Tracing.cpp
-+++ b/framework/Tracing.cpp
-@@ -19,7 +19,9 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
- // stgatilov: if you update Tracy and this header is missing in new artefacts
- // then you need to implement proper way of querying the version of Tracy
- // see this issue: https://github.com/wolfpld/tracy/issues/449
-+#ifdef ENABLE_TRACY
- #include <common/TracyVersion.hpp>
-+#endif
- 
- idCVar r_useDebugGroups(
- 	// note: we cannot enable these for players, because they are slow as shit in AMD driver:
-diff --git a/framework/Tracing.h b/framework/Tracing.h
-index 6a96ee5d5..2aa741907 100644
---- a/framework/Tracing.h
-+++ b/framework/Tracing.h
-@@ -12,7 +12,6 @@ or (at your option) any later version. For details, see LICENSE.TXT.
- Project: The Dark Mod (http://www.thedarkmod.com/)
- 
- ******************************************************************************/
--
- #pragma once
- 
- #include "renderer/backend/qgl/qgl.h"
-diff --git a/framework/TracingEmbeddedSourceCode.cpp b/framework/TracingEmbeddedSourceCode.cpp
-index 5f0c4d957..9bb4cd35e 100644
---- a/framework/TracingEmbeddedSourceCode.cpp
-+++ b/framework/TracingEmbeddedSourceCode.cpp
-@@ -1 +1,3 @@
-+#ifdef ENABLE_TRACY
- #include <TracyClient.cpp>
-+#endif
-diff --git a/framework/minizip/minizip_extra.h b/framework/minizip/minizip_extra.h
-index ad53f4674..27870827f 100644
---- a/framework/minizip/minizip_extra.h
-+++ b/framework/minizip/minizip_extra.h
-@@ -14,12 +14,13 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
- ******************************************************************************/
- #pragma once
- 
--#include <minizip/unzip.h>
-+#include <unzip.h>
-+#include <zconf.h>
- 
- #ifdef __cplusplus
- extern "C" {
- #endif
--
-+
- extern unzFile unzReOpen( const char* path, unzFile file );
- /* Re-Open a Zip file, i.e. clone an existing one and give it a new file descriptor. */
- 
 diff --git a/idlib/StdFilesystem.cpp b/idlib/StdFilesystem.cpp
 index 56d8921f2..6e3b56fa9 100644
 --- a/idlib/StdFilesystem.cpp
 +++ b/idlib/StdFilesystem.cpp
-@@ -20,29 +20,28 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+@@ -20,29 +20,29 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
  	#if _MSC_VER < 1910
  		//STL-based implementation for MSVC2013
  		#include <filesystem>
@@ -124,6 +25,7 @@ index 56d8921f2..6e3b56fa9 100644
 -	#include <experimental/filesystem>
 -	namespace stdfsys = std::experimental::filesystem::v1;
 +	#include <filesystem>
++	namespace filesystem = std::filesystem::v1;
  #endif
  
  namespace stdext {

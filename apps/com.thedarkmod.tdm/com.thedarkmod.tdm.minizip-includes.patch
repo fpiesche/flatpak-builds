@@ -1,0 +1,38 @@
+diff --git a/framework/minizip/minizip_extra.h b/framework/minizip/minizip_extra.h
+index ad53f4674..27870827f 100644
+--- a/framework/minizip/minizip_extra.h
++++ b/framework/minizip/minizip_extra.h
+@@ -17,1 +17,2 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+-#include <minizip/unzip.h>
++#include <unzip.h>
++#include <zconf.h>
+diff --git a/framework/File.cpp b/framework/File.cpp
+index bc2e9e18e..dafe70e75 100644
+--- a/framework/File.cpp
++++ b/framework/File.cpp
+@@ -18,7 +18,7 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+ 
+ 
+ 
+-#include <minizip/unzip.h>
++#include <unzip.h>
+ #include "minizip/minizip_extra.h"	//unzSeek
+ 
+ /*
+diff --git a/framework/FileSystem.cpp b/framework/FileSystem.cpp
+index b3a0e61a5..76ed8c7bd 100644
+--- a/framework/FileSystem.cpp
++++ b/framework/FileSystem.cpp
+@@ -18,10 +18,10 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+ 
+ 
+ 
+-#include <minizip/unzip.h>
++#include <unzip.h>
+ #include "minizip/minizip_extra.h"	//unzReOpen
+ //stgatilov: for pk4 repacking
+-#include <minizip/zip.h>
++#include <zip.h>
+ 
+ #ifdef WIN32
+ 	#include <io.h>	// for _read

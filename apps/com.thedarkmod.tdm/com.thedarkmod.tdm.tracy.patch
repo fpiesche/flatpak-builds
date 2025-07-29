@@ -1,0 +1,37 @@
+diff --git a/framework/Common.cpp b/framework/Common.cpp
+index 356ea0a18..0ee667318 100644
+--- a/framework/Common.cpp
++++ b/framework/Common.cpp
+@@ -2774,8 +2774,10 @@ void idCommonLocal::Init( int argc, const char **argv, const char *cmdline )
+ 		// init CVar system
+ 		cvarSystem->Init();
+ 
++		#ifdef ENABLE_TRACY
+ 		// potentially start trace profiler if requested
+ 		InitTracing();
++		#endif
+ 
+ 		// start file logging right away, before early console or whatever
+ 		StartupVariable( "win_outputDebugString", false );
+diff --git a/framework/Tracing.cpp b/framework/Tracing.cpp
+index f19932364..916474103 100644
+--- a/framework/Tracing.cpp
++++ b/framework/Tracing.cpp
+@@ -19,7 +19,9 @@ Project: The Dark Mod (http://www.thedarkmod.com/)
+ // stgatilov: if you update Tracy and this header is missing in new artefacts
+ // then you need to implement proper way of querying the version of Tracy
+ // see this issue: https://github.com/wolfpld/tracy/issues/449
++#ifdef ENABLE_TRACY
+ #include <common/TracyVersion.hpp>
++#endif
+
+ idCVar r_useDebugGroups(
+ 	// note: we cannot enable these for players, because they are slow as shit in AMD driver:
+diff --git a/framework/TracingEmbeddedSourceCode.cpp b/framework/TracingEmbeddedSourceCode.cpp
+index 5f0c4d957..9bb4cd35e 100644
+--- a/framework/TracingEmbeddedSourceCode.cpp
++++ b/framework/TracingEmbeddedSourceCode.cpp
+@@ -1 +1,3 @@
++#ifdef ENABLE_TRACY
+ #include <TracyClient.cpp>
++#endif

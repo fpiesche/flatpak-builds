@@ -17,7 +17,7 @@ index 056bd99db..d174de5c0 100644
 
  if (UNIX)
  	# we want debug symbols even with Release builds
-@@ -221,35 +221,35 @@ include_directories(
+@@ -221,35 +221,44 @@ include_directories(
  		"${PROJECT_SOURCE_DIR}/idlib"
  )
 
@@ -36,7 +36,6 @@ index 056bd99db..d174de5c0 100644
 +add_library(Vorbis INTERFACE IMPORTED)
 +add_library(JPEG INTERFACE IMPORTED)
 +add_library(PNG INTERFACE IMPORTED)
-+add_library(ffmpeg INTERFACE IMPORTED)
  find_package(pugixml REQUIRED CONFIG)
  find_package(MbedTLS REQUIRED CONFIG)
  find_package(glfw3 REQUIRED CONFIG)
@@ -44,6 +43,15 @@ index 056bd99db..d174de5c0 100644
 -find_package(tracy REQUIRED CONFIG)
 +# find_package(doctest REQUIRED CONFIG)
 +# find_package(tracy REQUIRED CONFIG)
++pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
++    libavdevice
++    libavfilter
++    libavformat
++    libavcodec
++    libswresample
++    libswscale
++    libavutil
++)
 
  target_link_libraries(TheDarkMod
  		ZLIB::ZLIB
@@ -60,7 +68,7 @@ index 056bd99db..d174de5c0 100644
 -		ffmpeg::ffmpeg
 +		JPEG
 +		PNG
-+		ffmpeg
++		PkgConfig::LIBAV
  		glfw
  		pugixml::pugixml
 -		doctest::doctest

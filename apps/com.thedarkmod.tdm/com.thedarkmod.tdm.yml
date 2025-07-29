@@ -13,11 +13,10 @@ finish-args:
   - --share=ipc
   - --socket=x11
 
-inherit-extensions:
-  - org.freedesktop.Platform.ffmpeg-full
-
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm18
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
 
 modules:
   # - name: zlib-ng
@@ -164,6 +163,18 @@ modules:
   #         project-id: 1705
   #         url-template: https://download.sourceforge.net/libpng/libpng-$version.tar.xz
 
+  # - name: curl
+  #   buildsystem: cmake-ninja
+  #   builddir: true
+  #   sources:
+  #     - type: archive
+  #       url: https://github.com/curl/curl/releases/download/curl-8_12_1/curl-8.12.1.tar.gz
+  #       sha256: 7b40ea64947e0b440716a4d7f0b7aa56230a5341c8377d7b609649d4aea8dbcf
+  #       x-checker-data:
+  #         type: anitya
+  #         project-id: 12083
+  #         url-template: https://github.com/facebook/zstd/releases/download/v$version/zstd-$version.tar.gz
+
   - name: ffmpeg
     config-opts:
       - --enable-shared
@@ -210,20 +221,7 @@ modules:
       - /share/ffmpeg/examples
       - /bin/ffmpeg
     post-install:
-      - mkdir -p /app/lib/cmake/FFMPEG
-      - cp ffmpeg-config.cmake /app/lib/cmake/FFMPEG/
-
-  # - name: curl
-  #   buildsystem: cmake-ninja
-  #   builddir: true
-  #   sources:
-  #     - type: archive
-  #       url: https://github.com/curl/curl/releases/download/curl-8_12_1/curl-8.12.1.tar.gz
-  #       sha256: 7b40ea64947e0b440716a4d7f0b7aa56230a5341c8377d7b609649d4aea8dbcf
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 12083
-  #         url-template: https://github.com/facebook/zstd/releases/download/v$version/zstd-$version.tar.gz
+      - mkdir -p /app/lib/cmake/ffmpeg && cp ffmpeg-config.cmake /app/lib/cmake/ffmpeg/
 
   - name: doctest
     buildsystem: cmake-ninja
@@ -265,11 +263,10 @@ modules:
       prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
     builddir: true
     config-opts:
-      - -DZIPSYNC_OPTION_BUILD_TESTS=OFF
       - -DENABLE_TRACY=OFF
       - -DTDM_THIRDPARTY_ARTEFACTS=OFF
-      - -DCMAKE_C_COMPILER=clang
-      - -DCMAKE_CXX_COMPILER=clang++
+      # - -DCMAKE_C_COMPILER=clang
+      # - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
     sources:
       - type: script
@@ -292,9 +289,15 @@ modules:
           version-query: .[].name | sub("^release"; "")
           url-query: .zipball_url
       - type: patch
+        path: com.thedarkmod.tdm.c++std.patch
+      - type: patch
         path: com.thedarkmod.tdm.cmakelists.patch
       - type: patch
-        path: com.thedarkmod.tdm.includes.patch
+        path: com.thedarkmod.tdm.minizip-includes.patch
+      - type: patch
+        path: com.thedarkmod.tdm.tracy.patch
+      # - type: patch
+      #   path: com.thedarkmod.tdm.filesystem-include.patch
     build-commands:
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
       - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop

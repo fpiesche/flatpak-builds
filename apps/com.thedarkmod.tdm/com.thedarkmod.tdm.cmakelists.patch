@@ -5,7 +5,7 @@ index 056bd99db..007dcd08d 100644
 @@ -221,35 +221,42 @@ include_directories(
  		"${PROJECT_SOURCE_DIR}/idlib"
  )
- 
+
 -find_package(ZLIB REQUIRED CONFIG)
 -find_package(minizip REQUIRED CONFIG)
 -find_package(CURL REQUIRED CONFIG)
