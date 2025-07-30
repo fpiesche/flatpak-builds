@@ -61,10 +61,10 @@ modules:
       - type: file
         path: io.github.sonicgalactic.metainfo.xml
       - type: extra-data
-        url: https://cdn.tohoku.ac/sonicgalactic-demo2-win.zip
+        url: https://cdn.tohoku.ac/sonicgalactic-demo2-patch1-win.zip
         filename: sonic-galactic.zip
-        size: 249866742
-        sha256: 6a2303eccff5be2452f5e74dd2d285ec9d5dc1224a1220c6b29b825ddb71f1f9
+        size: 246602507
+        sha256: b374481ca57b6c3b9da0305ad8e59a68fe70609a7e23f735ceb162a63d7f5588
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
