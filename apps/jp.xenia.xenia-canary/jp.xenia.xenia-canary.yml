@@ -46,7 +46,7 @@ modules:
           - xenia_canary --storage_root=$XDG_DATA_HOME --content_root=$XDG_DATA_HOME/content
             --cache_root=$XDG_CACHE_HOME/xenia --mount_cache=false $@
     build-commands:
-      - ./xb build --config release --target xenia-base
+      - ./xenia-build.py build --config release --target xenia-base
       - install -Dm755 build/bin/Linux/Release/xenia_canary -t /app/bin/
       - install -Dm644 assets/icon/256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm755 ${FLATPAK_ID}.sh -t /app/bin/
