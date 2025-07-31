@@ -59,34 +59,3 @@ index 056bd99db..007dcd08d 100644
  )
  
  if (WIN32)
-@@ -258,18 +265,18 @@ if (WIN32)
- elseif (UNIX)
- 	target_link_libraries(TheDarkMod pthread dl stdc++fs X11 Xext Xxf86vm)
- 	# strip debug symbols from executable and put them into a separate symbols file
--	add_custom_command(
--			TARGET TheDarkMod POST_BUILD
--			COMMAND objcopy --only-keep-debug "$<TARGET_FILE:TheDarkMod>" "$<TARGET_FILE:TheDarkMod>.debug"
--	)
--	add_custom_command(
--			TARGET TheDarkMod POST_BUILD
--			COMMAND strip --strip-debug --strip-unneeded "$<TARGET_FILE:TheDarkMod>"
--	)
--	add_custom_command(
--			TARGET TheDarkMod POST_BUILD
--			COMMAND objcopy "--add-gnu-debuglink=$<TARGET_FILE:TheDarkMod>.debug" "$<TARGET_FILE:TheDarkMod>"
--	)
-+	# add_custom_command(
-+	# 		TARGET TheDarkMod POST_BUILD
-+	# 		COMMAND objcopy --only-keep-debug "$<TARGET_FILE:TheDarkMod>" "$<TARGET_FILE:TheDarkMod>.debug"
-+	# )
-+	# add_custom_command(
-+	# 		TARGET TheDarkMod POST_BUILD
-+	# 		COMMAND strip --strip-debug --strip-unneeded "$<TARGET_FILE:TheDarkMod>"
-+	# )
-+	# add_custom_command(
-+	# 		TARGET TheDarkMod POST_BUILD
-+	# 		COMMAND objcopy "--add-gnu-debuglink=$<TARGET_FILE:TheDarkMod>.debug" "$<TARGET_FILE:TheDarkMod>"
-+	# )
- endif ()
- 
- if (COPY_EXE)
