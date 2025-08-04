@@ -59,8 +59,11 @@
     <keyword>level design</keyword>
   </keywords>
   <releases>
-    <release version="1.10.1.4" date="2025-08-03">
+    <release version="1.10.1.5" date="2025-08-04">
       <description></description>
+    </release>
+    <release version="1.10.1.4" date="2025-08-03">
+      <description/>
     </release>
     <release version="1.10.1.3" date="2025-07-28">
       <description/>
