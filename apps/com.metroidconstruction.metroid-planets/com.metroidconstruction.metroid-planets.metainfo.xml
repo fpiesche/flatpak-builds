@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.metroidconstruction.metroid-planets</id>
+  <name>Metroid Planets</name>
+  <developer id="com.metroidconstruction.metroid-planets">
+    <name>Vacant Shade Games</name>
+    <url>https://forum.metroidconstruction.com/index.php/topic,4952.0.html</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#a6e7ff</color>
+    <color type="primary" scheme_preference="dark">#06101a</color>
+  </branding>
+  <summary>Metroid (NES) fan game and creation tool</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.metroidconstruction.metroid-planets.desktop</launchable>
+  <url type="homepage">https://forum.metroidconstruction.com/index.php/topic,4952.0.html/</url>
+  <description>
+    <p>This is a game designed to emulate the feel of NEStroid, while adding improvements to the graphics, sound, and mechanics.
+        Each Planet is essentially a complete "game", but they are all bundled together and run on the same engine.</p>
+    <p>There are 2 complete Planets, one of which is the original NEStroid world. The other has an original design with some
+        additional areas and bosses.</p>
+    <p>A 3rd Planet is available as a demo, and it is randomized, so each playthrough is different! You can even use a built
+        in Room Studio to design your own rooms for it!</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://archive.org/download/metroid-planets/127title.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://uce8521ae38e1c51869347a6247e.dl.dropboxusercontent.com/cd/0/inline/Cuw54tplMgVPSRQC9iRqZbbMZIo23KaBNkL5jaC-MOZ3t1WkjeXRYwsFcyrZOqQ96miqx2iTtNdf57yjTATBhhVfRDWe-XdpXlL8A3YgfY4vOLa5TVM7q3sS2HxbhOFzGfc/file#</image>
+      <caption>Room Editor for the Enigma planet</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>Metroid Planets v1.27g.exe</binary>
+    <binary>Planets v1.33.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>platformer</keyword>
+    <keyword>metroid</keyword>
+    <keyword>nes</keyword>
+  </keywords>
+  <releases>
+    <release version="1.33" date="2024-04-27">
+      <description/>
+    </release>
+    <release version="1.27g" date="2021-11-13">
+      <description/>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>
