@@ -1,0 +1,93 @@
+app-id: com.metroidconstruction.metroid-planets
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: com.metroidconstruction.metroid-planets.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  # - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win64
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+modules:
+  - name: metroid-planets
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: com.metroidconstruction.metroid-planets.127.sh
+        commands:
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - wine "/app/extra/mplanets127/Metroid Planets v1.27g.exe"
+      - type: script
+        dest-filename: com.metroidconstruction.metroid-planets.133.sh
+        commands:
+          - export WINEPREFIX=$XDG_DATA_HOME/wine
+          - wine "/app/extra/mplanets133/Planets v1.33.exe"
+      - type: file
+        path: com.metroidconstruction.metroid-planets.sh
+      - type: script
+        dest-filename: com.metroidconstruction.metroid-planets.launcher.sh
+        commands:
+          - HIDE_LAUNCHER="${XDG_CONFIG_HOME}/hide_launcher"
+          - if [[ -f "${HIDE_LAUNCHER}" ]]; then rm "${HIDE_LAUNCHER}"; fi
+          - ${FLATPAK_ID}.sh $@
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip mp127.zip -d tmp && rm mp127.zip
+          - export EXTRACT_DIR=$(dirname "$(find tmp -name 'Metroid Planets v1.27g.exe')")
+          - echo "Found $EXTRACT_DIR"
+          - mkdir /app/extra/mplanets127 && mv "$EXTRACT_DIR"/* /app/extra/mplanets127/ && rm rf tmp
+          - unzip mp133.zip -d tmp && rm mp133.zip
+          - export EXTRACT_DIR=$(dirname "$(find tmp -name 'Planets v1.33.exe')")
+          - echo "Found $EXTRACT_DIR"
+          - mkdir /app/extra/mplanets133 && mv "$EXTRACT_DIR"/* /app/extra/mplanets133/ && rm -rf tmp
+      - type: file
+        path: com.metroidconstruction.metroid-planets.png
+      - type: file
+        path: com.metroidconstruction.metroid-planets.desktop
+      - type: file
+        path: com.metroidconstruction.metroid-planets.metainfo.xml
+      - type: extra-data
+        url: https://archive.org/download/metroid-planets/M%20Planets%20v127g.zip
+        filename: mp127.zip
+        size: 45484699
+        sha256: 1a3d59404110f7a71d189c67c9a76de8014c6b0791228c0e39f63eeab9959f2e
+      - type: extra-data
+        url: https://archive.org/download/metroid-planets/Planets%20v1.33.zip
+        filename: mp133.zip
+        size: 91421592
+        sha256: 5f2386ca47f34664e7bc78d35b01b2fdc982259b651f33d155ed35ed6209d360
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}*.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
