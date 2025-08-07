@@ -1,0 +1,67 @@
+app-id: io.github.sonicnext_dev.marathonrecomp
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: io.github.sonicnext_dev.marathonrecomp.sh
+
+finish-args:
+  # hardware 3D + gamepad support
+  - --device=all
+  # X11 + XShm access
+  # - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm18
+
+modules:
+  - name: marathonrecomp
+    buildsystem: cmake-ninja
+    builddir: true
+    build-options:
+      append-path: /usr/lib/sdk/llvm18/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+    config-opts:
+      - -DMARATHON_RECOMP_FLATPAK=ON
+      - -DSDL2MIXER_VORBIS=VORBISFILE
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: git
+        url: https://github.com/sonicnext-dev/MarathonRecomp.git
+        commit: 8604878a15b1c891cbbdd5264c9ad990f79d0728
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/sonicnext-dev/marathonrecomp/branches/main
+          commit-query: .commit.sha
+      - type: patch
+        path: io.github.sonicnext_dev.marathonrecomp.no-vcpkg.patch
+      - type: script
+        dest-filename: io.github.sonicnext_dev.marathonrecomp.sh
+        commands:
+          # Ensure data directories expected by the game exist
+          - if [[ ! -d ${XDG_DATA_HOME}/game ]]; then mkdir ${XDG_DATA_HOME}/game; fi
+          - if [[ ! -d ${XDG_DATA_HOME}/user ]]; then mkdir ${XDG_DATA_HOME}/user; fi
+          # Verify game data is present
+          - if [[ ! -f ${XDG_DATA_HOME}/game/DATA/INTRO.CIN ]]; then zenity --error
+            --text "f2bgl requires the game data from a Fade to Black installation.
+            Please copy at least the game's DATA directory and DELPHINE.INI to ${XDG_DATA_HOME}/game/."
+            --ok-label "Close" --width=400; exit 1; fi
+          # Launch game
+          - MarathonRecomp
+    post-install:
+      - install -Dm 755 MarathonRecomp -t /app/bin
+      - install -Dm 755 ../${FLATPAK_ID}.sh -t /app/bin
+    #   - install -Dm 644 controls.cfg -t /app/bin
+    #   - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh ../meta/${FLATPAK_ID}.desktop
+    #   - install -Dm 755 ../meta/${FLATPAK_ID}.desktop -t /app/share/applications
+    #   - install -Dm 644 ../meta/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
+    #   - install -Dm 644 ../meta/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
