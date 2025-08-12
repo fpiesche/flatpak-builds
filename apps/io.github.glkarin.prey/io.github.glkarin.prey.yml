@@ -18,8 +18,8 @@ sdk-extensions:
 
 cleanup:
   - /include
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
 
 modules:
   - name: backtrace
@@ -73,8 +73,8 @@ modules:
       - -DBUILD_PREY=ON
     sources:
       - type: archive
-        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan67.zip
-        sha256: 754d8edbe238c6d77e70c0778ea343895e25aa79d90d8bbb53cc0b11388e6ad1
+        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan68.zip
+        sha256: db6043a025f2ad9d9ed52dc7906a88f48d3bc2b4c7b970d1d98d68a4b1249acd
         x-checker-data:
           type: anitya
           project-id: 377943
