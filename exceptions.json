@@ -12,7 +12,8 @@
     "io.github.glkarin.prey": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing",
-	    "appid-url-not-reachable": "Repo name for this is a mess"
+	    "appid-url-not-reachable": "Repo name for this is a mess",
+        "releases-not-in-order": "Versioning scheme for this is a mess"
     },
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
