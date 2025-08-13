@@ -21,19 +21,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://megamanmaker.com/img/screenshots/1.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/com.megamanmaker.megamanmaker/screenshots/titlescreen.png</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://megamanmaker.com/img/screenshots/2.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/com.megamanmaker.megamanmaker/screenshots/builder.png</image>
       <caption>Build your own levels!</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://megamanmaker.com/img/screenshots/3.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/com.megamanmaker.megamanmaker/screenshots/play.png</image>
       <caption>Play other people's creations!</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://megamanmaker.com/img/screenshots/8.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/com.megamanmaker.megamanmaker/screenshots/multiplayer.png</image>
       <caption>Play and make with others!</caption>
     </screenshot>
   </screenshots>

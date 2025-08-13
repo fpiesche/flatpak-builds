@@ -16,7 +16,8 @@
         "releases-not-in-order": "Versioning scheme for this is a mess"
     },
     "com.megamanmaker.megamanmaker": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+	    "appid-url-not-reachable": "Site has gone down"
     },
     "com.shipofharkinian.shipwright": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
