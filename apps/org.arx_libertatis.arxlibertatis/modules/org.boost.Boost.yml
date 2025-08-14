@@ -1,13 +1,13 @@
-  - name: boost
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBOOST_INCLUDE_LIBRARIES=filesystem;system
-    sources:
-      - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.7z
-        sha256: 252149f583054515b10688855b24ca1c16072b5118e603b8fe017894d319c262
-        x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.7z
+name: boost
+buildsystem: cmake-ninja
+config-opts:
+  - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
+sources:
+  - type: archive
+    url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.7z
+    sha256: 252149f583054515b10688855b24ca1c16072b5118e603b8fe017894d319c262
+    x-checker-data:
+      type: anitya
+      project-id: 6845
+      stable-only: true
+      url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.7z

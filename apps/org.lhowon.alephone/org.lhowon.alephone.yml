@@ -42,8 +42,9 @@ add-extensions:
 modules:
   - name: boost
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
-      - -DBOOST_INCLUDE_LIBRARIES=filesystem;system
+      - -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;range;tokenizer;unordered;utility;uuid
     sources:
       - type: archive
         url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.7z
@@ -105,6 +106,8 @@ modules:
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
           version-query: .tag_name
           url-query: .zipball_url
+      - type: patch
+        path: org.lhowon.alephone.boost-system.patch
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
