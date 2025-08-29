@@ -94,6 +94,9 @@
     <keyword>online</keyword>
   </keywords>
   <releases>
+    <release version="release-20250829" date="2025-08-29">
+      <description></description>
+    </release>
     <release version="1.10.1" date="2025-03-02">
       <url>https://github.com/Aleph-One-Marathon/alephone/releases/tag/release-20250302</url>
       <description>
