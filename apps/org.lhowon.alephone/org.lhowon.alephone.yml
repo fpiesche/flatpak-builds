@@ -98,9 +98,9 @@ modules:
       - --with-miniupnpc
     sources:
       - type: archive
-        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20250302
+        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20250829
         dest-filename: alephone.zip
-        sha256: 7b720ab1b260f0f760993f7735adc37cc41d3ff99c8f28eacabb09f29c634367
+        sha256: 86627afb246f79034feaf27e0617bd39f1f4e82540053f8e34e59981747e3c15
         x-checker-data:
           type: json
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
@@ -111,8 +111,8 @@ modules:
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/Marathon-20250302-Data.zip
-        sha256: e517465537d85f721d582948cd4a2e9a1868171bd3df83b3c57a7f850748af85
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/Marathon-20250829-Data.zip
+        sha256: 644fa202a8df19fd5c36b8c4bc3777c33afd291e2874669defc1819d8e132620
         size: 26408514
         filename: marathon-data.zip
         x-checker-data:
@@ -121,8 +121,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/Marathon2-20250302-Data.zip
-        sha256: 3e07cca73137184032687f98623f8e7beb131d2a27ecba5344eaddf5bf082af7
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/Marathon2-20250829-Data.zip
+        sha256: cac0ce7bd37b91f5da15ad63be1b6131e1f75496906e8fd6af20f0bb1ab86cf9
         size: 28902408
         filename: marathon2-data.zip
         x-checker-data:
@@ -131,8 +131,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon2-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/MarathonInfinity-20250302-Data.zip
-        sha256: 53611535153548159334439d775ae49d8ea20a0ff804017c6d17386c001a8339
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/MarathonInfinity-20250829-Data.zip
+        sha256: 8b6ba6b2ca9714a2235b3063281f176ccd27a2e23b96c014f5c700d9a222a018
         size: 31852152
         filename: marathon-infinity-data.zip
         x-checker-data:
