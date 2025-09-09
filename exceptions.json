@@ -17,7 +17,7 @@
     },
 	"com.metroidconstruction.metroid-planets": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-	}
+	},
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
 	    "appid-url-not-reachable": "Site has gone down"
