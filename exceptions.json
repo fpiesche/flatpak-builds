@@ -15,6 +15,9 @@
 	    "appid-url-not-reachable": "Repo name for this is a mess",
         "releases-not-in-order": "Versioning scheme for this is a mess"
     },
+	"com.metroidconstruction.metroid-planets": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+	}
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
 	    "appid-url-not-reachable": "Site has gone down"
