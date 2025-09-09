@@ -98,7 +98,7 @@ jobs:
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
             MANIFEST_FILENAME="$manifest"
-            MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
+            MANIFEST_SDK=$(yq e ".sdk" $manifest )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             METAINFO_FILE="${manifest%.*}.metainfo.xml"
             MANIFEST_ARCHES='["x86_64", "aarch64"]'
