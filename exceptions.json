@@ -100,7 +100,8 @@
         "appstream-missing-screenshots": "Screenshots are present but unreachable from GitHub"
     },
     "org.vkdoom.vkdoom": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appid-url-not-reachable": "Site is down"
     },
     "se.remar.castle": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
