@@ -185,7 +185,7 @@ jobs:
       - metainfo-lint
     runs-on: ${{ matrix.arch.runner }}
     container:
-      image: ghcr.io/andyholmes/flatter/${{ matrix.app.sdk }}:${{ matrix.app.sdk-version }}
+      image: ghcr.io/andyholmes/flatter/flatter-base:latest
       options: --privileged
     permissions:
       pages: write
@@ -208,6 +208,8 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Install required runtime
+        run: flatpak install -y --noninteractive flathub ${{ matrix.app.sdk }}//${{ matrix.app.sdk-version }}
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: flatpak
