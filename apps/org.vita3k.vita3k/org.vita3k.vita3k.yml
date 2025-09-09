@@ -34,23 +34,19 @@ sdk-extensions:
 
 modules:
   - name: boost
-    buildsystem: simple
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBOOST_INCLUDE_LIBRARIES=filesystem;icl;variant
     sources:
       - type: archive
-        url: https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz
-        sha256: 9de758db755e8330a01d995b0a24d09798048400ac25c03fc5ea9be364b13c93
+        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz
+        sha256: 67acec02d0d118b5de9eb441f5fb707b3a1cdd884be00ca24b9a73c995511f74
         x-checker-data:
           type: anitya
           project-id: 6845
           stable-only: true
-          url-template: https://archives.boost.io/release/$version/source/boost_${major}_${minor}_${patch}.tar.gz
-    build-commands:
-      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=date_time,filesystem,iostreams,program_options,system
-      - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
-    cleanup:
-      - '*.a'
-      - /lib/debug
-      - /lib/cmake
+          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.tar.xz
 
   - name: vita3k
     buildsystem: cmake-ninja
