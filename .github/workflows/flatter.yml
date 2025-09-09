@@ -13,8 +13,6 @@ on:
       - "_site/*"
       - "_templates/*"
       - "build_site.py"
-    branches:
-      - main
   pull_request:
 
 jobs:
