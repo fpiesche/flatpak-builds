@@ -92,16 +92,15 @@ jobs:
           APPIDS="{ \"app\": [] }"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
-            echo "Generating matrix entry for $APPID..."
+            echo "::group::$APPID"
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
             METAINFO_FILE="${manifest%.*}.metainfo.xml"
+            MANIFEST_ARCHES='["x86_64", "aarch64"]'
             if [ -f apps/${APPID}/flathub.json ]; then
               echo "Reading required architectures from apps/${APPID}/flathub.json..."
-              MANIFEST_ARCHES=$(jq '. | ."only-arches"' apps/${APPID}/flathub.json)
-            else
-              MANIFEST_ARCHES="[\"x86_64\", \"aarch64\"]"
+              MANIFEST_ARCHES=$(jq '. | ."only-arches" // ["x86_64", "aarch64"]' apps/${APPID}/flathub.json)
             fi
             echo "::group::Variables"
             echo "MATRIX=$MATRIX"
@@ -125,6 +124,10 @@ jobs:
             APPIDS=$(echo $APPIDS | \
               jq -c ".app[.app | length] |=
                 .app + \"$APPID\"")
+            echo "::group::$Matrix"
+            echo $MATRIX | jq
+            echo "::endgroup::"
+          echo "::endgroup::"
           done
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "appids=$APPIDS" >> $GITHUB_OUTPUT
