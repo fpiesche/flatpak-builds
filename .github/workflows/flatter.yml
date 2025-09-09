@@ -66,7 +66,8 @@ jobs:
             APPS_TO_BUILD=(${{ inputs.appids }})
             declare -a APPS=()
             for appid in "${APPS_TO_BUILD[@]}"; do
-              APPS+=$(find ./apps -name $appid.yml)
+              manifest=$(find ./apps -name $appid.yml)
+              APPS+=($manifest)
             done
             echo "Building specified apps: $APPS"
           else
@@ -74,6 +75,8 @@ jobs:
             echo "Building all apps: $APPS"
           fi
           APP_LIST=($APPS)
+          echo "Final app list:"
+          for manifest in "${APP_LIST[@]}"; do echo $manifest; done
           echo "::endgroup::"
 
           # Generate JSON matrix for build jobs
