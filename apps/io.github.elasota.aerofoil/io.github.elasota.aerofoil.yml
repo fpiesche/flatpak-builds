@@ -19,6 +19,7 @@ cleanup:
   - '*.la'
   - /lib/pkgconfig
   - /share/pixmaps
+  - /share/appdata
 
 modules:
   - name: aerofoil
@@ -32,3 +33,7 @@ modules:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/branches/master
           commit-query: .commit.sha
+      - type: file
+        path: io.github.elasota.aerofoil.metainfo.xml
+    post-install:
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
