@@ -32,8 +32,6 @@ modules:
           project-id: 153600
           stable-only: true
           url-template: https://github.com/zdoom/ZMusic/archive/$version.tar.gz
-      - type: patch
-        path: fix-libxmp-playback.patch
   - name: vkdoom
     buildsystem: cmake-ninja
     config-opts:
