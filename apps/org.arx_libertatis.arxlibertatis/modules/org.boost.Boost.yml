@@ -3,7 +3,6 @@ buildsystem: cmake-ninja
 builddir: true
 config-opts:
   - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
-  # -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;range;tokenizer;unordered;utility;uuid
 sources:
   - type: archive
     url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz

@@ -45,7 +45,7 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;range;tokenizer;unordered;utility;uuid
+      - -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;system;tokenizer;unordered;uuid
     sources:
       - type: archive
         url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz
@@ -95,7 +95,6 @@ modules:
           type: anitya
           project-id: 117
           url-template: https://sourceforge.net/projects/asio/files/asio/${version}%20(Stable)/asio-${version}.tar.gz
-
 
   - name: alephone
     buildsystem: autotools
