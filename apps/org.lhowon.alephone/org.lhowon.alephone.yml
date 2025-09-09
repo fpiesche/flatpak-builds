@@ -1,6 +1,6 @@
 app-id: org.lhowon.alephone
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '23.08'
+runtime-version: &runtime-version '24.08'
 sdk: org.freedesktop.Sdk
 command: alephone
 
@@ -40,6 +40,7 @@ add-extensions:
     autodelete: false
 
 modules:
+  - ../shared-modules/glu/glu-9.json
   - name: boost
     buildsystem: cmake-ninja
     builddir: true
@@ -47,13 +48,13 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;range;tokenizer;unordered;utility;uuid
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.7z
-        sha256: 252149f583054515b10688855b24ca1c16072b5118e603b8fe017894d319c262
+        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz
+        sha256: 67acec02d0d118b5de9eb441f5fb707b3a1cdd884be00ca24b9a73c995511f74
         x-checker-data:
           type: anitya
           project-id: 6845
           stable-only: true
-          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.7z
+          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.tar.xz
 
   - name: zziplib
     buildsystem: cmake-ninja
@@ -83,7 +84,18 @@ modules:
       - -DUPNPC_BUILD_TESTS=FALSE
       - -DUPNPC_BUILD_SAMPLE=FALSE
 
-  - ../shared-modules/glu/glu-9.json
+  - name: asio
+    config-opts:
+      - --prefix=/app
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/asio/files/asio/1.36.0%20(Stable)/asio-1.36.0.tar.gz
+        sha256: 55d5c64e78b1bedd0004423e695c2cfc191fc71914eaaa7f042329ff99ee6155
+        x-checker-data:
+          type: anitya
+          project-id: 117
+          url-template: https://sourceforge.net/projects/asio/files/asio/${version}%20(Stable)/asio-${version}.tar.gz
+
 
   - name: alephone
     buildsystem: autotools
@@ -106,8 +118,6 @@ modules:
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
           version-query: .tag_name
           url-query: .zipball_url
-      - type: patch
-        path: org.lhowon.alephone.boost-system.patch
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
