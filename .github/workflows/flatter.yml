@@ -57,6 +57,7 @@ jobs:
       - name: Assemble build matrix
         id: builds
         run: |
+          echo "::group::Determine app IDs"
           # Figure out which manifests need building
           if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
             APPS="${{ steps.changed_files_action.outputs.all_changed_files }}"
@@ -73,6 +74,7 @@ jobs:
             echo "Building all apps: $APPS"
           fi
           APP_LIST=($APPS)
+          echo "::endgroup::"
 
           # Generate JSON matrix for build jobs
           MATRIX="{\
@@ -92,7 +94,6 @@ jobs:
           APPIDS="{ \"app\": [] }"
           for manifest in "${APP_LIST[@]}"; do
             APPID=$(basename ${manifest%.*})
-            echo "::group::$APPID"
             MANIFEST_FILENAME="$manifest"
             MANIFEST_SDK=$(yq e ".sdk" $manifest | sed "s/org.\(.*\).Sdk/\1/" )
             MANIFEST_SDK_VERSION=$(yq e ".runtime-version" $manifest)
@@ -102,7 +103,7 @@ jobs:
               echo "Reading required architectures from apps/${APPID}/flathub.json..."
               MANIFEST_ARCHES=$(jq '. | ."only-arches" // ["x86_64", "aarch64"]' apps/${APPID}/flathub.json)
             fi
-            echo "::group::Variables"
+            echo "::group::$APPID variables"
             echo "MATRIX=$MATRIX"
             echo "APPID=$APPID"
             echo "MANIFEST_FILENAME=$MANIFEST_FILENAME"
@@ -111,6 +112,7 @@ jobs:
             echo "MANIFEST_ARCHES=$MANIFEST_ARCHES"
             echo "METAINFO_FILE=$METAINFO_FILE"
             echo "::endgroup::"
+            echo "::group::$APPID matrix"
             MATRIX=$(echo $MATRIX | \
               jq -c ".app[.app | length] |=
               .app + {
@@ -124,14 +126,12 @@ jobs:
             APPIDS=$(echo $APPIDS | \
               jq -c ".app[.app | length] |=
                 .app + \"$APPID\"")
-            echo "::group::$Matrix"
             echo $MATRIX | jq
             echo "::endgroup::"
-          echo "::endgroup::"
           done
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "appids=$APPIDS" >> $GITHUB_OUTPUT
-          echo "::group::Matrix"
+          echo "::group::Full matrix"
           echo $MATRIX | jq
           echo "::endgroup::"
           echo "::group::app IDs"
