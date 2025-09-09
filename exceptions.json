@@ -16,7 +16,7 @@
         "releases-not-in-order": "Versioning scheme for this is a mess"
     },
 	"com.metroidconstruction.metroid-planets": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
 	},
     "com.megamanmaker.megamanmaker": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
