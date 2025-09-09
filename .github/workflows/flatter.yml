@@ -126,7 +126,7 @@ jobs:
             APPIDS=$(echo $APPIDS | \
               jq -c ".app[.app | length] |=
                 .app + \"$APPID\"")
-            echo $MATRIX | jq
+            echo $MATRIX | jq ".app[] | select(.appid == \"$APPID\")"
             echo "::endgroup::"
           done
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
