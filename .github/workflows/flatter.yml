@@ -374,14 +374,14 @@ jobs:
 
       - name: Enable git lfs and add any files
         run: |
+          cd _site
+          git init
+          git checkout -b gh-pages
           find . -type f -size +10M -exec git lfs track {} \;
-
-      - name: Publish repo
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: _site
-          single-commit: true
-          clean: true
+          git add --all .
+          git commit --quiet --no-verify -m "deploying from https://github.com/fpiesche/flatpak-builds/actions/runs/${{ github.run_id }}"
+          git remote add origin git@github.com:fpiesche/flatpak-builds.git
+          git push --force origin:gh-pages
 
       - name: Delete site build artifact
         uses: geekyeggo/delete-artifact@v5
