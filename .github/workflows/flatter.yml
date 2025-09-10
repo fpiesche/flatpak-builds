@@ -372,19 +372,16 @@ jobs:
             --verbose \
             _site/repo/
 
+      - name: Enable git lfs and add any files
+        run: |
+          find . -type f -size +10M -exec git lfs track {} \;
+
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
           single-commit: true
-
-      - name: Archive full site repo
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          path: _site/repo
-          name: full_site.zip
-          retention-days: 1
+          clean: true
 
       - name: Delete site build artifact
         uses: geekyeggo/delete-artifact@v5
