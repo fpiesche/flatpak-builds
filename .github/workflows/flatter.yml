@@ -201,6 +201,7 @@ jobs:
         with:
           submodules: true
           ref: ${{ github.ref }}
+
       - name: Setup GPG
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: gpg
@@ -208,8 +209,10 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
       - name: Install required runtime
         run: flatpak install -y --noninteractive flathub ${{ matrix.app.sdk }}//${{ matrix.app.sdk-version }}
+
       - name: Build
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: flatpak
@@ -223,18 +226,23 @@ jobs:
           arch: ${{ matrix.arch.name }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: false
+
       - name: Upload build dir as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: _build
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
+          retention-days: 1
+
       - name: Upload repo as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.flatpak.outputs.repository }}
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_repo.zip
+          retention-days: 1
+
       - name: Build single-file bundle
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: |
@@ -369,6 +377,14 @@ jobs:
         with:
           folder: _site
           single-commit: true
+
+      - name: Archive full site repo
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          path: _site/repo
+          name: full_site.zip
+          retention-days: 1
 
       - name: Delete site build artifact
         uses: geekyeggo/delete-artifact@v5
