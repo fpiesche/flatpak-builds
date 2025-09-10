@@ -371,13 +371,11 @@ jobs:
           single-commit: true
 
       - name: Delete site build artifact
-        if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
           name: "site_build.zip"
 
       - name: Delete repo artifacts
-        if: always()
         uses: geekyeggo/delete-artifact@v5
         with:
           name: "*_repo.zip"
