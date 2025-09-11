@@ -321,17 +321,12 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Check out base repo
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-
       - name: Check out current Flatpak repo
         uses: actions/checkout@v4
         with:
           ref: refs/heads/gh-pages
           path: _site/
+          lfs: true
 
       - name: Grab site artifact
         uses: actions/download-artifact@v4
@@ -375,13 +370,14 @@ jobs:
       - name: Enable git lfs and add any files
         run: |
           cd _site
-          git init
-          git checkout -b gh-pages
           find . -type f -size +10M -exec git lfs track {} \;
-          git add --all .
-          git commit --quiet --no-verify -m "deploying from https://github.com/fpiesche/flatpak-builds/actions/runs/${{ github.run_id }}"
-          git remote add origin git@github.com:fpiesche/flatpak-builds.git
-          git push --force origin:gh-pages
+
+      - name: Publish repo
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _site
+          single-commit: true
+          clean: true
 
       - name: Delete site build artifact
         uses: geekyeggo/delete-artifact@v5
