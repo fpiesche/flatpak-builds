@@ -51,6 +51,8 @@ modules:
         path: org.vkdoom.vkdoom.svg
       - type: file
         path: org.vkdoom.vkdoom.desktop
+      - type: patch
+        path: org.vkdoom.vkdoom.use-xdg-paths.patch
     post-install:
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications/
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/

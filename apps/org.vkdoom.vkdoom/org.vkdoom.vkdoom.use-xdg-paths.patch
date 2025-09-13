@@ -1,0 +1,305 @@
+diff --git a/src/common/engine/i_specialpaths.h b/src/common/engine/i_specialpaths.h
+index fb75230f5..2d1f62df6 100644
+--- a/src/common/engine/i_specialpaths.h
++++ b/src/common/engine/i_specialpaths.h
+@@ -8,7 +8,8 @@ FString GetUserFile (const char *path);
+ FString M_GetAppDataPath(bool create);
+ FString M_GetCachePath(bool create);
+ FString M_GetAutoexecPath();
+-FString M_GetConfigPath(bool for_reading);
++FString M_GetConfigFilePath(bool for_reading);
++FString M_GetConfigPath();
+ FString M_GetScreenshotsPath();
+ FString M_GetSavegamesPath();
+ FString M_GetDocumentsPath();
+diff --git a/src/common/filesystem/source/fs_findfile.cpp b/src/common/filesystem/source/fs_findfile.cpp
+index 3d176af55..ed6c88567 100644
+--- a/src/common/filesystem/source/fs_findfile.cpp
++++ b/src/common/filesystem/source/fs_findfile.cpp
+@@ -360,6 +360,7 @@ static bool DoScanDirectory(FileList& list, const char* dirpath, const char* mat
+ 			continue;
+ 		}
+ 		auto fn = FS_FindName(&find);
++		printf("Adding %s", fn);
+ 
+ 		if (attr & FA_DIREC)
+ 		{
+diff --git a/src/common/platform/posix/i_system.h b/src/common/platform/posix/i_system.h
+index 4f05ad09a..b56dd7a7c 100644
+--- a/src/common/platform/posix/i_system.h
++++ b/src/common/platform/posix/i_system.h
+@@ -17,7 +17,7 @@ struct WadStuff;
+ struct FStartupSelectionInfo;
+ 
+ #ifndef SHARE_DIR
+-#define SHARE_DIR "/usr/local/share/"
++#define SHARE_DIR "/usr/local/share"
+ #endif
+ 
+ void CalculateCPUSpeed(void);
+diff --git a/src/common/platform/posix/unix/i_specialpaths.cpp b/src/common/platform/posix/unix/i_specialpaths.cpp
+index c06e27b67..d654956ed 100644
+--- a/src/common/platform/posix/unix/i_specialpaths.cpp
++++ b/src/common/platform/posix/unix/i_specialpaths.cpp
+@@ -44,30 +44,74 @@
+ 
+ extern bool netgame;
+ 
++//===========================================================================
++//
++// M_GetDocumentsPath												Unix
++//
++// Returns the path to the default documents directory.
++//
++//===========================================================================
++
++FString M_GetDocumentsPath()
++{
++	if (std::getenv("XDG_DATA_HOME")) {
++		return NicePath("$XDG_DATA_HOME/" GAMENAMELOWERCASE);
++	}
++	else
++	{
++		return NicePath("$HOME/" GAME_DIR "/");
++	}
++}
++
++//===========================================================================
++//
++// M_GetConfigPath														Unix
++//
++// Returns the path to the default configuration file directory.
++//
++//===========================================================================
++
++FString M_GetConfigPath()
++{
++	if (std::getenv("XDG_CONFIG_HOME")) {
++		return NicePath("$XDG_CONFIG_HOME/" GAMENAMELOWERCASE);
++	}
++	else
++	{
++		return NicePath("$HOME/.config/");
++	}
++}
++
++//===========================================================================
++//
++// GetUserFile														Unix
++//
++// Get the full path to a file in the user data directory.
++//
++//===========================================================================
+ 
+ FString GetUserFile (const char *file)
+ {
+-	FString path;
+ 	struct stat info;
+ 
+-	path = NicePath("$HOME/" GAME_DIR "/");
++	FString path = M_GetDocumentsPath();
+ 
+ 	if (stat (path.GetChars(), &info) == -1)
+ 	{
+ 		struct stat extrainfo;
+ 
+ 		// Sanity check for $HOME/.config
+-		FString configPath = NicePath("$HOME/.config/");
++		FString configPath = M_GetConfigPath();
+ 		if (stat (configPath.GetChars(), &extrainfo) == -1)
+ 		{
+ 			if (mkdir (configPath.GetChars(), S_IRUSR | S_IWUSR | S_IXUSR) == -1)
+ 			{
+-				I_FatalError ("Failed to create $HOME/.config directory:\n%s", strerror(errno));
++				I_FatalError ("Failed to create %s directory:\n%s", configPath.GetChars(), strerror(errno));
+ 			}
+ 		}
+ 		else if (!S_ISDIR(extrainfo.st_mode))
+ 		{
+-			I_FatalError ("$HOME/.config must be a directory");
++			I_FatalError ("%s must be a directory", configPath.GetChars());
+ 		}
+ 
+ 		// This can be removed after a release or two
+@@ -112,9 +156,8 @@ FString GetUserFile (const char *file)
+ 
+ FString M_GetAppDataPath(bool create)
+ {
+-	// Don't use GAME_DIR and such so that ZDoom and its child ports can
+-	// share the node cache.
+-	FString path = NicePath("$HOME/.config/" GAMENAMELOWERCASE);
++	FString configPath = M_GetConfigPath() + GAMENAMELOWERCASE;
++	FString path = NicePath(configPath.GetChars());
+ 	if (create)
+ 	{
+ 		CreatePath(path.GetChars());
+@@ -132,13 +175,23 @@ FString M_GetAppDataPath(bool create)
+ 
+ FString M_GetCachePath(bool create)
+ {
++	FString path;
+ 	// Don't use GAME_DIR and such so that ZDoom and its child ports can
+ 	// share the node cache.
+-	FString path = NicePath("$HOME/.config/zdoom/cache");
++	if (std::getenv("XDG_CACHE_HOME"))
++	{
++		path = NicePath("$XDG_CACHE_HOME/zdoom");
++	}
++	else
++	{
++		path = NicePath("$HOME/.config/zdoom/cache");
++	}
++
+ 	if (create)
+ 	{
+ 		CreatePath(path.GetChars());
+ 	}
++
+ 	return path;
+ }
+ 
+@@ -157,7 +210,7 @@ FString M_GetAutoexecPath()
+ 
+ //===========================================================================
+ //
+-// M_GetConfigPath														Unix
++// M_GetConfigFilePath													Unix
+ //
+ // Returns the path to the config file. On Windows, this can vary for reading
+ // vs writing. i.e. If $PROGDIR/zdoom-<user>.ini does not exist, it will try
+@@ -165,9 +218,10 @@ FString M_GetAutoexecPath()
+ //
+ //===========================================================================
+ 
+-FString M_GetConfigPath(bool for_reading)
++FString M_GetConfigFilePath(bool for_reading)
+ {
+-	return GetUserFile(GAMENAMELOWERCASE ".ini");
++	FString configFile = M_GetConfigPath() +  "/" + GAMENAMELOWERCASE + ".ini";
++	return configFile;
+ }
+ 
+ //===========================================================================
+@@ -180,7 +234,7 @@ FString M_GetConfigPath(bool for_reading)
+ 
+ FString M_GetScreenshotsPath()
+ {
+-	return NicePath("$HOME/" GAME_DIR "/screenshots/");
++	return M_GetDocumentsPath() + "screenshots/";
+ }
+ 
+ //===========================================================================
+@@ -193,6 +247,6 @@ FString M_GetSavegamesPath()
+ 
+ FString M_GetSavegamesPath()
+ {
+-	return NicePath("$HOME/" GAME_DIR "/savegames/");
++	return M_GetDocumentsPath() + "savegames/";
+ }
+
+@@ -257,12 +257,0 @@ FString M_GetDocumentsPath()
+-//===========================================================================
+-//
+-// M_GetDocumentsPath												Unix
+-//
+-// Returns the path to the default documents directory.
+-//
+-//===========================================================================
+-
+-FString M_GetDocumentsPath()
+-{
+-	return NicePath("$HOME/" GAME_DIR "/");
+-}
+diff --git a/src/d_main.cpp b/src/d_main.cpp
+index 3f0ee70a0..93972c4dd 100644
+--- a/src/d_main.cpp
++++ b/src/d_main.cpp
+@@ -2053,7 +2053,11 @@ static void AddAutoloadFiles(const char *autoname, std::vector<std::string>& all
+ 		D_AddDirectory (allwads, file.GetChars(), "*.wad", GameConfig);
+ 
+ #ifdef __unix__
+-		file = NicePath("$HOME/" GAME_DIR "/skins");
++		if (std::getenv("XDG_DATA_HOME")) {
++			file = NicePath("$XDG_DATA_HOME/" GAMENAMELOWERCASE "/skins/");
++			D_AddDirectory (allwads, file.GetChars(), "*.wad", GameConfig);
++		}
++		file = NicePath("$HOME/" GAME_DIR "/skins/");
+ 		D_AddDirectory (allwads, file.GetChars(), "*.wad", GameConfig);
+ #endif	
+ 
+diff --git a/src/gameconfigfile.cpp b/src/gameconfigfile.cpp
+index efdad2fd5..889b5b731 100644
+--- a/src/gameconfigfile.cpp
++++ b/src/gameconfigfile.cpp
+@@ -118,6 +118,12 @@ FGameConfigFile::FGameConfigFile ()
+ #else
+ 		SetValueForKey ("Path", "$HOME/" GAME_DIR, true);
+ 		SetValueForKey ("Path", "$HOME/.local/share/games/doom", true);
++		// XDG_DATA_HOME is a FreeDesktop recommended standard for user data
++		// and used e.g. in Flatpak packages (where it's set to a path that
++		// will persist contents between sessions by default; usually
++		// $HOME/.var/app/[FreeDesktop app ID]/data).
++		// The recommended default otherwise is $HOME/.local/share.
++		SetValueForKey ("Path", "$XDG_DATA_HOME/" GAMENAMELOWERCASE, true);
+ 		// Arch Linux likes them in /usr/share/doom
+ 		// Debian likes them in /usr/share/games/doom
+ 		// I assume other distributions don't do anything radically different
+@@ -143,6 +149,12 @@ FGameConfigFile::FGameConfigFile ()
+ #elif !defined(__unix__)
+ 		SetValueForKey ("Path", "$PROGDIR", true);
+ #else
++		// XDG_DATA_HOME is a FreeDesktop recommended standard for user data
++		// and used e.g. in Flatpak packages (where it's set to a path that
++		// will persist contents between sessions by default; usually
++		// $HOME/.var/app/[FreeDesktop app ID]/data).
++		// The recommended default otherwise is $HOME/.local/share.
++		SetValueForKey ("Path", "$XDG_DATA_HOME/" GAMENAMELOWERCASE, true);
+ 		SetValueForKey ("Path", "$HOME/" GAME_DIR, true);
+ 		SetValueForKey ("Path", "$HOME/.local/share/games/doom", true);
+ 		SetValueForKey ("Path", SHARE_DIR, true);
+@@ -173,6 +185,16 @@ FGameConfigFile::FGameConfigFile ()
+ 		SetValueForKey("Path", "$PROGDIR/soundfonts", true);
+ 		SetValueForKey("Path", "$PROGDIR/fm_banks", true);
+ #else
++		// /app/ is the default installation prefix as seen from within a Flatpak sandbox.
++		SetValueForKey("Path", "/app/share/games/doom/soundfonts", true);
++		SetValueForKey("Path", "/app/share/games/doom/fm_banks", true);
++		// XDG_DATA_HOME is a FreeDesktop recommended standard for user data
++		// and used e.g. in Flatpak packages (where it's set to a path that
++		// will persist contents between sessions by default; usually
++		// $HOME/.var/app/[FreeDesktop app ID]/data).
++		// The recommended default otherwise is $HOME/.local/share.
++		SetValueForKey("Path", "$XDG_DATA_HOME/" GAMENAMELOWERCASE "/soundfonts", true);
++		SetValueForKey("Path", "$XDG_DATA_HOME/" GAMENAMELOWERCASE "/fm_banks", true);
+ 		SetValueForKey("Path", "$HOME/" GAME_DIR "/soundfonts", true);
+ 		SetValueForKey("Path", "$HOME/" GAME_DIR "/fm_banks", true);
+ 		SetValueForKey("Path", "$HOME/.local/share/games/doom/soundfonts", true);
+@@ -900,7 +922,7 @@ FString FGameConfigFile::GetConfigPath (bool tryProg)
+ 	{
+ 		return FString(pathval);
+ 	}
+-	return M_GetConfigPath(tryProg);
++	return M_GetConfigFilePath(tryProg);
+ }
+ 
+ void FGameConfigFile::CreateStandardAutoExec(const char *section, bool start)
+@@ -996,6 +1018,6 @@ void FGameConfigFile::SetStrifeDefaults ()
+ 
+ CCMD (whereisini)
+ {
+-	FString path = M_GetConfigPath(false);
++	FString path = M_GetConfigFilePath(false);
+ 	Printf ("%s\n", path.GetChars());
+ }
+diff --git a/src/playsim/bots/b_game.cpp b/src/playsim/bots/b_game.cpp
+index 19f212a61..372d604dd 100644
+--- a/src/playsim/bots/b_game.cpp
++++ b/src/playsim/bots/b_game.cpp
+@@ -500,6 +500,7 @@ FString M_GetCajunPath(const char* botfilename)
+ 	{
+ 		// Then check in SHARE_DIR/botfilename.
+ 		path = SHARE_DIR;
++		path << "/";
+ 		path << botfilename;
+ 		if (!FileExists(path))
+ 		{
