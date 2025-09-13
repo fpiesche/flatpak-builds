@@ -9,9 +9,9 @@ on:
         description: app IDs to build
   push:
     paths:
-      - "apps/*"
-      - "_site/*"
-      - "_templates/*"
+      - "apps/**/*"
+      - "_site/**/*"
+      - "_templates/**/*"
       - "build_site.py"
   pull_request:
 
