@@ -325,36 +325,34 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: refs/heads/gh-pages
-          path: _site/
           lfs: true
 
       - name: Grab site artifact
         uses: actions/download-artifact@v4
         with:
           pattern: "_site"
-          path: _site/
           merge-multiple: true
 
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: "*_repo.zip"
-          path: _site/repo
+          path: repo
           merge-multiple: true
 
       - name: Check site status
         run: |
           echo "::group::File size"
-          du -hsb _site
+          du -hsb .
           echo "::endgroup::"
           echo "::group::_site"
-          ls -la _site
+          ls -la .
           echo "::endgroup::"
           echo "::group::_site/repo"
-          ls -la _site/repo
+          ls -la repo
           echo "::endgroup::"
           echo "::group::Full tree"
-          tree _site
+          tree .
           echo "::endgroup::"
 
       - name: Update repo metadata
@@ -365,17 +363,16 @@ jobs:
             --title="Yellow Keycard" \
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
-            _site/repo/
+            repo/
 
       - name: Enable git lfs and add any files
         run: |
-          cd _site
           find . -type f -size +10M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: _site
+          folder: .
           single-commit: true
           clean: true
 
