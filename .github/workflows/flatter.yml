@@ -8,6 +8,8 @@ on:
         type: string
         description: app IDs to build
   push:
+    branches:
+      - main
     paths:
       - "apps/**/*"
       - "_site/**/*"
