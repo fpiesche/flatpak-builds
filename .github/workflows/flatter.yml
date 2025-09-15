@@ -10,11 +10,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "apps/**/*"
-      - "_site/**/*"
-      - "_templates/**/*"
-      - "build_site.py"
   pull_request:
 
 jobs:
