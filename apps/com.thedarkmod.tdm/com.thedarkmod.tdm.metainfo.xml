@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.thedarkmod.tdm</id>
+  <name>The Dark Mod</name>
+  <developer id="com.thedarkmod.tdm">
+    <name>The Dark Mod team</name>
+    <url>https://www.thedarkmod.com/team/</url>
+  </developer>
+  <summary>Steampunk stealth game</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.thedarkmod.tdm.desktop</launchable>
+  <url type="homepage">https://thedarkmod.com/</url>
+  <description>
+    <p>The Dark Mod is a free and open-source software first-person stealth video game, inspired by the Thief series by Looking Glass Studios. The game provides the basic framework and tools for more than 170 fan-made missions, including several multi-mission campaigns. The Dark Mod was founded by David Massey and first released in 2009 as a total conversion mod for Doom 3. Version 2.0 was released in October 2013 as a standalone game using the open-source id Tech 4 game engine.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://images.launchbox-app.com/c3b9b830-eeac-48c3-b6df-a47a423e33b7.jpg</image>
+      <caption>A new threat has appeared</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <supports>
+    <control>touch</control>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>tdm</binary>
+    <binary>TDMInstaller</binary>
+  </provides>
+  <keywords>
+    <keyword>stealth game</keyword>
+    <keyword>thief</keyword>
+    <keyword>retro</keyword>
+    <keyword>id tech</keyword>
+  </keywords>
+  <releases>
+    <release version="2.12" date="2024-03-03" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
