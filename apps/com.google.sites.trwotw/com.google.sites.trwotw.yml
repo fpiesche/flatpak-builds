@@ -26,7 +26,6 @@ finish-args:
   - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
 
 inherit-extensions:
-  - org.winehq.Wine.DLLs
   - org.freedesktop.Platform.GL32
   - org.freedesktop.Platform.Compat.i386
   - org.winehq.Wine.mono
@@ -36,6 +35,15 @@ add-extensions:
     directory: lib/debug/lib/i386-linux-gnu
     no-autodownload: true
     version: *runtime-version
+
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
 
 modules:
   - name: trwotw
@@ -61,10 +69,10 @@ modules:
       - type: file
         path: com.google.sites.trwotw.metainfo.xml
       - type: extra-data
-        url: https://drive.usercontent.google.com/download?id=1LLRbJdaBRYW9LbLX7j6MKSVoWsIA3N3M&export=download&confirm=yes
+        url: https://dl.tombraiderchronicles.com/content/tmp/mateusz-dzieciol-war-of-the-worlds-ver-1.1.zip
         filename: trwotw.zip
-        size: 2350785434
-        sha256: 3a297fd4452a97751afd4956d924f9f27c2d3cf1fc605a4e57e10e10a8087886
+        size: 2353407537
+        sha256: d5ac88e88625ff73a9bdf498c70f2b2e101905826bd2c8b52d6fed6cc0dff99c
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
