@@ -1,8 +1,0 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 056bd99db..007dcd08d 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -64,1 +64,2 @@ 	add_compile_options(
--			-std=c++14
-+			-std=c++17
-+           -Wno-register

@@ -1,5 +1,0 @@
-diff --git a/framework/minizip/minizip_extra.c b/framework/minizip/minizip_extra.cpp
-similarity index 100%
-rename from framework/minizip/minizip_extra.c
-rename to framework/minizip/minizip_extra.cpp
-index 56d8921f2..6e3b56fa9 100644

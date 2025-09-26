@@ -12,6 +12,8 @@ finish-args:
   # desktop
   - --share=ipc
   - --socket=x11
+  # network for installation and map downloads
+  - --share=network
 
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
@@ -19,304 +21,50 @@ add-extensions:
     add-ld-path: .
 
 modules:
-  # - name: zlib-ng
-  #   buildsystem: cmake-ninja
-  #   config-opts:
-  #     - -DZLIB_ENABLE_TESTS=false
-  #     - -DZLIB_COMPAT=true
-  #   sources:
-  #     - type: archive
-  #       url: https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.2.4.tar.gz
-  #       sha256: a73343c3093e5cdc50d9377997c3815b878fd110bf6511c2c7759f2afb90f5a3
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 115592
-  #         url-template: https://github.com/zlib-ng/zlib-ng/archive/refs/tags/$version.tar.gz
-
-  - name: minizip-ng
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
-        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
-        x-checker-data:
-          type: anitya
-          project-id: 301509
-          url-template: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/$version.tar.gz
-
-  - name: zstd
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DZSTD_LEGACY_SUPPORT=OFF
-      - -DZSTD_BUILD_TESTS=OFF
-      - -DZSTD_BUILD_PROGRAMS=OFF
-    builddir: true
-    subdir: build/cmake
-    sources:
-      - type: archive
-        url: https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz
-        sha256: 8c29e06cf42aacc1eafc4077ae2ec6c6fcb96a626157e0593d5e82a34fd403c1
-        x-checker-data:
-          type: anitya
-          project-id: 12083
-          url-template: https://github.com/facebook/zstd/releases/download/v$version/zstd-$version.tar.gz
-  - name: pugixml
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_SHARED_LIBS=ON
-    sources:
-      - type: archive
-        url: https://github.com/zeux/pugixml/archive/v1.11.4.zip
-        sha256: 6576948198b535388a9d4a0c89a21d4e83aeec3e77ce7b134e58a51ee312a89e
-        dest-filename: pugixml.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/zeux/pugixml/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
-
-  - name: mbedtls
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_C_FLAGS=-fPIC
-      - -DENABLE_TESTING=OFF
-      - -DENABLE_PROGRAMS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.4.0.zip
-        sha256: 9969088c86eb89f6f0a131e699c46ff57058288410f2087bd0d308f65e9fccb5
-        dest-filename: mbedtls.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/ARMmbed/mbedtls/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
-    cleanup:
-      - /include
-
-  - name: glfw
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DGLFW_BUILD_EXAMPLES=OFF
-      - -DGLFW_BUILD_TESTS=OFF
-      - -DGLFW_BUILD_DOCS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/glfw/glfw/archive/3.4.zip
-        sha256: a133ddc3d3c66143eba9035621db8e0bcf34dba1ee9514a9e23e96afd39fd57a
-        dest-filename: glfw.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/glfw/glfw/releases/latest
-          version-query: .tag_name
-          url-query: .zipball_url
-
-  # - name: libvorbis
-  #   buildsystem: cmake-ninja
-  #   cleanup:
-  #     - "/share/doc/libvorbis*"
-  #   sources:
-  #     - type: archive
-  #       url: https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.tar.xz
-  #       sha256: b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 1758
-  #         url-template: https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-$version.tar.xz
-
-  # - name: libjpeg
-  #   buildsystem: cmake-ninja
-  #   config-opts:
-  #     - -DCMAKE_SKIP_RPATH:BOOL=YES
-  #     - -DENABLE_STATIC:BOOL=NO
-  #     - -DWITH_JPEG8:BOOL=NO
-  #     - -DWITH_TURBOJPEG:BOOL=NO
-  #   cleanup: [/share, /bin]
-  #   sources:
-  #     - type: archive
-  #       url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/2.1.3.tar.gz
-  #       sha256: dbda0c685942aa3ea908496592491e5ec8160d2cf1ec9d5fd5470e50768e7859
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 1648
-  #         url-template: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$version.tar.gz
-
-  # - name: libpng
-  #   buildsystem: cmake-ninja
-  #   cleanup:
-  #     - "/bin"
-  #     - "/include"
-  #     - "/lib/pkgconfig"
-  #     - "/share"
-  #   sources:
-  #     - type: archive
-  #       url: https://download.sourceforge.net/libpng/libpng-1.6.45.tar.xz
-  #       sha256: 926485350139ffb51ef69760db35f78846c805fef3d59bfdcb2fba704663f370
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 1705
-  #         url-template: https://download.sourceforge.net/libpng/libpng-$version.tar.xz
-
-  # - name: curl
-  #   buildsystem: cmake-ninja
-  #   builddir: true
-  #   sources:
-  #     - type: archive
-  #       url: https://github.com/curl/curl/releases/download/curl-8_12_1/curl-8.12.1.tar.gz
-  #       sha256: 7b40ea64947e0b440716a4d7f0b7aa56230a5341c8377d7b609649d4aea8dbcf
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 12083
-  #         url-template: https://github.com/facebook/zstd/releases/download/v$version/zstd-$version.tar.gz
-
-  # - name: ffmpeg
-  #   config-opts:
-  #     - --enable-shared
-  #     - --disable-static
-  #     - --disable-doc
-  #     - --disable-manpages
-  #     - --disable-stripping
-  #     - --disable-ffplay
-  #     - --disable-ffprobe
-  #     - --enable-gpl
-  #     - --enable-version3
-  #     - --enable-optimizations
-  #     - --enable-postproc
-  #     - --enable-pthreads
-  #     - --enable-gnutls
-  #     - --enable-libxcb-xfixes
-  #     - --enable-opengl
-  #     - --enable-vaapi
-  #     - --enable-vdpau
-  #     - --enable-zlib
-  #     - --enable-bzlib
-  #     - --enable-lzma
-  #     - --enable-fontconfig
-  #     - --enable-libfontconfig
-  #     - --enable-libfreetype
-  #     # copied from another manifest
-  #     - --enable-avcodec
-  #     - --enable-avfilter
-  #     - --enable-libxml2
-  #     - --enable-swscale
-  #     - --enable-libxcb
-  #     - --enable-protocol=file
-  #   sources:
-  #     - type: archive
-  #       url: https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz
-  #       sha256: 40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6
-  #       x-checker-data:
-  #         type: anitya
-  #         project-id: 5405
-  #         url-template: https://ffmpeg.org/releases/ffmpeg-$version.tar.xz
-  #     - type: file
-  #       path: ffmpeg-config.cmake
-  #   cleanup:
-  #     - /share/ffmpeg/examples
-  #     - /bin/ffmpeg
-  #   post-install:
-  #     - mkdir -p /app/lib/cmake/ffmpeg && cp ffmpeg-config.cmake /app/lib/cmake/ffmpeg/
-
-
-  - name: ffmpeg-cmake
-    buildsystem: simple
-    sources:
-      - type: file
-        path: ffmpeg-config.cmake
-    build-commands:
-      - mkdir -p /app/lib/cmake/ffmpeg && cp ffmpeg-config.cmake /app/lib/cmake/ffmpeg/
-
-  - name: doctest
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DDOCTEST_WITH_TESTS=OFF
-      - -DDOCTEST_USE_STD_HEADERS=ON
-    sources:
-      - type: archive
-        url: https://github.com/doctest/doctest/archive/v2.4.11.zip
-        sha256: 6745e17682d6e2be1ea31ec8bf1814a3d7cb17d61d120e5f2ee5a075926634ad
-        dest-filename: doctest.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/doctest/doctest/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
-
-  - name: tracy
-    config-opts:
-      - -DTRACY_ENABLE=OFF
-    buildsystem: cmake-ninja
-    sources:
-      - type: archive
-        url: https://github.com/wolfpld/tracy/archive/v0.11.1.zip
-        sha256: 2213f8c39ccbda555ec646a6bfa77daabce5837733770937578c06ad20e747cd
-        dest-filename: tracy.zip
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/wolfpld/tracy/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
-    post-install:
-      - mv /app/share/Tracy/TracyConfig.cmake /app/share/Tracy/tracyConfig.cmake
-
   - name: tdm
-    buildsystem: cmake-ninja
-    build-options:
-      append-path: /usr/lib/sdk/llvm18/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
-    builddir: true
-    config-opts:
-      - -DENABLE_TRACY=OFF
-      - -DTDM_THIRDPARTY_ARTEFACTS=OFF
-      - -DCMAKE_C_COMPILER=clang
-      - -DCMAKE_CXX_COMPILER=clang++
-      - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
+    buildsystem: simple
     sources:
       - type: script
         dest-filename: com.thedarkmod.tdm.sh
         commands:
-          - tdminstaller
+          # Run installer if necessary
+          - |
+            if [[ ! -f $XDG_DATA_HOME/tdm/.installed ]]; then
+              mkdir -p $XDG_DATA_HOME/tdm
+              if [[ ! -f $XDG_DATA_HOME/tdm/tdm_installer.linux64 ]]; then
+                cp /app/bin/tdm_installer.linux64 $XDG_DATA_HOME/tdm/
+              fi
+              cd $XDG_DATA_HOME/tdm
+              ./tdm_installer.linux64 --unattended && rm *.exe *.ico && touch $XDG_DATA_HOME/tdm/.installed
+            fi
+          - cd $XDG_DATA_HOME/tdm && $XDG_DATA_HOME/tdm/thedarkmod.x64
+      - type: script
+        dest-filename: com.thedarkmod.tdm.installer.sh
+        commands:
+          - mkdir -p $XDG_DATA_HOME/tdm
+          - cd $XDG_DATA_HOME/tdm
+          - |
+            if [[ ! -f $XDG_DATA_HOME/tdm/tdm_installer.linux64 ]]; then
+              cp /app/bin/tdm_installer.linux64 $XDG_DATA_HOME/tdm/
+            fi
+          - ./tdm_installer.linux64 && rm *.exe *.ico
       - type: file
         path: com.thedarkmod.tdm.png
+      - type: file
+        path: com.thedarkmod.tdm.installer.png
       - type: file
         path: com.thedarkmod.tdm.desktop
       - type: file
         path: com.thedarkmod.tdm.metainfo.xml
       - type: archive
-        url: https://github.com/stgatilov/darkmod_src/archive/refs/heads/release213.zip
+        url: https://update.thedarkmod.com/zipsync/tdm_installer.linux64.zip
         dest-filename: tdm.zip
-        sha256: ed05eda4d6b3606a99a17f3ce3fb1531557cfa722dc9938a7579dc21655e6aef
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/stgatilov/darkmod_src/branches?per_page=100
-          version-query: .[].name | sub("^release"; "")
-          url-query: .zipball_url
-      - type: patch
-        path: patches/com.thedarkmod.tdm.allow-relwithdebinfo.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.c++std.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.cmake-packages.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.nostrip.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.tracy.patch
-      - type: patch
-        path: patches/precompiled-header-fix.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.minizip-includes.patch
-      - type: patch
-        path: patches/com.thedarkmod.tdm.filesystem-include.patch
-      - type: patch
-        path: patches/fix-minizip-compile.patch
+        sha256: 56754940823a49d07bd63efcba88a4f58ecd52cc0b3d244c49fdc996f37a687d
     build-commands:
-      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
-      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ tdm_installer.linux64
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.installer.sh
       - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.installer.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml

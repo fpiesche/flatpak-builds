@@ -8,3 +8,9 @@ Name=The Dark Mod
 StartupNotify=true
 Terminal=false
 Type=Application
+Actions=installer
+
+[Desktop Action installer]
+Name=The Dark Mod Installer
+Icon=com.thedarkmod.tdm.installer
+Exec=com.thedarkmod.tdm.installer.sh
