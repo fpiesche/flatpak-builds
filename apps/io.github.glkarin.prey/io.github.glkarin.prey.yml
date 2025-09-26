@@ -18,18 +18,25 @@ sdk-extensions:
 
 cleanup:
   - /include
+  - /lib/pkgconfig
+  - /lib/cmake
   - '*.a'
   - '*.la'
 
 modules:
-  - name: backtrace
-    buildsystem: autotools
+  - name: miniz
+    buildsystem: cmake-ninja
     sources:
-      - type: archive
-        url: https://github.com/ianlancetaylor/libbacktrace/archive/793921876c981ce49759114d7bb89bb89b2d3a2d.zip
-        sha256: 5c7fa8a3319cbc352f991a443997ac65913215354cb10f4b59f4b349e68373d7
+    - type: archive
+      url: https://github.com/richgel999/miniz/archive/refs/tags/3.1.0.zip
+      sha256: 89ce8fc6012b1f48407bb1422dd75701bb639e00fc235090cd8b47283fe6197b
+      x-checker-data:
+        type: anitya
+        project-id: 8067
+        url-template: https://github.com/richgel999/miniz/archive/refs/tags/$version.zip
 
   - name: prey
+    builddir: true
     buildsystem: cmake-ninja
     build-options:
       append-path: /usr/lib/sdk/llvm18/bin
@@ -38,7 +45,7 @@ modules:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DUSE_MINIZ=OFF
+      - -DUSE_MINIZ=ON
       - -DDEDICATED=ON
       - -DUSE_SYSTEM_CURL=ON
       - -DUSE_SYSTEM_OGGVORBIS=ON
@@ -87,7 +94,8 @@ modules:
         path: io.github.glkarin.prey.metainfo.xml
       - type: file
         path: io.github.glkarin.prey.sh
-      - type: shell
+      - type: patch
+        path: io.github.glkarin.prey.freetype.patch
     cleanup:
       # Doom 3
       - /bin/Doom3
