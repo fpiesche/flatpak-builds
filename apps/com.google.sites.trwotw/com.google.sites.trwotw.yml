@@ -1,0 +1,81 @@
+app-id: com.google.sites.trwotw
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: com.google.sites.trwotw.sh
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=x11
+  # wine setup
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.Notifications
+  - --allow=multiarch
+  # - --persist=.wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINEARCH=win64
+  - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+
+inherit-extensions:
+  - org.freedesktop.Platform.GL32
+  - org.freedesktop.Platform.Compat.i386
+  - org.winehq.Wine.mono
+
+add-extensions:
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    no-autodownload: true
+    version: *runtime-version
+
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+
+modules:
+  - name: trwotw
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: com.google.sites.trwotw.sh
+        commands:
+          - wine "/app/extra/War of the Worlds.exe"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - echo "Extracting game..."
+          - unzip -qq trwotw.zip && rm trwotw.zip
+          - export EXTRACT_DIR=$(dirname "$(find . -name 'War of the Worlds.exe')")
+          - echo "Found $EXTRACT_DIR"
+          - mv -v "$EXTRACT_DIR"/* /app/extra/
+          - rmdir "$EXTRACT_DIR"
+      - type: file
+        path: com.google.sites.trwotw.png
+      - type: file
+        path: com.google.sites.trwotw.desktop
+      - type: file
+        path: com.google.sites.trwotw.metainfo.xml
+      - type: extra-data
+        url: https://dl.tombraiderchronicles.com/content/tmp/mateusz-dzieciol-war-of-the-worlds-ver-1.1.zip
+        filename: trwotw.zip
+        size: 2353407537
+        sha256: d5ac88e88625ff73a9bdf498c70f2b2e101905826bd2c8b52d6fed6cc0dff99c
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml

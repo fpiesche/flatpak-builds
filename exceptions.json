@@ -3,6 +3,9 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing"
     },
+	"com.google.sites.trwotw": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+	},
     "io.github.glkarin.quake4": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing",
