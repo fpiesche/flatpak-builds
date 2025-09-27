@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>yellow keycard flatpak repo</title>
+        <meta description="Various things missing from Flathub">
+
+        <meta property="og:url" content="https://flatpak.yellowkeycard.net/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="yellow keycard flatpaks" />
+        <meta property="og:description" content="retrp gaming and other flatpaks" />
+        <meta property="og:image" content="https://flatpak.yellowkeycard.net/assets/favicon.svg" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg">
+        <meta name="theme-color" content="#f5d505">
+
+        <!-- Bootstrap 5 -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+        <!-- Data Tables -->
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+        <link href="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.css" rel="stylesheet" integrity="sha384-d76uxpdVr9QyCSR9vVSYdOAZeRzNUN8A4JVqUHBVXyGxZ+oOfrZVHC/1Y58mhyNg" crossorigin="anonymous">
+        <script src="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.js" integrity="sha384-JRUjeYWWUGO171YFugrU0ksSC6CaWnl4XzwP6mNjnnDh4hfFGRyYbEXwryGwLsEp" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function init() {
+                const datatables = ["#flatpaks", "#graduates"]
+                datatables.forEach(function (item, index) {
+                    console.log("Initializing data table for " + item);
+                    new DataTable(
+                        item,
+                        {
+                            info: true,
+                            ordering: true,
+                            paging: true
+                        }
+                    );
+                });
+            }
+        </script>
+
+        <!-- Ko-fi button -->
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="assets/styles.css">
+        <link href="https://fonts.cdnfonts.com/css/jupiter-crash" rel="stylesheet">
+
+        <!-- Font Awesome CSS -->
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+    </head>
+
+
+    <body onLoad="init();">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+                <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="flex-shrink-0">
+            <div class="container">
+                This is a repository holding some Flatpak builds I've assembled which I have yet to submit to Flathub for a variety of reasons
+                - e.g. because the app is still going through developer changes and approval, the developers have gone missing or retired so
+                I can't get approval for a submission, or the licensing situation is unclear or incompatible with Flathub, or the developers
+                have specifically said they don't want their app to be listed on Flathub.
+            </div>
+
+            <div class="container">
+                <h2 class="bi bi-tools" id="setup"> Setup</h2>
+                <div class="container">
+                    Run this command in a terminal window to set this repository up as a new remote for your Flatpak installation:
+                </div>
+                <div class="container">
+                    <br /><code class="cmdline bi bi-terminal-fill"> flatpak remote-add --user ykc https://flatpak.yellowkeycard.net/ykc.flatpakrepo</code><br /><br />
+                </div>
+                <div class="container">
+                    Once this is done, you can either click any of the
+                    <a class="bi bi-cloud-download-fill btn btn-primary" role="button"> Install</a> buttons on this site to install the
+                    given application, or use the <span class="cmdline cli-inline">flatpak</span> command line tool to search and install the applications as usual.
+                </div>
+            </div>
+
+            <div class="container">
+                <h2 class="bi bi-box-seam-fill"> Current packages</h2>
+                <table id="flatpaks" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>App</th>
+                            <th>Install</th>
+                            <th>Submission status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="com.dennisengelhard.megaman-rock-n-roll">
+                            <td>
+                                <a href="apps/com.dennisengelhard.megaman-rock-n-roll.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.dennisengelhard.megaman-rock-n-roll/com.dennisengelhard.megaman-rock-n-roll.png" alt="Mega Man: Rock'n'Roll" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.dennisengelhard.megaman-rock-n-roll.html">
+                                    <h3>Mega Man: Rock'n'Roll</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.dennisengelhard.megaman-rock-n-roll</p>
+                                Mega Man fan game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.dennisengelhard.megaman-rock-n-roll" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub distribution - unclear licensing.</td>
+                        </tr>
+                        <tr id="com.google.sites.trwotw">
+                            <td>
+                                <a href="apps/com.google.sites.trwotw.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.google.sites.trwotw/com.google.sites.trwotw.png" alt="Tomb Raider: War of the Worlds" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.google.sites.trwotw.html">
+                                    <h3>Tomb Raider: War of the Worlds</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.google.sites.trwotw</p>
+                                Tomb Raider fan game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.google.sites.trwotw" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="com.megamanmaker.megamanmaker">
+                            <td>
+                                <a href="apps/com.megamanmaker.megamanmaker.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.megamanmaker.megamanmaker/com.megamanmaker.megamanmaker.png" alt="Mega Man Maker" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.megamanmaker.megamanmaker.html">
+                                    <h3>Mega Man Maker</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.megamanmaker.megamanmaker</p>
+                                Mega Man-themed game creation tool
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.megamanmaker.megamanmaker" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="com.metroidconstruction.metroid-planets">
+                            <td>
+                                <a href="apps/com.metroidconstruction.metroid-planets.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.metroidconstruction.metroid-planets/com.metroidconstruction.metroid-planets.png" alt="Metroid Planets" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.metroidconstruction.metroid-planets.html">
+                                    <h3>Metroid Planets</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.metroidconstruction.metroid-planets</p>
+                                Metroid (NES) fan game and creation tool
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.metroidconstruction.metroid-planets" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="com.thedarkmod.tdm">
+                            <td>
+                                <a href="apps/com.thedarkmod.tdm.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.thedarkmod.tdm/com.thedarkmod.tdm.png" alt="The Dark Mod" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.thedarkmod.tdm.html">
+                                    <h3>The Dark Mod</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.thedarkmod.tdm</p>
+                                Steampunk stealth game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.thedarkmod.tdm" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - not a proper distribution, just a wrapper</td>
+                        </tr>
+                        <tr id="com.wixsite.stt16bit">
+                            <td>
+                                <a href="apps/com.wixsite.stt16bit.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.wixsite.stt16bit/com.wixsite.stt16bit.png" alt="Sonic Triple Trouble 16-Bit" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/com.wixsite.stt16bit.html">
+                                    <h3>Sonic Triple Trouble 16-Bit</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install com.wixsite.stt16bit</p>
+                                Fan remake of Sonic Triple Trouble in Genesis style
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://com.wixsite.stt16bit" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="io.github.andrei_drexler.ironwail">
+                            <td>
+                                <a href="apps/io.github.andrei_drexler.ironwail.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.andrei_drexler.ironwail/io.github.andrei_drexler.ironwail.png" alt="Ironwail" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.andrei_drexler.ironwail.html">
+                                    <h3>Ironwail</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.andrei_drexler.ironwail</p>
+                                A modern port of the original Quake engine, focused on performance
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.andrei_drexler.ironwail" role="button"> Install</a>
+                            </td>
+                            <td><a href='https://github.com/andrei-drexler/ironwail/issues/241#issuecomment-2261224166'>Pending dev approval</a> for Flathub submission</td>
+                        </tr>
+                        <tr id="io.github.apancik.abuse_2025">
+                            <td>
+                                <a href="apps/io.github.apancik.abuse_2025.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/io.github.apancik.abuse_2025.png" alt="Abuse 2025" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.apancik.abuse_2025.html">
+                                    <h3>Abuse 2025</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.apancik.abuse_2025</p>
+                                Modern port of Crack Dot Com's Abuse (1996)'
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.apancik.abuse_2025" role="button"> Install</a>
+                            </td>
+                            <td>Pending submission</td>
+                        </tr>
+                        <tr id="io.github.elasota.aerofoil">
+                            <td>
+                                <a href="apps/io.github.elasota.aerofoil.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.svg" alt="Aerofoil" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.elasota.aerofoil.html">
+                                    <h3>Aerofoil</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.elasota.aerofoil</p>
+                                A modern cross-platform port of Glider PRO, the classic Macintosh paper airplane game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.elasota.aerofoil" role="button"> Install</a>
+                            </td>
+                            <td>Pending submission to Flathub</td>
+                        </tr>
+                        <tr id="io.github.fgsfdsfgs.perfect_dark">
+                            <td>
+                                <a href="apps/io.github.fgsfdsfgs.perfect_dark.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fgsfdsfgs.perfect_dark/io.github.fgsfdsfgs.perfect_dark.png" alt="Perfect Dark" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.fgsfdsfgs.perfect_dark.html">
+                                    <h3>Perfect Dark</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.fgsfdsfgs.perfect_dark</p>
+                                Modern cross-platform port of Perfect Dark
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.fgsfdsfgs.perfect_dark" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub due to licensing restrictions</td>
+                        </tr>
+                        <tr id="io.github.fpiesche.f2bgl">
+                            <td>
+                                <a href="apps/io.github.fpiesche.f2bgl.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.fpiesche.f2bgl/io.github.fpiesche.f2bgl.svg" alt="Fade to Black" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.fpiesche.f2bgl.html">
+                                    <h3>Fade to Black</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.fpiesche.f2bgl</p>
+                                A modern cross-platform port of Fade to Black
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.fpiesche.f2bgl" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub: developer retired and license unclear.</td>
+                        </tr>
+                        <tr id="io.github.glkarin.prey">
+                            <td>
+                                <a href="apps/io.github.glkarin.prey.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.glkarin.prey/io.github.glkarin.prey.svg" alt="Prey" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.glkarin.prey.html">
+                                    <h3>Prey</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.glkarin.prey</p>
+                                Sci-fi shooter with horror elements
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.glkarin.prey" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub distribution due to messy repository name.</td>
+                        </tr>
+                        <tr id="io.github.glkarin.quake4">
+                            <td>
+                                <a href="apps/io.github.glkarin.quake4.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.glkarin.quake4/io.github.glkarin.quake4.svg" alt="Quake 4" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.glkarin.quake4.html">
+                                    <h3>Quake 4</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.glkarin.quake4</p>
+                                Sci-fi first-person shooter
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.glkarin.quake4" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub distribution due to messy repository name.</td>
+                        </tr>
+                        <tr id="io.github.interkarma.daggerfall-unity">
+                            <td>
+                                <a href="apps/io.github.interkarma.daggerfall-unity.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.interkarma.daggerfall-unity/io.github.interkarma.daggerfall-unity.png" alt="Daggerfall Unity" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.interkarma.daggerfall-unity.html">
+                                    <h3>Daggerfall Unity</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.interkarma.daggerfall-unity</p>
+                                A modern port of The Elder Scrolls II: Daggerfall
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.interkarma.daggerfall-unity" role="button"> Install</a>
+                            </td>
+                            <td>Developer refused Flathub submission</td>
+                        </tr>
+                        <tr id="io.github.kraflab.dsda-doom">
+                            <td>
+                                <a href="apps/io.github.kraflab.dsda-doom.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.kraflab.dsda-doom/io.github.kraflab.dsda-doom.svg" alt="dsda-doom" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.kraflab.dsda-doom.html">
+                                    <h3>dsda-doom</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.kraflab.dsda-doom</p>
+                                A vanilla-faithful Doom source port
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.kraflab.dsda-doom" role="button"> Install</a>
+                            </td>
+                            <td>Developers have expressed no interest in Flathub submission.</td>
+                        </tr>
+                        <tr id="io.github.openenroth.openenroth">
+                            <td>
+                                <a href="apps/io.github.openenroth.openenroth.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.openenroth.openenroth/io.github.openenroth.openenroth.png" alt="OpenEnroth" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.openenroth.openenroth.html">
+                                    <h3>OpenEnroth</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.openenroth.openenroth</p>
+                                Modern cross-platform port of the Might and Magic VI - VIII game engine
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.openenroth.openenroth" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub: no stable releases yet</td>
+                        </tr>
+                        <tr id="io.github.sergiou87.open-supaplex">
+                            <td>
+                                <a href="apps/io.github.sergiou87.open-supaplex.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.sergiou87.open-supaplex/io.github.sergiou87.open-supaplex.svg" alt="Open Supaplex" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.sergiou87.open-supaplex.html">
+                                    <h3>Open Supaplex</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.sergiou87.open-supaplex</p>
+                                A reverse-engineered port of Supaplex
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.sergiou87.open-supaplex" role="button"> Install</a>
+                            </td>
+                            <td><a href='https://github.com/sergiou87/open-supaplex/issues/62'>Waiting for dev approval</a> for Flathub submission</td>
+                        </tr>
+                        <tr id="io.github.sonicgalactic">
+                            <td>
+                                <a href="apps/io.github.sonicgalactic.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.sonicgalactic/io.github.sonicgalactic.png" alt="Sonic Galactic" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.sonicgalactic.html">
+                                    <h3>Sonic Galactic</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.sonicgalactic</p>
+                                Sonic the Hedgehog fan game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.sonicgalactic" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="io.github.stardropsmh.sonic-and-the-fallen-star">
+                            <td>
+                                <a href="apps/io.github.stardropsmh.sonic-and-the-fallen-star.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.stardropsmh.sonic-and-the-fallen-star/io.github.stardropsmh.sonic-and-the-fallen-star.png" alt="Sonic and the Fallen Star" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/io.github.stardropsmh.sonic-and-the-fallen-star.html">
+                                    <h3>Sonic and the Fallen Star</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.stardropsmh.sonic-and-the-fallen-star</p>
+                                Sonic the Hedgehog fan game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.stardropsmh.sonic-and-the-fallen-star" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="jp.ne.sakura.rpgex.littleworld">
+                            <td>
+                                <a href="apps/jp.ne.sakura.rpgex.littleworld.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/jp.ne.sakura.rpgex.littleworld/jp.ne.sakura.rpgex.littleworld.png" alt="Hat World: New Testament" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/jp.ne.sakura.rpgex.littleworld.html">
+                                    <h3>Hat World: New Testament</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install jp.ne.sakura.rpgex.littleworld</p>
+                                RPG inspired by the SaGa series
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://jp.ne.sakura.rpgex.littleworld" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="jp.xenia.xenia-canary">
+                            <td>
+                                <a href="apps/jp.xenia.xenia-canary.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/jp.xenia.xenia-canary/jp.xenia.xenia-canary.png" alt="Xenia Canary" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/jp.xenia.xenia-canary.html">
+                                    <h3>Xenia Canary</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install jp.xenia.xenia-canary</p>
+                                Experimental Xbox 360 emulator
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://jp.xenia.xenia-canary" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub: no stable releases yet</td>
+                        </tr>
+                        <tr id="net.duke4.m210.buildgdx">
+                            <td>
+                                <a href="apps/net.duke4.m210.buildgdx.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/net.duke4.m210.buildgdx/net.duke4.m210.buildgdx.png" alt="BuildGDX" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/net.duke4.m210.buildgdx.html">
+                                    <h3>BuildGDX</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install net.duke4.m210.buildgdx</p>
+                                Java-based cross-platform port of the Build game engine
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://net.duke4.m210.buildgdx" role="button"> Install</a>
+                            </td>
+                            <td>Pending submission to Flathub</td>
+                        </tr>
+                        <tr id="org.arx_libertatis.arxlibertatis">
+                            <td>
+                                <a href="apps/org.arx_libertatis.arxlibertatis.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.arx_libertatis.arxlibertatis/org.arx_libertatis.arxlibertatis.png" alt="Arx Libertatis" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/org.arx_libertatis.arxlibertatis.html">
+                                    <h3>Arx Libertatis</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install org.arx_libertatis.arxlibertatis</p>
+                                A cross-platform port of Arx Fatalis, a first-person role-playing game
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.arx_libertatis.arxlibertatis" role="button"> Install</a>
+                            </td>
+                            <td><a href='https://bugs.arx-libertatis.org/arx/issues/1747'>waiting for dev approval</a> for Flathub submission</td>
+                        </tr>
+                        <tr id="org.lhowon.alephone">
+                            <td>
+                                <a href="apps/org.lhowon.alephone.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.lhowon.alephone/org.lhowon.alephone.png" alt="Aleph One" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/org.lhowon.alephone.html">
+                                    <h3>Aleph One</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install org.lhowon.alephone</p>
+                                 Aleph One is the open source continuation of Bungie’s Marathon 2 game engine
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.lhowon.alephone" role="button"> Install</a>
+                            </td>
+                            <td>Developer <a href='https://github.com/Aleph-One-Marathon/alephone/issues/344#issuecomment-2322325970'>rejected Flathub submission</a> (for now)</td>
+                        </tr>
+                        <tr id="org.vita3k.vita3k">
+                            <td>
+                                <a href="apps/org.vita3k.vita3k.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vita3k.vita3k/org.vita3k.vita3k.svg" alt="Vita3K" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/org.vita3k.vita3k.html">
+                                    <h3>Vita3K</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install org.vita3k.vita3k</p>
+                                Experimental PlayStation Vita emulator
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.vita3k.vita3k" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub: no stable releases yet</td>
+                        </tr>
+                        <tr id="org.vkdoom.vkdoom">
+                            <td>
+                                <a href="apps/org.vkdoom.vkdoom.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.vkdoom.vkdoom/org.vkdoom.vkdoom.svg" alt="VkDoom" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/org.vkdoom.vkdoom.html">
+                                    <h3>VkDoom</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install org.vkdoom.vkdoom</p>
+                                Modern Doom source port
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.vkdoom.vkdoom" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub: no stable releases yet</td>
+                        </tr>
+                        <tr id="se.remar.castle">
+                            <td>
+                                <a href="apps/se.remar.castle.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/se.remar.castle/se.remar.castle.png" alt="Castle of Elite" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/se.remar.castle.html">
+                                    <h3>Castle of Elite</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install se.remar.castle</p>
+                                Puzzle platformer with a level editor
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://se.remar.castle" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="se.remar.herocore">
+                            <td>
+                                <a href="apps/se.remar.herocore.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/se.remar.herocore/se.remar.herocore.png" alt="Hero Core" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/se.remar.herocore.html">
+                                    <h3>Hero Core</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install se.remar.herocore</p>
+                                Sprawling action-exploration shooter
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://se.remar.herocore" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        <tr id="se.remar.iji">
+                            <td>
+                                <a href="apps/se.remar.iji.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/se.remar.iji/se.remar.iji.png" alt="Iji" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="apps/se.remar.iji.html">
+                                    <h3>Iji</h3>
+                                </a>
+                                <p class="bi bi-terminal-fill appid cmdline"> flatpak install se.remar.iji</p>
+                                Huge action-adventure platformer
+                            </td>
+                            <td class="col install-column">
+                                <a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://se.remar.iji" role="button"> Install</a>
+                            </td>
+                            <td>Unsuitable for Flathub - Windows application with bundled wine</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="container">
+                <h2 class="bi bi-mortarboard-fill"> Graduates</h2>
+                <p>These are some Flatpaks which used to be available here that have been replaced;
+                    in most cases they've been published on Flathub publicly with approval and help
+                    from the upstream projects.</p>
+                <table id="graduates" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>App</th>
+                            <th>Install</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="io.github.glkarin.quake4">
+                            <td>
+                                <a href="/apps/io.github.glkarin.quake4.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.idsoftware.quake4/com.idsoftware.quake4.svg" alt="Quake 4" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/apps/io.github.glkarin.quake4.html">
+                                    <h3>Quake 4</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> com.idsoftware.quake4</p>
+                                Sci-fi first-person shooter
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.glkarin.quake4" role="button">Install</a></td>
+                            <td>This package has been replaced with the improved glKarin port.</td>
+                        </tr>
+                        <tr id="info.exult.exult">
+                            <td>
+                                <a href="https://flathub.org/apps/info.exult.exult">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/info.exult.exult/info.exult.exult.svg" alt="Exult Ultima VII Engine" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/info.exult.exult">
+                                    <h3>Exult Ultima VII Engine</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> info.exult.exult</p>
+                                Cross-platform engine for the Ultima VII games
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://info.exult.exult" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.dxx_rebirth.dxx-rebirth">
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.dxx_rebirth.dxx-rebirth">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.dxx_rebirth.dxx-rebirth/io.github.dxx_rebirth.dxx-rebirth.svg" alt="DXX-Rebirth" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.dxx_rebirth.dxx-rebirth">
+                                    <h3>DXX-Rebirth</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.github.dxx_rebirth.dxx-rebirth</p>
+                                Modern cross-platform port of the Descent engine
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.dxx_rebirth.dxx-rebirth" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.ptitSeb.hydracastlelabyrinth">
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.ptitSeb.hydracastlelabyrinth">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.ptitSeb.hydracastlelabyrinth/io.github.ptitSeb.hydracastlelabyrinth.png" alt="Hydra Castle Labyrinth" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.ptitSeb.hydracastlelabyrinth">
+                                    <h3>Hydra Castle Labyrinth</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.github.ptitSeb.hydracastlelabyrinth</p>
+                                A modern Linux port of the "metroidvania" game Hydra Castle Labyrinth
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.ptitSeb.hydracastlelabyrinth" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.shadowmario.fnf-psychengine">
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.shadowmario.fnf-psychengine">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.shadowmario.fnf-psychengine/io.github.shadowmario.fnf-psychengine.png" alt="PsychEngine" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.shadowmario.fnf-psychengine">
+                                    <h3>PsychEngine</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.github.shadowmario.fnf-psychengine</p>
+                                Desktop implementation of Friday Night Funkin'
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.shadowmario.fnf-psychengine" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.theforceengine.tfe">
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.theforceengine.tfe">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.theforceengine.tfe/io.github.theforceengine.tfe.svg" alt="The Force Engine" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.theforceengine.tfe">
+                                    <h3>The Force Engine</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.github.theforceengine.tfe</p>
+                                A modern cross‑platform port of “STAR WARS™: Dark Forces” with mod support
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.theforceengine.tfe" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.voidforce.qsprawl">
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.voidforce.qsprawl">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.voidforce.qsprawl/io.github.voidforce.qsprawl.svg" alt="SPRAWL 96" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.github.voidforce.qsprawl">
+                                    <h3>SPRAWL 96</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.github.voidforce.qsprawl</p>
+                                A Quake mod based on the retro shooter SPRAWL
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.voidforce.qsprawl" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.itch.amcsquad.amcsquad">
+                            <td>
+                                <a href="https://flathub.org/apps/io.itch.amcsquad.amcsquad">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.itch.amcsquad.amcsquad/io.itch.amcsquad.amcsquad.png" alt="The AMC Squad" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/io.itch.amcsquad.amcsquad">
+                                    <h3>The AMC Squad</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> io.itch.amcsquad.amcsquad</p>
+                                Epic story-driven FPS running on the Build Engine
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.itch.amcsquad.amcsquad" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="net.shadps4.shadPS4">
+                            <td>
+                                <a href="https://flathub.org/apps/net.shadps4.shadPS4">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/net.shadps4.shadPS4/net.shadps4.shadPS4.svg" alt="shadPS4" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/net.shadps4.shadPS4">
+                                    <h3>shadPS4</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> net.shadps4.shadPS4</p>
+                                PS4 Emulator
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://net.shadps4.shadPS4" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="net.sourceforge.quakespasm.Quakespasm">
+                            <td>
+                                <a href="https://flathub.org/apps/net.sourceforge.quakespasm.Quakespasm">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/net.sourceforge.quakespasm.Quakespasm/net.sourceforge.quakespasm.Quakespasm.png" alt="Quakespasm" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/net.sourceforge.quakespasm.Quakespasm">
+                                    <h3>Quakespasm</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> net.sourceforge.quakespasm.Quakespasm</p>
+                                A modern port of the original Quake engine
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://net.sourceforge.quakespasm.Quakespasm" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="net.sourceforge.uhexen2.uhexen2">
+                            <td>
+                                <a href="https://flathub.org/apps/net.sourceforge.uhexen2.uhexen2">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/net.sourceforge.uhexen2.uhexen2/net.sourceforge.uhexen2.uhexen2.svg" alt="Hexen II: Hammer of Thyrion" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/net.sourceforge.uhexen2.uhexen2">
+                                    <h3>Hexen II: Hammer of Thyrion</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> net.sourceforge.uhexen2.uhexen2</p>
+                                A modernized source port of Hexen II
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://net.sourceforge.uhexen2.uhexen2" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="org.azahar_emu.Azahar">
+                            <td>
+                                <a href="https://flathub.org/apps/org.azahar_emu.Azahar">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.azahar_emu.azahar/org.azahar_emu.azahar.svg" alt="Azahar" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/org.azahar_emu.Azahar">
+                                    <h3>Azahar</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> org.azahar_emu.azahar</p>
+                                Nintendo 3DS emulator based on Citra
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.azahar_emu.Azahar" role="button">Install</a></td>
+                            <td>There is now an official Azahar distribution on Flathub.</td>
+                        </tr>
+                        <tr id="org.gemrb.gemrb">
+                            <td>
+                                <a href="https://flathub.org/apps/org.gemrb.gemrb">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.gemrb.gemrb/org.gemrb.gemrb.svg" alt="GemRB" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://flathub.org/apps/org.gemrb.gemrb">
+                                    <h3>GemRB</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> org.gemrb.gemrb</p>
+                                Classic role-playing game engine
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://org.gemrb.gemrb" role="button">Install</a></td>
+                            <td>This package has graduated to Flathub.</td>
+                        </tr>
+                        <tr id="io.github.glkarin.prey">
+                            <td>
+                                <a href="/apps/io.github.glkarin.prey.html">
+                                    <img class="app-icon-small" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/org.icculus.prey/org.icculus.prey.svg" alt="Prey" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/apps/io.github.glkarin.prey.html">
+                                    <h3>Prey</h3>
+                                </a>
+                                <p class="bi bi-mortarboard-fill appid cmdline"> org.icculus.prey</p>
+                                Sci-fi shooter with horror elements
+                            </td>
+                            <td class="col-2 install-column"><a class="bi bi-cloud-download-fill btn btn-primary" href="appstream://io.github.glkarin.prey" role="button">Install</a></td>
+                            <td>This package has been replaced with the improved glKarin port.</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">🏳️‍🌈🏳️‍⚧️ respect my trans homies or i'm gonna identify as a fucking problem</span>
+        </div>
+    </footer>
+
+    </body>
+</html>
