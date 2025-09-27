@@ -1,0 +1,74 @@
+app-id: io.github.apancik.abuse_2025
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: abuse
+
+finish-args:
+  # gamepad support
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  # - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
+  # Audio
+  - --socket=pulseaudio
+
+modules:
+  - ../shared-modules/glu/glu-9.json
+  - ../shared-modules/glew/glew.json
+  - name: sdl2-mixer
+    buildsystem: autotools
+    cleanup:
+      - /include
+      - /lib/cmake
+      - "*.la"
+      - "*.a"
+      - /lib/pkgconfig
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.tar.gz
+        sha256: 1cfb34c87b26dbdbc7afd68c4f545c0116ab5f90bbfecc5aebe2a9cb4bb31549
+        x-checker-data:
+          type: anitya
+          project-id: 4782
+          url-template: https://github.com/libsdl-org/SDL_mixer/releases/download/release-$version/SDL2_mixer-$version.tar.gz
+
+  - name: abuse
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT=True
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/apancik/abuse_2025/zipball/2025.1.0
+        dest-filename: abuse2025.zip
+        sha256: 84b808a5739a91a6ade3e7b0469901a6d62b1bc77795525d22e0cf74e7b7ffbb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/apancik/abuse_2025/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+      - type: file
+        path: io.github.apancik.abuse_2025.metainfo.xml
+      - type: file
+        path: io.github.apancik.abuse_2025.png
+      - type: file
+        path: io.github.apancik.abuse_2025.desktop
+      - type: script
+        dest-filename: io.github.apancik.abuse_2025.sh
+        commands:
+          - |
+            if [[ ! -f ${XDG_DATA_HOME}/abuse/data/timidity.cfg ]]; then
+              echo "soundfont $(find /app/share/games -name *AWE*.sf2)" >> ${XDG_DATA_HOME}/abuse/data/timidity.cfg
+            fi
+          - export TIMIDITY_CFG=$XDG_DATA_HOME/abuse/data/timidity.cfg
+          - abuse
+    post-install:
+      - install -vDm644 -t /app/share/metainfo/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml
+      - install -vDm755 -t /app/share/applications/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
+      - install -vDm644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.png
+      - install -vDm755 -t /app/bin/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
