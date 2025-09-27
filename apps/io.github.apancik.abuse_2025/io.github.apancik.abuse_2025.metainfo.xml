@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <component type="desktop-application">
-  <id>io.github.antrad.abuse_1996</id>
-  <name>Abuse 1996</name>
-  <developer id="io.github.antrad.abuse_1996">
-    <name>Abuse 1996 contributors</name>
-    <url>https://github.com/antrad/abuse_1996/graphs/contributors</url>
+  <id>io.github.apancik.abuse_2025</id>
+  <name>Abuse 2025</name>
+  <developer id="io.github.apancik.abuse_2025">
+    <name>Abuse 2025 contributors</name>
+    <url>https://github.com/apancik/abuse_2025/graphs/contributors</url>
   </developer>
-  <icon type="stock">io.github.antrad.abuse_1996</icon>
+  <icon type="stock">io.github.apancik.abuse_2025</icon>
   <summary>Modern port of Crack Dot Com's Abuse (1996)'</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <launchable type="desktop-id">io.github.antrad.abuse_1996.desktop</launchable>
+  <launchable type="desktop-id">io.github.apancik.abuse_2025.desktop</launchable>
   <url type="homepage">https://github.com/antrad/abuse_1996</url>
   <branding>
     <color type="primary" scheme_preference="light">#e4bc47</color>
@@ -36,23 +36,23 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.antrad.abuse_1996/screenshots/title.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/screenshots/title.png</image>
       <caption>Title screen (v2.0)</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.antrad.abuse_1996/screenshots/jungle.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/screenshots/jungle.png</image>
       <caption>Explore alien jungles</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.antrad.abuse_1996/screenshots/ambush.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/screenshots/ambush.png</image>
       <caption>Face devious ambushes...</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.antrad.abuse_1996/screenshots/traps.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/screenshots/traps.png</image>
       <caption>... and dangerous traps</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.antrad.abuse_1996/screenshots/flame.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.apancik.abuse_2025/screenshots/flame.png</image>
       <caption>Encounter spooky entities</caption>
     </screenshot>
   </screenshots>
@@ -60,6 +60,7 @@
     <category>Game</category>
   </categories>
   <releases>
+    <release version="2025.1.0" date="2025-01-17" />
     <release version="0.9a" date="2016-05-09" />
   </releases>
   <content_rating type="oars-1.1">

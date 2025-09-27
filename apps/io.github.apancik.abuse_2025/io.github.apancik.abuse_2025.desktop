@@ -2,9 +2,9 @@
 Categories=Game
 Comment=Side-scrolling shooter
 Exec=abuse
-Icon=io.github.antrad.abuse_1996
+Icon=io.github.apancik.abuse_2025
 Keywords=abuse;crackdotcom;shooter
-Name=Abuse 1996
+Name=Abuse 2025
 StartupNotify=true
 Terminal=false
 Type=Application
