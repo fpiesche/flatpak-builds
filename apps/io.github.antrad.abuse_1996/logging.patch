@@ -2,6 +2,13 @@ diff --git a/data/abuse.lsp b/data/abuse.lsp
 index cc09aa9..c517635 100644
 --- a/data/abuse.lsp
 +++ b/data/abuse.lsp
+@@ -9,4 +9,2 @@
+-(if (not (load "lisp/english.lsp"))             ;; load language specific stuff
+-    (progn
+-      (print "Abuse data files not found. Maybe try the `-datadir' option?")
+-      (quit)))
++(print "Loading English language")
++(load "lisp/english.lsp")
 @@ -12,12 +12,14 @@
        (quit)))
  (setq load_warn T)
