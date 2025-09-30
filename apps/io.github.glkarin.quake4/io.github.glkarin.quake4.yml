@@ -85,7 +85,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan69.zip
-        sha256: ed5be53d53b0646234bf4ac0ad01261870f8c2be23e952d60108c30751046639
+        sha256: b7c92282d1cefdd8a03c1c35bb03468e6fcc36cc72b1a75edeec7c173d68b49c
         x-checker-data:
           type: anitya
           project-id: 377943
