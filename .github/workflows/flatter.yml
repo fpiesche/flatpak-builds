@@ -296,7 +296,7 @@ jobs:
         run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/main' || github.event.pull_request.merged == true }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs:
