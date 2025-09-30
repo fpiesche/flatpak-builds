@@ -295,21 +295,6 @@ jobs:
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
 
-  merge:
-    name: Merge PR
-    if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
-    needs: builddir-lint
-    permissions:
-      pull-requests: write
-      contents: write
-    steps:
-      - name: Merge Pull Request
-        uses: juliangruber/merge-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ github.event.pull_request.number }}
-
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
@@ -400,3 +385,18 @@ jobs:
         uses: geekyeggo/delete-artifact@v5
         with:
           name: "*_repo.zip"
+
+  merge:
+    name: Merge PR
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: builddir-lint
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number }}
