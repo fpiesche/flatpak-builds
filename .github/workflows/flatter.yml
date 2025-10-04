@@ -363,11 +363,11 @@ jobs:
             --title="Yellow Keycard" \
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
-            repo/
+            _site/repo/
 
       - name: Enable git lfs and add any files
         run: |
-          find . -type f -size +10M -exec git lfs track {} \;
+          find _site -type f -size +10M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
