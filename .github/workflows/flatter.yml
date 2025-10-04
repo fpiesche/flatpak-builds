@@ -337,7 +337,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: "*_repo.zip"
-          path: repo
+          path: _site/repo
           merge-multiple: true
 
       - name: Check site status
@@ -372,7 +372,7 @@ jobs:
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .
+          folder: _site/
           single-commit: true
           clean: true
 
