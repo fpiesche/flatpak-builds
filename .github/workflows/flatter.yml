@@ -345,14 +345,14 @@ jobs:
           echo "::group::File size"
           du -hsb .
           echo "::endgroup::"
+          echo "::group::Full tree"
+          tree .
+          echo "::endgroup::"
           echo "::group::_site"
           ls -la .
           echo "::endgroup::"
           echo "::group::_site/repo"
-          ls -la repo
-          echo "::endgroup::"
-          echo "::group::Full tree"
-          tree .
+          ls -la _site/repo
           echo "::endgroup::"
 
       - name: Update repo metadata

@@ -6,6 +6,7 @@ venv
 # Flatpak build artifacts
 build
 .flatpak-builder
+.flatpak
 repo
 
 # Site build artifacts
