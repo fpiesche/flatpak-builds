@@ -103,7 +103,7 @@ def generate_flatpakrepo():
     with open("_site/ykc.gpg", "r") as pubkey_file:
         gpgkey = pubkey_file.read()
     return template.render({"gpg_key": gpgkey})
-    
+
 
 def generate_index(apps: list[dict]) -> str:
     print("Writing main index...")
