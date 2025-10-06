@@ -363,7 +363,7 @@ jobs:
             --title="Yellow Keycard" \
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
-            _site/repo/
+            repo/
 
       - name: Enable git lfs and add any files
         run: |
