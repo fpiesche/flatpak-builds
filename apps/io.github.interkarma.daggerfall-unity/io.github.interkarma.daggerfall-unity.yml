@@ -65,14 +65,14 @@ modules:
       - type: file
         path: settings.ini.default
       - type: extra-data
-        url: https://github.com/Interkarma/daggerfall-unity/releases/download/v1.1.1/dfu_linux_64bit-v1.1.1.zip
+        url: https://github.com/Interkarma/daggerfall-unity/releases/download/v1.1.1-cve-2025/dfu_linux_64bit-v1.1.1.zip
         sha256: be3c476ae92972f42448757719266ad82c04868eb7b6f3a3c90fcfcf1490849a
         size: 58809717
         filename: dfu-linux.zip
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Interkarma/daggerfall-unity/releases/latest
-          version-query: .tag_name
+          version-query: .tag_name | sub("-cve-2025"; "")
           url-query:
             .assets[] | select(.name=="dfu_linux_64bit-" + $version + ".zip")
             | .browser_download_url
