@@ -331,14 +331,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: "_site"
-          path: _site
           merge-multiple: true
 
       - name: Grab build artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: "*_repo.zip"
-          path: _site/repo
+          path: repo
           merge-multiple: true
 
       - name: Check site status
@@ -349,11 +348,11 @@ jobs:
           echo "::group::Full tree"
           tree -L2 .
           echo "::endgroup::"
-          echo "::group::_site"
+          echo "::group::site root"
           ls -la .
           echo "::endgroup::"
-          echo "::group::_site/repo"
-          ls -la _site/repo
+          echo "::group::repo"
+          ls -la repo
           echo "::endgroup::"
 
       - name: Update repo metadata
@@ -368,12 +367,12 @@ jobs:
 
       - name: Enable git lfs and add any files
         run: |
-          find _site -type f -size +10M -exec git lfs track {} \;
+          find . -type f -size +10M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: _site/
+          folder: .
           single-commit: true
           clean: true
 
