@@ -346,7 +346,7 @@ jobs:
           du -hsb .
           echo "::endgroup::"
           echo "::group::Full tree"
-          tree -L2 .
+          tree -L 2 .
           echo "::endgroup::"
           echo "::group::site root"
           ls -la .
