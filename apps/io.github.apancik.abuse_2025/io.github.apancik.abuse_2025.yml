@@ -7,9 +7,8 @@ command: abuse
 finish-args:
   # gamepad support
   - --device=all
-  # X11 + XShm access
+  # GUI access
   - --share=ipc
-  # - --socket=x11
   - --socket=fallback-x11
   - --socket=wayland
   # Audio
