@@ -331,6 +331,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: "_site"
+          path: _site
           merge-multiple: true
 
       - name: Grab build artifacts
@@ -346,7 +347,7 @@ jobs:
           du -hsb .
           echo "::endgroup::"
           echo "::group::Full tree"
-          tree .
+          tree -L2 .
           echo "::endgroup::"
           echo "::group::_site"
           ls -la .
