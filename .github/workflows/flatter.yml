@@ -343,7 +343,7 @@ jobs:
       - name: Check site status
         run: |
           echo "::group::File size"
-          du -hsb .
+          du -bh -d1 --exclude=".git*" .
           echo "::endgroup::"
           echo "::group::Full tree"
           tree -L 2 .
