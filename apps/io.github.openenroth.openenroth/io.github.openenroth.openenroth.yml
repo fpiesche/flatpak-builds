@@ -44,9 +44,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v2.1.0
+        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v2.2.0
         dest-filename: libdwarf.zip
-        sha256: 68fab33d1b6fa9cc1768b2c07fcba0e4812a8ac04df78242800aa5a8703696c4
+        sha256: d6ef4562f01186195bea489bfe9178977fd70ab56711a1dae915fb1567d08763
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
@@ -75,7 +75,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenEnroth/OpenEnroth.git
-        commit: faf9c893c0343b492fc23328b82f6609b4b86099
+        commit: 062954030f5af5d9b163ab7cc21d7cfafb9e6974
         x-checker-data:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/tags
