@@ -4,11 +4,11 @@ build-commands:
   - cp -r glm /app/include
 sources:
   - type: archive
-    url: https://api.github.com/repos/g-truc/glm/zipball/1.0.1
+    url: https://api.github.com/repos/g-truc/glm/zipball/1.0.2
     dest-filename: glm.zip
-    sha256: 022236a5f7c2b187eb3e7b50854b0b2017df26d3a9bd2f533764c96c369211c1
+    sha256: b1c53907f5d4e4d35006f7d30c2577eec229a7e85e47b384f029b05235b7743d
     x-checker-data:
       type: json
       url: https://api.github.com/repos/g-truc/glm/releases/latest
       version-query: .tag_name
-      url-query: '.zipball_url'
+      url-query: .zipball_url
