@@ -69,7 +69,7 @@ modules:
       - type: extra-data
         url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_3.zip
         filename: mega-man-maker.zip
-        size: 83817984
+        size: 82793559
         sha256: 0e5a993f11f3843886d2ec65bbe188c2f9e688b1d7dd476c253506b8fb65315c
         x-checker-data:
           type: html
