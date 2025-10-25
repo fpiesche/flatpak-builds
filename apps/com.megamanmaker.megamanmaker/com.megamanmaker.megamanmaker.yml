@@ -67,15 +67,15 @@ modules:
       - type: file
         path: com.megamanmaker.megamanmaker.metainfo.xml
       - type: extra-data
-        url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_2_2.zip
+        url: https://megamanmaker.com/downloads/MegaManMaker_v1_10_3.zip
         filename: mega-man-maker.zip
         size: 83817984
-        sha256: 0833ad80842da87abcf0f5dd83bdfae608980d4abcccfb674eed759e81f8660a
+        sha256: 0e5a993f11f3843886d2ec65bbe188c2f9e688b1d7dd476c253506b8fb65315c
         x-checker-data:
           type: html
           url: https://megamanmaker.com/
           version-pattern: The latest version is ([\d.-]+)
-          url-template: https://megamanmaker.com/downloads/MegaManMaker_v${version0}_${version1}_${version2}_${version3}.zip
+          url-template: https://megamanmaker.com/downloads/MegaManMaker_v${version0}_${version1}_${version2}.zip
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
