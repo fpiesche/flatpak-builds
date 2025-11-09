@@ -60,10 +60,10 @@ modules:
       - type: file
         path: com.wixsite.stt16bit.metainfo.xml
       - type: extra-data
-        url: https://archive.org/download/sonic-triple-trouble-16-bit-2022-platform-android-mac-os-windows_202308/Sonic%20Triple%20Trouble%2016-Bit%20%28v1.1.0%29%20%282022%29%20%28Platform%29%20%28Windows%2064%29.zip
+        url: https://archive.org/download/sonic-triple-trouble-16-bit_v128/sonic-triple-trouble-16-bit-v1.2.8.zip
         filename: stt16bit.zip
-        size: 106670939
-        sha256: 71f0747412655c2e7cd6af2a6ea8824ff6157d8bf3dad000a33cc510c5bc25cd
+        size: 108397947
+        sha256: ff6ad1a750c26c27010b011b1be20f4c876b1bf56407ec3fe5f33121a9006f37
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
