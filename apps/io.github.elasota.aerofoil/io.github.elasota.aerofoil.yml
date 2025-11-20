@@ -28,7 +28,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/elasota/Aerofoil.git
-        commit: 75e5cceaf55c3b185dd106d21dd47252c639048f
+        commit: eccf2cf528af04cd87d741719db34d7745c05be5
         x-checker-data:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/branches/master
