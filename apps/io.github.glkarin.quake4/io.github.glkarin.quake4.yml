@@ -1,6 +1,6 @@
 app-id: io.github.glkarin.quake4
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '24.08'
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.glkarin.quake4.sh
 

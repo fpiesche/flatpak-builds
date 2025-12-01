@@ -7,12 +7,12 @@ config-opts:
   - -Dtests=false
 sources:
   - type: archive
-    url: https://api.github.com/repos/anholt/libepoxy/zipball/1.5.10
-    sha256: d75ddc0e7925d9852b52c3db7f4f2c67cdc0f9bc3e9e542efab37f4791a6f9e4
-    dest-filename: libepoxy.zip
+    url: https://api.github.com/repos/anholt/libepoxy/tarball/1.5.10
+    sha256: b3e076c5bea209ffa7789cb460d76718be206ccad65a8c915757957c76318376
+    dest-filename: libepoxy.tar.gz
     x-checker-data:
       type: json
       url: https://api.github.com/repos/anholt/libepoxy/releases/latest
       version-query: .tag_name
-      url-query: .zipball_url
+      url-query: .tarball_url
 

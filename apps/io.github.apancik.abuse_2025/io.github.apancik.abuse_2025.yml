@@ -1,6 +1,6 @@
 app-id: io.github.apancik.abuse_2025
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: abuse
 
@@ -42,14 +42,14 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://api.github.com/repos/apancik/Abuse_2025/zipball/2025.1.0
-        dest-filename: abuse2025.zip
-        sha256: 84b808a5739a91a6ade3e7b0469901a6d62b1bc77795525d22e0cf74e7b7ffbb
+        url: https://api.github.com/repos/apancik/Abuse_2025/tarball/2025.1.0
+        dest-filename: abuse2025.tar.gz
+        sha256: 24a231619f2d22b70dcb175939ddf1fadabf74b6611f21beadec9d92077b9b2a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/apancik/abuse_2025/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: file
         path: io.github.apancik.abuse_2025.metainfo.xml
       - type: file

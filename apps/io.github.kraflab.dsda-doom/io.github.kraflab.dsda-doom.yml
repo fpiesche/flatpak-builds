@@ -53,26 +53,26 @@ modules:
       - -D BUILD_ALLEGRO4=OFF
     sources:
       - type: archive
-        url: https://api.github.com/repos/kode54/dumb/zipball/396caa4d31859045ccb5ef943fd430ca4026cce8
-        sha256: 252df229612e7c534440130a32133325de6565d77c5c6fe16507f321ab7468a1
-        dest-filename: dumb.zip
+        url: https://api.github.com/repos/kode54/dumb/tarball/396caa4d31859045ccb5ef943fd430ca4026cce8
+        sha256: 57738c93e42a76d94b76502464962e521eb74b669e8ac56eb23349dd4ab078c5
+        dest-filename: dumb.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kode54/dumb/branches/master
           version-query: .commit.sha
-          url-query: ("https://api.github.com/repos/kode54/dumb/zipball/" + .commit.sha)
+          url-query: ("https://api.github.com/repos/kode54/dumb/tarball/" + .commit.sha)
   - name: portmidi
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/PortMidi/portmidi/zipball/v2.0.6
-        dest-filename: portmidi.zip
-        sha256: 73e797a4be29434537706338567ec711981a4779c71f16f0e39742ec18f01d81
+        url: https://api.github.com/repos/PortMidi/portmidi/tarball/v2.0.6
+        dest-filename: portmidi.tar.gz
+        sha256: e2e6ce46f16d65a3372fb07ff38e6e8925e50af3c225051abe2b8cbc47aabc85
         x-checker-data:
           type: json
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
 
   - name: dsda-doom
     buildsystem: cmake-ninja
@@ -80,14 +80,14 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://api.github.com/repos/kraflab/dsda-doom/zipball/v0.29.4
-        dest-filename: dsda-doom.zip
-        sha256: 1745844b4f8e8210e0f24358d3b35be983453862e9bc0fc264bfbe0735018f75
+        url: https://api.github.com/repos/kraflab/dsda-doom/tarball/v0.29.4
+        dest-filename: dsda-doom.tar.gz
+        sha256: 91630379edd11e00287a483653a7e558141bfa230a3b88d9ce8d539f63046d4d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kraflab/dsda-doom/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: file
         path: io.github.kraflab.dsda-doom.metainfo.xml
     post-install:
@@ -100,14 +100,14 @@ modules:
     subdir: src
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/zipball/v1.4
-        dest-filename: dsda-doom-launcher.zip
-        sha256: 0daf82a6e93429576095974499a212885681dfa844dd7b4e34de1015e82c8476
+        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.4
+        dest-filename: dsda-doom-launcher.tar.gz
+        sha256: 80418d7e8eb69fd91a9ecf575e5e9d89e453fb18194d1bf5785847b709310390
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: patch
         path: dsda-launcher-ui.patch
       - type: patch

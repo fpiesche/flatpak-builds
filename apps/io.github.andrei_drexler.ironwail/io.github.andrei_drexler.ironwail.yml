@@ -1,6 +1,6 @@
 app-id: io.github.andrei_drexler.ironwail
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.andrei_drexler.ironwail.sh
 
@@ -33,14 +33,14 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://api.github.com/repos/libxmp/libxmp/zipball/libxmp-4.6.3
-        dest-filename: libxmp.zip
-        sha256: f761dedfa698e37b240112ed8531b94dda199261f0cac338829a7f3dc0a933ef
+        url: https://api.github.com/repos/libxmp/libxmp/tarball/libxmp-4.6.3
+        dest-filename: libxmp.tar.gz
+        sha256: 0f7b5265bd660ab40c99e20045068c24c63025b1c1120540659e209c0c2370b4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libxmp/libxmp/releases/latest
           version-query: .tag_name | sub("^libxmp-"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
   - name: ironwail
     buildsystem: cmake-ninja
     no-make-install: true
@@ -48,14 +48,14 @@ modules:
       - -DENABLE_USERDIRS=true
     sources:
       - type: archive
-        url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.8.0
-        sha256: d7fbbd94dad93d11834de52b39c9cd30399fd1a75f8ef0c53769081ea0e780bf
-        dest-filename: ironwail.zip
+        url: https://api.github.com/repos/andrei-drexler/ironwail/tarball/v0.8.0
+        sha256: 96b68a95cf0acbbf83a66ab9dc54f1f28783d6b3436e44eb7450f86823339976
+        dest-filename: ironwail.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/andrei-drexler/ironwail/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: patch
         path: io.github.andrei_drexler.ironwail.userdir.patch
       - type: file

@@ -1,6 +1,6 @@
 app-id: org.lhowon.alephone
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '24.08'
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: alephone
 
@@ -109,14 +109,14 @@ modules:
       - --with-miniupnpc
     sources:
       - type: archive
-        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20250829
-        dest-filename: alephone.zip
-        sha256: 86627afb246f79034feaf27e0617bd39f1f4e82540053f8e34e59981747e3c15
+        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/tarball/release-20250829
+        dest-filename: alephone.tar.gz
+        sha256: 29a5c5592a630b58941ca7161f380371ea4a45c3ba9b17d5f3e892c81ee4a1b6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data

@@ -1,6 +1,6 @@
 app-id: io.github.fpiesche.f2bgl
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.fpiesche.f2bgl.sh
 
@@ -38,14 +38,14 @@ modules:
   - name: f2bgl
     sources:
       - type: archive
-        url: https://api.github.com/repos/fpiesche/f2bgl/zipball/v1.0.2
-        dest-filename: f2bgl.zip
-        sha256: c5cd3e0529067f4c4c9193cde38b4faf84dc5f5a994794e77074ef5c1eb53ccb
+        url: https://api.github.com/repos/fpiesche/f2bgl/tarball/v1.0.2
+        dest-filename: f2bgl.tar.gz
+        sha256: 569e8dad7b7b33e2441398c07defc9cc8b368d4cdc11e2470005e177e215a765
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fpiesche/f2bgl/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: patch
         path: f2bgl_remap_config_files.patch
       - type: script

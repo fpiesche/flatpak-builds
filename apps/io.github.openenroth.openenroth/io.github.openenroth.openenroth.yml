@@ -44,14 +44,14 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v2.2.0
-        dest-filename: libdwarf.zip
-        sha256: d6ef4562f01186195bea489bfe9178977fd70ab56711a1dae915fb1567d08763
+        url: https://api.github.com/repos/davea42/libdwarf-code/tarball/v2.2.0
+        dest-filename: libdwarf.tar.gz
+        sha256: 7000c9b0b5463af6c0c01cd1ab30255ed85155442332f7195aca93e2ca7fe690
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
     cleanup:
       - /bin/dwarfdump
       - /share/dwarfdump

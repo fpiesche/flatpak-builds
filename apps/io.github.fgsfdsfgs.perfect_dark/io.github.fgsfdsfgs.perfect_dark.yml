@@ -1,6 +1,6 @@
 app-id: io.github.fgsfdsfgs.perfect_dark
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '24.08'
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.fgsfdsfgs.perfect_dark.sh
 

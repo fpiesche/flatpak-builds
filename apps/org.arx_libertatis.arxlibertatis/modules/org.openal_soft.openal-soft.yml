@@ -4,11 +4,11 @@ config-opts:
   - -DALSOFT_EXAMPLES=OFF
 sources:
   - type: archive
-    url: https://api.github.com/repos/kcat/openal-soft/zipball/1.24.3
-    sha256: 8eca75eaf2ff33905d3bfb68db7716672b54d5049d98f0804df6a034233e9620
-    dest-filename: openal-soft.zip
+    url: https://api.github.com/repos/kcat/openal-soft/tarball/1.24.3
+    sha256: 6e859cc6b0315d4a6ddefa2bad524fcaff8cd87ed7f5c36b5d90bf4488dbc6ca
+    dest-filename: openal-soft.tar.gz
     x-checker-data:
       type: json
       url: https://api.github.com/repos/kcat/openal-soft/releases/latest
       version-query: .tag_name
-      url-query: .zipball_url
+      url-query: .tarball_url
