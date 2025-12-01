@@ -196,6 +196,10 @@ jobs:
       matrix: ${{fromJson(needs.builds.outputs.matrix)}}
       fail-fast: false
     steps:
+      - name: Ensure unzip is present
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        run: dnf install -y unzip
+
       - name: Checkout
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         uses: actions/checkout@v4
