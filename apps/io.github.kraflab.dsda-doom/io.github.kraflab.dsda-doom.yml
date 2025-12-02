@@ -65,9 +65,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/PortMidi/portmidi/tarball/v2.0.6
+        url: https://api.github.com/repos/PortMidi/portmidi/tarball/v2.0.7
         dest-filename: portmidi.tar.gz
-        sha256: e2e6ce46f16d65a3372fb07ff38e6e8925e50af3c225051abe2b8cbc47aabc85
+        sha256: e4851b707685e2c318646e97621014918a93daab43d483d344e6e460231da5e0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
