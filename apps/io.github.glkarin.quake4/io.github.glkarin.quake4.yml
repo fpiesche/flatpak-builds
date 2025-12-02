@@ -49,9 +49,10 @@ modules:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DUSE_MINIZ=ON
       - -DDEDICATED=ON
-      - -DUSE_SYSTEM_CURL=ON
+      - -DUSE_SYSTEM_CURL=OFF
       - -DUSE_SYSTEM_OGGVORBIS=ON
       - -DUSE_SYSTEM_FREETYPE=ON
       # Doom 3
