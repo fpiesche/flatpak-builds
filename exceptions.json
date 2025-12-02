@@ -19,6 +19,7 @@
         "releases-not-in-order": "Versioning scheme for this is a mess"
     },
 	"com.metroidconstruction.metroid-planets": {
+        "appid-url-not-reachable": "metroidconstruction.com goes down periodically",
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
 	},
     "com.megamanmaker.megamanmaker": {
