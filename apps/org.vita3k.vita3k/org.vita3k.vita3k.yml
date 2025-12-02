@@ -1,6 +1,6 @@
 app-id: org.vita3k.vita3k
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '25.08'
+runtime-version: &runtime-version '24.08'
 sdk: org.freedesktop.Sdk
 command: Vita3K
 
@@ -64,6 +64,7 @@ modules:
       - -DUSE_VITA3K_UPDATE=OFF
       - -DUSE_DISCORD_RICH_PRESENCE=OFF
       - -DVITA3K_FORCE_SYSTEM_BOOST=ON
+      # - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/fpiesche/Vita3K.git

@@ -41,6 +41,8 @@ add-extensions:
 
 modules:
   - ../shared-modules/glu/glu-9.json
+  - ../shared-modules/SDL2/SDL2_ttf.json
+  - ../shared-modules/SDL2/SDL2_image.json
   - name: boost
     buildsystem: cmake-ninja
     builddir: true

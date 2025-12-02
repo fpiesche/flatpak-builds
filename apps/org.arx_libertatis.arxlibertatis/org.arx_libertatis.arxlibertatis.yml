@@ -32,14 +32,84 @@ cleanup:
   - /share/pixmaps
 
 modules:
+  - ../shared-modules/glu/glu-9.json
+
+  - name: boost
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
+    sources:
+      - type: archive
+        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz
+        sha256: 67acec02d0d118b5de9eb441f5fb707b3a1cdd884be00ca24b9a73c995511f74
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.tar.xz
+
+  - name: freetype
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.14.1.tar.xz
+        sha256: 32427e8c471ac095853212a37aef816c60b42052d4d9e48230bab3bdf2936ccc
+        dest-filename: freetype.tar.xz
+        x-checker-data:
+          type: anitya
+          project-id: 854
+          url-template: https://download-mirror.savannah.gnu.org/releases/freetype/freetype-$version.tar.xz
+
+  - name: glm
+    buildsystem: simple
+    build-commands:
+      - cp -r glm /app/include
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/g-truc/glm/tarball/1.0.2
+        dest-filename: glm.tar.gz
+        sha256: 90d616471e9c2e7dfbddfd0a9ec0741b7550d3b342816d2b1f4bfd153328a43a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/g-truc/glm/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
+
+  - name: libepoxy
+    buildsystem: meson
+    builddir: true
+    config-opts:
+      - --buildtype=debugoptimized
+      - --default-library=static
+      - -Dtests=false
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/anholt/libepoxy/tarball/1.5.10
+        sha256: b3e076c5bea209ffa7789cb460d76718be206ccad65a8c915757957c76318376
+        dest-filename: libepoxy.tar.gz
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/anholt/libepoxy/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
+
+  - name: openal-soft
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DALSOFT_EXAMPLES=OFF
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/kcat/openal-soft/tarball/1.24.3
+        sha256: 6e859cc6b0315d4a6ddefa2bad524fcaff8cd87ed7f5c36b5d90bf4488dbc6ca
+        dest-filename: openal-soft.tar.gz
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/kcat/openal-soft/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
+
   - name: arx
-    modules:
-      - ../shared-modules/glu/glu-9.json
-      - modules/org.boost.Boost.yml
-      - modules/org.freetype.libfreetype.yml
-      - modules/io.github.anholt.libepoxy.yml
-      - modules/net.g_truc.glm.yml
-      - modules/org.openal_soft.openal-soft.yml
     buildsystem: cmake-ninja
     build-options:
       cxxflags: -O2 -g -pthread -lGL

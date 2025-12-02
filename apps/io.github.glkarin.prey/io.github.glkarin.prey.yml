@@ -14,7 +14,7 @@ finish-args:
   - --socket=pulseaudio
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm18
+  - org.freedesktop.Sdk.Extension.llvm20
 
 cleanup:
   - /include
@@ -43,15 +43,16 @@ modules:
     builddir: true
     buildsystem: cmake-ninja
     build-options:
-      append-path: /usr/lib/sdk/llvm18/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
     config-opts:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DUSE_MINIZ=ON
       - -DDEDICATED=ON
-      - -DUSE_SYSTEM_CURL=ON
+      - -DUSE_SYSTEM_CURL=OFF
       - -DUSE_SYSTEM_OGGVORBIS=ON
       - -DUSE_SYSTEM_FREETYPE=ON
       # Doom 3
