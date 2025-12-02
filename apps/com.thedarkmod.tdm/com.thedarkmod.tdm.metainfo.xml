@@ -12,7 +12,10 @@
   <launchable type="desktop-id">com.thedarkmod.tdm.desktop</launchable>
   <url type="homepage">https://thedarkmod.com/</url>
   <description>
-    <p>The Dark Mod is a free and open-source software first-person stealth video game, inspired by the Thief series by Looking Glass Studios. The game provides the basic framework and tools for more than 170 fan-made missions, including several multi-mission campaigns. The Dark Mod was founded by David Massey and first released in 2009 as a total conversion mod for Doom 3. Version 2.0 was released in October 2013 as a standalone game using the open-source id Tech 4 game engine.</p>
+    <p>The Dark Mod is a free and open-source software first-person stealth video game, inspired by the Thief series by Looking Glass Studios.
+      The game provides the basic framework and tools for more than 170 fan-made missions, including several multi-mission campaigns.
+      The Dark Mod was founded by David Massey and first released in 2009 as a total conversion mod for Doom 3. Version 2.0 was released
+      in October 2013 as a standalone game using the open-source id Tech 4 game engine.</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -42,6 +45,9 @@
     <keyword>id tech</keyword>
   </keywords>
   <releases>
+    <release version="2.13" date="2024-03-24">
+      <url>https://www.thedarkmod.com/posts/the-dark-mod-2-13-has-been-released/</url>
+    </release>
     <release version="2.12" date="2024-03-03" />
   </releases>
   <content_rating type="oars-1.1" />
