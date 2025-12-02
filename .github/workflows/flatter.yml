@@ -371,7 +371,7 @@ jobs:
 
       - name: Enable git lfs and add any files
         run: |
-          find . -type f -size +10M -exec git lfs track {} \;
+          find . -type f -size +25M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4
