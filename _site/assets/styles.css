@@ -7,6 +7,12 @@
     --ykc-medium: #f2b705;
 }
 
+[data-bs-theme="dark"] {
+    --ykc-bg-dark: #a3bdc3;
+    --ykc: #915103;
+    --ykc-medium: #915103;
+}
+
 .app-icon {
     height: 128px;
     width: 128px;

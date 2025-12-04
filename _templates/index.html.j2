@@ -39,9 +39,21 @@
                         }
                     );
                 });
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+                document.getElementById('darkmode').addEventListener('change', () => {
+                    if (document.documentElement.getAttribute("data-bs-theme") == "dark") {
+                        document.documentElement.removeAttribute("data-bs-theme");
+                    } else {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
             }
         </script>
-
         <!-- Ko-fi button -->
         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
 
@@ -59,8 +71,16 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
-                <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+                <div class="col-8">
+                    <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+                </div>
+                <div class="col-1">
+                    <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+                </div>
+                <div class="form-check form-switch col-1">
+                    <input class="form-check-input" type="checkbox" id="darkmode">
+                    <label class="form-check-label" for="darkmode">🌒</label>
+                </div>
             </div>
         </nav>
 
@@ -167,7 +187,7 @@
         </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 bg-light">
+    <footer class="footer mt-auto py-3">
         <div class="container">
             <span class="text-muted">🏳️‍🌈🏳️‍⚧️ respect my trans homies or i'm gonna identify as a fucking problem</span>
         </div>
