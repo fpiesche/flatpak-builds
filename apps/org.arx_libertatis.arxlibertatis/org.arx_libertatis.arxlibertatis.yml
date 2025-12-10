@@ -22,8 +22,8 @@ build-options:
 cleanup:
   - /bin/openal-info
   - /include
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /lib/cmake
   - /lib/pkgconfig
   - /share/aclocal
@@ -41,8 +41,8 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.xz
-        sha256: 67acec02d0d118b5de9eb441f5fb707b3a1cdd884be00ca24b9a73c995511f74
+        url: https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
+        sha256: aca59f889f0f32028ad88ba6764582b63c916ce5f77b31289ad19421a96c555f
         x-checker-data:
           type: anitya
           project-id: 6845
