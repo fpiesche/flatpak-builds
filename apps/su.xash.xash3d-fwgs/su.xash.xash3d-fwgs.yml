@@ -1,0 +1,117 @@
+app-id: su.xash.xash3d-fwgs
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+x-gl-version: &gl-version '1.4'
+x-gl-versions: &gl-versions 25.08;1.4
+sdk: org.freedesktop.Sdk
+command: su.xash.xash3d-fwgs.sh
+
+rename-desktop-file: su.xash.Engine.Compat.i386.desktop
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: *runtime-version
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: *runtime-version
+    no-autodownload: true
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+
+x-compat-i386-opts: &compat-i386-opts
+  prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+  ldflags: -L/app/lib32
+  prepend-path: /usr/lib/sdk/toolchain-i386/bin
+  env:
+    CC: i686-unknown-linux-gnu-gcc
+    CXX: i686-unknown-linux-gnu-g++
+  libdir: /app/lib32
+  no-debuginfo: true # libbacktrace relies on this
+
+finish-args:
+  - --share=ipc
+  - --allow=multiarch
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --share=network
+  # Steam library path on Ubuntu
+  - --filesystem=~/.steam/steam/steamapps/common:ro
+  # ... on SteamOS
+  - --filesystem=~/.local/share/Steam/steamapps/common:ro
+  # ... on Steam Flatpak
+  - --filesystem=~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common:ro
+  # allow talking with Discord for mods
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --device=all
+  - --allow=bluetooth
+
+modules:
+  - name: bundle-setup
+    buildsystem: simple
+    build-commands:
+      - |
+        mkdir -p /app/lib/i386-linux-gnu
+        mkdir -p /app/lib/debug/lib/i386-linux-gnu
+        mkdir -p /app/lib/i386-linux-gnu/GL
+        mkdir -p /app/etc
+        echo "/app/lib32" > /app/etc/ld.so.conf
+        echo "/app/lib/i386-linux-gnu" >> /app/etc/ld.so.conf
+  - name: xash
+    buildsystem: simple
+    build-options: *compat-i386-opts
+    sources:
+      - type: git
+        url: https://github.com/FWGS/xash3d-fwgs
+        commit: 4b77170136a12d340f4dc214c8286b4d343200a4
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
+          version-query: .body | trim | sub("buildnum "; "")
+          commit-query: .target_commitish
+      - type: file
+        path: su.xash.xash3d-fwgs.svg
+      - type: file
+        path: su.xash.xash3d-fwgs.metainfo.xml
+      - type: patch
+        path: su.xash.xash3d-fwgs.runner.patch
+    build-commands:
+      - >
+        python waf configure
+        -T release
+        --jobs ${FLATPAK_BUILDER_N_JOBS}
+        --enable-packaging
+        --use-sdl3
+        --enable-hl25-extended-structs
+        --enable-utils
+        --enable-xar
+        --disable-rpath
+        --prefix=/app
+        --bindir=/app/bin
+        --libdir=/app/lib32
+      - python waf build
+      - python waf install --destdir=/
+    post-install:
+      - mkdir -p /app/share/icons/hicolor/scalable/apps /app/share/applications /app/share/metainfo
+      - install -m 755 -t /app/lib32/xash3d/ 3rdparty/vgui_support/vgui-dev/lib/vgui.so
+      - install -m 644 -t /app/share/metainfo/ su.xash.xash3d-fwgs.metainfo.xml
+      - install -m 644 -t /app/share/icons/hicolor/scalable/apps/ su.xash.xash3d-fwgs.svg
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} scripts/flatpak/su.xash.Engine.Compat.i386.desktop
+      - install -m 644 -t /app/share/applications/ scripts/flatpak/su.xash.Engine.Compat.i386.desktop
+      - install -m 755 scripts/flatpak/run.sh /app/bin/su.xash.xash3d-fwgs.sh
