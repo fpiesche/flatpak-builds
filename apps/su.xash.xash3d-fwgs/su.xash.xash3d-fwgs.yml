@@ -83,7 +83,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
-          version-query: .body | trim | sub("buildnum "; "")
+          version-query: .body | sub("\n"; "") | sub("buildnum "; "")
           commit-query: .target_commitish
       - type: file
         path: su.xash.xash3d-fwgs.svg
