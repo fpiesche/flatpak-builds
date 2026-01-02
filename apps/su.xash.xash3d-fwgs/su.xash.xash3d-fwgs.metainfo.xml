@@ -68,8 +68,11 @@
     <keyword>half-life</keyword>
   </keywords>
   <releases>
-    <release version="3923" date="2025-12-27">
+    <release version="3929" date="2026-01-02">
       <description></description>
+    </release>
+    <release version="3923" date="2025-12-27">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1">
