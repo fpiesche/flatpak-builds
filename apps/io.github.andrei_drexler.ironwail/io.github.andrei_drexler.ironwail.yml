@@ -48,8 +48,8 @@ modules:
       - -DENABLE_USERDIRS=true
     sources:
       - type: archive
-        url: https://api.github.com/repos/andrei-drexler/ironwail/tarball/v0.8.0
-        sha256: 96b68a95cf0acbbf83a66ab9dc54f1f28783d6b3436e44eb7450f86823339976
+        url: https://api.github.com/repos/andrei-drexler/ironwail/tarball/v0.8.1
+        sha256: 757fbb0ab2ad800d9f6b6b947553c1a3215f3848cff3d7bee9cac200b3c3f2c7
         dest-filename: ironwail.tar.gz
         x-checker-data:
           type: json
