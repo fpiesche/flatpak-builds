@@ -100,8 +100,8 @@ modules:
       - -DALSOFT_EXAMPLES=OFF
     sources:
       - type: archive
-        url: https://api.github.com/repos/kcat/openal-soft/tarball/1.25.0
-        sha256: cb31a3d7b90b3d7e7eeb7be02079c8790ee9b5ad075febdca4c555c41ea91faa
+        url: https://api.github.com/repos/kcat/openal-soft/tarball/1.25.1
+        sha256: 86d23113f605745dc29e8e861c7742312e5ca4480e68aeb49d21b753c62dd74a
         dest-filename: openal-soft.tar.gz
         x-checker-data:
           type: json
