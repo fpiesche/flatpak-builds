@@ -1,4 +1,3 @@
 {
-  "_submission-status": "Unsuitable for Flathub - Windows application with bundled wine",
-  "only-arches": ["x86_64"]
+  "end-of-life": "Wine-based packages have been removed."
 }
