@@ -75,7 +75,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenEnroth/OpenEnroth.git
-        commit: 060bcc2c395dd426291ba40319216423c3ac160d
+        commit: 3d4150076fded7517e5165f8105a7052af1d70c9
         x-checker-data:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/tags
