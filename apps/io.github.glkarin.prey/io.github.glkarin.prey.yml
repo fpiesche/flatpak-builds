@@ -32,8 +32,8 @@ modules:
       - -DINSTALL_PROJECT=ON
     sources:
       - type: archive
-        url: https://github.com/richgel999/miniz/archive/refs/tags/3.1.0.zip
-        sha256: 89ce8fc6012b1f48407bb1422dd75701bb639e00fc235090cd8b47283fe6197b
+        url: https://github.com/richgel999/miniz/archive/refs/tags/3.1.1.zip
+        sha256: 5d09f82bcd0a4f65d1480f9e91fee0521cab729dc79606c5540c9af75ed6a006
         x-checker-data:
           type: anitya
           project-id: 8067
