@@ -85,8 +85,8 @@ modules:
       - -DBUILD_PREY=OFF
     sources:
       - type: archive
-        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan70.zip
-        sha256: d1940ea190a13a25e6678027fc362295fc517e6f27dbc8da5060042b96ae7523
+        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan71.zip
+        sha256: 5fe3334a906f4ce353722dc3e9ce5f2177047d05284e234d45b5d21df58c1b74
         x-checker-data:
           type: anitya
           project-id: 377943
