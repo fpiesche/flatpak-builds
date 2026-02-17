@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.glkarin.prey</id>
+  <name>Prey</name>
+  <developer id="io.github.glkarin">
+    <name>Human Head Studios; Ryan C. Gordon; glKarin; idtech4a++ Contributors</name>
+    <url>https://github.com/glKarin/com.n0n3m4.diii4a/graphs/contributors</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>Sci-fi shooter with horror elements</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">io.github.glkarin.prey.desktop</launchable>
+  <url type="homepage">https://github.com/glKarin/com.n0n3m4.diii4a</url>
+  <description>
+    <p>Prey tells the story of Tommy, a Cherokee garage mechanic stuck on a reservation
+        going nowhere. Along with his people, he is abducted to a menacing mothership.</p>
+    <p>This is a Flatpak distribution of Ryan C. Gordon's Linux port of the game, for
+        ease of use as the game can be difficult to run on modern systems.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Prey game data or a CD key. You will need
+        to supply both. At least the files <code>pak000.pk4</code> through <code>pak004.pk4</code>
+        from a retail installation of Prey must be copied to
+        <code>$HOME/.var/app/io.github.glkarin.prey/base/</code>.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.mobygames.com/screenshots/11960762-prey-macintosh-title.jpg</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961144-prey-macintosh-game-intro-with-tommy-native-american-talking-to-.jpg</image>
+      <caption>The protagonist talking to himself in the bathroom at the start of the game.</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/11961162-prey-macintosh-all-of-us-are-transported-to-some-alien-ship.jpg</image>
+      <caption>Abduction</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>Prey</binary>
+  </provides>
+  <keywords>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+    <keyword>horror</keyword>
+    <keyword>prey</keyword>
+  </keywords>
+  <releases>
+    <release version="1.1.0harmattan71" date="2026-02-17">
+      <description></description>
+    </release>
+    <release version="1.1.0harmattan70" date="2025-12-20">
+      <description/>
+    </release>
+    <release version="1.1.0harmattan69" date="2025-09-26">
+      <description/>
+    </release>
+    <release version="1.1.0harmattan68" date="2025-08-13">
+      <description/>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="drugs-alcohol">moderate</content_attribute>
+    <content_attribute id="drugs-narcotics">moderate</content_attribute>
+    <content_attribute id="sex-themes">mild</content_attribute>
+    <content_attribute id="language-discrimination">moderate</content_attribute>
+    <content_attribute id="money-gambling">moderate</content_attribute>
+  </content_rating>
+</component>
