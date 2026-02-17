@@ -34,7 +34,7 @@ modules:
         url: https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx
         size: 21136045
         sha256: 8f9758b7a0a4392d91f25e7551a42c3027d78d71b06772d84a0a7c6bf118178b
-        x-data-checker:
+        x-checker-data:
           type: html
           url: https://m210.duke4.net/
           version-pattern: "BuildGDX Release v([\\d+.-]+)</strong><br /></a>buildgdx.zip</td>"
