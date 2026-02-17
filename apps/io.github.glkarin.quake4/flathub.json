@@ -1,3 +1,4 @@
 {
-  "_submission-status": "Unsuitable for Flathub distribution due to messy repository name."
+  "end-of-life": "This package has been rolled into a combined package with the other glKarin idtech4 ports.",
+  "end-of-life-rebase": "io.github.glkarin.idtech4"
 }
