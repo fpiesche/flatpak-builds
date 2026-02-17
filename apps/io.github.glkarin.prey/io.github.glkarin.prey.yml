@@ -45,6 +45,7 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/llvm20/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+    subdir: doom3/neo
     config-opts:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++

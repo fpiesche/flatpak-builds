@@ -1,7 +1,7 @@
-diff --git a/Q3E/src/main/jni/doom3/neo/CMakeLists.txt b/Q3E/src/main/jni/doom3/neo/CMakeLists.txt
+diff --git a/doom3/neo/CMakeLists.txt b/doom3/neo/CMakeLists.txt
 index fc6caff..303c33d 100644
---- a/Q3E/src/main/jni/doom3/neo/CMakeLists.txt
-+++ b/Q3E/src/main/jni/doom3/neo/CMakeLists.txt
+--- a/doom3/neo/CMakeLists.txt
++++ b/doom3/neo/CMakeLists.txt
 @@ -1496,1 +1496,1 @@
 -		find_package(FREETYPE QUIET)
 +		find_package(Freetype QUIET)
