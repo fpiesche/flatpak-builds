@@ -97,10 +97,7 @@ modules:
         -T release
         --jobs ${FLATPAK_BUILDER_N_JOBS}
         --enable-packaging
-        --use-sdl3
-        --enable-hl25-extended-structs
-        --enable-utils
-        --enable-xar
+        --enable-all-renderers
         --disable-rpath
         --prefix=/app
         --bindir=/app/bin
