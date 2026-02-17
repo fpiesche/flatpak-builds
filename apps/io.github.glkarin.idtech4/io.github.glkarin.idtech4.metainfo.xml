@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.glkarin.prey</id>
+  <id>io.github.glkarin.idtech4</id>
   <name>Prey</name>
   <developer id="io.github.glkarin">
-    <name>Human Head Studios; Ryan C. Gordon; glKarin; idtech4a++ Contributors</name>
+    <name>Human Head Studios; Raven Software; id Software; Ryan C. Gordon; glKarin; idtech4a++ Contributors</name>
     <url>https://github.com/glKarin/com.n0n3m4.diii4a/graphs/contributors</url>
   </developer>
   <branding>
@@ -13,7 +13,7 @@
   <summary>Sci-fi shooter with horror elements</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
-  <launchable type="desktop-id">io.github.glkarin.prey.desktop</launchable>
+  <launchable type="desktop-id">io.github.glkarin.idtech4.desktop</launchable>
   <url type="homepage">https://github.com/glKarin/com.n0n3m4.diii4a</url>
   <description>
     <p>Prey tells the story of Tommy, a Cherokee garage mechanic stuck on a reservation
@@ -23,20 +23,40 @@
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Prey game data or a CD key. You will need
         to supply both. At least the files <code>pak000.pk4</code> through <code>pak004.pk4</code>
         from a retail installation of Prey must be copied to
-        <code>$HOME/.var/app/io.github.glkarin.prey/base/</code>.</p>
+        <code>$HOME/.var/app/io.github.glkarin.idtech4/base/</code>.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.mobygames.com/screenshots/11960762-prey-macintosh-title.jpg</image>
-      <caption>Title screen</caption>
+      <image type="source">https://cdn.mobygames.com/screenshots/11745728-doom3-macintosh-walked-off-dropship-game-start.jpg</image>
+      <caption>Doom 3: Mars space port.</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/16685927-doom3-windows-guess-whos-coming-to-dinner.png</image>
+      <caption>Doom 3: Encountering a Hell Knight.</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/10169906-doom3-resurrection-of-evil-windows-ruins-of-ancient-temple.jpg</image>
+      <caption>Doom 3: Resurrection of Evil: Exploring an ancient temple</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.mobygames.com/screenshots/10169900-doom3-resurrection-of-evil-windows-there-are-survivors-in-the-er.jpg</image>
+      <caption>Doom 3: Resurrection of Evil: There are survivors!</caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.mobygames.com/screenshots/11961144-prey-macintosh-game-intro-with-tommy-native-american-talking-to-.jpg</image>
-      <caption>The protagonist talking to himself in the bathroom at the start of the game.</caption>
+      <caption>Prey: The protagonist talking to himself in the bathroom at the start of the game.</caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.mobygames.com/screenshots/11961162-prey-macintosh-all-of-us-are-transported-to-some-alien-ship.jpg</image>
-      <caption>Abduction</caption>
+      <caption>Prey: Abduction</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006651.jpg</image>
+      <caption>Quake 4: The squad</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2210/0000006643.jpg</image>
+      <caption>Quake 4: Fight giant Strogg bosses</caption>
     </screenshot>
   </screenshots>
   <categories>
@@ -51,13 +71,18 @@
     <control>pointing</control>
   </recommends>
   <provides>
+    <binary>Doom3</binary>
     <binary>Prey</binary>
+    <binary>Quake4</binary>
   </provides>
   <keywords>
     <keyword>shooter</keyword>
     <keyword>sci-fi</keyword>
     <keyword>horror</keyword>
+    <keyword>doom</keyword>
+    <keyword>doom 3</keyword>
     <keyword>prey</keyword>
+    <keyword>quake 4</keyword>
   </keywords>
   <releases>
     <release version="1.1.0harmattan71" date="2026-02-17">

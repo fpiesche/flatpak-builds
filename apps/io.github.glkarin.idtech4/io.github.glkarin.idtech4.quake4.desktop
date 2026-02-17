@@ -1,8 +1,8 @@
 [Desktop Entry]
 Categories=Game;Shooter
 Comment=A sci-fi first person shooter
-Exec=io.github.glkarin.idtech3.quake4.sh
-Icon=io.github.glkarin.idtech3.quake4
+Exec=io.github.glkarin.idtech4.quake4.sh
+Icon=io.github.glkarin.idtech4.quake4
 Keywords=quake;shooter;fps
 Name=Quake 4
 PrefersNonDefaultGPU=true

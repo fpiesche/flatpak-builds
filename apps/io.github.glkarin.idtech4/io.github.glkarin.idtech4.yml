@@ -1,8 +1,8 @@
-app-id: io.github.glkarin.idtech3
+app-id: io.github.glkarin.idtech4
 runtime: org.freedesktop.Platform
 runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
-command: io.github.glkarin.prey.sh
+command: io.github.glkarin.idtech4.sh
 
 finish-args:
   # hardware 3D
@@ -39,7 +39,7 @@ modules:
           project-id: 8067
           url-template: https://github.com/richgel999/miniz/archive/refs/tags/$version.zip
 
-  - name: idtech3
+  - name: idtech4
     builddir: true
     buildsystem: cmake-ninja
     build-options:
@@ -93,23 +93,42 @@ modules:
           project-id: 377943
           url-template: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v$version.zip
       - type: file
-        path: io.github.glkarin.idtech3.prey.svg
+        path: io.github.glkarin.idtech4.prey.svg
       - type: file
-        path: io.github.glkarin.idtech3.prey.desktop
+        path: io.github.glkarin.idtech4.prey.desktop
       - type: file
-        path: io.github.glkarin.idtech3.prey.sh
+        path: io.github.glkarin.idtech4.prey.sh
       - type: file
-        path: io.github.glkarin.idtech3.quake4.svg
+        path: io.github.glkarin.idtech4.quake4.svg
       - type: file
-        path: io.github.glkarin.idtech3.quake4.desktop
+        path: io.github.glkarin.idtech4.quake4.desktop
       - type: file
-        path: io.github.glkarin.idtech3.quake4.sh
+        path: io.github.glkarin.idtech4.quake4.sh
       - type: file
-        path: io.github.glkarin.idtech3.metainfo.xml
+        path: io.github.glkarin.idtech4.doom3.png
+      - type: file
+        path: io.github.glkarin.idtech4.doom3.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.doom3.sh
+      - type: file
+        path: io.github.glkarin.idtech4.d3xp.png
+      - type: file
+        path: io.github.glkarin.idtech4.d3xp.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.d3xp.sh
+      - type: file
+        path: io.github.glkarin.idtech4.svg
+      - type: file
+        path: io.github.glkarin.idtech4.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.sh
+      - type: file
+        path: io.github.glkarin.idtech4.metainfo.xml
       - type: patch
-        path: io.github.glkarin.idtech3.freetype.patch
+        path: io.github.glkarin.idtech4.freetype.patch
     post-install:
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.sh /app/bin
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.png -t /app/share/icons/hicolor/256x256/apps
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.desktop -t /app/share/applications

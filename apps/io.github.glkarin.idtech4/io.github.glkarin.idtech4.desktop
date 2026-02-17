@@ -1,0 +1,29 @@
+[Desktop Entry]
+Categories=Game;Shooter
+Comment=A modernised port of a number of id tech 4 engine games
+Exec=io.github.glkarin.idtech4.sh
+Icon=io.github.glkarin.idtech4
+Keywords=doom;idtech;shooter;fps
+Name=idtech4
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Actions=doom3;doom3xp;prey;quake4
+
+[Desktop Action doom3]
+Name=Doom 3
+Exec=io.github.glkarin.idtech4.doom3.sh
+
+[Desktop Action d3xp]
+Name=Doom 3: Resurrection of Evil
+Exec=io.github.glkarin.idtech4.d3xp.sh
+
+[Desktop Action prey]
+Name=Prey
+Exec=io.github.glkarin.idtech4.prey.sh
+
+[Desktop Action quake4]
+Name=Quake 4
+Exec=io.github.glkarin.idtech4.quake4.sh
