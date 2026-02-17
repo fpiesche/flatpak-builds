@@ -1,11 +1,16 @@
 #!/bin/bash
-gamedata_file="$XDG_DATA_HOME/doom3/d3xp/pak000.pk4"
+
+BASEDIR=$XDG_DATA_HOME/doom3
+GAMEDIR=$BASEDIR/d3xp
+gamedata_file="$GAMEDIR/pak000.pk4"
 
 if [[ ! -f $gamedata_file ]]; then
     zenity --error --ok-label "Quit" --width=400 --text "
 Could not find Doom 3 RoE game data file <tt><b>$(basename $gamedata_file)</tt></b>\n\n
 Please ensure you have copied at least <tt><b>$(basename $gamedata_file)</b></tt>
-from a Doom 3 RoE installation to\n<tt><b>$XDG_DATA_HOME/doom3/d3xp/</b></tt>."
+from a Doom 3 RoE installation to\n<tt><b>$GAMEDIR/</b></tt>."
+    if [[ ! -d $GAMEDIR ]]; then mkdir -p $GAMEDIR; fi
+    xdg-open $GAMEDIR
     exit 1
 fi
 
