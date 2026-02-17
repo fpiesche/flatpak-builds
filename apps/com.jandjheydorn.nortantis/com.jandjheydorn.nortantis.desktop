@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game;Graphics
+Comment=Map drawing utility
+Exec=com.jandjheydorn.nortantis.sh
+Icon=com.jandjheydorn.nortantis
+Keywords=maps;art;ttrpg
+Name=Nortantis
+StartupNotify=true
+Terminal=false
+Type=Application

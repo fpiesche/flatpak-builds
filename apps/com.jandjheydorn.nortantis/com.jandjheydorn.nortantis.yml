@@ -1,0 +1,65 @@
+app-id: com.jandjheydorn.nortantis
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+sdk: org.freedesktop.Sdk
+command: com.jandjheydorn.nortantis.sh
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # network access
+  - --share=network
+  # Add JRE to system path
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+modules:
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+
+  - name: nortantis
+    buildsystem: simple
+    sources:
+      - type: file
+        filename: nortantis.deb
+        url: https://d2qy47ls9df5zf.cloudfront.net/nortantis_3.14_amd64.deb
+        size: 60313290
+        sha256: 1a63f38e8d48e7ea5b165afc9f746430bcdabc46dd48bca77651c66ee0e242c0
+        x-checker-data:
+          type: html
+          url: https://raw.githubusercontent.com/jeheydorn/nortantis/release/installers/version.txt
+          version-pattern: "([\\d+.-]"
+          url-template: https://d2qy47ls9df5zf.cloudfront.net/nortantis_${version}_amd64.deb
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - ar x nortantis.deb
+          - tar xf data.tar.zst
+          - rm nortantis.deb control.tar.zst data.tar.zst debian-binary
+          - mv opt/lib/app/Nortantis.jar /app/extra/
+          - rm -rf opt
+      - type: script
+        dest-filename: com.jandjheydorn.nortantis.sh
+        commands:
+          - if [[ ! -d $XDG_DATA_HOME ]]; then mkdir -p $XDG_DATA_HOME; fi
+          - java -jar /app/extra/Nortantis.jar $@
+      - type: file
+        path: com.jandjheydorn.nortantis.desktop
+      - type: file
+        path: com.jandjheydorn.nortantis.png
+      - type: file
+        path: com.jandjheydorn.nortantis.metainfo.xml
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - install -Dm644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
