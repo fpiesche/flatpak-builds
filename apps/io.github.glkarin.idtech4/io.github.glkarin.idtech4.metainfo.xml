@@ -10,20 +10,20 @@
     <color type="primary" scheme_preference="light">#739dca</color>
     <color type="primary" scheme_preference="dark">#393569</color>
   </branding>
-  <summary>Sci-fi shooter with horror elements</summary>
+  <summary>Modern ports for Doom 3 engine games</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">io.github.glkarin.idtech4.desktop</launchable>
   <url type="homepage">https://github.com/glKarin/com.n0n3m4.diii4a</url>
   <description>
-    <p>Prey tells the story of Tommy, a Cherokee garage mechanic stuck on a reservation
-        going nowhere. Along with his people, he is abducted to a menacing mothership.</p>
-    <p>This is a Flatpak distribution of Ryan C. Gordon's Linux port of the game, for
-        ease of use as the game can be difficult to run on modern systems.</p>
-    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the Prey game data or a CD key. You will need
-        to supply both. At least the files <code>pak000.pk4</code> through <code>pak004.pk4</code>
-        from a retail installation of Prey must be copied to
-        <code>$HOME/.var/app/io.github.glkarin.idtech4/base/</code>.</p>
+    <p>Modernised source ports of the flagship idtech4 games: Doom 3, Prey (2006) and Quake 4.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include any game data or CD keys for
+        these games. You will need to supply both for any of the games you wish to play.
+        At least the <code>*.pk4</code> files from the relevant game data must be copied to
+        an appropriate sub-directory in
+        <code>$HOME/.var/app/io.github.glkarin.idtech4/[doom3|prey|quake4]/</code>.</p>
+    <p>Launching any of the games included will inform you with a message if any of the required
+        files are missing and where you need to copy them.</p>
   </description>
   <screenshots>
     <screenshot type="default">
