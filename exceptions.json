@@ -6,18 +6,6 @@
     "com.jandjheydorn.nortantis": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
-    "io.github.glkarin.quake4": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are not missing",
-	    "appid-url-not-reachable": "Repo name for this is a mess",
-        "releases-not-in-order": "Versioning scheme for this is a mess"
-    },
-    "io.github.glkarin.prey": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are not missing",
-	    "appid-url-not-reachable": "Repo name for this is a mess",
-        "releases-not-in-order": "Versioning scheme for this is a mess"
-    },
     "com.shipofharkinian.shipwright": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
@@ -43,6 +31,12 @@
     },
     "io.github.fpiesche.f2bgl": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.glkarin.idtech4": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are not missing",
+	    "appid-url-not-reachable": "Repo name for this is a mess",
+        "releases-not-in-order": "Versioning scheme for this is a mess"
     },
     "io.github.interkarma.daggerfall-unity": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
