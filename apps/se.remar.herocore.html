@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Hero Core on ykc flatpaks</title>
+        <meta name="description" content="Sprawling action-exploration shooter" />
+
+        <meta property="og:url" content="https://flatpak.yellowkeycard.net/apps/se.remar.herocore.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Hero Core on ykc flatpaks" />
+        <meta property="og:description" content="Sprawling action-exploration shooter" />
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/se.remar.herocore/se.remar.herocore.png" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg">
+        <meta name="theme-color" content="#f5d505">
+
+        <!-- Bootstrap 5 -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+        <script type="text/javascript">
+            function init() {
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+                document.getElementById('darkmode').addEventListener('change', () => {
+                    if (document.documentElement.getAttribute("data-bs-theme") == "dark") {
+                        document.documentElement.removeAttribute("data-bs-theme");
+                    } else {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+            }
+        </script>
+
+
+        <!-- Ko-fi button -->
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/assets/styles.css">
+        <link href="https://fonts.cdnfonts.com/css/jupiter-crash" rel="stylesheet">
+    </head>
+
+    <body onLoad="init();">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container">
+                <div class="col-8">
+                    <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+                </div>
+                <div class="col-1">
+                    <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+                </div>
+                <div class="form-check form-switch col-1">
+                    <input class="form-check-input" type="checkbox" id="darkmode">
+                    <label class="form-check-label" for="darkmode">🌒</label>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="container">
+            <div class="container listing-header">
+                <div class="row">
+                    <div class="col-2"><img class="app-icon" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/se.remar.herocore/se.remar.herocore.png" /></div>
+                    <div class="col">
+                        <div class="h1">
+                            Hero Core
+                            <a class="homepage-link" href="https://remar.se/daniel/herocore.php"><i class="bi bi-house-fill"></i></a>
+                            </div>
+                        <div class="developer">by <a href="https://remar.se/">Daniel Remar</a></div>
+                        <div class="bi bi-terminal-fill appid cmdline"> flatpak install se.remar.herocore</div>
+                    </div>
+                    <div class="col-2 align-self-center"><a class="btn-install btn btn-primary bi bi-cloud-arrow-down-fill" href="appstream://se.remar.herocore" role="button"> Install</a></div>
+                </div>
+            </div>
+
+            <div id="screenshotCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="https://cdn.mobygames.com/screenshots/12332749-hero-core-windows-title-screen.jpg" class="d-block" alt="Title screen" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Title screen</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12324927-hero-core-windows-intro.jpg" class="d-block" alt="Intro" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Intro</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12325611-hero-core-windows-start-of-the-game.jpg" class="d-block" alt="Start of the game" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Start of the game</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12324876-hero-core-windows-select-a-route.jpg" class="d-block" alt="Choose a route" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Choose a route</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12324879-hero-core-windows-several-enemies.jpg" class="d-block" alt="Some enemies" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Some enemies</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12326897-hero-core-windows-save-point.jpg" class="d-block" alt="A save point" />
+                        <div class="carousel-caption d-none d-md-block"><h5>A save point</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://cdn.mobygames.com/screenshots/12324924-hero-core-windows-destroy-the-ball.jpg" class="d-block" alt="ORB" />
+                        <div class="carousel-caption d-none d-md-block"><h5>ORB</h5></div>
+                    </div>
+                    </div>
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="0"
+                        aria-label="Title screen"
+                        class="active"
+                        aria-current="true"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="1"
+                        aria-label="Intro"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="2"
+                        aria-label="Start of the game"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="3"
+                        aria-label="Choose a route"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="4"
+                        aria-label="Some enemies"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="5"
+                        aria-label="A save point"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="6"
+                        aria-label="ORB"
+                        ></button>
+                    </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+            <div class="container">
+                <description>
+    <p>Flip Hero returns for the final battle against his nemesis Cruiser Tetron - but can he really stop the reign of the machine warlord for all time? Like the first game, the controls are simple and the gameplay is easy to learn. The non-linear game world allows you to tackle the boss machines in nearly any order, or head straight for Tetron's headquarters if you know how.</p>
+  </description>
+  
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <span class="text-muted">🏳️‍🌈🏳️‍⚧️ respect my trans homies or i'm gonna identify as a fucking problem</span>
+            </div>
+        </footer>
+    </body>
+</html>

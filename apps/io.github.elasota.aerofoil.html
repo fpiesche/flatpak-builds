@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Aerofoil on ykc flatpaks</title>
+        <meta name="description" content="A modern cross-platform port of Glider PRO, the classic Macintosh paper airplane game" />
+
+        <meta property="og:url" content="https://flatpak.yellowkeycard.net/apps/io.github.elasota.aerofoil.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Aerofoil on ykc flatpaks" />
+        <meta property="og:description" content="A modern cross-platform port of Glider PRO, the classic Macintosh paper airplane game" />
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.svg" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg">
+        <meta name="theme-color" content="#f5d505">
+
+        <!-- Bootstrap 5 -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+        <script type="text/javascript">
+            function init() {
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+                document.getElementById('darkmode').addEventListener('change', () => {
+                    if (document.documentElement.getAttribute("data-bs-theme") == "dark") {
+                        document.documentElement.removeAttribute("data-bs-theme");
+                    } else {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+            }
+        </script>
+
+
+        <!-- Ko-fi button -->
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/assets/styles.css">
+        <link href="https://fonts.cdnfonts.com/css/jupiter-crash" rel="stylesheet">
+    </head>
+
+    <body onLoad="init();">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container">
+                <div class="col-8">
+                    <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+                </div>
+                <div class="col-1">
+                    <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+                </div>
+                <div class="form-check form-switch col-1">
+                    <input class="form-check-input" type="checkbox" id="darkmode">
+                    <label class="form-check-label" for="darkmode">🌒</label>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="container">
+            <div class="container listing-header">
+                <div class="row">
+                    <div class="col-2"><img class="app-icon" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/io.github.elasota.aerofoil/io.github.elasota.aerofoil.svg" /></div>
+                    <div class="col">
+                        <div class="h1">
+                            Aerofoil
+                            <a class="homepage-link" href="https://github.com/elasota/Aerofoil/"><i class="bi bi-house-fill"></i></a>
+                            </div>
+                        <div class="developer">by <a href="https://github.com/elasota/Aerofoil/graphs/contributors">Aerofoil Contributors</a></div>
+                        <div class="bi bi-terminal-fill appid cmdline"> flatpak install io.github.elasota.aerofoil</div>
+                    </div>
+                    <div class="col-2 align-self-center"><a class="btn-install btn btn-primary bi bi-cloud-arrow-down-fill" href="appstream://io.github.elasota.aerofoil" role="button"> Install</a></div>
+                </div>
+            </div>
+
+            <div id="screenshotCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="https://play-lh.googleusercontent.com/9AWQ8tfXjjavos7xLahHolliczMrLNnCz8erMzrMu1dRr-ZRpbNnQc-kn_0GFjfTxBs=w2560-h1440" class="d-block" alt="How to tip the grease..." />
+                        <div class="carousel-caption d-none d-md-block"><h5>How to tip the grease...</h5></div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="https://play-lh.googleusercontent.com/rkBnqvdYw_H02E3Xue0wd6WS44SZdMm6orNy-gRCFyauH7sdu6N-h-2G12NHF74b6zI=w2560-h1440" class="d-block" alt="Koo-koo" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Koo-koo</h5></div>
+                    </div>
+                    </div>
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="0"
+                        aria-label="How to tip the grease..."
+                        class="active"
+                        aria-current="true"
+                        ></button>
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="1"
+                        aria-label="Koo-koo"
+                        ></button>
+                    </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+            <div class="container">
+                <description>
+    <p>Aerofoil is a port of John Calhoun's Glider PRO, the classic paper airplane game
+      for Apple Macintosh computers released in 1994.</p>
+    <p>The port features a 90's-style GUI, gamepad support, high-quality upscaling and
+      color correction, a full port of the level editor, a set of import tools for unpacking
+      and converting the vast majority of existing community content, and a new touchscreen interface
+      for mobile devices.</p>
+  </description>
+  
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <span class="text-muted">🏳️‍🌈🏳️‍⚧️ respect my trans homies or i'm gonna identify as a fucking problem</span>
+            </div>
+        </footer>
+    </body>
+</html>
