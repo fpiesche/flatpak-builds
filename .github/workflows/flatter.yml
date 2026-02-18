@@ -50,7 +50,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref }}
       - name: Get changed manifests
-        if: ${{ github.event_name == "push" }}
+        if: ${{ github.event_name == 'push' }}
         id: changed_files_action
         uses: tj-actions/changed-files@v45
         with:
