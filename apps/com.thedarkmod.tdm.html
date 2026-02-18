@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>The Dark Mod on ykc flatpaks</title>
+        <meta name="description" content="Steampunk stealth game" />
+
+        <meta property="og:url" content="https://flatpak.yellowkeycard.net/apps/com.thedarkmod.tdm.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="The Dark Mod on ykc flatpaks" />
+        <meta property="og:description" content="Steampunk stealth game" />
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.thedarkmod.tdm/com.thedarkmod.tdm.png" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg">
+        <meta name="theme-color" content="#f5d505">
+
+        <!-- Bootstrap 5 -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+        <script type="text/javascript">
+            function init() {
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+                document.getElementById('darkmode').addEventListener('change', () => {
+                    if (document.documentElement.getAttribute("data-bs-theme") == "dark") {
+                        document.documentElement.removeAttribute("data-bs-theme");
+                    } else {
+                        document.documentElement.setAttribute("data-bs-theme", "dark");
+                    }
+                });
+            }
+        </script>
+
+
+        <!-- Ko-fi button -->
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/assets/styles.css">
+        <link href="https://fonts.cdnfonts.com/css/jupiter-crash" rel="stylesheet">
+    </head>
+
+    <body onLoad="init();">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container">
+                <div class="col-8">
+                    <a class="navbar-brand" href="/">yellow keycard flatpaks</a>
+                </div>
+                <div class="col-1">
+                    <script type='text/javascript'>kofiwidget2.init('Buy me a coffee', '#f28705', 'A0A715O8WT');kofiwidget2.draw();</script>
+                </div>
+                <div class="form-check form-switch col-1">
+                    <input class="form-check-input" type="checkbox" id="darkmode">
+                    <label class="form-check-label" for="darkmode">🌒</label>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="container">
+            <div class="container listing-header">
+                <div class="row">
+                    <div class="col-2"><img class="app-icon" src="https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds/apps/com.thedarkmod.tdm/com.thedarkmod.tdm.png" /></div>
+                    <div class="col">
+                        <div class="h1">
+                            The Dark Mod
+                            <a class="homepage-link" href="https://thedarkmod.com/"><i class="bi bi-house-fill"></i></a>
+                            </div>
+                        <div class="developer">by <a href="https://www.thedarkmod.com/team/">The Dark Mod team</a></div>
+                        <div class="bi bi-terminal-fill appid cmdline"> flatpak install com.thedarkmod.tdm</div>
+                    </div>
+                    <div class="col-2 align-self-center"><a class="btn-install btn btn-primary bi bi-cloud-arrow-down-fill" href="appstream://com.thedarkmod.tdm" role="button"> Install</a></div>
+                </div>
+            </div>
+
+            <div id="screenshotCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="https://www.thedarkmod.com/wp-content/gallery/screenshots/Volta_New.jpg" class="d-block" alt="Skulking around the shadows" />
+                        <div class="carousel-caption d-none d-md-block"><h5>Skulking around the shadows</h5></div>
+                    </div>
+                    </div>
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#screenshotCarousel"
+                        data-bs-slide-to="0"
+                        aria-label="Skulking around the shadows"
+                        class="active"
+                        aria-current="true"
+                        ></button>
+                    </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#screenshotCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+            <div class="container">
+                <description>
+    <p>The Dark Mod is a free and open-source software first-person stealth video game, inspired by the Thief series by Looking Glass Studios.
+      The game provides the basic framework and tools for more than 170 fan-made missions, including several multi-mission campaigns.
+      The Dark Mod was founded by David Massey and first released in 2009 as a total conversion mod for Doom 3. Version 2.0 was released
+      in October 2013 as a standalone game using the open-source id Tech 4 game engine.</p>
+  </description>
+  
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <span class="text-muted">🏳️‍🌈🏳️‍⚧️ respect my trans homies or i'm gonna identify as a fucking problem</span>
+            </div>
+        </footer>
+    </body>
+</html>
