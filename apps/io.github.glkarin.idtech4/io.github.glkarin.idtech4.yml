@@ -1,8 +1,8 @@
-app-id: io.github.glkarin.prey
+app-id: io.github.glkarin.idtech4
 runtime: org.freedesktop.Platform
 runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
-command: io.github.glkarin.prey.sh
+command: io.github.glkarin.idtech4.sh
 
 finish-args:
   # hardware 3D
@@ -39,7 +39,7 @@ modules:
           project-id: 8067
           url-template: https://github.com/richgel999/miniz/archive/refs/tags/$version.zip
 
-  - name: prey
+  - name: idtech4
     builddir: true
     buildsystem: cmake-ninja
     build-options:
@@ -56,34 +56,10 @@ modules:
       - -DUSE_SYSTEM_CURL=OFF
       - -DUSE_SYSTEM_OGGVORBIS=ON
       - -DUSE_SYSTEM_FREETYPE=ON
-      # Doom 3
-      - -DBUILD_D3=OFF
-      - -DBUILD_D3_MOD=OFF
-      # - -DD3XP=OFF
-      # - -DD3LE=OFF
-      # - -DCDOOM=OFF
-      # - -DRIVENSIN=OFF
-      # - -DHARDCORPS=OFF
-      # - -DOVERTHINKED=OFF
-      # - -DSABOT=OFF
-      # - -DHEXENEOC=OFF
-      # - -DFRAGGINGFREE=OFF
-      # - -DLIBRECOOP=OFF
-      # - -DLIBRECOOPXP=OFF
-      # - -DPERFECTED=OFF
-      # - -DPERFECTEDROE=OFF
-      # - -DPHOBOS=OFF
-      # Quake 4
-      - -DBUILD_Q4=OFF
-      - -DBUILD_Q4_MOD=OFF
-      # - -DRAVEN=OFF
-      # - -DRAVEN_BSE_FX=OFF
-      # - -DQUAKE4=OFF
-      # - -DQ4_MOD_FULL_BODY_AWARENESS=OFF
-      # - -DQ4_MOD_BOTS=OFF
-      # - -DHARDQORE=OFF
-      # Prey
-      - -DBUILD_PREY=ON
+      - -DCMAKE_INSTALL_LIBDIR=/app/bin
+      - -DSTENCIL_SHADOW_IMPROVE=ON
+      - -DRAVEN_BSE_FX=ON
+      - -DBUILD_Q4_MOD=ON
     sources:
       - type: archive
         url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan71.zip
@@ -92,40 +68,41 @@ modules:
           type: anitya
           project-id: 377943
           url-template: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v$version.zip
-      - type: file
-        path: io.github.glkarin.prey.svg
-      - type: file
-        path: io.github.glkarin.prey.desktop
-      - type: file
-        path: io.github.glkarin.prey.metainfo.xml
-      - type: file
-        path: io.github.glkarin.prey.sh
       - type: patch
-        path: io.github.glkarin.prey.freetype.patch
-    cleanup:
-      # Doom 3
-      - /bin/Doom3
-      - /lib/libcdoom.so
-      - /lib/libd3le.so
-      - /lib/libd3xp.so
-      - /lib/libfraggingfree.so
-      - /lib/libgame.so
-      - /lib/libhardcorps.so
-      - /lib/libhexeneoc.so
-      - /lib/liblibrecoop.so
-      - /lib/liblibrecoopxp.so
-      - /lib/liboverthinked.so
-      - /lib/libperfected_roe.so
-      - /lib/libperfected.so
-      - /lib/librivensin.so
-      - /lib/libsabot.so
-      - /lib/libtfphobos.so
-      # Quake 4
-      - /bin/Quake4
-      - /lib/libq4game.so
-      - /lib/libhardqore.so
-    post-install:
-      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh /app/bin
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
+        path: io.github.glkarin.idtech4.freetype.patch
+
+  - name: desktop
+    buildsystem: simple
+    sources:
+      - type: file
+        path: io.github.glkarin.idtech4.doom3.png
+      - type: file
+        path: io.github.glkarin.idtech4.doom3.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.doom3.sh
+      - type: file
+        path: io.github.glkarin.idtech4.prey.svg
+      - type: file
+        path: io.github.glkarin.idtech4.prey.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.prey.sh
+      - type: file
+        path: io.github.glkarin.idtech4.quake4.svg
+      - type: file
+        path: io.github.glkarin.idtech4.quake4.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.quake4.sh
+      - type: file
+        path: io.github.glkarin.idtech4.svg
+      - type: file
+        path: io.github.glkarin.idtech4.desktop
+      - type: file
+        path: io.github.glkarin.idtech4.sh
+      - type: file
+        path: io.github.glkarin.idtech4.metainfo.xml
+    build-commands:
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.sh /app/bin
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.png -t /app/share/icons/hicolor/256x256/apps
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}*.desktop -t /app/share/applications
