@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>net.duke4.m210.buildgdx</id>
-  <name>BuildGDX</name>
-  <developer id="net.duke4.m210">
-    <name>BuildM210 Projects</name>
-    <url>https://m210.duke4.net/</url>
+  <id>com.jandjheydorn.nortantis</id>
+  <name>Nortantis</name>
+  <developer id="com.jandjheydorn.nortantis">
+    <name>J. &amp; J. Heydorn</name>
+    <url>https://jandjheydorn.com/</url>
   </developer>
   <branding>
     <color type="primary" scheme_preference="light">#6d80bf</color>
     <color type="primary" scheme_preference="dark">#6c2626</color>
   </branding>
-  <summary>Java-based cross-platform port of the Build game engine</summary>
+  <summary>Fantasy Map Creator</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only</project_license>
-  <launchable type="desktop-id">net.duke4.m210.buildgdx.desktop</launchable>
-  <url type="homepage">https://m210.duke4.net/</url>
-  <url type="contact">https://discord.com/invite/kTVu6KU</url>
+  <launchable type="desktop-id">com.jandjheydorn.nortantis.desktop</launchable>
+  <url type="homepage">https://jandjheydorn.com/nortantis</url>
+  <url type="contact">https://jandjheydorn.com/contact-1</url>
   <description>
-    <p>BuildGDX is a port of the Build Engine games based on Java's libGDX framework v1.13.0.</p>
+    <p>Nortantis is a free, open source fantasy map generator and editor, created by an author for
+      authors. With it, you can quickly generate a random world, then fine tune it to match your
+      story's world.</p>
+    <p>Features:</p>
+      <ul>
+        <li>Generate random maps. Nortantis uses a simple tectonic plate simulation to create
+            continents, islands, ocean, deserts, mountains, trees, regions, and cities, with text</li>
+        <li>Adjustable coastline shading and 4 styles of ocean waves</li>
+        <li>Optional political region coloring</li>
+        <li>Borders: Frames with adjustable width. Randomly generated frayed edges and grunge</li>
+        <li>Paper backgrounds randomly generated from texture images</li>
+        <li>Tools with brushes for ocean, lakes, land, rivers, political regions, mountains, hills,
+          trees, sand dunes, and cities</li>
+        <li>Add, remove, and edit text</li>
+        <li>Random name generator for person and place names</li>
+        <li>Export to PNG or JPEG</li>
+      </ul>
+    <p>See our blog for the latest updates and features.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-Seppuku_Station-0003.png</image>
-      <caption>Shadow Warrior</caption>
+      <image type="source">https://images.squarespace-cdn.com/content/v1/626b00aab8fc365653850274/f0fc802d-5763-4774-88c5-13ff8d2b04d3/Nortantis+create+map.gif</image>
+      <caption>Creating a map</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-e1m1redneck.grp-0000.png</image>
-      <caption>Redneck Rampage</caption>
+      <image type="source">https://jandjheydorn.com/s/Land-of-Sisbury.jpg</image>
+      <caption>Example map</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-e1m1duke3d.grp-0000.png</image>
-      <caption>Duke Nukem 3D</caption>
+      <image type="source">https://jandjheydorn.com/s/Land-of-Eurgh.jpg</image>
+      <caption>Example map</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://media.indiedb.com/images/games/1/75/74184/scr-secret6.map-0000.png</image>
-      <caption>Blood</caption>
+      <image type="source">https://jandjheydorn.com/s/Land-of-Laham.jpg</image>
+      <caption>Example map</caption>
     </screenshot>
 </screenshots>
   <categories>
     <category>Game</category>
-    <category>Shooter</category>
-    <category>ActionGame</category>
+    <category>Graphics</category>
   </categories>
   <supports>
-    <control>gamepad</control>
-  </supports>
-  <recommends>
     <control>keyboard</control>
     <control>pointing</control>
-  </recommends>
-  <provides>
-    <binary>BuildGDX.jar</binary>
-  </provides>
+  </supports>
   <keywords>
-    <keyword>boomer shooter</keyword>
-    <keyword>retro</keyword>
+    <keyword>tabletop rpg</keyword>
+    <keyword>rpg</keyword>
+    <keyword>map</keyword>
+    <keyword>art</keyword>
+    <keyword>world map</keyword>
   </keywords>
   <releases>
-    <release version="v1.18" date="2025-01-11" />
+    <release version="v1.14" date="2025-11-30" />
   </releases>
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-fantasy">intense</content_attribute>
-    <content_attribute id="violence-bloodshed">intense</content_attribute>
-  </content_rating>
+  <content_rating type="oars-1.1" />
 </component>
