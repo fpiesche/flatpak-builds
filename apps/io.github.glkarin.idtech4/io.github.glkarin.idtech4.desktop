@@ -10,15 +10,11 @@ StartupNotify=true
 Terminal=false
 TerminalOptions=
 Type=Application
-Actions=doom3;doom3xp;prey;quake4
+Actions=doom3;prey;quake4
 
 [Desktop Action doom3]
 Name=Doom 3
 Exec=io.github.glkarin.idtech4.doom3.sh
-
-[Desktop Action d3xp]
-Name=Doom 3: Resurrection of Evil
-Exec=io.github.glkarin.idtech4.d3xp.sh
 
 [Desktop Action prey]
 Name=Prey
