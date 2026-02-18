@@ -5,7 +5,8 @@ GAMEDIR=$BASEDIR/q4base
 
 for gamedata_file in $GAMEDIR/pak{001..012}.pk4; do
     if [[ ! -f $gamedata_file ]]; then
-        zenity --error --ok-label "Quit" --width=400 --text "
+        zenity --error --ok-label "Quit" --width=400 \
+            --title "Failed to find Quake 4 game data" --text "
 Could not find Quake 4 game data file <tt><b>$(basename $gamedata_file)</b></tt>\n\n
 Please ensure you have copied the necessary game data files
 (at least <tt><b>pak001.pk4</b></tt> through <tt><b>pak012.pk4</b></tt> and
@@ -21,4 +22,5 @@ if [[ ! -f $GAMEDIR/autoexec.cfg ]]; then
     echo 'seta sys_lang "english"' >> $GAMEDIR/autoexec.cfg
 fi
 
-Quake4 +set fs_basepath $BASEDIR $@
+cd /app/bin
+./Quake4 +set fs_basepath $BASEDIR $@
