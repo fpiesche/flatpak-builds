@@ -1,0 +1,59 @@
+app-id: com.jandjheydorn.nortantis
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+sdk: org.freedesktop.Sdk
+command: com.jandjheydorn.nortantis.sh
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk25
+
+finish-args:
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # network access
+  - --share=network
+  # Allow access to user documents
+  - --filesystem=xdg-documents
+  # Add JRE to system path
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+modules:
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk25/install.sh
+
+  - name: nortantis
+    buildsystem: simple
+    sources:
+      - type: file
+        dest-filename: nortantis.deb
+        url: https://d2qy47ls9df5zf.cloudfront.net/nortantis_3.14_amd64.deb
+        sha256: 1a63f38e8d48e7ea5b165afc9f746430bcdabc46dd48bca77651c66ee0e242c0
+        x-checker-data:
+          type: html
+          url: https://raw.githubusercontent.com/jeheydorn/nortantis/release/installers/version.txt
+          version-pattern: "([\\d+.-]"
+          url-template: https://d2qy47ls9df5zf.cloudfront.net/nortantis_${version}_amd64.deb
+      - type: script
+        dest-filename: com.jandjheydorn.nortantis.sh
+        commands:
+          - if [[ ! -d $XDG_DATA_HOME ]]; then mkdir -p $XDG_DATA_HOME; fi
+          - if [[ ! -L ~/.Nortantis ]]; then ln -s $XDG_DATA_HOME ~/.Nortantis; fi
+          - java -jar /app/bin/Nortantis.jar $@
+      - type: file
+        path: com.jandjheydorn.nortantis.desktop
+      - type: file
+        path: com.jandjheydorn.nortantis.png
+      - type: file
+        path: com.jandjheydorn.nortantis.metainfo.xml
+    build-commands:
+      - ar x nortantis.deb
+      - tar xf data.tar.zst
+      - mkdir -p /app/bin/
+      - install -m 644 opt/nortantis/lib/app/Nortantis.jar /app/bin/
+      - rm -rf opt
+      - install -Dm755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - install -Dm644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
