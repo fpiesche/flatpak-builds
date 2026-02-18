@@ -27,10 +27,6 @@
     "dev.lostartefacts.tr1x": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
-    "io.github.andrei_drexler.ironwail": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "finish-args-flatpak-appdata-folder-access": "Ironwail has access to Steam's Flatpak data directory"
-    },
     "io.github.apancik.abuse_2025": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },

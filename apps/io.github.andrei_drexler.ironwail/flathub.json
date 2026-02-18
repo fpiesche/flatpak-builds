@@ -1,3 +1,4 @@
 {
-    "_submission-status": "<a href='https://github.com/andrei-drexler/ironwail/issues/241#issuecomment-2261224166'>Pending dev approval</a> for Flathub submission"
+  "end-of-life": "Ironwail is now included in the LibreQuake Flatpak on Flathub.",
+  "end-of-life-rebase": "io.github.lavenderdotpet.LibreQuake"
 }
