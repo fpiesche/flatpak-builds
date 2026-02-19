@@ -30,7 +30,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary
-        commit: d9747704bedc4e691ba243bf399647b836ce493e
+        commit: bc69b95db698efdcb4dcf36101b9c252d28f0c95
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
