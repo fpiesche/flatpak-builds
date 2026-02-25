@@ -1,0 +1,11 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 675e820..7e2c4e4 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -28,3 +28,5 @@ target_link_libraries(${PROJECT_NAME}
+ 	OpenAL::OpenAL
+ 	OpenGL::GL
+ 	${HASH_LIBRARY_TGT_NAME})
++
++install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+\ No newline at end of file

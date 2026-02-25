@@ -1,0 +1,137 @@
+diff --git a/src/Game.cpp b/src/Game.cpp
+index 27735e6..30207f5 100644
+--- a/src/Game.cpp
++++ b/src/Game.cpp
+@@ -1743,10 +1743,10 @@ void Game::loadWorldState() {
+ 	}
+ 
+ 	if (this->activeLoadType == 1) {
+-		name = this->GetSaveFile(Game::FILE_NAME_FULLWORLD, 0);
++		name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_FULLWORLD, 0));
+ 	}
+ 	else {
+-		name = this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, app->canvas->loadMapID - 1);
++		name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, app->canvas->loadMapID - 1));
+ 	}
+ 
+ 	if (!IS.loadFile(name, LT_FILE) || (this->loadWorldState(&IS) == 0)) {
+@@ -1914,7 +1914,7 @@ void Game::saveConfig() {
+ 	Applet* app = CAppContainer::getInstance()->app;
+ 	SDLGL* sdlGL = CAppContainer::getInstance()->sdlGL;
+ 	OutputStream OS;
+-	const char* name = this->GetSaveFile(Game::FILE_NAME_CONFIG, 0);
++	const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_CONFIG, 0));
+ 	
+ 	if (OS.openFile(name, 1)) {
+ 		OS.writeInt(11);
+@@ -1977,7 +1977,7 @@ void Game::loadConfig() {
+ 	Applet* app = CAppContainer::getInstance()->app;
+ 	SDLGL* sdlGL = CAppContainer::getInstance()->sdlGL;
+ 	InputStream IS;
+-	const char* name = this->GetSaveFile(Game::FILE_NAME_CONFIG, 0);
++	const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_CONFIG, 0));
+ 
+ 	if (IS.loadFile(name, LT_FILE)) {
+ 		if (IS.readInt() == 11) {
+@@ -2075,10 +2075,10 @@ void Game::saveState(int lastMapID, int loadMapID, int viewX, int viewY, int vie
+ 	if ((saveType & 0x1) != 0x0) {
+ 		app->canvas->updateLoadingBar(false);
+ 		if (briefSave) {
+-			name = this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0);
++			name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0));
+ 		}
+ 		else {
+-			name = this->GetSaveFile(Game::FILE_NAME_FULLPLAYER, 0);
++			name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_FULLPLAYER, 0));
+ 		}
+ 
+ 		if (OS.openFile(name, 1)) {
+@@ -2097,10 +2097,10 @@ void Game::saveState(int lastMapID, int loadMapID, int viewX, int viewY, int vie
+ 	if ((saveType & 0x2) != 0x0) {
+ 		app->canvas->updateLoadingBar(false);
+ 		if (briefSave) {
+-			name = this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, (lastMapID - 1));
++			name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, (lastMapID - 1)));
+ 		}
+ 		else {
+-			name = this->GetSaveFile(Game::FILE_NAME_FULLWORLD, 0);
++			name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_FULLWORLD, 0));
+ 		}
+ 		if (OS.openFile(name, 1)) {
+ 			this->saveWorldState(&OS, briefSave);
+@@ -2120,7 +2120,7 @@ void Game::saveLevelSnapshot() {
+ 	Applet* app = CAppContainer::getInstance()->app;
+ 	OutputStream OS;
+ 
+-	const char* name = this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0);
++	const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0));
+ 	if (OS.openFile(name, 1))
+ 	{
+ 		app->canvas->updateLoadingBar(false);
+@@ -2140,7 +2140,7 @@ void Game::saveLevelSnapshot() {
+ 			app->canvas->savePitch))
+ 		{
+ 			OS.close();
+-			const char* name = this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, app->canvas->loadMapID - 1);
++			const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFWORLD, app->canvas->loadMapID - 1));
+ 			if (OS.openFile(name, 1)) {
+ 				app->canvas->updateLoadingBar(false);
+ 				this->saveWorldState(&OS, true);
+@@ -2195,11 +2195,11 @@ bool Game::loadState(int activeLoadType) {
+ 	bool rtn = false;
+ 
+ 	if (activeLoadType == 1) {
+-		name = this->GetSaveFile(Game::FILE_NAME_FULLPLAYER, 0);
++		name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_FULLPLAYER, 0));
+ 	}
+ 	else if (activeLoadType == 2) {
+ 		app->player->currentLevelDeaths = 0;
+-		name = this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0);
++		name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_BRIEFPLAYER, 0));
+ 	}
+ 
+ 	if (IS.loadFile(name, LT_FILE)) {
+@@ -2224,7 +2224,7 @@ bool Game::loadState(int activeLoadType) {
+ 
+ bool Game::hasConfig() {
+ 	InputStream IS;
+-	const char* name = this->GetSaveFile(Game::FILE_NAME_CONFIG, 0);
++	const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_CONFIG, 0));
+ 	if (IS.loadFile(name, LT_FILE)) {
+ 		if (IS.readInt() == 11) {
+ 			return true;
+@@ -2319,7 +2319,7 @@ void Game::saveEmptyConfig() {
+ 	Applet* app = CAppContainer::getInstance()->app;
+ 	SDLGL* sdlGL = CAppContainer::getInstance()->sdlGL;
+ 	OutputStream OS;
+-	const char* name = this->GetSaveFile(Game::FILE_NAME_CONFIG, 0);
++	const char* name = this->getProfileSaveFileName(this->GetSaveFile(Game::FILE_NAME_CONFIG, 0));
+ 
+ 	if (OS.openFile(name, 1)) {
+ 		OS.writeInt(11);
+@@ -3695,7 +3695,7 @@ const char* Game::GetSaveFile(int i, int i2) {
+ 			name = "FWORLD";
+ 			break;
+ 		case 1: // SDCONFIG
+-			name = "CONFIGFILENAME";
++			name = "CONFIG";
+ 			break;
+ 		case 2: // SDBPLAYER
+ 			name = "BRIEFPLAYER";
+@@ -3752,11 +3752,12 @@ const char* Game::GetSaveFile(int i, int i2) {
+ char* Game::getProfileSaveFileName(const char* name) {
+ 	if (name != nullptr)
+ 	{
+-		int len1 = std::strlen(dir);
++		int len1 = std::strlen(std::getenv("XDG_DATA_HOME"));
+ 		int len2 = std::strlen(name);
+-		char* namePath = new char[len1 + len2 + 200];
+-		std::strcpy(namePath, dir);
+-		std::strcat(namePath, "/");
++		char* namePath = new char[len1 + len2 + 10 + 7 + 200];
++		std::strcpy(namePath, std::getenv("XDG_DATA_HOME"));
++		std::strcat(namePath, "/doom2rpg");
++		std::strcat(namePath, "/saves/");
+ 		std::strcat(namePath, name);
+ 		return namePath;
+ 	}

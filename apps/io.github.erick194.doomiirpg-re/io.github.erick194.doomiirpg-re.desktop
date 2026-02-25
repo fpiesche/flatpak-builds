@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=A reverse-engineered port of Doom II RPG
+Exec=io.github.erick194.doomiirpg-re.sh
+Icon=io.github.erick194.doomiirpg-re
+Keywords=doom;doom ii rpg;rpg
+Name=Doom II RPG
+StartupNotify=true
+Terminal=false
+Type=Application
