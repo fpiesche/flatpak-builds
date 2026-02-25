@@ -35,15 +35,22 @@ def inotify_filter(filename: str, watcher, boolean) -> bool:
 def parse_app(app_id: str) -> dict:
     base_app_path = Path("apps") / app_id
     flathub_status = "Pending submission"
+    flathub_url = ""
     flathub_id = None
     is_graduate = False
     try:
         with open(base_app_path / "flathub.json", "r") as flathub_json_fileobj:
             flathub_json = json.loads(flathub_json_fileobj.read())
-        if "end-of-life-rebase" in flathub_json.keys():
+        if "end-of-life" in flathub_json.keys():
             flathub_status = flathub_json["end-of-life"]
-            flathub_id = flathub_json["end-of-life-rebase"]
+            flathub_id = flathub_json.get("end-of-life-rebase", "retired")
             is_graduate = True
+            # Graduated to Flathub
+            if "Flathub" in flathub_status:
+                flathub_url = f"https://flathub.org/apps/{flathub_id}"
+            # Replaced locally
+            elif "retired" not in flathub_id:
+                flathub_url = f"/apps/{flathub_id}.html"
         elif "_submission-status" in flathub_json.keys():
             flathub_status = flathub_json["_submission-status"]
     except:
@@ -57,7 +64,7 @@ def parse_app(app_id: str) -> dict:
         "description": etree.tostring(metainfo.xpath("description")[0], encoding="unicode"),
         "flathub_status": flathub_status,
         "flathub_id": flathub_id,
-        "flathub_url": f"https://flathub.org/apps/{flathub_id}" if "Flathub" in flathub_status else f"/apps/{flathub_id}.html",
+        "flathub_url": flathub_url,
         "developer_name": metainfo.xpath("developer/name")[0].text,
         "developer_url": metainfo.xpath("developer/url")[0].text,
         "developer_name": metainfo.xpath("developer/name")[0].text,

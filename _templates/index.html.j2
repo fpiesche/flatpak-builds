@@ -165,14 +165,14 @@
                         {% if app.is_graduate -%}
                         <tr id="{{ app.flathub_id }}">
                             <td>
-                                <a href="{{ app.flathub_url }}">
+                                {% if app.flathub_url != "" -%}<a href="{{ app.flathub_url }}">{% endif -%}
                                     <img class="app-icon-small" src="{{ app.icon_url }}" alt="{{ app.name }}" />
-                                </a>
+                                {% if app.flathub_url != "" -%}</a>{% endif -%}
                             </td>
                             <td>
-                                <a href="{{ app.flathub_url }}">
+                                {% if app.flathub_url != "" -%}<a href="{{ app.flathub_url }}">{% endif -%}
                                     <h3>{{ app.name }}</h3>
-                                </a>
+                                {% if app.flathub_url != "" -%}</a>{% endif -%}
                                 <p class="bi bi-mortarboard-fill appid cmdline"> {{ app.id }}</p>
                                 {{ app.summary }}
                             </td>
