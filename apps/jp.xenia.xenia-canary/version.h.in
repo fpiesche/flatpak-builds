@@ -1,0 +1,7 @@
+#ifndef GENERATED_VERSION_H_
+#define GENERATED_VERSION_H_
+#define XE_BUILD_BRANCH "canary_experimental"
+#define XE_BUILD_COMMIT "@GIT_HASH@"
+#define XE_BUILD_COMMIT_SHORT "@GIT_HASH_SHORT@"
+#define XE_BUILD_DATE __DATE__
+#endif  // GENERATED_VERSION_H_
