@@ -17,11 +17,19 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
+cleanup:
+  - /bin/spirv*
+  - /bin/glslangValidator
+  - /lib/libSPIRV*
+  - /lib/pkgconfig
+  - /lib/cmake
+
 modules:
   - name: spirv-tools
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
       - -DSPIRV_SKIP_TESTS=ON
       - -DSPIRV_HEADERS_ENABLE_TESTS=OFF
     sources:
