@@ -7,12 +7,12 @@
     <url>https://github.com/lunarmeadow/barrett/graphs/contributors</url>
   </developer>
   <branding>
-    <color type="primary" scheme_preference="light">#739dca</color>
-    <color type="primary" scheme_preference="dark">#393569</color>
+    <color type="primary" scheme_preference="light">#eeb969</color>
+    <color type="primary" scheme_preference="dark">#324f4f</color>
   </branding>
   <summary>A modern source port of Rise of the Triad</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL2</project_license>
+  <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">io.github.lunarmeadow.barrett.desktop</launchable>
   <url type="homepage">https://github.com/lunarmeadow/barrett</url>
   <url type="vcs-browser">https://github.com/lunarmeadow/barrett</url>
