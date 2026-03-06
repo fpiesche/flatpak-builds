@@ -1,0 +1,106 @@
+app-id: io.github.lunarmeadow.barrett
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+sdk: org.freedesktop.Sdk
+command: io.github.lunarmeadow.barrett.sh
+
+finish-args:
+  # hardware 3D
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /lib/cmake
+  - '*.a'
+  - '*.la'
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
+
+modules:
+  - name: adlmidi
+    builddir: true
+    buildsystem: cmake-ninja
+    build-options:
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+    config-opts:
+      - -DCMAKE_C_COMPILER=clang
+      - -DCMAKE_CXX_COMPILER=clang++
+      - -DCMAKE_LINKER_TYPE=LLD
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DlibADLMIDI_STATIC=OFF
+      - -DlibADLMIDI_SHARED=ON
+    sources:
+      - type: archive
+        url: https://github.com/Wohlstand/libADLMIDI/archive/refs/tags/v1.6.1.tar.gz
+        sha256: 9f14489ce1e6d020b8b90b6cf902e31d61b2d4e82122505cec6d5d4afebcb3e1
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Wohlstand/libADLMIDI/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
+
+  - name: barrett
+    builddir: true
+    buildsystem: cmake-ninja
+    build-options:
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+    config-opts:
+      - -DCMAKE_C_COMPILER=clang
+      - -DCMAKE_CXX_COMPILER=clang++
+      - -DCMAKE_LINKER_TYPE=LLD
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/lunarmeadow/barrett/archive/refs/tags/v1.2-beta.tar.gz
+        sha256: d2c65a9c61b41d012a3429601a1a529ef80d0f057d919b1bcf6c187761f93c58
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/lunarmeadow/barrett/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
+      - type: archive
+        url: https://github.com/benhoyt/inih/archive/refs/tags/r62.tar.gz
+        sha256: 9c15fa751bb8093d042dae1b9f125eb45198c32c6704cd5481ccde460d4f8151
+        dest: src/
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/benhoyt/inih/releases/latest
+          version-query: .tag_name | sub("^r"; "")
+          url-query: .tarball_url
+      - type: patch
+        path: io.github.lunarmeadow.barrett.no-fetchcontent.patch
+      - type: patch
+        path: io.github.lunarmeadow.barrett.inih-path.patch
+      - type: patch
+        path: io.github.lunarmeadow.barrett.link-math.patch
+      - type: patch
+        path: io.github.lunarmeadow.barrett.cmake-install.patch
+
+  - name: desktop
+    buildsystem: simple
+    sources:
+      - type: file
+        path: io.github.lunarmeadow.barrett.png
+      - type: file
+        path: io.github.lunarmeadow.barrett.desktop
+      - type: script
+        dest-filename: io.github.lunarmeadow.barrett.sh
+        commands:
+          - cd $XDG_DATA_HOME/rott
+          - barrett
+      - type: file
+        path: io.github.lunarmeadow.barrett.metainfo.xml
+    build-commands:
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh -t /app/bin
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop -t /app/share/applications

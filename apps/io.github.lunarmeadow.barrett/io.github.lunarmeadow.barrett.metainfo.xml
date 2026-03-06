@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.lunarmeadow.barrett</id>
+  <name>Barrett</name>
+  <developer id="io.github.lunarmeadow">
+    <name>lunarmeadow; erysdren; Barrett Contributors</name>
+    <url>https://github.com/lunarmeadow/barrett/graphs/contributors</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>A modern source port of Rise of the Triad</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL2</project_license>
+  <launchable type="desktop-id">io.github.lunarmeadow.barrett.desktop</launchable>
+  <url type="homepage">https://github.com/lunarmeadow/barrett</url>
+  <url type="vcs-browser">https://github.com/lunarmeadow/barrett</url>
+  <description>
+    <p>Modernised source ports of the original <em>Rise of the Triad</em> including the
+      "Ludicrous Edition" add-on campaign.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include any game data.
+        At least the <code>*.dmo</code>, <code>REMOTE1.RTS</code> and either the
+        <code>DARKWAR.*</code> or <code>HUNTBGIN.*</code> files from a copy of
+        Rise of the Triad must be copied to
+        <code>$HOME/.var/app/io.github.lunarmeadow.barrett/rott/</code>.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.lunarmeadow.barrett/screenshots/01-title.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.lunarmeadow.barrett/screenshots/02-playerselect.png</image>
+      <caption>Character selection</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.lunarmeadow.barrett/screenshots/03-ingame.png</image>
+      <caption>In-game</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>barrett</binary>
+  </provides>
+  <keywords>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+  </keywords>
+  <releases>
+    <release version="1.2-beta" date="2026-02-12">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>

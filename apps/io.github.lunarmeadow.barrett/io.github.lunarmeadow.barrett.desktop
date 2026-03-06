@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Game;Shooter
+Comment=A modern port of Rise of the Triad
+Exec=io.github.lunarmeadow.barrett.sh
+Icon=io.github.lunarmeadow.barrett
+Keywords=doom;idtech;shooter;fps
+Name=Barrett
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
