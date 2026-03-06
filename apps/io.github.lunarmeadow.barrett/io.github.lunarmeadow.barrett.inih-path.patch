@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1dfedae..3489c2c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -106,7 +106,7 @@ set(BARRETT_SOURCES
+ 	${PROJECT_SOURCE_DIR}/src/queue.c
+ 	${PROJECT_SOURCE_DIR}/src/HashTable.c
+ 	${PROJECT_SOURCE_DIR}/src/opl.c
+-	${inih_SOURCE_DIR}/ini.c
++	${PROJECT_SOURCE_DIR}/src/ini.c
+ )
+ 
+ add_executable(barrett ${BARRETT_SOURCES})
+diff --git a/src/opl.c b/src/opl.c
+index 56706ef..dfd45c9 100644
+--- a/src/opl.c
++++ b/src/opl.c
+@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ #include "SDL_mixer.h"
+ 
+ #include <adlmidi.h>
+-#include <ini.h>
++#include "ini.h"
+ 
+ #include "opl.h"
+ #include "rt_def.h"

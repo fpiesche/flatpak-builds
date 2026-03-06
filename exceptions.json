@@ -41,6 +41,9 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "screenshot-image-not-found": "this is fine"
     },
+    "io.github.lunarmeadow.barrett": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.openenroth.openenroth": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
