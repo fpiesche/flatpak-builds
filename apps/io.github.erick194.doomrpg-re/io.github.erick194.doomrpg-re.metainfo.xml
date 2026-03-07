@@ -14,8 +14,8 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <launchable type="desktop-id">io.github.erick194.doomrpg-re.desktop</launchable>
-  <url type="homepage">https://github.com/erick194.doomrpg-re</url>
-  <url type="vcs-browser">https://github.com/erick194.doomrpg-re</url>
+  <url type="homepage">https://github.com/erick194/doomrpg-re</url>
+  <url type="vcs-browser">https://github.com/erick194/doomrpg-re</url>
   <description>
     <p>A fully reverse engineered PC port of the Java mobile game.</p>
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the game data for Doom RPG.
@@ -26,15 +26,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.377a562edf9f3e32b1c3a3deed541378.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/titlescreen.png</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.a5381aa95ccc874c15106d8ba7157cab.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/gamestart.png</image>
       <caption>Some survivors</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.5690df6ab42017c72c58a11ff06647f8.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/cutscene.png</image>
       <caption>Cutscene: A portal to... hell?</caption>
     </screenshot>
   </screenshots>
