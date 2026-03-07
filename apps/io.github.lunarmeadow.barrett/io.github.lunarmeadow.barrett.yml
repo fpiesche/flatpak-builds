@@ -39,8 +39,8 @@ modules:
       - -DlibADLMIDI_SHARED=ON
     sources:
       - type: archive
-        url: https://github.com/Wohlstand/libADLMIDI/archive/refs/tags/v1.6.1.tar.gz
-        sha256: 9f14489ce1e6d020b8b90b6cf902e31d61b2d4e82122505cec6d5d4afebcb3e1
+        url: https://api.github.com/repos/Wohlstand/libADLMIDI/tarball/v1.6.1
+        sha256: 132f95977f3cccc9092bf09c91817669f0e6a59a8121ae89a72a2ab3fa61d8f1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Wohlstand/libADLMIDI/releases/latest
@@ -60,16 +60,16 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/lunarmeadow/barrett/archive/refs/tags/v1.2-beta.tar.gz
-        sha256: d2c65a9c61b41d012a3429601a1a529ef80d0f057d919b1bcf6c187761f93c58
+        url: https://api.github.com/repos/lunarmeadow/barrett/tarball/v1.2-beta
+        sha256: 1c4fcedd79cb8950f0f4e5abb1d8f0408cb39682b514b04a532655b6248772fc
         x-checker-data:
           type: json
           url: https://api.github.com/repos/lunarmeadow/barrett/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: .tarball_url
       - type: archive
-        url: https://github.com/benhoyt/inih/archive/refs/tags/r62.tar.gz
-        sha256: 9c15fa751bb8093d042dae1b9f125eb45198c32c6704cd5481ccde460d4f8151
+        url: https://api.github.com/repos/benhoyt/inih/tarball/r62
+        sha256: ed649543d32ef3b9f25497b5744dcf1dc8eb7357cbfc3e79030b85a9946888ef
         dest: src/
         x-checker-data:
           type: json
