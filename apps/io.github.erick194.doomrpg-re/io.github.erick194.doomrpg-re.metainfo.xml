@@ -17,7 +17,8 @@
   <url type="homepage">https://github.com/erick194/doomrpg-re</url>
   <url type="vcs-browser">https://github.com/erick194/doomrpg-re</url>
   <description>
-    <p>A fully reverse engineered PC port of the Java mobile game.</p>
+    <p>A fully reverse engineered PC port of the Java mobile game based on the 90s
+        retro shooter.</p>
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the game data for Doom RPG.
         Please copy the file <code>Doom RPG.ipa</code> file to
         <code>$HOME/.var/app/io.github.erick194.doomrpg-re/doom2rpg/</code>.</p>
