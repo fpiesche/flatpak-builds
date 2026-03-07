@@ -27,15 +27,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/titlescreen.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomrpg-re/screenshots/titlescreen.png</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/gamestart.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomrpg-re/screenshots/gamestart.png</image>
       <caption>Some survivors</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche@main/flatpak-builds/apps/io.github.erick194.doomrpg-re/screenshots/cutscene.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomrpg-re/screenshots/cutscene.png</image>
       <caption>Cutscene: A portal to... hell?</caption>
     </screenshot>
   </screenshots>
