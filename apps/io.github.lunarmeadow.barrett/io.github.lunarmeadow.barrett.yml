@@ -41,6 +41,7 @@ modules:
       - type: archive
         url: https://api.github.com/repos/Wohlstand/libADLMIDI/tarball/v1.6.1
         sha256: 132f95977f3cccc9092bf09c91817669f0e6a59a8121ae89a72a2ab3fa61d8f1
+        dest-filename: adlmidi.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Wohlstand/libADLMIDI/releases/latest
@@ -60,21 +61,23 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://api.github.com/repos/lunarmeadow/barrett/tarball/v1.2-beta
-        sha256: 1c4fcedd79cb8950f0f4e5abb1d8f0408cb39682b514b04a532655b6248772fc
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/lunarmeadow/barrett/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .tarball_url
-      - type: archive
         url: https://api.github.com/repos/benhoyt/inih/tarball/r62
         sha256: ed649543d32ef3b9f25497b5744dcf1dc8eb7357cbfc3e79030b85a9946888ef
+        dest-filename: inih.tar.gz
         dest: src/
         x-checker-data:
           type: json
           url: https://api.github.com/repos/benhoyt/inih/releases/latest
           version-query: .tag_name | sub("^r"; "")
+          url-query: .tarball_url
+      - type: archive
+        url: https://api.github.com/repos/lunarmeadow/barrett/tarball/v1.2-beta
+        sha256: 1c4fcedd79cb8950f0f4e5abb1d8f0408cb39682b514b04a532655b6248772fc
+        dest-filename: barrett.tar.gz
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/lunarmeadow/barrett/releases/latest
+          version-query: .tag_name | sub("^v"; "")
           url-query: .tarball_url
       - type: patch
         path: io.github.lunarmeadow.barrett.no-fetchcontent.patch
