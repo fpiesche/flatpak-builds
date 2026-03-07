@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.erick194.doomrpg-re</id>
+  <name>Doom RPG</name>
+  <developer id="io.github.erick194.doomrpg-re">
+    <name>Doom RPG RE Contributors</name>
+    <url>https://github.com/erick194.doomrpg-re/graphs/contributors</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>Reverse engineered port of Doom RPG</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <launchable type="desktop-id">io.github.erick194.doomrpg-re.desktop</launchable>
+  <url type="homepage">https://github.com/erick194.doomrpg-re</url>
+  <url type="vcs-browser">https://github.com/erick194.doomrpg-re</url>
+  <description>
+    <p>A fully reverse engineered PC port of the Java mobile game.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the game data for Doom RPG.
+        Please copy the file <code>Doom RPG.ipa</code> file to
+        <code>$HOME/.var/app/io.github.erick194.doomrpg-re/doom2rpg/</code>.</p>
+    <p>Launching any of the games included will inform you with a message if any of the required
+        files are missing and where you need to copy them.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.377a562edf9f3e32b1c3a3deed541378.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.a5381aa95ccc874c15106d8ba7157cab.png</image>
+      <caption>Some survivors</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://static.doomworld.com/monthly_2022_06/image.png.5690df6ab42017c72c58a11ff06647f8.png</image>
+      <caption>Cutscene: A portal to... hell?</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>RolePlaying</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>doomrpg</binary>
+  </provides>
+  <keywords>
+    <keyword>rpg</keyword>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+    <keyword>horror</keyword>
+    <keyword>doom rpg</keyword>
+  </keywords>
+  <releases>
+    <release version="git-8ff35da" date="2024-04-23">
+      <description></description>
+    </release>
+    <release version="0.2.2" date="2024-01-24">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>
