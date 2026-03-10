@@ -284,7 +284,7 @@ jobs:
 
       - name: Download ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
           path: _build
@@ -348,13 +348,13 @@ jobs:
           lfs: true
 
       - name: Grab site artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: "_site"
           merge-multiple: true
 
       - name: Grab build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: "*_repo.zip"
           path: repo
