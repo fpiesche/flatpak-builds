@@ -32,7 +32,7 @@ jobs:
           pip install -r requirements.txt
           python3 build_site.py _site
       - name: Upload build as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: _site/
           name: _site
@@ -234,7 +234,7 @@ jobs:
 
       - name: Upload build dir as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: _build
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
@@ -242,7 +242,7 @@ jobs:
 
       - name: Upload repo as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: ${{ steps.flatpak.outputs.repository }}
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_repo.zip
@@ -258,7 +258,7 @@ jobs:
 
       - name: Upload bundle as artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}.flatpak
