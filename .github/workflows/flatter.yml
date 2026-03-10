@@ -52,7 +52,7 @@ jobs:
       - name: Get changed manifests
         if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
         id: changed_files_action
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/changed-files@v47
         with:
           files: apps/*/*.yml
       - name: Assemble build matrix
