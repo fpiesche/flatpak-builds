@@ -25,7 +25,7 @@ modules:
       - type: git
         url: https://github.com/erick194/doomrpg-re
         branch: main
-        commit: 8ff35da34478170eb3c9d42604184f1174b4558c
+        commit: "8ff35da34478170eb3c9d42604184f1174b4558c"
         x-checker-data:
           type: json
           url: https://api.github.com/repos/erick194/doomrpg-re/branches
