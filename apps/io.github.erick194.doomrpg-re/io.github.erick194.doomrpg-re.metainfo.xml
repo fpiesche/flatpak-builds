@@ -65,8 +65,11 @@
     <release version="git-8ff35da" date="2026-03-11">
       <description></description>
     </release>
+    <release version="git-8ff35da" date="2026-03-11">
+      <description/>
+    </release>
     <release version="0.2.2" date="2024-01-24">
-      <description></description>
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1">
