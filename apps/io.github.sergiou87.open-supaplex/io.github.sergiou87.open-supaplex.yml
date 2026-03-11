@@ -51,6 +51,8 @@ modules:
           project-id: 4782
           url-template: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-$version.tar.gz
           stable-only: true
+          versions:
+            "<": "3.0"
 
   - name: open-supaplex
     buildsystem: simple
