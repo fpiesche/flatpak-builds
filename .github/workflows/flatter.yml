@@ -55,7 +55,7 @@ jobs:
         id: changed_files_action
         uses: tj-actions/changed-files@v47
         with:
-          files: apps/*/*.yml
+          files: apps/**.yml
       - name: Assemble build matrix
         id: builds
         run: |
