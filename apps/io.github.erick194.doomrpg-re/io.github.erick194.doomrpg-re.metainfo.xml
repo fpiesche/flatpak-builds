@@ -62,8 +62,11 @@
     <keyword>doom rpg</keyword>
   </keywords>
   <releases>
-    <release version="git-8ff35da" date="2026-03-12">
+    <release version="git-8ff35da" date="2026-03-14">
       <description></description>
+    </release>
+    <release version="git-8ff35da" date="2026-03-12">
+      <description/>
     </release>
     <release version="git-8ff35da" date="2026-03-11">
       <description/>
