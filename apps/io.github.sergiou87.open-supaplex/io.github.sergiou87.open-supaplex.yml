@@ -52,14 +52,14 @@ modules:
           url-template: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-$version.tar.gz
           stable-only: true
           versions:
-            "<": "3.0"
+            <: '3.0'
 
   - name: open-supaplex
     buildsystem: simple
     sources:
       - type: git
         url: https://github.com/sergiou87/open-supaplex
-        commit: 73df867bc9c14790a23b8d66c86388e09b7e5312
+        commit: fddd13d619228b85b649504ea6e2bac77751ee18
         x-checker-data:
           type: json
           url: https://api.github.com/repos/sergiou87/open-supaplex/branches/master
