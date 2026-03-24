@@ -294,7 +294,7 @@ jobs:
 
       - name: Delete builddir artifact
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
 
@@ -400,11 +400,11 @@ jobs:
           clean: true
 
       - name: Delete site build artifact
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: "site_build.zip"
 
       - name: Delete repo artifacts
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: "*_repo.zip"
