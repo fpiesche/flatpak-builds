@@ -53,8 +53,8 @@ modules:
     buildsystem: meson
     sources:
       - type: archive
-        url: https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.14.2.tar.xz
-        sha256: 4b62dcab4c920a1a860369933221814362e699e26f55792516d671e6ff55b5e1
+        url: https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.xz
+        sha256: 36bc4f1cc413335368ee656c42afca65c5a3987e8768cc28cf11ba775e785a5f
         dest-filename: freetype.tar.xz
         x-checker-data:
           type: anitya
