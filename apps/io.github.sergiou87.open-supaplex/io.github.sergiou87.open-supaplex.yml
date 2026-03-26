@@ -58,8 +58,9 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/sergiou87/open-supaplex/archive/refs/tags/v7.2.tar.gz
-        sha256: 7be532b8f3fe24cbe4c7068c79c7d6a9557b6bf36d1d23eb2ab829e053bce2ae
+        url: https://api.github.com/repos/sergiou87/open-supaplex/tarball/v7.2
+        dest-filename: open-supaplex.tar.gz
+        sha256: 326bd0af07f7660ef27e45b0fe40f4c6476b2da9bbc9e252ea5b083bc3e899c2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/sergiou87/open-supaplex/releases/latest
