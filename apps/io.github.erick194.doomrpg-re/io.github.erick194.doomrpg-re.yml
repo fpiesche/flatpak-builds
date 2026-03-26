@@ -30,7 +30,6 @@ modules:
           type: json
           url: https://api.github.com/repos/erick194/doomrpg-re/branches
           commit-query: .[] | select(.name == "main") | .commit.sha
-          version-query: .[] | select(.name == "main") | "git-\(.commit.sha[:7])"
       - type: patch
         path: io.github.erick194.doomrpg-re.cmake-install.patch
       - type: patch
