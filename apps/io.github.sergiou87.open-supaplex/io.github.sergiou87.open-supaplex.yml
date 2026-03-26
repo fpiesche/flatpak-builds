@@ -59,7 +59,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/sergiou87/open-supaplex/archive/refs/tags/v7.2.tar.gz
-        sha256: 7a2a91460c824b88ee5f9f91a3decc40efe1ff77b924c6a4ecf2419618202879
+        sha256: 7be532b8f3fe24cbe4c7068c79c7d6a9557b6bf36d1d23eb2ab829e053bce2ae
         x-checker-data:
           type: json
           url: https://api.github.com/repos/sergiou87/open-supaplex/releases/latest
