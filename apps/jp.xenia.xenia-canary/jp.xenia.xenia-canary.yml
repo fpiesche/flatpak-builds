@@ -88,6 +88,7 @@ modules:
       - type: file
         path: jp.xenia.xenia-canary.svg
         dest: assets/icon/
+        dest-filename: jp.xenia.xenia-canary_outline.svg
       - type: file
         path: jp.xenia.xenia-canary.metainfo.xml
         dest: assets/freedesktop/
