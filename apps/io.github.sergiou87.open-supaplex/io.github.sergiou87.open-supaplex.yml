@@ -57,13 +57,14 @@ modules:
   - name: open-supaplex
     buildsystem: simple
     sources:
-      - type: git
-        url: https://github.com/sergiou87/open-supaplex
-        commit: af6536d92b96eca6c0c3e6eeaf7d57121a828886
+      - type: archive
+        url: https://github.com/sergiou87/open-supaplex/archive/refs/tags/v7.2.tar.gz
+        sha256: 7a2a91460c824b88ee5f9f91a3decc40efe1ff77b924c6a4ecf2419618202879
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sergiou87/open-supaplex/branches/master
-          commit-query: .commit.sha
+          url: https://api.github.com/repos/sergiou87/open-supaplex/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
       - type: file
         path: io.github.sergiou87.open-supaplex.svg
       - type: file
