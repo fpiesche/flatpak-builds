@@ -11,6 +11,7 @@
   <project_license>BSD-3-Clause</project_license>
   <launchable type="desktop-id">jp.xenia.xenia-canary.desktop</launchable>
   <url type="homepage">https://xenia.jp/</url>
+  <url type="vcs-browser">https://github.com/xenia-canary/xenia-canary</url>
   <branding>
     <color type="primary" scheme_preference="light">#ffd85f</color>
     <color type="primary" scheme_preference="dark">#555555</color>
