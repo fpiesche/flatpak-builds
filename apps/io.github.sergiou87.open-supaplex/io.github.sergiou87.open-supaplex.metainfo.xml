@@ -61,8 +61,11 @@
     <keyword>source port</keyword>
   </keywords>
   <releases>
-    <release version="v7.2" date="2026-03-26">
+    <release version="v7.2.1" date="2026-03-30">
       <description></description>
+    </release>
+    <release version="v7.2" date="2026-03-26">
+      <description/>
     </release>
     <release version="nightly" date="2024-09-30"/>
     <release version="7.1.2" date="2020-08-21"/>
