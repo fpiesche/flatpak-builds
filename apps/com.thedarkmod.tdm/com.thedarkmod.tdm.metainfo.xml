@@ -11,6 +11,7 @@
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">com.thedarkmod.tdm.desktop</launchable>
   <url type="homepage">https://thedarkmod.com/</url>
+  <url type="vcs-browser">https://github.com/stgatilov/darkmod_src</url>
   <description>
     <p>The Dark Mod is a free and open-source software first-person stealth video game, inspired by the Thief series by Looking Glass Studios.
       The game provides the basic framework and tools for more than 170 fan-made missions, including several multi-mission campaigns.

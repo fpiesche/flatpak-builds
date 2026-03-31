@@ -15,6 +15,7 @@
   </branding>
   <launchable type="desktop-id">org.lhowon.alephone.desktop</launchable>
   <url type="homepage">https://alephone.lhowon.org/</url>
+  <url type="vcs-browser">https://github.com/Aleph-One-Marathon/alephone</url>
   <url type="contact">https://discord.gg/NvF3pdV</url>
   <description>
     <p>Aleph One is the open source continuation of Bungie’s Marathon® 2 game engine. Available for macOS, Windows, and Linux, Aleph One supports Marathon, Marathon 2 and Marathon Infinity natively. Many third party scenarios and net maps are also available.</p>

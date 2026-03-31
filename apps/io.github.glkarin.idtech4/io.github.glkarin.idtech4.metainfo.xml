@@ -15,6 +15,7 @@
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">io.github.glkarin.idtech4.desktop</launchable>
   <url type="homepage">https://github.com/glKarin/com.n0n3m4.diii4a</url>
+  <url type="vcs-browser">https://github.com/glKarin/com.n0n3m4.diii4a</url>
   <description>
     <p>Modernised source ports of the flagship idtech4 games: Doom 3, Prey (2006) and Quake 4.</p>
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include any game data or CD keys for

@@ -15,6 +15,7 @@
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">su.xash.xash3d-fwgs.desktop</launchable>
   <url type="homepage">https://xash.su/</url>
+  <url type="vcs-browser">https://github.com/FWGS/xash3d-fwgs</url>
   <description>
     <p>Xash3D-FWGS is a fork of the Half-Life compatible Xash3D engine with many new features:</p>
     <ul>

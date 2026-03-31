@@ -15,6 +15,7 @@
   <project_license>MIT AND GPL-3.0</project_license>
   <launchable type="desktop-id">io.github.sergiou87.open-supaplex.desktop</launchable>
   <url type="homepage">https://github.com/sergiou87/open-supaplex</url>
+  <url type="vcs-browser">https://github.com/sergiou87/open-supaplex</url>
   <description>
     <p>Open Supaplex is a reverse engineered multi-platform port of the early-90s puzzle game Supaplex.</p>
     <p>Since then the source code has been lost. Some enthusiasts have disassembled the game, fixed many bugs, and added many features.</p>

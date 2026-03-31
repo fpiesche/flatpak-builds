@@ -15,6 +15,7 @@
   <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">io.github.kraflab.dsda-doom.desktop</launchable>
   <url type="homepage">https://github.com/kraflab/dsda-doom</url>
+  <url type="vcs-browser">https://github.com/kraflab/dsda-doom</url>
   <description>
     <p>dsda-doom is a successor of prboom+ with extra tooling for demo recording and playback,
         with a focus on speedrunning and quality of life.</p>

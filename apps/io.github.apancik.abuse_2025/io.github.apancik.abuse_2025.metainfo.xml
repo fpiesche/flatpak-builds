@@ -11,14 +11,16 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">io.github.apancik.abuse_2025.desktop</launchable>
-  <url type="homepage">https://github.com/antrad/abuse_1996</url>
+  <url type="homepage">https://github.com/apancik/abuse_2025</url>
+  <url type="vcs-browser">https://github.com/apancik/abuse_2025</url>
   <branding>
     <color type="primary" scheme_preference="light">#e4bc47</color>
     <color type="primary" scheme_preference="dark">#2c373d</color>
   </branding>
   <description>
-    <p>This is an enhanced fork of the 2014 SDL2 version by Xenoveritas of the original Abuse-SDL source port
-      of Crack Dot Com's 1996 platform shooter Abuse.</p>
+    <p>Abuse 2025 is a modern port of the original game, updated to run on modern systems and with new features like
+      high-resolution graphics, gamepad support, and more. This project is a continuation of the Xenoveritas SDL2
+      port and the Abuse 1996 project. It aims to be the go-to version for playing Abuse on modern systems.</p>
     <p>Improvements from the Xenoveritas SDL2 port include:</p>
     <ul>
       <li>Enabled custom resolutions and enabled lights on high resolutions</li>

@@ -13,8 +13,8 @@
   <summary>A modern cross-platform port of Glider PRO, the classic Macintosh paper airplane game</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <url type="homepage">https://github.com/elasota/Aerofoil/</url>
-  <url type="contact">https://github.com/elasota</url>
+  <url type="homepage">https://github.com/elasota/Aerofoil</url>
+  <url type="vcs-browser">https://github.com/elasota/Aerofoil</url>
   <description>
     <p>Aerofoil is a port of John Calhoun's Glider PRO, the classic paper airplane game
       for Apple Macintosh computers released in 1994.</p>

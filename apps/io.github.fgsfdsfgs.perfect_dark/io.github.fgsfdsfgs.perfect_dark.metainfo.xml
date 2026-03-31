@@ -15,7 +15,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <url type="homepage">https://github.com/fgsfdsfgs/perfect_dark/</url>
-  <url type="contact">https://github.com/fgsfdsfgs/perfect_dark/</url>
+  <url type="vcs-browser">https://github.com/fgsfdsfgs/perfect_dark/</url>
   <description>
       <p>This is a port of Ryan Dywer's decompilation of classic N64 shooter Perfect Dark to modern systems.
         The base game is fully playable with some graphical enhancements and a range of options added, as well

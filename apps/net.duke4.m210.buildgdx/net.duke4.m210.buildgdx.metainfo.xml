@@ -15,6 +15,7 @@
   <project_license>GPL-2.0-only</project_license>
   <launchable type="desktop-id">net.duke4.m210.buildgdx.desktop</launchable>
   <url type="homepage">https://m210.duke4.net/</url>
+  <url type="vcs-browser">https://gitlab.com/m210/BuildGDX</url>
   <url type="contact">https://discord.com/invite/kTVu6KU</url>
   <description>
     <p>BuildGDX is a port of the Build Engine games based on Java's libGDX framework v1.13.0.</p>
