@@ -73,8 +73,11 @@
     <keyword>retro</keyword>
   </keywords>
   <releases>
-    <release version="v1.0.2" date="2024-10-05">
+    <release version="v1.0.3" date="2026-03-31">
       <description></description>
+    </release>
+    <release version="v1.0.2" date="2024-10-05">
+      <description/>
     </release>
     <release version="1.0.1" date="2024-10-04"><description><p>Improve icon.</p></description></release>
     <release version="1.0" date="2024-02-23"><description><p>The original Flatpak release of f2bgl.</p></description></release>
