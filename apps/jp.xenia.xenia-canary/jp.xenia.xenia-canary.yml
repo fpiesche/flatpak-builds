@@ -70,7 +70,7 @@ modules:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary
         branch: canary_experimental
-        commit: d2c8ca675e78e3730af5f2d90669d37a69ebfd94
+        commit: c383d049ecd8e89fad4a72567ad66151d7572e1c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
