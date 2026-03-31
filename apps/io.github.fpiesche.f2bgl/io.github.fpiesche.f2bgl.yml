@@ -38,9 +38,9 @@ modules:
   - name: f2bgl
     sources:
       - type: archive
-        url: https://api.github.com/repos/fpiesche/f2bgl/tarball/v1.0.2
+        url: https://api.github.com/repos/fpiesche/f2bgl/tarball/v1.0.3
         dest-filename: f2bgl.tar.gz
-        sha256: 569e8dad7b7b33e2441398c07defc9cc8b368d4cdc11e2470005e177e215a765
+        sha256: b5bf4f18c8c468679085f2acf9acfbdd809502576c232a6f6d0eab2bcad71331
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fpiesche/f2bgl/releases/latest
