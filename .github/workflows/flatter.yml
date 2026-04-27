@@ -369,7 +369,7 @@ jobs:
           du -bh -d1 --exclude=".git*" .
           echo "::endgroup::"
           echo "::group::git metadata"
-          du -bh -d1 git/
+          du -bh -d1 .git/
           echo "::endgroup::"
           echo "::group::Full tree"
           tree -L 2 .
