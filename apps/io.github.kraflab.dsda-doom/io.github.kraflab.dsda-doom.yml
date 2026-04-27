@@ -1,8 +1,8 @@
 app-id: io.github.kraflab.dsda-doom
 runtime: org.kde.Platform
-runtime-version: '6.7'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
-command: dsda-launcher
+command: io.github.kraflab.dsda-doom.sh
 
 rename-icon: dsda-doom
 rename-desktop-file: dsda-doom.desktop
@@ -27,6 +27,11 @@ cleanup:
   - /share/man
 
 modules:
+  - ../shared-modules/glu/glu-9.json
+  - ../shared-modules/SDL2/SDL2_image.json
+  - ../shared-modules/libmad/libmad.json
+  - ../shared-modules/linux-audio/fluidsynth2.json
+
   - name: libzip
     buildsystem: cmake-ninja
     config-opts:
@@ -43,14 +48,13 @@ modules:
           project-id: 10649
           url-template: https://libzip.org/download/libzip-$version.tar.xz
 
-  - ../shared-modules/glu/glu-9.json
-  - ../shared-modules/libmad/libmad.json
   - name: libdumb
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -D BUILD_EXAMPLES=OFF
-      - -D BUILD_ALLEGRO4=OFF
+      - -DBUILD_EXAMPLES=OFF
+      - -DBUILD_ALLEGRO4=OFF
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: archive
         url: https://api.github.com/repos/kode54/dumb/tarball/396caa4d31859045ccb5ef943fd430ca4026cce8
@@ -73,6 +77,16 @@ modules:
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: .tarball_url
+  - name: libxmp
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://github.com/libxmp/libxmp/
+        tag: libxmp-4.7.0
+        commit: 8a4fdf7d09aedc921de537853b59e1d15b534f24
+        x-checker-data:
+          type: git
+          tag-pattern: ^libxmp-(.*)$
 
   - name: dsda-doom
     buildsystem: cmake-ninja
@@ -115,10 +129,16 @@ modules:
       - type: file
         url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/src/icons/dsda-launcher.svg
         sha256: b354bcc022f55d72dd0450fe44997175e5c2b41cd8684a3a5c3b851b1b289fcd
+      - type: script
+        dest-filename: io.github.kraflab.dsda-doom.sh
+        commands:
+          - if [[ ! -d "$XDG_DATA_HOME/dsda-doom" ]]; then mkdir -p "$XDG_DATA_HOME/dsda-doom"; fi
+          - dsda-launcher $@
     build-commands:
       - mkdir build && cd build && qmake ..
       - cd build && make
       - install -Dm755 build/dsda-launcher -t /app/bin
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh -t /app/bin
       - desktop-file-edit --set-icon=${FLATPAK_ID}.launcher icons/dsda-Launcher.desktop
       - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA
         Doom" icons/dsda-Launcher.desktop
