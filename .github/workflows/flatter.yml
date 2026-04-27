@@ -368,14 +368,11 @@ jobs:
           echo "::group::File size"
           du -bh -d1 --exclude=".git*" .
           echo "::endgroup::"
+          echo "::group::git metadata"
+          du -bh -d1 git/
+          echo "::endgroup::"
           echo "::group::Full tree"
           tree -L 2 .
-          echo "::endgroup::"
-          echo "::group::site root"
-          ls -la .
-          echo "::endgroup::"
-          echo "::group::repo"
-          ls -la repo
           echo "::endgroup::"
 
       - name: Update repo metadata
