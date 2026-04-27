@@ -396,7 +396,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
-          single-commit: true
+          single-commit: false
           clean: true
 
       - name: Delete site build artifact
