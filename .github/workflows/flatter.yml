@@ -219,6 +219,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Install required runtime
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: flatpak install -y --noninteractive flathub ${{ matrix.app.sdk }}//${{ matrix.app.sdk-version }}
 
       - name: Build
