@@ -24,12 +24,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/erick194/doomrpg-re
-        branch: main
         commit: 8ff35da34478170eb3c9d42604184f1174b4558c
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/erick194/doomrpg-re/branches
-          commit-query: .[] | select(.name == "main") | .commit.sha
+          url: https://api.github.com/repos/erick194/doomrpg-re/branches/main
+          commit-query: .commit.sha
       - type: patch
         path: io.github.erick194.doomrpg-re.cmake-install.patch
       - type: patch
