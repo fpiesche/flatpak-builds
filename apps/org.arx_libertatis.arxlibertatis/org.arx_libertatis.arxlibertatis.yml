@@ -41,13 +41,13 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
-        sha256: aca59f889f0f32028ad88ba6764582b63c916ce5f77b31289ad19421a96c555f
+        url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.xz
+        sha256: cc5dc5006ecbdf0051f90979be31b4eee5987d9ae14ae9fb9c03cfa43fa3cdad
         x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          url-template: https://github.com/boostorg/boost/releases/download/boost-${major}.${minor}.${patch}/boost-${major}.${minor}.${patch}-cmake.tar.xz
+          type: json
+          url: https://api.github.com/repos/boostorg/boost/releases/latest
+          version-query: .tag_name | sub("boost-"; "")
+          url-query: .assets[] | select(.name | test("^boost-.*-cmake.tar.xz$")).browser_download_url
 
   - name: freetype
     buildsystem: meson
