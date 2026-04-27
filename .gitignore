@@ -7,12 +7,9 @@ venv
 build
 .flatpak-builder
 .flatpak
-repo
 
 # Site build artifacts
 _site/apps
-index.html
-*.flatpakrepo
 
 # stop it
 .vscode
