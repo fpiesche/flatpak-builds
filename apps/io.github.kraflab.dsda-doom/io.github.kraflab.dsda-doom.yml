@@ -99,9 +99,9 @@ modules:
         sha256: 91630379edd11e00287a483653a7e558141bfa230a3b88d9ce8d539f63046d4d
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/kraflab/dsda-doom/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .tarball_url
+          url: https://api.github.com/repos/kraflab/dsda-doom/releases
+          version-query: .[0].tag_name | sub("^v"; "")
+          url-query: .[0].tarball_url
       - type: file
         path: io.github.kraflab.dsda-doom.metainfo.xml
     post-install:
