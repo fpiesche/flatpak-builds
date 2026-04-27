@@ -338,7 +338,6 @@ jobs:
         run: sudo apt update && sudo apt install -y --no-install-recommends flatpak
 
       - name: Setup GPG
-        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v7
         with:
