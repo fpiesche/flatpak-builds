@@ -68,8 +68,7 @@ modules:
       - -DXENIA_ICON_OUTLINED=ON
     sources:
       - type: git
-        url: https://github.com/xenia-canary/xenia-canary
-        branch: canary_experimental
+        url: https://github.com/xenia-canary/xenia-canary.git
         commit: cff0773e00d756af6669b127ef6c09562ace62c3
         x-checker-data:
           type: json
