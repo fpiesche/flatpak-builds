@@ -59,7 +59,7 @@ modules:
       - type: archive
         url: https://update.thedarkmod.com/zipsync/tdm_installer.linux64.zip
         dest-filename: tdm.zip
-        sha256: 03025c09fc4d293bf5d566c5e1332a494d04ddd1ad9cc2b18891c2b250523451
+        sha256: 7ae4be6d8d45c7ed0e1a911e2dd6e8df3c0bf5247d7f37f2ae408c822bf035f7
     build-commands:
       - install -Dm 755 -t /app/bin/ tdm_installer.linux64
       - install -Dm 755 -t /app/bin/ ${FLATPAK_ID}.installer.sh
