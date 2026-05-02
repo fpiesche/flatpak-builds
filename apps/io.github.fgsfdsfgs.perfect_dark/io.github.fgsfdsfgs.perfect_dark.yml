@@ -24,7 +24,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: d8962763b75b3008a30b52d82fd487174c15d212
+        commit: 45139a9293dc221de5795733137c76f5ee134261
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
@@ -52,7 +52,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: d8962763b75b3008a30b52d82fd487174c15d212
+        commit: 45139a9293dc221de5795733137c76f5ee134261
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
@@ -68,7 +68,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: d8962763b75b3008a30b52d82fd487174c15d212
+        commit: 45139a9293dc221de5795733137c76f5ee134261
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
@@ -84,7 +84,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: aead1bc4c4207e91c8e0d7dc665be432251d58b6
+        commit: 54d35b47a02db9c0a14b504cc603e57056b5c666
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
@@ -109,7 +109,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: aead1bc4c4207e91c8e0d7dc665be432251d58b6
+        commit: 54d35b47a02db9c0a14b504cc603e57056b5c666
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
@@ -127,7 +127,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fgsfdsfgs/perfect_dark.git
-        commit: aead1bc4c4207e91c8e0d7dc665be432251d58b6
+        commit: 54d35b47a02db9c0a14b504cc603e57056b5c666
         x-checker-data:
           type: json
           url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
