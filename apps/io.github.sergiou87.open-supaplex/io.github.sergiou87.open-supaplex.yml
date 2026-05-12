@@ -43,9 +43,9 @@ modules:
       - --enable-music-mod-xmp=yes
     sources:
       - type: archive
-        url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.1.tar.gz
+        url: https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.8.2.tar.gz
         dest-filename: sdl2_mixer.tar.gz
-        sha256: 63804b4b2ba503865c0853f102231aeff489b1dfc6dea4750a69e2a8ef54b2bb
+        sha256: bcd36dc5df23f2a8a89ea518a323dcdde0e296bdcd9b3427d933c21165ca42ce
         x-checker-data:
           type: anitya
           project-id: 4782
@@ -71,8 +71,11 @@ modules:
     build-commands:
       - cd linux && make -j${FLATPAK_BUILDER_N_JOBS} CFLAGS='-DFILE_FHS_XDG_DIRS -DFILE_DATA_PATH=/app/usr/share/OpenSupaplex
         -DHAVE_SDL2 -I/usr/include/SDL2 -I/app/include/SDL2'
-      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
-      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps
-      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.metainfo.xml
+        -t /app/share/metainfo
+      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.svg
+        -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/linux/assets/${FLATPAK_ID}.desktop
+        -t /app/share/applications
       - install -Dm755 linux/opensupaplex -t /app/bin/
       - mkdir -p /app/usr/share/OpenSupaplex && cp -R resources/* /app/usr/share/OpenSupaplex/
