@@ -79,7 +79,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/FWGS/xash3d-fwgs
-        commit: 843f6297ed685cc5e41ce07793d01117fb94dc7f
+        commit: cae1d32c66c0699d97def04953693b2b1f1467f0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
