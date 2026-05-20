@@ -3,9 +3,6 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing"
     },
-    "com.jandjheydorn.nortantis": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
-    },
     "com.shipofharkinian.shipwright": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
@@ -13,6 +10,9 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "dev.lostartefacts.tr1x": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "dev.twilitrealm.dusklight": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
     "io.github.apancik.abuse_2025": {

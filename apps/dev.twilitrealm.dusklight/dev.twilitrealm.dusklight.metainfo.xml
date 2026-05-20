@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>dev.twilitrealm.dusklight</id>
+  <name>Dusklight</name>
+  <developer id="dev.twilitrealm.dusklight">
+    <name>Twilit Realm</name>
+    <url>https://twilitrealm.dev</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#814707</color>
+    <color type="primary" scheme_preference="dark">#201d1b</color>
+  </branding>
+  <summary>Become a legend – again.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>CC0-1.0</project_license>
+  <launchable type="desktop-id">dev.twilitrealm.dusklight.desktop</launchable>
+  <url type="homepage">https://twilitrealm.dev/</url>
+  <url type="vcs-browser">https://github.com/TwilitRealm/dusklight</url>
+  <description>
+    <p>Dusklight brings a classic adventure to PC and mobile platforms with a variety of fixes and improvements.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://twilitrealm.dev/_astro/shot-platform.Cp2I0l-W_NTXOU.webp</image>
+      <caption>Dungeons</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://twilitrealm.dev/_astro/shot-chainedwolf.tWdokXM-_1Oau0A.webp</image>
+      <caption>Wolf Link</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://twilitrealm.dev/_astro/shot-heartpiece.CXTCnfhq_2uMctO.webp</image>
+      <caption>Finding a heart container</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>dusklight</binary>
+  </provides>
+  <keywords>
+    <keyword>adventure</keyword>
+    <keyword>rpg</keyword>
+    <keyword>zelda</keyword>
+    <keyword>twilight</keyword>
+    <keyword>twilight princess</keyword>
+    <keyword>decompile</keyword>
+  </keywords>
+  <releases>
+    <release version="1.2.0" date="2026-05-18">
+      <url>https://github.com/TwilitRealm/dusklight/releases/tag/v1.2.0</url>
+    </release>
+    <release version="1.1.1" date="2026-05-13">
+      <url>https://github.com/TwilitRealm/dusklight/releases/tag/v1.1.1</url>
+    </release>
+    <release version="1.0.1" date="2026-05-11">
+      <url>https://github.com/TwilitRealm/dusklight/releases/tag/v1.0.1</url>
+    </release>
+    <release version="1.0.0" date="2026-05-09">
+      <url>https://github.com/TwilitRealm/dusklight/releases/tag/v1.0.0</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
