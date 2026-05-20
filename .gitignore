@@ -1,2 +1,15 @@
+# Python artifacts
+__pycache__
+*.pyc
+venv
+
+# Flatpak build artifacts
 build
 .flatpak-builder
+.flatpak
+
+# Site build artifacts
+_site/apps
+
+# stop it
+.vscode

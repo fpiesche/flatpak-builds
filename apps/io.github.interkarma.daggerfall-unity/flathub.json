@@ -1,5 +1,4 @@
 {
-  "only-arches": [
-    "x86_64"
-  ]
+  "_submission-status": "Developer refused Flathub submission",
+  "only-arches": ["x86_64"]
 }

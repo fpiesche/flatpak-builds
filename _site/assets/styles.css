@@ -1,0 +1,176 @@
+:root {
+    --ykc-bg-dark: #024959;
+    --ykc-bg-dark-alpha: #024959b0;
+    --ykc: #f5d505;
+    --accent: #ea602e;
+    --ykc-darker: #f28705;
+    --ykc-medium: #f2b705;
+}
+
+[data-bs-theme="dark"] {
+    --ykc-bg-dark: #a3bdc3;
+    --ykc: #915103;
+    --ykc-medium: #915103;
+}
+
+.app-icon {
+    height: 128px;
+    width: 128px;
+}
+
+.app-icon-small {
+    height: 64px;
+    width: 64px;
+}
+
+.appid {
+    font-size: .8em;
+    margin-bottom: 1em;
+}
+
+main {
+    padding-top: 5em;
+}
+
+h2 {
+    margin-bottom: 1em;
+}
+
+.cmdline {
+    border-radius: .4em;
+    padding: .4em;
+    padding-left: .8em;
+    padding-right: .6em;
+    border: none;
+    font-family: monospace;
+    background-color: var(--ykc-bg-dark);
+    color: var(--ykc);
+}
+
+.cli-inline {
+    padding: .3em;
+    font-size: .8em;
+}
+
+main > .container {
+    padding-top: 2em;
+    color: var(--ykc-bg-dark);
+}
+
+.navbar-brand {
+    font-family: 'Jupiter Crash BRK', sans-serif;
+    font-size: 2em;
+    color: var(--ykc-bg-dark);
+}
+
+.navbar-brand:hover {
+    font-family: 'Jupiter Crash BRK', sans-serif;
+    font-size: 2em;
+    color: var(--ykc);
+}
+
+a {
+    color: var(--ykc-darker);
+}
+
+a:hover {
+    color: var(--ykc-medium);
+}
+
+.btn {
+    background-color: var(--ykc-darker);
+    border: var(--ykc-medium);
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: var(--ykc-medium);
+    border: var(--ykc);
+    font-weight: bold;
+}
+
+.btn-install {
+    font-size: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.btn:active {
+    background-color: var(--accent) !important;
+}
+
+.install-column {
+    text-align: center;
+}
+
+.install-column > a {
+    width: 6em;
+}
+
+footer {
+    text-align: right;
+}
+
+.developer {
+    margin-bottom: 1em;
+}
+
+nav {
+    background-color: var(--ykc-medium);
+    padding: .2em;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.header > div > h1 {
+    font-weight: bold;
+}
+
+.homepage-link {
+    font-size: .5em;
+    margin-left: .5em;
+}
+
+.header > div > img {
+    float: left;
+    margin-right: 1em;
+}
+
+.carousel-inner {
+    margin-top: 2em;
+}
+
+.carousel-inner > div > img {
+    height: 600px;
+    width: 100%;
+    object-fit: scale-down;
+}
+
+.carousel-caption {
+    border-radius: 0.5em;
+    background: var(--ykc-bg-dark-alpha);
+    margin: 0 8em;
+}
+
+.carousel-control-prev-icon {
+    border-radius: 0.5em;
+    padding: 2em;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.50'/%3E%3Cpath d='m121.57 162.4-62.395-62.395 62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+}
+
+.carousel-control-prev-icon:hover {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.75'/%3E%3Cpath d='m121.57 162.4-62.395-62.395 62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+    transition: .4s;
+}
+
+.carousel-control-next-icon {
+    border-radius: 0.5em;
+    padding: 2em;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.50'/%3E%3Cpath d='m78.434 162.4 62.395-62.395-62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+}
+
+.carousel-control-next-icon:hover {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' rx='30' ry='30' fill-opacity='.75'/%3E%3Cpath d='m78.434 162.4 62.395-62.395-62.395-62.395' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='40'/%3E%3C/svg%3E%0A");
+    transition: .4s;
+}

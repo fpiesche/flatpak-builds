@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 43f1957..113659b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -143,3 +143,7 @@ endif()
+ if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT WIN32)
+     target_link_options(barrett PRIVATE -rdynamic)
+ endif()
++
++if(UNIX AND NOT DARWIN)
++		install(TARGETS barrett DESTINATION ${CMAKE_INSTALL_BINDIR})
++endif()

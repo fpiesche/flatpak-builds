@@ -1,0 +1,7 @@
+diff --git a/doom3/neo/CMakeLists.txt b/doom3/neo/CMakeLists.txt
+index fc6caff..303c33d 100644
+--- a/doom3/neo/CMakeLists.txt
++++ b/doom3/neo/CMakeLists.txt
+@@ -1496,1 +1496,1 @@
+-		find_package(FREETYPE QUIET)
++		find_package(Freetype QUIET)

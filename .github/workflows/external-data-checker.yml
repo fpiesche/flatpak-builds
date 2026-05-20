@@ -11,9 +11,10 @@ jobs:
     outputs:
       manifests: ${{ steps.get-manifests.outputs.manifests }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
-        submodules: true
+        submodules: false
+        set-safe-directory: true
     - id: get-manifests
       run: |
         MANIFEST_JSON=$(find ./apps/ -maxdepth 2 -name "*.yml" | jq -R -s -c 'split("\n")' | jq 'map(select(length > 0))')
@@ -32,8 +33,11 @@ jobs:
         manifest: ${{ fromJson(needs.build-matrix.outputs.manifests) }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - run: chown -R $(whoami) .
+    - uses: actions/checkout@v6
+      with:
+        submodules: recursive
+        set-safe-directory: true
+    - run: git config --global --add safe.directory /github/workspace
     - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
       env:
         GIT_AUTHOR_NAME: Flatpak External Data Checker

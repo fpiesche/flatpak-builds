@@ -1,6 +1,6 @@
 app-id: io.github.openenroth.openenroth
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '24.08'
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.openenroth.openenroth.sh
 
@@ -21,7 +21,7 @@ cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm18
+  - org.freedesktop.Sdk.Extension.llvm20
 
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
@@ -44,14 +44,14 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/davea42/libdwarf-code/zipball/v2.0.0
-        dest-filename: libdwarf.zip
-        sha256: 720ab662b039d075b7140f89632062e778efa2d280ae0c4fd6e2aa3a5cc9623d
+        url: https://api.github.com/repos/davea42/libdwarf-code/tarball/v2.3.1
+        dest-filename: libdwarf.tar.gz
+        sha256: 555127e03fcf8104f19608f6df8f0d98d88c2c0969f04726c6130a08c98c49d5
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
     cleanup:
       - /bin/dwarfdump
       - /share/dwarfdump
@@ -60,8 +60,8 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     build-options:
-      append-path: /usr/lib/sdk/llvm18/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
     config-opts:
       - -DOE_BUILD_TESTS=OFF
       - -DOE_BUILD_TOOLS=OFF
@@ -70,10 +70,12 @@ modules:
       - -DOE_USE_PREBUILT_DEPENDENCIES=OFF
       - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
       - -DCMAKE_LINKER=lld
+      # - -DCMAKE_C_COMPILER=clang
+      # - -DCMAKE_CXX_COMPILER=clang++
     sources:
       - type: git
         url: https://github.com/OpenEnroth/OpenEnroth.git
-        commit: 811c72d7da47df715fdb083cd74904ed12bd3b4d
+        commit: d98839ba8b9afde4df987150de7bcc9c32d9ecee
         x-checker-data:
           type: json
           url: https://api.github.com/repos/openenroth/openenroth/tags

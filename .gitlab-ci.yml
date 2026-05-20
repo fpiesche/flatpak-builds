@@ -1,0 +1,24 @@
+include:
+  # Dependabot updates
+  - component: $CI_SERVER_FQDN/dependabot-gitlab/dependabot-standalone/template@3.64.0
+    inputs:
+      gitlab_access_token: $gitlab_access_token
+    rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  # Flatpak updates
+  - local: flatpak-external-data-checker.yml
+    rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+
+  # Build Flatpak updates for PRs
+  - local: flatpak-build.yml
+    rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+
+  # Build and deploy site
+  - local: build-site.yml
+    rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+  - local: deploy-site.yml
+    rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.google.sites.trwotw</id>
+  <name>Tomb Raider: War of the Worlds</name>
+  <developer id="com.google.sites.trwotw">
+    <name>Mateusz Dzięcioł</name>
+    <url>https://sites.google.com/view/trwotw/</url>
+  </developer>
+  <summary>Tomb Raider fan game</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.google.sites.trwotw.desktop</launchable>
+  <url type="homepage">https://sites.google.com/view/trwotw/</url>
+  <description>
+    <p>Lara is one of the survivors of a pandemic of an unknown disease. Formerly, she was
+      a historian and archaeologist. Today she lives in a bunker called Asylum with a group
+      of other survivors. The life of community members revolves around caring for the
+      common good, supplies, and security. Lara's role most often comes down to
+      participating in the expeditions looking for medicines or food. Croft believes in the
+      existence of a 'mythical' medicine and she hopes to find some proofs in the ruins
+      of the Medical Pavilion. Soon their peace is interrupted.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://archive.org/download/tomb-raider-war-of-the-worlds/screenshots/mateusz-dzieciol-07.jpg</image>
+      <caption>Uncover futuristic technology</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://archive.org/download/tomb-raider-war-of-the-worlds/screenshots/mateusz-dzieciol-mateusz-dzieciol-10d.jpg</image>
+      <caption>Explore secret faciltiies</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://archive.org/download/tomb-raider-war-of-the-worlds/screenshots/mateusz-dzieciol-mateusz-dzieciol-23.jpg</image>
+      <caption>Discover the causes of humanity's disappearance'</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>wine</binary>
+    <binary>War of the Worlds.exe</binary>
+  </provides>
+  <keywords>
+    <keyword>tomb raider</keyword>
+    <keyword>fan game</keyword>
+    <keyword>retro</keyword>
+  </keywords>
+  <releases>
+    <release version="1.1" date="2021-12-19" />
+    <release version="1.0" date="2021-12-13" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

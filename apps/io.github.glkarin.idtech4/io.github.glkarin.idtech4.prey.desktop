@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Game;Shooter
+Comment=A sci-fi first person shooter with horror elements
+Exec=io.github.glkarin.idtech4.prey.sh
+Icon=io.github.glkarin.idtech4.prey
+Keywords=prey;shooter;fps
+Name=Prey
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application

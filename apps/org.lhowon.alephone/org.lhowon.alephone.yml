@@ -1,6 +1,6 @@
 app-id: org.lhowon.alephone
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '23.08'
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: alephone
 
@@ -40,20 +40,23 @@ add-extensions:
     autodelete: false
 
 modules:
+  - ../shared-modules/glu/glu-9.json
+  - ../shared-modules/SDL2/SDL2_ttf.json
+  - ../shared-modules/SDL2/SDL2_image.json
   - name: boost
-    buildsystem: simple
-    build-commands:
-      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=filesystem,system
-      - ./b2 -j$FLATPAK_BUILDER_N_JOBS install
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBOOST_INCLUDE_LIBRARIES=algorithm;filesystem;iostreams;iterator;lockfree;property_tree;system;tokenizer;unordered;uuid
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/boost/boost/1.88.0/boost_1_88_0.tar.bz2
-        sha256: 46d9d2c06637b219270877c9e16155cbd015b6dc84349af064c088e9b5b12f7b
+        url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.xz
+        sha256: cc5dc5006ecbdf0051f90979be31b4eee5987d9ae14ae9fb9c03cfa43fa3cdad
         x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          url-template: https://downloads.sourceforge.net/boost/boost/$version/boost_${major}_${minor}_${patch}.tar.bz2
+          type: json
+          url: https://api.github.com/repos/boostorg/boost/releases/latest
+          version-query: .tag_name | sub("boost-"; "")
+          url-query: .assets[] | select(.name | test("^boost-.*-cmake.tar.xz$")).browser_download_url
 
   - name: zziplib
     buildsystem: cmake-ninja
@@ -83,7 +86,17 @@ modules:
       - -DUPNPC_BUILD_TESTS=FALSE
       - -DUPNPC_BUILD_SAMPLE=FALSE
 
-  - ../shared-modules/glu/glu-9.json
+  - name: asio
+    config-opts:
+      - --prefix=/app
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/asio/files/asio/1.36.0%20(Stable)/asio-1.36.0.tar.gz
+        sha256: 55d5c64e78b1bedd0004423e695c2cfc191fc71914eaaa7f042329ff99ee6155
+        x-checker-data:
+          type: anitya
+          project-id: 117
+          url-template: https://sourceforge.net/projects/asio/files/asio/${version}%20(Stable)/asio-${version}.tar.gz
 
   - name: alephone
     buildsystem: autotools
@@ -98,19 +111,19 @@ modules:
       - --with-miniupnpc
     sources:
       - type: archive
-        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/zipball/release-20250302
-        dest-filename: alephone.zip
-        sha256: 7b720ab1b260f0f760993f7735adc37cc41d3ff99c8f28eacabb09f29c634367
+        url: https://api.github.com/repos/Aleph-One-Marathon/alephone/tarball/release-20250829
+        dest-filename: alephone.tar.gz
+        sha256: 29a5c5592a630b58941ca7161f380371ea4a45c3ba9b17d5f3e892c81ee4a1b6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/aleph-one-marathon/alephone/releases/latest
           version-query: .tag_name
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/Marathon-20250302-Data.zip
-        sha256: e517465537d85f721d582948cd4a2e9a1868171bd3df83b3c57a7f850748af85
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/Marathon-20250829-Data.zip
+        sha256: 644fa202a8df19fd5c36b8c4bc3777c33afd291e2874669defc1819d8e132620
         size: 26408514
         filename: marathon-data.zip
         x-checker-data:
@@ -119,8 +132,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/Marathon2-20250302-Data.zip
-        sha256: 3e07cca73137184032687f98623f8e7beb131d2a27ecba5344eaddf5bf082af7
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/Marathon2-20250829-Data.zip
+        sha256: cac0ce7bd37b91f5da15ad63be1b6131e1f75496906e8fd6af20f0bb1ab86cf9
         size: 28902408
         filename: marathon2-data.zip
         x-checker-data:
@@ -129,8 +142,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon2-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250302/MarathonInfinity-20250302-Data.zip
-        sha256: 53611535153548159334439d775ae49d8ea20a0ff804017c6d17386c001a8339
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20250829/MarathonInfinity-20250829-Data.zip
+        sha256: 8b6ba6b2ca9714a2235b3063281f176ccd27a2e23b96c014f5c700d9a222a018
         size: 31852152
         filename: marathon-infinity-data.zip
         x-checker-data:

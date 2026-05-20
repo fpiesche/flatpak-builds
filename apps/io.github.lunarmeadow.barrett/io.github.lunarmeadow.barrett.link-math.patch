@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5a698af..43f1957 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -111,7 +111,7 @@ set(BARRETT_SOURCES
+ 
+ add_executable(barrett ${BARRETT_SOURCES})
+ target_include_directories(barrett PRIVATE ${inih_SOURCE_DIR})
+-target_link_libraries(barrett PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> SDL2::SDL2 SDL2_mixer::SDL2_mixer ADLMIDI)
++target_link_libraries(barrett PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> SDL2::SDL2 SDL2_mixer::SDL2_mixer ADLMIDI m)
+ target_link_libraries(barrett PRIVATE audiolib)
+ target_link_libraries(barrett PUBLIC $<$<BOOL:${BARRETT_USEASAN}>:ASAN::ASAN>)
+ target_compile_definitions(barrett PRIVATE SHAREWARE=$<BOOL:${BARRETT_SHAREWARE}>)

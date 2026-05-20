@@ -1,8 +1,8 @@
 app-id: io.github.kraflab.dsda-doom
 runtime: org.kde.Platform
-runtime-version: '6.7'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
-command: dsda-launcher
+command: io.github.kraflab.dsda-doom.sh
 
 rename-icon: dsda-doom
 rename-desktop-file: dsda-doom.desktop
@@ -27,6 +27,11 @@ cleanup:
   - /share/man
 
 modules:
+  - ../shared-modules/glu/glu-9.json
+  - ../shared-modules/SDL2/SDL2_image.json
+  - ../shared-modules/libmad/libmad.json
+  - ../shared-modules/linux-audio/fluidsynth2.json
+
   - name: libzip
     buildsystem: cmake-ninja
     config-opts:
@@ -43,36 +48,45 @@ modules:
           project-id: 10649
           url-template: https://libzip.org/download/libzip-$version.tar.xz
 
-  - ../shared-modules/glu/glu-9.json
-  - ../shared-modules/libmad/libmad.json
   - name: libdumb
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -D BUILD_EXAMPLES=OFF
-      - -D BUILD_ALLEGRO4=OFF
+      - -DBUILD_EXAMPLES=OFF
+      - -DBUILD_ALLEGRO4=OFF
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: archive
-        url: https://api.github.com/repos/kode54/dumb/zipball/396caa4d31859045ccb5ef943fd430ca4026cce8
-        sha256: 252df229612e7c534440130a32133325de6565d77c5c6fe16507f321ab7468a1
-        dest-filename: dumb.zip
+        url: https://api.github.com/repos/kode54/dumb/tarball/396caa4d31859045ccb5ef943fd430ca4026cce8
+        sha256: 57738c93e42a76d94b76502464962e521eb74b669e8ac56eb23349dd4ab078c5
+        dest-filename: dumb.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kode54/dumb/branches/master
           version-query: .commit.sha
-          url-query: ("https://api.github.com/repos/kode54/dumb/zipball/" + .commit.sha)
+          url-query: ("https://api.github.com/repos/kode54/dumb/tarball/" + .commit.sha)
   - name: portmidi
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/PortMidi/portmidi/zipball/v2.0.6
-        dest-filename: portmidi.zip
-        sha256: 73e797a4be29434537706338567ec711981a4779c71f16f0e39742ec18f01d81
+        url: https://api.github.com/repos/PortMidi/portmidi/tarball/v2.0.7
+        dest-filename: portmidi.tar.gz
+        sha256: e4851b707685e2c318646e97621014918a93daab43d483d344e6e460231da5e0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/portmidi/portmidi/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
+  - name: libxmp
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://github.com/libxmp/libxmp/
+        tag: libxmp-4.7.0
+        commit: 8a4fdf7d09aedc921de537853b59e1d15b534f24
+        x-checker-data:
+          type: git
+          tag-pattern: ^libxmp-(.*)$
 
   - name: dsda-doom
     buildsystem: cmake-ninja
@@ -80,14 +94,14 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://api.github.com/repos/kraflab/dsda-doom/zipball/v0.29.3
-        dest-filename: dsda-doom.zip
-        sha256: 1ad08ee97a0679791be67ce008608aae36155184aaf919a43a5ccecd9f0ee440
+        url: https://api.github.com/repos/kraflab/dsda-doom/tarball/v0.29.4
+        dest-filename: dsda-doom.tar.gz
+        sha256: 91630379edd11e00287a483653a7e558141bfa230a3b88d9ce8d539f63046d4d
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/kraflab/dsda-doom/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url: https://api.github.com/repos/kraflab/dsda-doom/releases
+          version-query: .[0].tag_name | sub("^v"; "")
+          url-query: .[0].tarball_url
       - type: file
         path: io.github.kraflab.dsda-doom.metainfo.xml
     post-install:
@@ -100,14 +114,14 @@ modules:
     subdir: src
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/zipball/v1.4
-        dest-filename: dsda-doom-launcher.zip
-        sha256: 0daf82a6e93429576095974499a212885681dfa844dd7b4e34de1015e82c8476
+        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.4
+        dest-filename: dsda-doom-launcher.tar.gz
+        sha256: 80418d7e8eb69fd91a9ecf575e5e9d89e453fb18194d1bf5785847b709310390
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .zipball_url
+          url-query: .tarball_url
       - type: patch
         path: dsda-launcher-ui.patch
       - type: patch
@@ -115,10 +129,16 @@ modules:
       - type: file
         url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/src/icons/dsda-launcher.svg
         sha256: b354bcc022f55d72dd0450fe44997175e5c2b41cd8684a3a5c3b851b1b289fcd
+      - type: script
+        dest-filename: io.github.kraflab.dsda-doom.sh
+        commands:
+          - if [[ ! -d "$XDG_DATA_HOME/dsda-doom" ]]; then mkdir -p "$XDG_DATA_HOME/dsda-doom"; fi
+          - dsda-launcher $@
     build-commands:
       - mkdir build && cd build && qmake ..
       - cd build && make
       - install -Dm755 build/dsda-launcher -t /app/bin
+      - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh -t /app/bin
       - desktop-file-edit --set-icon=${FLATPAK_ID}.launcher icons/dsda-Launcher.desktop
       - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA
         Doom" icons/dsda-Launcher.desktop

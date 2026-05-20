@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Side-scrolling shooter
+Exec=abuse
+Icon=io.github.apancik.abuse_2025
+Keywords=abuse;crackdotcom;shooter
+Name=Abuse 2025
+StartupNotify=true
+Terminal=false
+Type=Application
