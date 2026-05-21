@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.shipofharkinian.2ship</id>
+  <id>com.shipofharkinian.twoship</id>
   <name>2Ship2Harkinian</name>
-  <developer id="com.shipofharkinian.2ship">
+  <developer id="com.shipofharkinian.twoship">
     <name>Harbour Masters</name>
     <url>https://shipofharkinian.com/</url>
   </developer>
@@ -13,7 +13,7 @@
   <summary>Recompiled port of Legend of Zelda: Majora's Mask'</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
-  <launchable type="desktop-id">com.shipofharkinian.2ship.desktop</launchable>
+  <launchable type="desktop-id">com.shipofharkinian.twoship.desktop</launchable>
   <url type="homepage">https://shipofharkinian.com/</url>
   <url type="vcs-browser">https://github.com/HarbourMasters/2Ship2Harkinian</url>
   <description>
@@ -34,12 +34,12 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://www.shipofharkinian.com/splash_poster.jpg</image>
-      <caption>The Temple of Time</caption>
+      <image type="source">https://images.igdb.com/igdb/image/upload/t_720p/scsf8v.webp</image>
+      <caption>Woodfall Temple</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://www.shipofharkinian.com/screenshot_saria.jpg</image>
-      <caption>Saria</caption>
+      <image type="source">https://evilgames.eu/texture-packs/img/mm-n64hd-01.jpg</image>
+      <caption>HD texture pack</caption>
     </screenshot>
   </screenshots>
   <categories>
@@ -53,29 +53,20 @@
     <control>gamepad</control>
   </recommends>
   <provides>
-    <binary>2ship.elf</binary>
+    <binary>2s2h.elf</binary>
   </provides>
   <keywords>
     <keyword>adventure</keyword>
     <keyword>rpg</keyword>
     <keyword>zelda</keyword>
-    <keyword>ocarina</keyword>
-    <keyword>ocarina of time</keyword>
+    <keyword>majora</keyword>
+    <keyword>majora's mask</keyword>
     <keyword>decompile</keyword>
     <keyword>recompile</keyword>
   </keywords>
   <releases>
-    <release version="9.2.3" date="2026-04-14">
-      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.3</url>
-    </release>
-    <release version="9.2.2" date="2026-04-14">
-      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.2</url>
-    </release>
-    <release version="9.2.1" date="2026-03-28">
-      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.1</url>
-    </release>
-    <release version="9.2.0" date="2026-03-22">
-      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.0</url>
+    <release version="4.0.2" date="2026-03-02">
+      <url>https://github.com/HarbourMasters/2Ship2Harkinian/releases/tag/4.0.2</url>
     </release>
   </releases>
   <content_rating type="oars-1.1" />

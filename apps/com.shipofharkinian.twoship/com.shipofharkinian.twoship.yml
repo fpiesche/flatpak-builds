@@ -1,8 +1,8 @@
-app-id: com.shipofharkinian.soh
+app-id: com.shipofharkinian.twoship
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
-command: com.shipofharkinian.soh.sh
+command: com.shipofharkinian.twoship.sh
 
 finish-args:
   # hardware 3D and controller access
@@ -19,38 +19,38 @@ cleanup:
   - "/bin/include"
 
 modules:
-  - name: soh
+  - name: twoship
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.2.3/SoH-Ackbar-Delta-Linux.zip
-        sha256: f81cde8052142d6abbbaaffa70699d6748e4cde3f158be8f268c3aab338ee315
+        url: https://github.com/HarbourMasters/2ship2harkinian/releases/download/4.0.2/2Ship-Keiichi-Charlie-Linux.zip
+        sha256: c97fc9440f5584f350c911ec7385778394aa62f651c6613cee0b74c0141932cb
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
+          url: https://api.github.com/repos/harbourmasters/2ship2harkinian/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name | test("^SoH-.*-Linux.zip$")).browser_download_url
+          url-query: .assets[] | select(.name | test("^2Ship-.*-Linux.zip$")).browser_download_url
       - type: file
-        path: com.shipofharkinian.soh.png
+        path: com.shipofharkinian.twoship.png
       - type: file
-        path: com.shipofharkinian.soh.metainfo.xml
+        path: com.shipofharkinian.twoship.metainfo.xml
       - type: script
-        dest-filename: com.shipofharkinian.soh.sh
+        dest-filename: com.shipofharkinian.twoship.sh
         commands:
           - export SOH_DATA_DIR="${XDG_DATA_HOME}/${FLATPAK_ID}"
           - if [[ ! -d "${SOH_DATA_DIR}" ]]; then mkdir -p ${SOH_DATA_DIR}; fi
           - cd "${SOH_DATA_DIR}"
-          - soh.elf
+          - 2s2h.elf
     build-commands:
-      - chmod +x soh.appimage
-      - ./soh.appimage --appimage-extract
+      - chmod +x 2ship.appimage
+      - ./2ship.appimage --appimage-extract
       # desktop file
-      - desktop-file-edit --set-key=Name --set-value="Ship of Harkinian" squashfs-root/soh.desktop
-      - desktop-file-edit --set-key=Exec --set-value="${FLATPAK_ID}.sh" squashfs-root/soh.desktop
-      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/soh.desktop
-      - install -D -m644 squashfs-root/soh.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key=Name --set-value="2Ship2Harkinian" squashfs-root/2s2h.desktop
+      - desktop-file-edit --set-key=Exec --set-value="${FLATPAK_ID}.sh" squashfs-root/2s2h.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/2s2h.desktop
+      - install -D -m644 squashfs-root/2s2h.desktop /app/share/applications/${FLATPAK_ID}.desktop
       # icon
-      - install -D -m644 squashfs-root/usr/share/icons/hicolor/512x512/apps/sohIcon.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -D -m644 ${FLATPAK_ID}.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       # metainfo
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
       # launcher script
