@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.shipofharkinian.2ship</id>
+  <name>2Ship2Harkinian</name>
+  <developer id="com.shipofharkinian.2ship">
+    <name>Harbour Masters</name>
+    <url>https://shipofharkinian.com/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#9d6aa6</color>
+    <color type="primary" scheme_preference="dark">#603e67</color>
+  </branding>
+  <summary>Recompiled port of Legend of Zelda: Majora's Mask'</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.shipofharkinian.2ship.desktop</launchable>
+  <url type="homepage">https://shipofharkinian.com/</url>
+  <url type="vcs-browser">https://github.com/HarbourMasters/2Ship2Harkinian</url>
+  <description>
+    <p>2Ship2Harkinian does for Majora's Mask what Ship of Harkinian did for Ocarina of Time:
+      a recompiled port that brings the original game to new platforms with a variety of
+      fixes and improvements. We are careful to put any and all changes to the
+      game behind toggles, so that by default you get the authentic experience.</p>
+    <ul>
+      <li><em>Higher framerate</em> - No longer constrained by 90s console hardware, your
+        experience will now be as silky smooth as your modern GPU and monitor can handle!</li>
+      <li><em>Enhancements</em> - Make your own fun! With a plethora of enhancements and cheats
+        available, you're guaranteed to find a new way to play!</li>
+      <li><em>Randomizer</em> - Shuffle what rewards you get from things like chests, skulltulas,
+        and more with the built-in randomizer! Endless replayability! No patching required!</li>
+    </ul>
+    <p>2Ship does not include any copyrighted assets. You are required to provide a
+      supported copy of the game.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://www.shipofharkinian.com/splash_poster.jpg</image>
+      <caption>The Temple of Time</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.shipofharkinian.com/screenshot_saria.jpg</image>
+      <caption>Saria</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>2ship.elf</binary>
+  </provides>
+  <keywords>
+    <keyword>adventure</keyword>
+    <keyword>rpg</keyword>
+    <keyword>zelda</keyword>
+    <keyword>ocarina</keyword>
+    <keyword>ocarina of time</keyword>
+    <keyword>decompile</keyword>
+    <keyword>recompile</keyword>
+  </keywords>
+  <releases>
+    <release version="9.2.3" date="2026-04-14">
+      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.3</url>
+    </release>
+    <release version="9.2.2" date="2026-04-14">
+      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.2</url>
+    </release>
+    <release version="9.2.1" date="2026-03-28">
+      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.1</url>
+    </release>
+    <release version="9.2.0" date="2026-03-22">
+      <url>https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.0</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
