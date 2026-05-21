@@ -10,7 +10,7 @@
     <color type="primary" scheme_preference="light">#9d6aa6</color>
     <color type="primary" scheme_preference="dark">#603e67</color>
   </branding>
-  <summary>Recompiled port of Legend of Zelda: Majora's Mask'</summary>
+  <summary>Recompiled port of Legend of Zelda: Majora's Mask</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-Proprietary</project_license>
   <launchable type="desktop-id">com.shipofharkinian.twoship.desktop</launchable>
