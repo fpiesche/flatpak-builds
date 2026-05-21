@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.shipofharkinian.twoship</id>
+  <name>2Ship2Harkinian</name>
+  <developer id="com.shipofharkinian.twoship">
+    <name>Harbour Masters</name>
+    <url>https://shipofharkinian.com/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#9d6aa6</color>
+    <color type="primary" scheme_preference="dark">#603e67</color>
+  </branding>
+  <summary>Recompiled port of Legend of Zelda: Majora's Mask'</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.shipofharkinian.twoship.desktop</launchable>
+  <url type="homepage">https://shipofharkinian.com/</url>
+  <url type="vcs-browser">https://github.com/HarbourMasters/2Ship2Harkinian</url>
+  <description>
+    <p>2Ship2Harkinian does for Majora's Mask what Ship of Harkinian did for Ocarina of Time:
+      a recompiled port that brings the original game to new platforms with a variety of
+      fixes and improvements. We are careful to put any and all changes to the
+      game behind toggles, so that by default you get the authentic experience.</p>
+    <ul>
+      <li><em>Higher framerate</em> - No longer constrained by 90s console hardware, your
+        experience will now be as silky smooth as your modern GPU and monitor can handle!</li>
+      <li><em>Enhancements</em> - Make your own fun! With a plethora of enhancements and cheats
+        available, you're guaranteed to find a new way to play!</li>
+      <li><em>Randomizer</em> - Shuffle what rewards you get from things like chests, skulltulas,
+        and more with the built-in randomizer! Endless replayability! No patching required!</li>
+    </ul>
+    <p>2Ship does not include any copyrighted assets. You are required to provide a
+      supported copy of the game.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://images.igdb.com/igdb/image/upload/t_720p/scsf8v.webp</image>
+      <caption>Woodfall Temple</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://evilgames.eu/texture-packs/img/mm-n64hd-01.jpg</image>
+      <caption>HD texture pack</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>2s2h.elf</binary>
+  </provides>
+  <keywords>
+    <keyword>adventure</keyword>
+    <keyword>rpg</keyword>
+    <keyword>zelda</keyword>
+    <keyword>majora</keyword>
+    <keyword>majora's mask</keyword>
+    <keyword>decompile</keyword>
+    <keyword>recompile</keyword>
+  </keywords>
+  <releases>
+    <release version="4.0.2" date="2026-03-02">
+      <url>https://github.com/HarbourMasters/2Ship2Harkinian/releases/tag/4.0.2</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
