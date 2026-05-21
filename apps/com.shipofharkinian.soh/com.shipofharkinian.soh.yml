@@ -1,0 +1,63 @@
+app-id: com.shipofharkinian.soh
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: com.shipofharkinian.soh.sh
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+
+cleanup:
+  - "/bin/lib"
+  - "/bin/include"
+
+modules:
+  - name: soh
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.2.3/SoH-Ackbar-Delta-Linux.zip
+        sha256: f81cde8052142d6abbbaaffa70699d6748e4cde3f158be8f268c3aab338ee315
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^SoH-.*-Linux.zip$")).browser_download_url
+      - type: file
+        path: com.shipofharkinian.soh.png
+      - type: file
+        path: com.shipofharkinian.soh.metainfo.xml
+      - type: script
+        dest-filename: com.shipofharkinian.soh.sh
+        commands:
+          - export SOH_DATA_DIR="${XDG_DATA_HOME}/${FLATPAK_ID}"
+          - if [[ ! -d "${SOH_DATA_DIR}" ]]; then mkdir -p ${SOH_DATA_DIR}; fi
+          - cd "${SOH_DATA_DIR}"
+          - soh.elf
+    build-commands:
+      - chmod +x soh.appimage
+      - ./soh.appimage --appimage-extract
+      # desktop file
+      - desktop-file-edit --set-key=Name --set-value="Ship of Harkinian" squashfs-root/soh.desktop
+      - desktop-file-edit --set-key=Exec --set-value="${FLATPAK_ID}.sh" squashfs-root/soh.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/soh.desktop
+      - install -D -m644 squashfs-root/soh.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      # icon
+      - install -D -m644 squashfs-root/usr/share/icons/hicolor/512x512/apps/sohIcon.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      # metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      # launcher script
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
+      # port files
+      - mv squashfs-root/usr/bin/* /app/bin/
+      - install -D -m644 squashfs-root/usr/lib/libbz2.so.1.0 -t /app/lib/
+      - install -D -m644 squashfs-root/usr/lib/libzip.so.5 -t /app/lib/
+      - install -D -m644 squashfs-root/usr/lib/libspdlog.so.1 -t /app/lib/
+      - install -D -m644 squashfs-root/usr/lib/libfmt.so.8 -t /app/lib/
