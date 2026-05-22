@@ -68,6 +68,9 @@
     "io.github.sonicdcer.Starfox64Recomp": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.revosucks.bmherorecomp": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "jp.xenia.xenia-canary": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },

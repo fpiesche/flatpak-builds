@@ -1,0 +1,82 @@
+app-id: io.github.revosucks.bmherorecomp
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: io.github.revosucks.bmherorecomp.sh
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Gamescope for SteamOS
+  - --filesystem=xdg-run/gamescope-0:ro
+
+modules:
+  - name: recomp
+    buildsystem: simple
+    sources:
+      - type: archive
+        only-arches:
+          - aarch64
+        url: https://github.com/RevoSucks/BMHeroRecomp/releases/download/v0.7.1/BMHeroRecompiled-Linux-ARM64-Release.zip
+        dest-filename: recomp.zip
+        sha256: 7eb76ae6b9d3fcc1024418f5f225833868b6b106e075e76e8dd847c7feefe24c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/releases
+          version-query: .[0].tag_name
+          url-query: .[0].assets[] | select(.name | test("^BMHeroRecompiled.*Linux-ARM64.*.zip$")).browser_download_url
+      - type: archive
+        only-arches:
+          - x86_64
+        url: https://github.com/RevoSucks/BMHeroRecomp/releases/download/v0.7.1/BMHeroRecompiled-Linux-X64-Release.zip
+        dest-filename: recomp.zip
+        sha256: 8ccf995307af9c35efdc99d2404029c8588da5c314f5ae771fed88d2dc0a568c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/releases
+          version-query: .[0].tag_name
+          url-query: .[0].assets[] | select(.name | test("^BMHeroRecompiled.*Linux-ARM64.*.zip$")).browser_download_url
+    build-commands:
+      - tar -xf BMHeroRecompiled.tar.gz --no-same-owner
+      - install -D -m755 BMHeroRecompiled -t /app/bin/
+      - install -D -m644 recompcontrollerdb.txt -t /app/bin/
+      - cp -rv assets /app/bin/
+
+  - name: freedesktop
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/tarball/v0.7.1
+        dest-filename: repo.tar.gz
+        sha256: b760c3e2f77b701430775f4be2dda37e58c36f1d8dc0667475114d54fb17a289
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/releases/latest
+          version-query: .[0].tag_name | sub("^v"; "")
+          url-query: .[0].tarball_url
+      - type: file
+        path: io.github.revosucks.bmherorecomp.metainfo.xml
+      - type: script
+        dest-filename: io.github.revosucks.bmherorecomp.sh
+        commands:
+          - export APP_FOLDER_PATH="${XDG_DATA_HOME}/${FLATPAK_ID}"
+          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
+          - cd /app/bin/
+          - BMHeroRecompiled
+    build-commands:
+      # desktop file
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh flatpak/io.github.bmherorecomp.bmherorecomp.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} flatpak/io.github.bmherorecomp.bmherorecomp.desktop
+      - install -D -m644 flatpak/io.github.bmherorecomp.bmherorecomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      # icon
+      - install -D -m644 icons/app.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      # metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      # launcher script
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
