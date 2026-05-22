@@ -99,11 +99,11 @@
     <control>gamepad</control>
   </recommends>
   <provides>
-    <binary>Starship</binary>
+    <binary>DinosaurPlanetRecompiled</binary>
   </provides>
   <keywords>
     <keyword>action</keyword>
-    <keyword>shooter</keyword>
+    <keyword>adventure</keyword>
     <keyword>starfox</keyword>
     <keyword>decompile</keyword>
     <keyword>recompile</keyword>
