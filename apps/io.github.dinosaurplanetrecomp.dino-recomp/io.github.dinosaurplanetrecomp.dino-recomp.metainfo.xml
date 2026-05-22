@@ -7,8 +7,8 @@
     <url>https://github.com/DinosaurPlanetRecomp/dino-recomp/graphs/contributors/</url>
   </developer>
   <branding>
-    <color type="primary" scheme_preference="light">#a2a5d2</color>
-    <color type="primary" scheme_preference="dark">#015e2a</color>
+    <color type="primary" scheme_preference="light">#f7bf5c</color>
+    <color type="primary" scheme_preference="dark">#050c98</color>
   </branding>
   <summary>Recompiled port of Dinosaur Planet</summary>
   <metadata_license>CC0-1.0</metadata_license>
@@ -36,7 +36,7 @@
       <li><em>High Framerate Support</em> - Play at any framerate you want thanks to
         functionality provided by RT64! Game objects and terrain, texture scrolling, screen
         effects, and most HUD elements are all rendered at high framerates. By default,
-        this project is configured to run at your monitor's refresh rate. You can also
+        this project is configured to run at your mo#f7bf5cnitor's refresh rate. You can also
         play at the original framerate of the game if you prefer. Changing framerate has
         no effect on gameplay. <em>Note:</em> External framerate limiters (such as the NVIDIA
         Control Panel) are known to potentially cause problems, so if you notice any stuttering
