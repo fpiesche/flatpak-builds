@@ -57,9 +57,9 @@ modules:
         sha256: 01cb0fc9268cb1adb24d0211971c96a5e4519cc31a79879a879471ed3de92363
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases
-          version-query: .[0].tag_name | sub("^v"; "")
-          url-query: .[0].tarball_url
+          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
       - type: file
         path: io.github.klorfmorf.Goemon64Recomp.metainfo.xml
       - type: script
