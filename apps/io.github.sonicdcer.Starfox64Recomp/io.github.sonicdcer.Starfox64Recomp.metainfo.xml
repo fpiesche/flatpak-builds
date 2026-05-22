@@ -91,7 +91,7 @@
     <control>gamepad</control>
   </recommends>
   <provides>
-    <binary>Starship</binary>
+    <binary>Starfox64Recompiled</binary>
   </provides>
   <keywords>
     <keyword>action</keyword>
