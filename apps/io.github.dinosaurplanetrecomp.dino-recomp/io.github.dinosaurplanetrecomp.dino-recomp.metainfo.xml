@@ -36,10 +36,10 @@
       <li><em>High Framerate Support</em> - Play at any framerate you want thanks to
         functionality provided by RT64! Game objects and terrain, texture scrolling, screen
         effects, and most HUD elements are all rendered at high framerates. By default,
-        this project is configured to run at your mo#f7bf5cnitor's refresh rate. You can also
-        play at the original framerate of the game if you prefer. Changing framerate has
-        no effect on gameplay. <em>Note:</em> External framerate limiters (such as the NVIDIA
-        Control Panel) are known to potentially cause problems, so if you notice any stuttering
+        this project is configured to run at the original 30 fps. You can also play at 60Hz
+        framerate you prefer, though there are currently still issues with some gameplay elements
+        when running at higher framerates. <em>Note:</em> External framerate limiters (such as the
+        NVIDIA Control Panel) are known to potentially cause problems, so if you notice any stuttering
         then turn them off and use the manual framerate slider in the in-game graphics menu
         instead.</li>
       <li><em>Widescreen and Ultrawide Support</em> - Any aspect ratio is supported, with
