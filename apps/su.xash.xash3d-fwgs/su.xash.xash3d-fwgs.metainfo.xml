@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>su.xash.xash3d-fwgs</id>
-  <name>Prey</name>
+  <name>Xash3D-FWGS</name>
   <developer id="su.xash">
     <name>a1batross, xash3d Contributors</name>
     <url>https://github.com/FWGS/xash3d-fwgs/graphs/contributors</url>
