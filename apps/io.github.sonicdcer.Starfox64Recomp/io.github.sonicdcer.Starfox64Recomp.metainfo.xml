@@ -7,8 +7,8 @@
     <url>https://github.com/sonicdcer/Starfox64Recomp/graphs/contributors/</url>
   </developer>
   <branding>
-    <color type="primary" scheme_preference="light">#9d6aa6</color>
-    <color type="primary" scheme_preference="dark">#603e67</color>
+    <color type="primary" scheme_preference="light">#a2a5d2</color>
+    <color type="primary" scheme_preference="dark">#015e2a</color>
   </branding>
   <summary>Recompiled port of Starfox 64</summary>
   <metadata_license>CC0-1.0</metadata_license>
@@ -17,10 +17,9 @@
   <url type="homepage">https://github.com/sonicdcer/Starfox64Recomp</url>
   <url type="vcs-browser">https://github.com/sonicdcer/Starfox64Recomp</url>
   <description>
-    <p>Starship is a project that uses N64: Recompiled to statically recompile
-      Starfox 64 into a native port with many new features, enhancements, and extensive mod
-      support. This project uses RT64 as the rendering engine to provide some of these
-      enhancements.</p>
+    <p>This is a recompiled version of Starfox 64 into a native port with many new features,
+      enhancements, and extensive mod support. This project uses RT64 as the rendering engine
+      to provide some of these enhancements.</p>
     <ul>
       <li><em>Plug and Play</em> - Simply provide your copy of the 1.1 (Rev A) North American
         version of the game in the main menu and start playing! This project will automatically
@@ -64,17 +63,21 @@
       <li><em>Linux and Steam Deck Support</em> - A Linux binary as well as a Flatpak is
         available for playing on most up-to-date distros, including on the Steam Deck.</li>
     </ul>
-    <p>Starship does not include any copyrighted assets. You are required to provide a
+    <p>This Flatpak does not include any copyrighted assets. You are required to provide a
       supported copy of the game.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://images.igdb.com/igdb/image/upload/t_720p/scsf8v.webp</image>
-      <caption>Woodfall Temple</caption>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.sonicdcer.Starfox64Recomp/screenshots/01-intro.png</image>
+      <caption>Intro cutscene</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://evilgames.eu/texture-packs/img/mm-n64hd-01.jpg</image>
-      <caption>HD texture pack</caption>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.sonicdcer.Starfox64Recomp/screenshots/02-titlescreen.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.sonicdcer.Starfox64Recomp/screenshots/03-ingame.png</image>
+      <caption>Corneria City</caption>
     </screenshot>
   </screenshots>
   <categories>
