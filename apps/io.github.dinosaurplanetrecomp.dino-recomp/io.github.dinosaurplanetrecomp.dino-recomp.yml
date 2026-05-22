@@ -1,0 +1,69 @@
+app-id: io.github.dinosaurplanetrecomp.dino-recomp
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: io.github.dinosaurplanetrecomp.dino-recomp.sh
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Gamescope for SteamOS
+  - --filesystem=xdg-run/gamescope-0:ro
+
+modules:
+  - name: recomp
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/download/v0.2.0/DinosaurPlanetRecompiled-v0.2.0-Linux-x64.tar.gz
+        dest-filename: recomp.zip
+        sha256: e74932bd0edb6186a015dabaa87b6b24af3d3b5511ff3b0293a2c3331840cdf0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-X64.zip$")).browser_download_url
+    build-commands:
+      - tar -xf DinosaurPlanetRecompiled.tar.gz --no-same-owner
+      - install -D -m755 DinosaurPlanetRecompiled -t /app/bin/
+      - install -D -m644 recompcontrollerdb.txt -t /app/bin/
+      - cp -rv assets /app/bin/
+
+  - name: freedesktop
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/tarball/1.0.3
+        dest-filename: recomp.tar.gz
+        sha256: 97c70fad38476b8b9402c19f2407158316f30c3aafe477a531515c6a9e6ce56e
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
+      - type: file
+        path: io.github.dinosaurplanetrecomp.dino-recomp.metainfo.xml
+      - type: script
+        dest-filename: io.github.dinosaurplanetrecomp.dino-recomp.sh
+        commands:
+          - export APP_FOLDER_PATH="${XDG_DATA_HOME}/${FLATPAK_ID}"
+          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
+          - cd /app/bin/
+          - DinosaurPlanetRecompiled
+    build-commands:
+      # desktop file
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh flatpak/io.github.starfox64recomp.starfox64recomp.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} flatpak/io.github.starfox64recomp.starfox64recomp.desktop
+      - install -D -m644 flatpak/io.github.starfox64recomp.starfox64recomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      # icon
+      - install -D -m644 icons/512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      # metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      # launcher script
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
