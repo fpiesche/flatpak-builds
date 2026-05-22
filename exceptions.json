@@ -46,6 +46,9 @@
     "io.github.interkarma.daggerfall-unity": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.klorfmorf.Goemon64Recompiled": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.kraflab.dsda-doom": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "screenshot-image-not-found": "this is fine"
