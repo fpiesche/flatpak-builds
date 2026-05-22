@@ -20,28 +20,28 @@ modules:
   - name: recomp
     buildsystem: simple
     sources:
-      - type: archive
+      - type: file
         url: https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/download/v0.2.0/DinosaurPlanetRecompiled-v0.2.0-Linux-x64.tar.gz
-        dest-filename: recomp.zip
-        sha256: e74932bd0edb6186a015dabaa87b6b24af3d3b5511ff3b0293a2c3331840cdf0
+        dest-filename: recomp.tar.gz
+        sha256: a99b5dab8990864ef7c51413f502bf846169cd827c5e4a12fb1feb9d34d1b9e2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-X64.zip$")).browser_download_url
+          url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-x64.zip$")).browser_download_url
     build-commands:
-      - tar -xf DinosaurPlanetRecompiled.tar.gz --no-same-owner
+      - tar -xf recomp.tar.gz
       - install -D -m755 DinosaurPlanetRecompiled -t /app/bin/
-      - install -D -m644 recompcontrollerdb.txt -t /app/bin/
+      - install -D -m644 gamecontrollerdb.txt -t /app/bin/
       - cp -rv assets /app/bin/
 
   - name: freedesktop
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/tarball/1.0.3
-        dest-filename: recomp.tar.gz
-        sha256: 97c70fad38476b8b9402c19f2407158316f30c3aafe477a531515c6a9e6ce56e
+        url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/tarball/v0.2.0
+        dest-filename: repo.tar.gz
+        sha256: 7f449fcdfe977a79e76c85a9e1311cc5083289fdb01a818cd23723e812a385d2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
@@ -56,11 +56,16 @@ modules:
           - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
           - cd /app/bin/
           - DinosaurPlanetRecompiled
+      # TODO: remove with next release
+      - type: file
+        url: https://raw.githubusercontent.com/DinosaurPlanetRecomp/dino-recomp/refs/heads/main/icons/512.png
+        sha256: 9395ddd6ea41cb35fcecfb82287ec77a7f39b8c3627f3a676a9d82ee650247e8
+        dest: icons
     build-commands:
       # desktop file
-      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh flatpak/io.github.starfox64recomp.starfox64recomp.desktop
-      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} flatpak/io.github.starfox64recomp.starfox64recomp.desktop
-      - install -D -m644 flatpak/io.github.starfox64recomp.starfox64recomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop
+      - install -D -m644 deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
       # icon
       - install -D -m644 icons/512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       # metainfo
