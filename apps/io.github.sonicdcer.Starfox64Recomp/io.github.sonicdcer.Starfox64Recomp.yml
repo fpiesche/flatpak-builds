@@ -28,7 +28,7 @@ modules:
         sha256: 85408daa5ceac1fc208a744b0a35fb316c417d62c709761aceb242353fb2a1c0
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases
+          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases/latest
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Starfox64Recompiled-.*-Linux-ARM64-Release.zip$")).browser_download_url
       - type: archive
@@ -39,7 +39,7 @@ modules:
         sha256: e74932bd0edb6186a015dabaa87b6b24af3d3b5511ff3b0293a2c3331840cdf0
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases
+          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases/latest
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Starfox64Recompiled-.*-Linux-X64-Release.zip$")).browser_download_url
     build-commands:
@@ -57,9 +57,9 @@ modules:
         sha256: 97c70fad38476b8b9402c19f2407158316f30c3aafe477a531515c6a9e6ce56e
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases
-          version-query: .[0].tag_name | sub("^v"; "")
-          url-query: .[0].tarball_url
+          url: https://api.github.com/repos/sonicdcer/Starfox64Recomp/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
       - type: file
         path: io.github.sonicdcer.Starfox64Recomp.metainfo.xml
       - type: script
