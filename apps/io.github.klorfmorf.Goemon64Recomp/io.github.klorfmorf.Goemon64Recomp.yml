@@ -17,7 +17,7 @@ finish-args:
   - --filesystem=xdg-run/gamescope-0:ro
 
 modules:
-  - name: sf64recomp
+  - name: recomp
     buildsystem: simple
     sources:
       - type: archive
@@ -28,7 +28,7 @@ modules:
         sha256: 134fc51de50d8aba05fe9b13c069598030e9588d2b83304e1ace925c135f321b
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases
+          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases/latest
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Goemon64Recompiled.*Linux-ARM64-Release.zip$")).browser_download_url
       - type: archive
@@ -39,7 +39,7 @@ modules:
         sha256: 73e0deb9fab6deb40365708ca4c8ef5ef2d06e54160a9eb089655b063b361f0d
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases
+          url: https://api.github.com/repos/klorfmorf/Goemon64Recomp/releases/latest
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Goemon64Recompiled.*Linux-X64-Release.zip$")).browser_download_url
     build-commands:
