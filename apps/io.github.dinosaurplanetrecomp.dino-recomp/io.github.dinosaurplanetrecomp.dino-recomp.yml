@@ -28,7 +28,7 @@ modules:
           type: json
           url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-x64.zip$")).browser_download_url
+          url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-x64.tar.gz$")).browser_download_url
     build-commands:
       - tar -xf recomp.tar.gz
       - install -D -m755 DinosaurPlanetRecompiled -t /app/bin/
