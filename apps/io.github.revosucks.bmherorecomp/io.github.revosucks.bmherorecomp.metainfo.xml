@@ -68,24 +68,16 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/01-intro.png</image>
-      <caption>Intro cutscene</caption>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/01-title.png</image>
+      <caption>Title screen</caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/02-intro.png</image>
       <caption>Intro cutscene</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/03-palace.png</image>
-      <caption>Inside a shrine</caption>
-    </screenshot>
-    <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/04-icemountain.png</image>
-      <caption>Sabre on Ice Mountain</caption>
-    </screenshot>
-    <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/05-talking.png</image>
-      <caption>Talking</caption>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/03-ingame.png</image>
+      <caption>Ingame</caption>
     </screenshot>
   </screenshots>
   <categories>
