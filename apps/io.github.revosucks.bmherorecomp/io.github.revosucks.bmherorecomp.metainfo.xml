@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.revosucks.bmherorecomp</id>
+  <name>Bomberman Hero Recompiled</name>
+  <developer id="io.github.revosucks.bmherorecomp">
+    <name>Bomberman Hero Recompiled Contributors</name>
+    <url>https://github.com/RevoSucks/BMHeroRecomp/graphs/contributors/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#feda00</color>
+    <color type="primary" scheme_preference="dark">#d78901</color>
+  </branding>
+  <summary>Recompiled port of Bomberman Hero</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <launchable type="desktop-id">io.github.revosucks.bmherorecomp.desktop</launchable>
+  <url type="homepage">https://github.com/RevoSucks/BMHeroRecomp</url>
+  <url type="vcs-browser">https://github.com/RevoSucks/BMHeroRecomp</url>
+  <description>
+    <p>This is a recompiled version of Bomberman Hero into a native port with many new features,
+      enhancements, and extensive mod support. This project uses RT64 as the rendering engine
+      to provide some of these enhancements.</p>
+    <ul>
+      <li><em>Plug and Play</em> - Simply provide your copy of the 1.1 (Rev A) North American
+        version of the game in the main menu and start playing! This project will automatically
+        load assets from the provided copy, so there is no need to go through a separate
+        extraction step or build the game yourself. Other versions of the game may be supported
+        in the future.</li>
+      <li><em>Fully Intact N64 Effects</em> - A lot of care was put into RT64 to make sure all
+        graphical effects were rendered exactly as they did originally on the N64. No workarounds
+        or "hacks" were made to replicate these effects, with the only modifications to them
+        being made for enhancement purposes such as widescreen support.</li>
+      <li><em>Easy-to-Use Menus</em> - Gameplay settings, graphics settings, input mappings,
+        and audio settings can all be configured with the in-game config menu. The menus
+        can all be used with mouse, controller, or keyboard for maximum convenience.</li>
+      <li><em>High Framerate Support</em> - Play at any framerate you want thanks to
+        functionality provided by RT64! Game objects and terrain, texture scrolling, screen
+        effects, and most HUD elements are all rendered at high framerates. By default,
+        this project is configured to run at the original 30 fps. You can also play at 60Hz
+        framerate you prefer, though there are currently still issues with some gameplay elements
+        when running at higher framerates. <em>Note:</em> External framerate limiters (such as the
+        NVIDIA Control Panel) are known to potentially cause problems, so if you notice any stuttering
+        then turn them off and use the manual framerate slider in the in-game graphics menu
+        instead.</li>
+      <li><em>Widescreen and Ultrawide Support</em> - Any aspect ratio is supported, with
+        most effects modded to work correctly in widescreen. The HUD can also be positioned
+        at 16:9 when using ultrawide aspect ratios if preferred. <em>Note:</em> Some animation
+        quirks can be seen at the edges of the screen in certain cutscenes when using very
+        wide aspect ratios.</li>
+      <li><em>Mod Support</em> - Install community made mods and texture packs! Mods can
+        change any part of the game, including adding completely new features and content.
+        You can install mods by simply dragging the mod files onto the game window before
+        starting the game or by clicking the <em>Install Mods</em> button in the mod menu.
+        Mods can be toggled in the mod menu, and some mods can be configured there as
+        well.</li>
+      <li><em>Additional Control Options</em> - Customize your experience by setting your
+        stick deadzone to your liking, as well as adjusting the Y axis inversion for aiming.</li>
+      <li><em>Low Input Lag</em> - This project has been optimized to have as little input
+        lag as possible, making the game feel more responsive than ever!</li>
+      <li><em>Instant Load Times</em> - Saving and loading files, going from place to
+        place, and pausing all happen in the blink of an eye thanks to the game running
+        natively on modern hardware.</li>
+      <li><em>Linux and Steam Deck Support</em> - A Linux binary as well as a Flatpak is
+        available for playing on most up-to-date distros, including on the Steam Deck.</li>
+    </ul>
+    <p>This Flatpak does not include any copyrighted assets. You are required to provide a
+      supported copy of the game.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/01-title.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/02-intro.png</image>
+      <caption>Intro cutscene</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.revosucks.bmherorecomp/screenshots/03-ingame.png</image>
+      <caption>Ingame</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>DinosaurPlanetRecompiled</binary>
+  </provides>
+  <keywords>
+    <keyword>action</keyword>
+    <keyword>adventure</keyword>
+    <keyword>starfox</keyword>
+    <keyword>decompile</keyword>
+    <keyword>recompile</keyword>
+  </keywords>
+  <releases>
+    <release version="1.0.3" date="2025-12-30">
+      <url>https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/tag/1.0.3</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
