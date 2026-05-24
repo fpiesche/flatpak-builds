@@ -25,7 +25,7 @@ modules:
           - aarch64
         url: https://github.com/RevoSucks/BM64Recomp/releases/download/v1.0.0/BM64Recompiled-Linux-ARM64-Release.zip
         dest-filename: recomp.zip
-        sha256: sha256:63864cd71f9371eb5cf6a1cae4f49b821f046a59f29b82c6a8f8e57fbf1030ed
+        sha256: 63864cd71f9371eb5cf6a1cae4f49b821f046a59f29b82c6a8f8e57fbf1030ed
         x-checker-data:
           type: json
           url: https://api.github.com/repos/RevoSucks/BM64Recomp/releases
@@ -36,7 +36,7 @@ modules:
           - x86_64
         url: https://github.com/RevoSucks/BM64Recomp/releases/download/v1.0.0/BM64Recompiled-Linux-X64-Release.zip
         dest-filename: recomp.zip
-        sha256: sha256:0a8f1889295ca0e06802e37317862e1552e98f09022c111b145396f36ae20bba
+        sha256: 0a8f1889295ca0e06802e37317862e1552e98f09022c111b145396f36ae20bba
         x-checker-data:
           type: json
           url: https://api.github.com/repos/RevoSucks/BM64Recomp/releases
