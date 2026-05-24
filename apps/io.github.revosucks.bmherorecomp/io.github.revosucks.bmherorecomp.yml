@@ -57,7 +57,7 @@ modules:
         sha256: b760c3e2f77b701430775f4be2dda37e58c36f1d8dc0667475114d54fb17a289
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/releases/latest
+          url: https://api.github.com/repos/RevoSucks/BMHeroRecomp/releases
           version-query: .[0].tag_name | sub("^v"; "")
           url-query: .[0].tarball_url
       - type: file
