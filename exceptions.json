@@ -65,6 +65,9 @@
     "io.github.sergiou87.open-supaplex": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.revosucks.bm64recomp": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.sonicdcer.Starfox64Recomp": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },

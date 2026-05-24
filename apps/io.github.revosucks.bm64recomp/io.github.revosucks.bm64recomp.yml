@@ -1,0 +1,82 @@
+app-id: io.github.revosucks.bm64recomp
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: io.github.revosucks.bm64recomp.sh
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Gamescope for SteamOS
+  - --filesystem=xdg-run/gamescope-0:ro
+
+modules:
+  - name: recomp
+    buildsystem: simple
+    sources:
+      - type: archive
+        only-arches:
+          - aarch64
+        url: https://github.com/RevoSucks/BM64Recomp/releases/download/v1.0.0/BM64Recompiled-Linux-ARM64-Release.zip
+        dest-filename: recomp.zip
+        sha256: sha256:63864cd71f9371eb5cf6a1cae4f49b821f046a59f29b82c6a8f8e57fbf1030ed
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BM64Recomp/releases
+          version-query: .[0].tag_name
+          url-query: .[0].assets[] | select(.name | test("^BM64Recompiled.*Linux-ARM64.*.zip$")).browser_download_url
+      - type: archive
+        only-arches:
+          - x86_64
+        url: https://github.com/RevoSucks/BM64Recomp/releases/download/v1.0.0/BM64Recompiled-Linux-X64-Release.zip
+        dest-filename: recomp.zip
+        sha256: sha256:0a8f1889295ca0e06802e37317862e1552e98f09022c111b145396f36ae20bba
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BM64Recomp/releases
+          version-query: .[0].tag_name
+          url-query: .[0].assets[] | select(.name | test("^BM64Recompiled.*Linux-ARM64.*.zip$")).browser_download_url
+    build-commands:
+      - tar -xf BM64Recompiled.tar.gz --no-same-owner
+      - install -D -m755 BM64Recompiled -t /app/bin/
+      - install -D -m644 recompcontrollerdb.txt -t /app/bin/
+      - cp -rv assets /app/bin/
+
+  - name: freedesktop
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/RevoSucks/BM64Recomp/tarball/v1.0.0
+        dest-filename: repo.tar.gz
+        sha256: 911f58caadaf3984f67b387e96fab89a9fbb4a7e0a978e801a21092646a5caa0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/RevoSucks/BM64Recomp/releases
+          version-query: .[0].tag_name | sub("^v"; "")
+          url-query: .[0].tarball_url
+      - type: file
+        path: io.github.revosucks.bm64recomp.metainfo.xml
+      - type: script
+        dest-filename: io.github.revosucks.bm64recomp.sh
+        commands:
+          - export APP_FOLDER_PATH="${XDG_DATA_HOME}/${FLATPAK_ID}"
+          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
+          - cd /app/bin/
+          - BM64Recompiled
+    build-commands:
+      # desktop file
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh flatpak/io.github.bm64recomp.bm64recomp.desktop
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} flatpak/io.github.bm64recomp.bm64recomp.desktop
+      - install -D -m644 flatpak/io.github.bm64recomp.bm64recomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      # icon
+      - install -D -m644 icons/512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      # metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      # launcher script
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
