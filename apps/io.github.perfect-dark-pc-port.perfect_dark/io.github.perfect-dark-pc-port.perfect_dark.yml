@@ -1,8 +1,8 @@
-app-id: io.github.fgsfdsfgs.perfect_dark
+app-id: io.github.perfect-dark-pc-port.perfect_dark
 runtime: org.freedesktop.Platform
 runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
-command: io.github.fgsfdsfgs.perfect_dark.sh
+command: io.github.perfect-dark-pc-port.perfect_dark.sh
 
 finish-args:
   # hardware 3D and controller access
@@ -23,14 +23,14 @@ modules:
       - -DROMID=ntsc-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
           commit-query: .commit.sha
       - type: file
-        path: io.github.fgsfdsfgs.perfect_dark.metainfo.xml
+        path: io.github.perfect-dark-pc-port.perfect_dark.metainfo.xml
     post-install:
       - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.ntsc
       # metadata file
@@ -51,11 +51,11 @@ modules:
       - -DROMID=pal-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
           commit-query: .commit.sha
     post-install:
       - install -Dm 755 ./pd.pal.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.pal
@@ -67,11 +67,11 @@ modules:
       - -DROMID=jpn-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
           commit-query: .commit.sha
     post-install:
       - install -Dm 755 ./pd.jpn.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.jpn
@@ -83,11 +83,11 @@ modules:
       - -DROMID=ntsc-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: be0293f555fd0b008f38807d0f5821161bf2ecbb
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port-net
           commit-query: .commit.sha
       - type: patch
         path: fix-netplay-build.patch
@@ -108,11 +108,11 @@ modules:
       - -DROMID=pal-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: be0293f555fd0b008f38807d0f5821161bf2ecbb
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port-net
           commit-query: .commit.sha
       - type: patch
         path: fix-netplay-build.patch
@@ -126,11 +126,11 @@ modules:
       - -DROMID=jpn-final
     sources:
       - type: git
-        url: https://github.com/fgsfdsfgs/perfect_dark.git
+        url: https://github.com/perfect-dark-pc-port/perfect_dark.git
         commit: be0293f555fd0b008f38807d0f5821161bf2ecbb
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fgsfdsfgs/perfect_dark/branches/port-net
+          url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port-net
           commit-query: .commit.sha
       - type: patch
         path: fix-netplay-build.patch
