@@ -1,4 +1,4 @@
 {
-  "_submission-status": "Unsuitable for Flathub due to licensing restrictions",
-  "only-arches": ["x86_64"]
+  "end-of-life": "This package has been renamed.",
+  "end-of-life-rebase": "io.github.perfect_dark_pc_port.perfect_dark"
 }
