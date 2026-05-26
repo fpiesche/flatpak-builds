@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.birabittoh.kameorepowered</id>
+  <name>Kameo RePowered</name>
+  <developer id="io.github.birabittoh.kameorepowered">
+    <name>Kameo RePowered Contributors</name>
+    <url>https://github.com/birabittoh/KameoRePowered/graphs/contributors/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#6dabdc</color>
+    <color type="primary" scheme_preference="dark">#1f3661</color>
+  </branding>
+  <summary>Recompiled port of Kameo: Elements of Power</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <launchable type="desktop-id">io.github.birabittoh.kameorepowered.desktop</launchable>
+  <url type="homepage">https://github.com/birabittoh/KameoRePowered</url>
+  <url type="vcs-browser">https://github.com/birabittoh/KameoRePowered</url>
+  <description>
+    <p>This is a recompiled version of Kameo: Elements of Power into a native port,
+      using the ReXGlue SDK.</p>
+    <p>This Flatpak does not include any copyrighted assets. You are required to provide a
+      supported copy of the game.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.birabittoh.kameorepowered/screenshots/01-title.png</image>
+      <caption>Title screen</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <provides>
+    <binary>kameorepowered</binary>
+  </provides>
+  <keywords>
+    <keyword>action</keyword>
+    <keyword>platformer</keyword>
+    <keyword>Kameo: Elements of Power</keyword>
+    <keyword>decompile</keyword>
+    <keyword>recompile</keyword>
+  </keywords>
+  <releases>
+    <release version="0.1.0" date="2026-01-29">
+      <url>https://github.com/birabittoh/KameoRePowered/releases/tag/v0.1.0</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

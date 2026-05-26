@@ -1,0 +1,71 @@
+app-id: io.github.birabittoh.kameorepowered
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: io.github.birabittoh.kameorepowered.sh
+
+finish-args:
+  # hardware 3D and controller access
+  - --device=all
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # - --socket=wayland
+  # - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Gamescope for SteamOS
+  - --filesystem=xdg-run/gamescope-0:ro
+
+modules:
+  - name: recomp
+    buildsystem: simple
+    sources:
+      - type: file
+        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.1.0/kameorepowered-v0.1.0-linux-x64
+        dest-filename: kameorepowered
+        sha256: 6acdb7f9da3ed7dbd61e3dd385271c7bfc7d7829cf9c1068064e6d8518a16690
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/birabittoh/KameoRePowered/releases
+          version-query: .[0].tag_name
+          url-query: .[0].assets[] | select(.name | test("^kameorepowered.*linux-x64$")).browser_download_url
+    build-commands:
+      - install -D -m755 kameorepowered -t /app/bin/
+
+  - name: freedesktop
+    buildsystem: simple
+    sources:
+      - type: file
+        path: io.github.birabittoh.kameorepowered.metainfo.xml
+      - type: script
+        dest-filename: io.github.birabittoh.kameorepowered.sh
+        commands:
+          - |
+            kameorepowered \
+              --log_file "${XDG_DATA_HOME}/kameorepowered/kameorepowered.log" \
+              --game_data_root "${XDG_DATA_HOME}/kameorepowered/gamedata" \
+              --cache_path "${XDG_CACHE_HOME}/kameorepowered/" \
+              $@
+      - type: file
+        path: io.github.birabittoh.kameorepowered.png
+      - type: inline
+        dest-filename: io.github.birabittoh.kameorepowered.desktop
+        contents: |
+          [Desktop Entry]
+          Categories=Game;AdventureGame
+          Comment=A recompiled port of Kameo: Elements of Power
+          Exec=io.github.birabittoh.kameorepowered.sh
+          Icon=io.github.birabittoh.kameorepowered
+          Keywords=xbox;kameo;rare
+          Name=Kameo RePowered
+          PrefersNonDefaultGPU=true
+          StartupNotify=true
+          Terminal=false
+          TerminalOptions=
+          Type=Application
+    build-commands:
+      - install -D -m644 io.github.birabittoh.kameorepowered.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m644 ${FLATPAK_ID}.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -D -m644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
