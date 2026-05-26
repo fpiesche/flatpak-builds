@@ -1,8 +1,8 @@
-app-id: io.github.perfect-dark-pc-port.perfect_dark
+app-id: io.github.perfect_dark_pc_port.perfect_dark
 runtime: org.freedesktop.Platform
 runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
-command: io.github.perfect-dark-pc-port.perfect_dark.sh
+command: io.github.perfect_dark_pc_port.perfect_dark.sh
 
 finish-args:
   # hardware 3D and controller access
@@ -30,7 +30,7 @@ modules:
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
           commit-query: .commit.sha
       - type: file
-        path: io.github.perfect-dark-pc-port.perfect_dark.metainfo.xml
+        path: io.github.perfect_dark_pc_port.perfect_dark.metainfo.xml
     post-install:
       - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd.ntsc
       # metadata file

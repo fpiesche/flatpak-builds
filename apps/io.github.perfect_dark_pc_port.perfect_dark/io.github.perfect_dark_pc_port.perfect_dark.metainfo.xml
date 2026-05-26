@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.perfect-dark-pc-port.perfect_dark</id>
+  <id>io.github.perfect_dark_pc_port.perfect_dark</id>
   <name>Perfect Dark</name>
-  <developer id="io.github.perfect-dark-pc-port.perfect_dark">
+  <developer id="io.github.perfect_dark_pc_port.perfect_dark">
     <name>Perfect Dark Contributors</name>
     <url>https://github.com/perfect-dark-pc-port/perfect_dark/graphs/contributors</url>
   </developer>
-  <launchable type="desktop-id">io.github.perfect-dark-pc-port.perfect_dark.desktop</launchable>
+  <launchable type="desktop-id">io.github.perfect_dark_pc_port.perfect_dark.desktop</launchable>
   <branding>
     <color type="primary" scheme_preference="light">#5c85c1</color>
     <color type="primary" scheme_preference="dark">#292b55</color>
