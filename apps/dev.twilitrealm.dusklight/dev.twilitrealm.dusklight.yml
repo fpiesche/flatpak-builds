@@ -42,9 +42,9 @@ modules:
     build-commands:
       - chmod +x Dusklight.AppImage
       - ./Dusklight.AppImage --appimage-extract
-      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/dusklight.desktop
-      - install -D -m644 squashfs-root/dusklight.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - install -D -m644 squashfs-root/usr/share/icons/hicolor/256x256/apps/dusklight.png
+      - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/dev.twilitrealm.dusk.desktop
+      - install -D -m644 squashfs-root/dev.twilitrealm.dusk.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m644 squashfs-root/usr/share/icons/hicolor/256x256/apps/dev.twilitrealm.dusk.png
         /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -D -m644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
