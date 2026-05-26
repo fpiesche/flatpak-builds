@@ -36,13 +36,14 @@ modules:
       # metadata file
       - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
-      - sed -i "s/.x86_64//" dist/linux/${FLATPAK_ID}.sh && sed -i "s/pd\"/pd.ntsc\"/"
-        dist/linux/${FLATPAK_ID}.sh
-      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
-      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm 644 dist/linux/${FLATPAK_ID}.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
-      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - sed -i "s/.x86_64//" dist/linux/io.github.fgsfdsfgs.perfect_dark.sh && sed -i "s/pd\"/pd.ntsc\"/"
+        dist/linux/io.github.fgsfdsfgs.perfect_dark.sh
+      - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.sh
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Icon" --set-value="${FLATPAK_ID}"
+      - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.sh
 
   - name: perfect_dark_pal
     buildsystem: cmake-ninja
@@ -94,12 +95,12 @@ modules:
     build-commands:
       - install -Dm 755 ./pd.$(uname -m | sed 's/^aarch64$/arm64/') /app/bin/pd-netplay.ntsc
       # Netplay launcher
-      - install -Dm 755 dist/linux/${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.netplay.sh
+      - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
-      - desktop-file-edit dist/linux/${FLATPAK_ID}.desktop --set-name="Perfect Dark
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-name="Perfect Dark
         Netplay"
-      - install -Dm 644 dist/linux/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
+      - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
 
   - name: perfect_dark_netplay_pal
     buildsystem: cmake-ninja
