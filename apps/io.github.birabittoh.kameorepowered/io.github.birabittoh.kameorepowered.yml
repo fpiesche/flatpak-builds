@@ -18,6 +18,16 @@ finish-args:
   - --filesystem=xdg-run/gamescope-0:ro
 
 modules:
+  - name: extract-xiso
+    buildsystem: simple
+    sources:
+      - type: file
+        url: https://github.com/rikyperdana/extract-xiso/raw/refs/heads/master/extract-xiso
+        dest-filename: extract-xiso
+        sha256: ee065965c2f8c73d924973e422f10537d8eecd5e83e5914fa20b4721411fec52
+    build-commands:
+      - install -D -m755 extract-xiso -t /app/bin/
+
   - name: recomp
     buildsystem: simple
     sources:
@@ -38,15 +48,8 @@ modules:
     sources:
       - type: file
         path: io.github.birabittoh.kameorepowered.metainfo.xml
-      - type: script
-        dest-filename: io.github.birabittoh.kameorepowered.sh
-        commands:
-          - |
-            kameorepowered \
-              --log_file "${XDG_DATA_HOME}/kameorepowered/kameorepowered.log" \
-              --game_data_root "${XDG_DATA_HOME}/kameorepowered/gamedata" \
-              --cache_path "${XDG_CACHE_HOME}/kameorepowered/" \
-              $@
+      - type: file
+        path: io.github.birabittoh.kameorepowered.sh
       - type: file
         path: io.github.birabittoh.kameorepowered.png
       - type: inline
