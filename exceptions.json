@@ -43,6 +43,9 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appstream-missing-screenshots": "Screenshots are not missing"
     },
+    "io.github.etonedemid.renut": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.fpiesche.f2bgl": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
