@@ -55,8 +55,11 @@
     <keyword>decompile</keyword>
   </keywords>
   <releases>
-    <release version="v1.3.0" date="2026-05-25">
+    <release version="v1.3.1" date="2026-05-27">
       <description></description>
+    </release>
+    <release version="v1.3.0" date="2026-05-25">
+      <description/>
     </release>
     <release version="1.2.0" date="2026-05-18">
       <url>https://github.com/TwilitRealm/dusklight/releases/tag/v1.2.0</url>
