@@ -95,7 +95,7 @@ fi
 
 echo "Starting $PORT_NAME..."
 exec "$EXECUTABLE" \
-  "$ASSETS_DIR" \
+  --game_data_root "$ASSETS_DIR" \
   --cache_path "${XDG_CACHE_HOME}/${FLATPAK_ID}" \
   --log_file "${DATA_DIR}/${FLATPAK_ID}.log" \
   --log_level "warn" \
