@@ -44,5 +44,6 @@ modules:
       - install -D -m644 squashfs-root/renut.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -D -m755 squashfs-root/usr/bin/extract-xiso -t /app/bin/
       - install -D -m755 squashfs-root/usr/bin/renut -t /app/bin/
+      - sed -i s/"^mnk_mode = true$"// squashfs-root/usr/bin/renut.toml
       - install -D -m755 squashfs-root/usr/bin/renut.toml /app/bin/renut.toml
       - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/

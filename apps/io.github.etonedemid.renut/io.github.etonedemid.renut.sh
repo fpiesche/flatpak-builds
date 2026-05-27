@@ -3,17 +3,17 @@
 # Extracts game assets from a Banjo-Kazooie: Nuts & Bolts (US) ISO on first run,
 # then launches the game.
 
-set -eu
 GAME_TITLE="Banjo-Kazooie: Nuts &amp; Bolts"
 ISO_REQUIREMENT="the US version of $GAME_TITLE"
 PORT_NAME="reNut"
 EXECUTABLE="/app/bin/renut"
 DATA_DIR="$XDG_DATA_HOME/$FLATPAK_ID"
 ASSETS_DIR="$DATA_DIR/assets"
+XEX_SHASUM="cfc2ecf323d7d8d1d6a6b871f424387f89f1136128fe0ca4f6e6e71c5838d07e"
 
 pick_iso_gui() {
     zenity --file-selection \
-        --title="Select Banjo-Kazooie: Nuts & Bolts (US) ISO" \
+        --title="Select ISO for $ISO_REQUIREMENT" \
         --file-filter="ISO files | *.iso *.ISO *.xiso *.XISO" 2>/dev/null || true
     return
 }
@@ -33,6 +33,13 @@ setup_assets() {
       --auto-close \
       --auto-kill
 
+    if [ $? -ne 0 ]; then
+        zenity --error --title "Extraction failed" \
+          --text "Failed to extract <tt>$iso_path</tt>. Please try another
+disk image or manually extract it to <tt>$ASSETS_DIR</tt> using <tt>extract-xiso</tt>."
+        exit 1
+    fi
+
     if [ ! -f "$ASSETS_DIR/default.xex" ]; then
         zenity --error --title "default.xex not found after extraction" \
           --text "Please make sure to select an ISO of $ISO_REQUIREMENT."
@@ -48,17 +55,7 @@ if [ ! -f "$ASSETS_DIR/default.xex" ]; then
     zenity --info --title "Game assets not found" \
       --text "Please select an ISO image of $ISO_REQUIREMENT or place its contents into <tt>$ASSETS_DIR</tt>."
 
-    ISO_PATH=""
-
-    # 1. Command-line argument
-    if [ -n "${1:-}" ]; then
-        ISO_PATH="$1"
-    fi
-
-    # 2. GUI file picker
-    if [ -z "$ISO_PATH" ]; then
-        ISO_PATH=$(pick_iso_gui)
-    fi
+    ISO_PATH=$(pick_iso_gui)
 
     if [ -z "$ISO_PATH" ] || [ ! -f "$ISO_PATH" ]; then
         zenity --error --title "File not found" --text \
@@ -67,6 +64,24 @@ if [ ! -f "$ASSETS_DIR/default.xex" ]; then
     fi
 
     setup_assets "$ISO_PATH"
+fi
+
+# ── Verify default.xex ────────────────────────────────────────────────────────
+
+CHECKED_SHASUM=$(sha256sum $ASSETS_DIR/default.xex | cut -d " " -f 1)
+if [ ! -z "$XEX_SHASUM" ] && [ "$CHECKED_SHASUM" != "$XEX_SHASUM" ]; then
+    response=$(zenity --warning --title "default.xex sha256 mismatched" \
+      --extra-button "Open asset directory" \
+      --text "The sha256 checksum for <tt>default.xex</tt> does not match the expected file. \
+The game may not work properly.\n
+If you encounter problems, please delete the asset directory and restart $PORT_NAME to try \
+another dump of the game.\n
+Expected: <tt>$XEX_SHASUM</tt>
+Got: <tt>$CHECKED_SHASUM</tt>")
+    if [ "$response" == "Open asset directory" ]; then
+      xdg-open "$ASSETS_DIR"
+      exit 1
+    fi
 fi
 
 # ── Launch ────────────────────────────────────────────────────────────────────
@@ -85,7 +100,7 @@ fi
 echo "Starting $PORT_NAME..."
 exec "$EXECUTABLE" \
   "$ASSETS_DIR" \
-  --gpu_allow_invalid_fetch_constants=true \
   --cache_path "${XDG_CACHE_HOME}/${FLATPAK_ID}" \
   --log_file "${DATA_DIR}/${FLATPAK_ID}.log" \
+  --log_level "warn" \
   $@
