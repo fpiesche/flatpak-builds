@@ -24,7 +24,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
+        commit: 514bf7affd3259b7919165201342ff81a026d92c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -36,11 +36,13 @@ modules:
       # metadata file
       - install -Dm 644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       # Regular launcher
-      - sed -i "s/.x86_64//" dist/linux/io.github.fgsfdsfgs.perfect_dark.sh && sed -i "s/pd\"/pd.ntsc\"/"
-        dist/linux/io.github.fgsfdsfgs.perfect_dark.sh
+      - sed -i "s/.x86_64//" dist/linux/io.github.fgsfdsfgs.perfect_dark.sh && sed
+        -i "s/pd\"/pd.ntsc\"/" dist/linux/io.github.fgsfdsfgs.perfect_dark.sh
       - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.sh
-      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.sh"
-      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Icon" --set-value="${FLATPAK_ID}"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec"
+        --set-value="/app/bin/${FLATPAK_ID}.sh"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Icon"
+        --set-value="${FLATPAK_ID}"
       - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.sh
@@ -53,7 +55,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
+        commit: 514bf7affd3259b7919165201342ff81a026d92c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -69,7 +71,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 0750c54200c0812da50fb9d32f6b885e3ec891f3
+        commit: 514bf7affd3259b7919165201342ff81a026d92c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -97,9 +99,10 @@ modules:
       # Netplay launcher
       - install -Dm 755 dist/linux/io.github.fgsfdsfgs.perfect_dark.sh /app/bin/${FLATPAK_ID}.netplay.sh
       - sed -i "s:\"pd:\"/app/bin/netplay/pd:" /app/bin/${FLATPAK_ID}.netplay.sh
-      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec" --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
-      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-name="Perfect Dark
-        Netplay"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-key="Exec"
+        --set-value="/app/bin/${FLATPAK_ID}.netplay.sh"
+      - desktop-file-edit dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop --set-name="Perfect
+        Dark Netplay"
       - install -Dm 644 dist/linux/io.github.fgsfdsfgs.perfect_dark.desktop /app/share/applications/${FLATPAK_ID}.netplay.desktop
 
   - name: perfect_dark_netplay_pal
