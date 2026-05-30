@@ -37,8 +37,8 @@ modules:
         x-checker-data:
           type: json
           url: https://gitlab.com/api/v4/projects/m210%2FBuildGDX/repository/tags?search=^Release
-          version-query: .[].name | sub("^Release.*v"; "")
-          url-template: https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx
+          version-query: .[0].name | sub("^Release.*v"; "")
+          url-query: ("https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx")
       - type: script
         dest-filename: apply_extra
         commands:
