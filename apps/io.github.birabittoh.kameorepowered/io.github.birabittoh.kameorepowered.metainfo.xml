@@ -46,6 +46,9 @@
     <keyword>recompile</keyword>
   </keywords>
   <releases>
+    <release version="0.1.1" date="2026-05-28">
+      <url>https://github.com/birabittoh/KameoRePowered/releases/tag/v0.1.1</url>
+    </release>
     <release version="0.1.0" date="2026-01-29">
       <url>https://github.com/birabittoh/KameoRePowered/releases/tag/v0.1.0</url>
     </release>
