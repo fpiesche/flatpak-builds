@@ -32,16 +32,18 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.1.0/kameorepowered-v0.1.0-linux-x64
-        dest-filename: kameorepowered
-        sha256: 6acdb7f9da3ed7dbd61e3dd385271c7bfc7d7829cf9c1068064e6d8518a16690
+        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.1.1/kameorepowered-v0.1.1-linux-x64.tar.gz
+        dest-filename: kameorepowered.tar.gz
+        sha256: 1db952aac7cf1ee50347663372e3da3b661951c4516bf020cb88a01542bfb9fa
         x-checker-data:
           type: json
           url: https://api.github.com/repos/birabittoh/KameoRePowered/releases
           version-query: .[0].tag_name
-          url-query: .[0].assets[] | select(.name | test("^kameorepowered.*linux-x64$")).browser_download_url
+          url-query: .[0].assets[] | select(.name | test("^kameorepowered.*linux-x64.tar.gz")).browser_download_url
     build-commands:
+      - tar -xf kameorepowered.tar.gz
       - install -D -m755 kameorepowered -t /app/bin/
+      - install -D -m644 lib*.so -t /app/lib/
 
   - name: freedesktop
     buildsystem: simple
