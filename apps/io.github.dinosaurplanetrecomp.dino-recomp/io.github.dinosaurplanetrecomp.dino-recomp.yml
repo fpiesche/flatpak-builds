@@ -21,9 +21,9 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/download/v0.2.0/DinosaurPlanetRecompiled-v0.2.0-Linux-x64.tar.gz
+        url: https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/download/v0.3.0/DinosaurPlanetRecompiled-v0.3.0-Linux-x64.tar.gz
         dest-filename: recomp.tar.gz
-        sha256: a99b5dab8990864ef7c51413f502bf846169cd827c5e4a12fb1feb9d34d1b9e2
+        sha256: 8a370cff9bfaacc4af0da9f729b5910f341d41942899cef4ce64aa7d8a4c03a2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
@@ -39,9 +39,9 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/tarball/v0.2.0
+        url: https://api.github.com/repos/DinosaurPlanetRecomp/dino-recomp/tarball/v0.3.0
         dest-filename: repo.tar.gz
-        sha256: 7f449fcdfe977a79e76c85a9e1311cc5083289fdb01a818cd23723e812a385d2
+        sha256: b6cd376de6ec7d7e0a7845a639235a3379c92fd252fceada0468197a205c4f9a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/dinosaurplanetrecomp/dino-recomp/releases/latest
@@ -53,7 +53,8 @@ modules:
         dest-filename: io.github.dinosaurplanetrecomp.dino-recomp.sh
         commands:
           - export APP_FOLDER_PATH="${XDG_DATA_HOME}/${FLATPAK_ID}"
-          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
+          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH};
+            fi
           - cd /app/bin/
           - DinosaurPlanetRecompiled
       # TODO: remove with next release
@@ -65,7 +66,8 @@ modules:
       # desktop file
       - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop
       - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop
-      - install -D -m644 deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m644 deploy/io.github.dinosaurplanetrecomp.dino_recomp.desktop
+        /app/share/applications/${FLATPAK_ID}.desktop
       # icon
       - install -D -m644 icons/512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       # metainfo
