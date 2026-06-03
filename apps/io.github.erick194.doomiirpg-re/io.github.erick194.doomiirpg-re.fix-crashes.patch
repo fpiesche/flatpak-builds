@@ -1,0 +1,24 @@
+diff --git a/src/ZipFile.cpp b/src/ZipFile.cpp
+index 8385db7..8331490 100644
+--- a/src/ZipFile.cpp
++++ b/src/ZipFile.cpp
+@@ -191,12 +191,10 @@ void ZipFile::openZipFile(const char* name) {
+ void ZipFile::closeZipFile() {
+ 	if (this) {
+ 		if (this->entry) {
+-			std::free(this->entry);
+ 			this->entry = nullptr;
+ 		}
+ 
+ 		if (this->file) {
+-			fclose(this->file);
+ 			this->file = nullptr;
+ 		}
+ 	}
+@@ -294,4 +292,4 @@ uint8_t* ZipFile::readZipFileEntry(const char* name, int* sizep) {
+ 	}
+ 
+ 	return nullptr;
+-}
+\ No newline at end of file
++}

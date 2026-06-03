@@ -1,0 +1,34 @@
+diff --git a/src/Main.cpp b/src/Main.cpp
+index 8f756d8..6f38395 100644
+--- a/src/Main.cpp
++++ b/src/Main.cpp
+@@ -33,7 +33,11 @@ void drawView(SDLGL* sdlGL);
+ 
+ int main(int argc, char* args[]) {
+ 
+-    int		UpTime = 0;
++    int UpTime = 0;
++    std::string ipa_file = "Doom 2 RPG.ipa";
++    if (argc == 2) {
++        ipa_file = args[1];
++    }
+ 
+     char* basePath = SDL_GetBasePath();
+     if (basePath) {
+@@ -42,7 +46,8 @@ int main(int argc, char* args[]) {
+     }
+ 
+     ZipFile zipFile;
+-    zipFile.openZipFile("Doom 2 RPG.ipa");
++    printf("Loading game data from %s\n", ipa_file.c_str());
++    zipFile.openZipFile(ipa_file.c_str());
+ 
+ 	SDLGL sdlGL;
+ 	sdlGL.Initialize();
+@@ -139,4 +144,4 @@ void drawView(SDLGL *sdlGL) {
+ 
+     SDL_GL_SwapWindow(sdlGL->window);  // Swap the window/pBmp to display the result.
+     
+-}
+\ No newline at end of file
++}

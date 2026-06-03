@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.erick194.doomiirpg-re</id>
+  <name>Doom II RPG</name>
+  <developer id="io.github.erick194.doomiirpg-re">
+    <name>Doom II RPG RE Contributors</name>
+    <url>https://github.com/erick194/doomiirpg-re/graphs/contributors</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#739dca</color>
+    <color type="primary" scheme_preference="dark">#393569</color>
+  </branding>
+  <summary>Reverse engineered port of Doom II RPG</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <launchable type="desktop-id">io.github.erick194.doomiirpg-re.desktop</launchable>
+  <url type="homepage">https://github.com/erick194/doomiirpg-re</url>
+  <url type="vcs-browser">https://github.com/erick194/doomiirpg-re</url>
+  <description>
+    <p>A fully reverse engineered PC port of the Java mobile game.</p>
+    <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the game data for Doom II RPG.
+        Please copy the file <code>Doom 2 RPG.ipa</code> file to
+        <code>$HOME/.var/app/io.github.erick194.doomiirpg-re/doom2rpg/</code>.</p>
+    <p>Launching any of the games included will inform you with a message if any of the required
+        files are missing and where you need to copy them.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomiirpg-re/screenshots/01-characterselect.png</image>
+      <caption>Choose your character</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomiirpg-re/screenshots/02-intro.png</image>
+      <caption>Introductory cutscene.</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomiirpg-re/screenshots/03-iconofsin.png</image>
+      <caption>The Icon of Sin...</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.erick194.doomiirpg-re/screenshots/04-cyberdemon.png</image>
+      <caption>... in cyberspace?</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>RolePlaying</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>DoomIIRPG</binary>
+  </provides>
+  <keywords>
+    <keyword>rpg</keyword>
+    <keyword>shooter</keyword>
+    <keyword>sci-fi</keyword>
+    <keyword>horror</keyword>
+    <keyword>doom 2 rpg</keyword>
+  </keywords>
+  <releases>
+    <release version="0.1-snapshot" date="2023-12-23">
+      <description></description>
+    </release>
+    <release version="0.1" date="2023-12-23">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
+</component>

@@ -1,0 +1,52 @@
+app-id: io.github.erick194.doomiirpg-re
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+x-gl-version: &gl-version '1.4'
+x-gl-versions: &gl-versions 25.08;1.4
+sdk: org.freedesktop.Sdk
+command: io.github.erick194.doomiirpg-re.sh
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=all
+  - --allow=bluetooth
+
+modules:
+  - name: doomiirpg
+    buildsystem: cmake-ninja
+    # config-opts:
+    #   - -DCMAKE_CXX_FLAGS=-fanalyzer
+    #   - -DCMAKE_CXX_FLAGS=-fsanitize=address
+    sources:
+      - type: git
+        url: https://github.com/KorolevSoftware/DoomIIRPG-RE
+        branch: refactoring_bug_fix
+        commit: ef4f832c0827c9173f4e46ac98b4ecd077ac54d2
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/KorolevSoftware/doomiirpg-re/branches
+          commit-query: .[] | select(.name == "refactoring_bug_fix") | .commit.sha
+      - type: patch
+        paths:
+          - io.github.erick194.doomiirpg-re.cmake-install.patch
+          - io.github.erick194.doomiirpg-re.ipa-argv.patch
+          - io.github.erick194.doomiirpg-re.fix-saves.patch
+          - io.github.erick194.doomiirpg-re.fix-readwrite.patch
+          - io.github.erick194.doomiirpg-re.fix-crashes.patch
+      - type: file
+        path: io.github.erick194.doomiirpg-re.sh
+      - type: file
+        path: io.github.erick194.doomiirpg-re.png
+      - type: file
+        path: io.github.erick194.doomiirpg-re.metainfo.xml
+      - type: file
+        path: io.github.erick194.doomiirpg-re.desktop
+    post-install:
+      - mkdir -p /app/share/metainfo /app/share/icons/hicolor/256x256/apps /app/share/applications
+      - install -m 644 -t /app/share/metainfo/ io.github.erick194.doomiirpg-re.metainfo.xml
+      - install -m 644 -t /app/share/icons/hicolor/256x256/apps/ io.github.erick194.doomiirpg-re.png
+      - install -m 644 -t /app/share/applications/ io.github.erick194.doomiirpg-re.desktop
+      - install -m 755 -t /app/bin/ io.github.erick194.doomiirpg-re.sh

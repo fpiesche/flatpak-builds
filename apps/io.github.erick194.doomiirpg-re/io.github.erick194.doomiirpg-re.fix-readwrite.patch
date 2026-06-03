@@ -1,0 +1,98 @@
+diff --git a/src/JavaStream.cpp b/src/JavaStream.cpp
+index a4a34c7..5f25e2a 100644
+--- a/src/JavaStream.cpp
++++ b/src/JavaStream.cpp
+@@ -1,3 +1,4 @@
++#include <filesystem>
+ #include <stdexcept>
+ #include <cstdio>
+ 
+@@ -42,7 +43,6 @@ InputStream::~InputStream() {
+ 	}
+ 
+ 	if (this->data) {
+-		std::free(this->data);
+ 		this->data = nullptr;
+ 	}
+ }
+@@ -90,11 +90,13 @@ bool InputStream::loadFile(const char* fileName, int loadType) {
+ 		}
+ 	}
+ 	else if (loadType == LT_FILE) {
+-		std::strcpy(namePath, dir);
+-		std::strcat(namePath, "/");
+-		std::strcat(namePath, fileName);
++	        std::filesystem::path userDir = std::filesystem::path(std::getenv("XDG_DATA_HOME"));
++        	std::filesystem::path namePath = std::filesystem::path(fileName);
++        	if (! namePath.is_absolute()) {
++            		namePath = userDir / namePath;
++	        }
+ 
+-		this->file = std::fopen(namePath, "rb");
++		this->file = std::fopen(namePath.c_str(), "rb");
+ 
+ 		if (this->file != nullptr) {
+ 			std::fseek(this->file, 0, SEEK_END);
+@@ -195,35 +197,25 @@ OutputStream::~OutputStream() {
+ 	this->close();
+ 
+ 	if (this->writeBuff) {
+-		std::free(this->writeBuff);
+-		this->writeBuff = nullptr;
++                this->writeBuff = nullptr;
+ 	}
+ 
+ 	if (this->buffer != nullptr) {
+-		std::free(this->buffer);
+-		this->buffer = nullptr;
++                this->buffer = nullptr;
+ 	}
+ }
+ 
+ #include <sys/stat.h>
+ 
+ int OutputStream::openFile(const char* fileName, int openMode) {
+-	char namePath[2060];
+-
+-	struct stat sb;
+-	if (stat(dir, &sb)) {
+-		char command[64];
+-		std::strcpy(command, "mkdir ");
+-		std::strcat(command, "\"");
+-		std::strcat(command, dir);
+-		std::strcat(command, "\"");
+-		//printf("command %s\n", command);
+-		std::system(command);
+-	}
+-
+-	std::strcpy(namePath, dir);
+-	std::strcat(namePath, "/");
+-	std::strcat(namePath, fileName);
++        std::filesystem::path userDir = std::filesystem::path(std::getenv("XDG_DATA_HOME"));
++        std::filesystem::path namePath = std::filesystem::path(fileName);
++        if (! namePath.is_absolute()) {
++            namePath = userDir / namePath;
++        }
++        if (! std::filesystem::exists(namePath.parent_path())) {
++            std::filesystem::create_directory(namePath.parent_path());
++        }
+ 
+ 	//printf("output file: %s\n", namePath);
+ 	this->buffer = (uint8_t*)std::malloc(512);
+@@ -242,13 +234,13 @@ int OutputStream::openFile(const char* fileName, int openMode) {
+ 	switch (openMode)
+ 	{
+ 	case 1:
+-		this->file = std::fopen(namePath, "wb");
++		this->file = std::fopen(namePath.c_str(), "wb");
+ 		break;
+ 	case 2:
+-		this->file = std::fopen(namePath, "rb");
++		this->file = std::fopen(namePath.c_str(), "rb");
+ 		break;
+ 	case 3:
+-		this->file = std::fopen(namePath, "w+b");
++		this->file = std::fopen(namePath.c_str(), "w+b");
+ 		break;
+ 	default:
+ 		return 0;
