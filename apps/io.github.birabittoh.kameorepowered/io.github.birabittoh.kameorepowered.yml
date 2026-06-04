@@ -32,9 +32,9 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.1.1/kameorepowered-v0.1.1-linux-x64.tar.gz
+        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.2.0/kameorepowered-v0.2.0-linux-x64.tar.gz
         dest-filename: kameorepowered.tar.gz
-        sha256: 1db952aac7cf1ee50347663372e3da3b661951c4516bf020cb88a01542bfb9fa
+        sha256: 981fb29f54f8cc5796e34e3e260c51d60ae0bca3008aaaea94eaf955f789a5f7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/birabittoh/KameoRePowered/releases
