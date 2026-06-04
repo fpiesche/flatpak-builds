@@ -43,7 +43,7 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Goemon64Recompiled.*Linux-X64-Release.zip$")).browser_download_url
     build-commands:
-      - tar xf Goemon64Recompiled.tar.gz --no-same-owner
+      - tar -xf Goemon64Recompiled.tar.gz --no-same-owner
       - install -D -m755 Goemon64Recompiled -t /app/bin/
       - install -D -m644 recompcontrollerdb.txt -t /app/bin/
       - cp -rv assets /app/bin/

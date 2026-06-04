@@ -30,7 +30,7 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^DinosaurPlanetRecompiled-.*-Linux-x64.tar.gz$")).browser_download_url
     build-commands:
-      - tar -xf recomp.tar.gz
+      - tar -xf recomp.tar.gz --no-same-owner
       - install -D -m755 DinosaurPlanetRecompiled -t /app/bin/
       - install -D -m644 gamecontrollerdb.txt -t /app/bin/
       - cp -rv assets /app/bin/

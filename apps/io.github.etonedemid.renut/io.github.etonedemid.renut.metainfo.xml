@@ -10,7 +10,7 @@
     <color type="primary" scheme_preference="light">#6dabdc</color>
     <color type="primary" scheme_preference="dark">#1f3661</color>
   </branding>
-  <summary>Recompiled port of Kameo: Elements of Power</summary>
+  <summary>Recompiled port of Banjo-Kazooie: Nuts'n'Bolts</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <launchable type="desktop-id">io.github.etonedemid.renut.desktop</launchable>
