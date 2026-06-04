@@ -41,7 +41,7 @@ modules:
           version-query: .[0].tag_name
           url-query: .[0].assets[] | select(.name | test("^kameorepowered.*linux-x64.tar.gz")).browser_download_url
     build-commands:
-      - tar -xf kameorepowered.tar.gz
+      - tar -xf kameorepowered.tar.gz --no-same-owner
       - install -D -m755 kameorepowered -t /app/bin/
       - install -D -m644 lib*.so -t /app/lib/
 
