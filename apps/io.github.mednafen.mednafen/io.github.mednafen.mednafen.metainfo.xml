@@ -15,7 +15,7 @@
   <project_license>GPL-2.0</project_license>
   <launchable type="desktop-id">io.github.mednafen.mednafen.desktop</launchable>
   <url type="homepage">https://mednafen.github.io/</url>
-  <url type="vcs-browser">https://github.com/mednafen/mednafen</url>
+  <url type="vcs-browser">https://mednafen.github.io/</url>
   <description>
     <p>A portable, command-line driven multi-system emulator utilizing OpenGL and SDL.</p>
     <p>This particular build has been patched with the ability to read CD format games in MAME's
