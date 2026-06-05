@@ -1,0 +1,81 @@
+app-id: io.github.mednafen.mednafen
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '25.08'
+x-gl-version: &gl-version '1.4'
+x-gl-versions: &gl-versions 25.08;1.4
+sdk: org.freedesktop.Sdk
+command: mednafen
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --filesystem=xdg-run/pipewire-0
+  - --socket=pulseaudio
+  - --device=dri
+  - --device=all
+
+modules:
+  - name: libchdr
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/rtissera/libchdr/tarball/v0.3.0
+        dest-filename: libchdr.tar.gz
+        sha256: 0e1981af5bb4d0361948b270e050302604dae3cf50e576e02059f0d78ce0f18e
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/rtissera/libchdr/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
+
+  - name: mednafen
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://mednafen.github.io/releases/files/mednafen-1.32.1.tar.xz
+        sha256: de7eb94ab66212ae7758376524368a8ab208234b33796625ca630547dbc83832
+        x-checker-data:
+          type: anitya
+          project-id: 12273
+          url-template: https://mednafen.github.io/releases/files/mednafen-$version.tar.xz
+      - type: patch
+        paths:
+          - io.github.mednafen.mednafen.basedir.patch
+          - io.github.mednafen.mednafen.chd-support.patch
+          - io.github.mednafen.mednafen.chd-make.patch
+          - io.github.mednafen.mednafen.chd-linking.patch
+
+  - name: mednaffe
+    buildsystem: autotools
+    cleanup:
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/AmatCoder/mednaffe/tarball/0.9.3
+        dest-filename: mednaffe.tar.gz
+        sha256: 46cc9868cad46a1e1f764e5d987b6fc4a5bb45f0e822cbc62585d885b49684b0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/AmatCoder/mednaffe/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .tarball_url
+      - type: patch
+        paths:
+          - io.github.mednafen.mednafen.mednaffe-appid.patch
+          - io.github.mednafen.mednafen.mednaffe-basedir.patch
+
+  - name: freedesktop
+    buildsystem: simple
+    sources:
+      - type: file
+        path: io.github.mednafen.mednafen.svg
+      - type: file
+        path: io.github.mednafen.mednafen.metainfo.xml
+      - type: file
+        path: io.github.mednafen.mednafen.desktop
+    build-commands:
+      - install -m644 ${FLATPAK_ID}.metainfo.xml -Dt /app/share/metainfo/
+      - install -m644 ${FLATPAK_ID}.svg -Dt /app/share/icons/hicolor/scalable/apps/
+      - install -m644 ${FLATPAK_ID}.desktop -Dt /app/share/applications/

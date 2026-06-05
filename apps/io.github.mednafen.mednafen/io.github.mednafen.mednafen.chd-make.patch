@@ -1,0 +1,62 @@
+diff --git a/src/Makefile.in b/src/Makefile.in
+index 672f724..e020ec9 100644
+--- a/src/Makefile.in
++++ b/src/Makefile.in
+@@ -635,7 +635,7 @@ am__mednafen_SOURCES_DIST = debug.cpp error.cpp mempatcher.cpp \
+ 	cdrom/lec.cpp cdrom/CDUtility.cpp cdrom/CDInterface.cpp \
+ 	cdrom/CDInterface_MT.cpp cdrom/CDInterface_ST.cpp \
+ 	cdrom/CDAccess.cpp cdrom/CDAccess_Image.cpp \
+-	cdrom/CDAccess_CCD.cpp cdrom/CDAFReader.cpp \
++	cdrom/CDAccess_CCD.cpp cdrom/CDAccess_CHD.cpp cdrom/CDAFReader.cpp \
+ 	cdrom/CDAFReader_Vorbis.cpp cdrom/CDAFReader_MPC.cpp \
+ 	cdrom/CDAFReader_FLAC.cpp cdrom/CDAFReader_PCM.cpp \
+ 	cdrom/scsicd.cpp sound/Blip_Buffer.cpp sound/Stereo_Buffer.cpp \
+@@ -996,7 +996,7 @@ am_mednafen_OBJECTS = debug.$(OBJEXT) error.$(OBJEXT) \
+ 	cdrom/lec.$(OBJEXT) cdrom/CDUtility.$(OBJEXT) \
+ 	cdrom/CDInterface.$(OBJEXT) cdrom/CDInterface_MT.$(OBJEXT) \
+ 	cdrom/CDInterface_ST.$(OBJEXT) cdrom/CDAccess.$(OBJEXT) \
+-	cdrom/CDAccess_Image.$(OBJEXT) cdrom/CDAccess_CCD.$(OBJEXT) \
++	cdrom/CDAccess_Image.$(OBJEXT) cdrom/CDAccess_CCD.$(OBJEXT) cdrom/CDAccess_CHD.$(OBJEXT) \
+ 	cdrom/CDAFReader.$(OBJEXT) cdrom/CDAFReader_Vorbis.$(OBJEXT) \
+ 	cdrom/CDAFReader_MPC.$(OBJEXT) $(am__objects_39) \
+ 	cdrom/CDAFReader_PCM.$(OBJEXT) cdrom/scsicd.$(OBJEXT) \
+@@ -1064,7 +1064,7 @@ am__depfiles_remade = ./$(DEPDIR)/ExtMemStream.Po \
+ 	cdrom/$(DEPDIR)/CDAFReader_MPC.Po \
+ 	cdrom/$(DEPDIR)/CDAFReader_PCM.Po \
+ 	cdrom/$(DEPDIR)/CDAFReader_Vorbis.Po \
+-	cdrom/$(DEPDIR)/CDAccess.Po cdrom/$(DEPDIR)/CDAccess_CCD.Po \
++	cdrom/$(DEPDIR)/CDAccess.Po cdrom/$(DEPDIR)/CDAccess_CCD.Po cdrom/$(DEPDIR)/CDAccess_CHD.Po\
+ 	cdrom/$(DEPDIR)/CDAccess_Image.Po \
+ 	cdrom/$(DEPDIR)/CDInterface.Po \
+ 	cdrom/$(DEPDIR)/CDInterface_MT.Po \
+@@ -1742,7 +1742,7 @@ mednafen_SOURCES = debug.cpp error.cpp mempatcher.cpp settings.cpp \
+ 	cdrom/lec.cpp cdrom/CDUtility.cpp cdrom/CDInterface.cpp \
+ 	cdrom/CDInterface_MT.cpp cdrom/CDInterface_ST.cpp \
+ 	cdrom/CDAccess.cpp cdrom/CDAccess_Image.cpp \
+-	cdrom/CDAccess_CCD.cpp cdrom/CDAFReader.cpp \
++	cdrom/CDAccess_CCD.cpp cdrom/CDAccess_CHD.cpp cdrom/CDAFReader.cpp \
+ 	cdrom/CDAFReader_Vorbis.cpp cdrom/CDAFReader_MPC.cpp \
+ 	$(am__append_64) cdrom/CDAFReader_PCM.cpp cdrom/scsicd.cpp \
+ 	$(am__append_65) sound/Fir_Resampler.cpp sound/WAVRecord.cpp \
+@@ -3278,6 +3278,8 @@ cdrom/CDAccess_Image.$(OBJEXT): cdrom/$(am__dirstamp) \
+ 	cdrom/$(DEPDIR)/$(am__dirstamp)
+ cdrom/CDAccess_CCD.$(OBJEXT): cdrom/$(am__dirstamp) \
+ 	cdrom/$(DEPDIR)/$(am__dirstamp)
++cdrom/CDAccess_CHD.$(OBJEXT): cdrom/$(am__dirstamp) \
++	cdrom/$(DEPDIR)/$(am__dirstamp)
+ cdrom/CDAFReader.$(OBJEXT): cdrom/$(am__dirstamp) \
+ 	cdrom/$(DEPDIR)/$(am__dirstamp)
+ cdrom/CDAFReader_Vorbis.$(OBJEXT): cdrom/$(am__dirstamp) \
+diff --git a/src/cdrom/Makefile.am.inc b/src/cdrom/Makefile.am.inc
+index 887b16d..a81aa7c 100644
+--- a/src/cdrom/Makefile.am.inc
++++ b/src/cdrom/Makefile.am.inc
+@@ -1,7 +1,7 @@
+ mednafen_SOURCES	+=	cdrom/crc32.cpp cdrom/galois.cpp cdrom/l-ec.cpp cdrom/recover-raw.cpp cdrom/lec.cpp
+ mednafen_SOURCES	+=	cdrom/CDUtility.cpp
+ mednafen_SOURCES	+=	cdrom/CDInterface.cpp cdrom/CDInterface_MT.cpp cdrom/CDInterface_ST.cpp
+-mednafen_SOURCES	+=	cdrom/CDAccess.cpp cdrom/CDAccess_Image.cpp cdrom/CDAccess_CCD.cpp
++mednafen_SOURCES	+=	cdrom/CDAccess.cpp cdrom/CDAccess_Image.cpp cdrom/CDAccess_CCD.cpp cdrom/CDAccess_CHD.cpp
+ 
+ mednafen_SOURCES	+=	cdrom/CDAFReader.cpp
+ mednafen_SOURCES	+=	cdrom/CDAFReader_Vorbis.cpp

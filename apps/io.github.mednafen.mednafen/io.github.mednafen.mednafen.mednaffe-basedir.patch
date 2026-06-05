@@ -1,0 +1,26 @@
+diff --git a/src/widgets/bios_helper.c b/src/widgets/bios_helper.c
+index d94b715..d25a615 100644
+--- a/src/widgets/bios_helper.c
++++ b/src/widgets/bios_helper.c
+@@ -64,7 +64,7 @@ bios_get_base_path (void)
+   const gchar* home = g_getenv ("MEDNAFEN_HOME");
+ 
+   if (home == NULL)
+-    mh = g_strconcat (g_get_home_dir (), "/.mednafen", NULL);
++    mh = g_strconcat (g_get_user_data_dir (), "/mednafen", NULL);
+   else
+     mh = g_strconcat (home, "/", NULL);
+ #endif
+diff --git a/src/medprocess.c b/src/medprocess.c
+index 2646ef8..d506bab 100644
+--- a/src/medprocess.c
++++ b/src/medprocess.c
+@@ -69,7 +69,7 @@ med_process_get_conf_path (MedProcess* self)
+     const gchar* mh = g_getenv ("MEDNAFEN_HOME");
+ 
+     if (mh == NULL)
+-      self->MedConfPath = g_strconcat (g_get_home_dir (), "/.mednafen/mednafen.cfg", NULL);
++      self->MedConfPath = g_strconcat (g_get_user_data_dir (), "/mednafen/mednafen.cfg", NULL);
+     else
+       self->MedConfPath = g_strconcat (mh, "/mednafen.cfg", NULL);
+ #endif

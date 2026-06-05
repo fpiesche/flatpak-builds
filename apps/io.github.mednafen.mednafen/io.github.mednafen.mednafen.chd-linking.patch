@@ -1,0 +1,80 @@
+diff --git a/aclocal.m4 b/aclocal.m4
+index effc30f..e4fc972 100644
+--- a/aclocal.m4
++++ b/aclocal.m4
+@@ -308,10 +308,10 @@ AS_VAR_IF([$1], [""], [$5], [$4])dnl
+ # generated from the m4 files accompanying Automake X.Y.
+ # (This private macro should not be called outside this file.)
+ AC_DEFUN([AM_AUTOMAKE_VERSION],
+-[am__api_version='1.16'
++[am__api_version='1.18'
+ dnl Some users find AM_AUTOMAKE_VERSION and mistake it for a way to
+ dnl require some minimum version.  Point them to the right macro.
+-m4_if([$1], [1.16.1], [],
++m4_if([$1], [1.18], [],
+       [AC_FATAL([Do not call $0, use AM_INIT_AUTOMAKE([$1]).])])dnl
+ ])
+ 
+@@ -327,7 +327,7 @@ m4_define([_AM_AUTOCONF_VERSION], [])
+ # Call AM_AUTOMAKE_VERSION and AM_AUTOMAKE_VERSION so they can be traced.
+ # This function is AC_REQUIREd by AM_INIT_AUTOMAKE.
+ AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],
+-[AM_AUTOMAKE_VERSION([1.16.1])dnl
++[AM_AUTOMAKE_VERSION([1.18])dnl
+ m4_ifndef([AC_AUTOCONF_VERSION],
+   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
+ _AM_AUTOCONF_VERSION(m4_defn([AC_AUTOCONF_VERSION]))])
+diff --git a/configure b/configure
+index bb28774..91e2b0d 100755
+--- a/configure
++++ b/configure
+@@ -4473,7 +4473,7 @@ IFS=$ac_save_IFS
+ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
+ 
+ 
+-am__api_version='1.16'
++am__api_version='1.18'
+ 
+ # Find a good install program.  We prefer a C program (faster),
+ # so one script is as good as another.  But avoid the broken or
+diff --git a/configure.ac b/configure.ac
+index ed31fe5..c33e804 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -96,13 +96,16 @@ dnl Check for zlib
+ AC_CHECK_LIB([z], [zlibVersion], ZLIB_LIBS="-lz", AC_MSG_ERROR([*** zlib not found!]))
+ AC_SUBST([ZLIB_LIBS])
+ 
+-
+ ENABLE_LIBXXX_MODE=false
+ AC_ARG_ENABLE(libxxx-mode, AC_HELP_STRING([--enable-libxxx-mode], [dev use only]))
+ if test x$enable_libxxx_mode = xyes; then
+ 	ENABLE_LIBXXX_MODE=true
+ fi
+ 
++PKG_CHECK_MODULES(LIBCHDR, libchdr >= 0.3.0, [have_libchdr=true], AC_MSG_ERROR([*** libchdr >= 0.3.0 not found!]))
++AC_SUBST([LIBCHDR_LIBS])
++AC_SUBST([LIBCHDR_CFLAGS])
++
+ AC_ARG_ENABLE(dev-build,
+  AC_HELP_STRING([--enable-dev-build], [enable expensive Mednafen developer features [[default=no]]]),
+                   , enable_dev_build=no)
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 0ccb1c8..b8c0d20 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,12 +1,12 @@
+ AUTOMAKE_OPTIONS = subdir-objects
+-DEFS = @DEFS@ @FLAC_CFLAGS@
++DEFS = @DEFS@ @FLAC_CFLAGS@ @LIBCHDR_CFLAGS@
+ DEFAULT_INCLUDES = -I$(top_builddir)/include -I$(top_srcdir)/include -I$(top_builddir)/intl
+ 
+ bin_PROGRAMS	=	mednafen
+ 
+ SUBDIRS			=
+ noinst_LIBRARIES	=
+-mednafen_LDADD		=
++mednafen_LDADD		=   @LIBCHDR_LIBS@
+ mednafen_DEPENDENCIES	=
+ mednafen_SOURCES 	= 	debug.cpp error.cpp mempatcher.cpp settings.cpp endian.cpp mednafen.cpp git.cpp file.cpp general.cpp memory.cpp netplay.cpp state.cpp state_rewind.cpp movie.cpp player.cpp PSFLoader.cpp SSFLoader.cpp SNSFLoader.cpp SPCReader.cpp tests.cpp testsexp.cpp qtrecord.cpp IPSPatcher.cpp
+ mednafen_SOURCES	+=	VirtualFS.cpp NativeVFS.cpp Stream.cpp MemoryStream.cpp ExtMemStream.cpp FileStream.cpp MTStreamReader.cpp

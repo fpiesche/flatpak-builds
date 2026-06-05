@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.mednafen.mednafen</id>
+  <name>Mednafen</name>
+  <developer id="io.github.lunarmeadow">
+    <name>Mednafen Team</name>
+    <url>https://mednafen.github.io/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#d8f6d8</color>
+    <color type="primary" scheme_preference="dark">#4d7e00</color>
+  </branding>
+  <summary>A portable multi-system emulator</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <launchable type="desktop-id">io.github.mednafen.mednafen.desktop</launchable>
+  <url type="homepage">https://mednafen.github.io/</url>
+  <url type="vcs-browser">https://mednafen.github.io/</url>
+  <description>
+    <p>A portable, command-line driven multi-system emulator utilizing OpenGL and SDL.</p>
+    <p>This particular build has been patched with the ability to read CD format games in MAME's
+      <code>chd</code> format.</p>
+    <p>Mednafen has the ability to remap hotkey functions and virtual system inputs to a
+      keyboard, a joystick, or both simultaneously. Save states are supported, as is
+      real-time game rewinding. Screen snapshots may be taken, in the PNG file format, at
+      the press of a button. Mednafen can record audiovisual movies in the QuickTime file
+      format, with several different lossless codecs supported.</p>
+    <p>The following systems are supported:</p>
+    <ul>
+      <li>Apple II/II+/IIe/Enhanced IIe</li>
+      <li>Atari Lynx</li>
+      <li>Neo Geo Pocket (Color)</li>
+      <li>WonderSwan</li>
+      <li>GameBoy (Color)</li>
+      <li>GameBoy Advance</li>
+      <li>Nintendo Entertainment System</li>
+      <li>Super Nintendo Entertainment System/Super Famicom</li>
+      <li>Virtual Boy</li>
+      <li>PC Engine/TurboGrafx 16 (CD)</li>
+      <li>SuperGrafx</li>
+      <li>PC-FX</li>
+      <li>Sega Game Gear</li>
+      <li>Sega Genesis/Megadrive</li>
+      <li>Sega Master System</li>
+      <li>Sega Saturn (64-bit only)</li>
+      <li>Sony PlayStation</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://cdn.jsdelivr.net/gh/AmatCoder/mednaffe@wiki/mednaffe-0.9.0-linux.png</image>
+      <caption>Mednaffe GUI</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://cdn.jsdelivr.net/gh/AmatCoder/mednaffe@wiki/mednaffe-0.9.0-linux2.png</image>
+      <caption>GUI Configuration</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>Emulator</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <provides>
+    <binary>mednaffe</binary>
+    <binary>mednafen</binary>
+  </provides>
+  <keywords>
+    <keyword>emulator</keyword>
+    <keyword>nintendo</keyword>
+    <keyword>nes</keyword>
+    <keyword>snes</keyword>
+    <keyword>game boy</keyword>
+    <keyword>game boy advance</keyword>
+    <keyword>virtual boy</keyword>
+    <keyword>sega</keyword>
+    <keyword>master system</keyword>
+    <keyword>megadrive</keyword>
+    <keyword>genesis</keyword>
+    <keyword>saturn</keyword>
+    <keyword>pc-engine</keyword>
+    <keyword>turbografx</keyword>
+    <keyword>neo geo pocket</keyword>
+    <keyword>wonderswan</keyword>
+    <keyword>sony</keyword>
+    <keyword>playstation</keyword>
+  </keywords>
+  <releases>
+    <release version="1.32.1" date="2024-04-05">
+      <url>https://mednafen.github.io/releases/</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

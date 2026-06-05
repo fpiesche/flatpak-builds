@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Game;Emulator
+Comment=A graphical frontend for the multi-system emulator
+Exec=mednaffe
+Icon=io.github.mednafen.mednafen
+Keywords=emulator
+Name=Mednaffe
+PrefersNonDefaultGPU=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
