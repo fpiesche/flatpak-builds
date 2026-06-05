@@ -1,0 +1,13 @@
+diff --git a/src/mednaffe.c b/src/mednaffe.c
+index 71a99e7..b43eef5 100644
+--- a/src/mednaffe.c
++++ b/src/mednaffe.c
+@@ -45,7 +45,7 @@ mednaffe_app_new (void)
+ {
+   MednaffeApp * self = (MednaffeApp*) g_object_new (mednaffe_app_get_type(),
+                                                     "application-id",
+-                                                    "com.github.AmatCoder.mednaffe",
++                                                    "io.github.mednafen.mednafen.mednaffe",
+                                                     "flags",
+                                                     G_APPLICATION_FLAGS_NONE,
+                                                     NULL);

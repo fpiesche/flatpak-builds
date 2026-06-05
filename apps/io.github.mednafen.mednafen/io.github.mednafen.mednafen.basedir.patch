@@ -1,0 +1,16 @@
+diff --git a/src/drivers/main.cpp b/src/drivers/main.cpp
+index fe6b7f9..a89a61a 100644
+--- a/src/drivers/main.cpp
++++ b/src/drivers/main.cpp
+@@ -1501,9 +1501,9 @@ std::string GetBaseDirectory(void)
+   return std::string(ol);
+  }
+ 
+- ol = getenv("HOME");
++ ol = getenv("XDG_DATA_HOME");
+  if(ol)
+-  return std::string(ol) + MDFN_PSS + ".mednafen";
++  return std::string(ol) + MDFN_PSS + "mednafen";
+ 
+  #if defined(HAVE_GETUID) && defined(HAVE_GETPWUID)
+  {

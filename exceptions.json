@@ -72,6 +72,10 @@
     "io.github.lunarmeadow.barrett": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.mednafen.mednafen": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appid-url-not-reachable": "No public git repo but mednafen.github.io exists."
+    },
     "io.github.openenroth.openenroth": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
