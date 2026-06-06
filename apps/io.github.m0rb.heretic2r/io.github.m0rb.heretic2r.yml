@@ -8,7 +8,8 @@ command: io.github.m0rb.heretic2r.sh
 
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --device=all
   - --allow=bluetooth
@@ -42,9 +43,11 @@ modules:
         paths:
           - io.github.m0rb.heretic2r.cmake-install.patch
           - io.github.m0rb.heretic2r.homedir.patch
+          - io.github.m0rb.heretic2r.wayland.patch
     post-install:
       - install -m644 -Dt /app/share/metainfo/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml
       - install -m644 -Dt /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.png
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
       - install -m644 -Dt /app/share/applications/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
       - install -m755 -Dt /app/bin/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh
       - mkdir -p /app/share/games/h2e
