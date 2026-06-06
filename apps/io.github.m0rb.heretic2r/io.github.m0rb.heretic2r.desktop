@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Game
 Comment=A reverse-engineered port of Heretic 2
-Exec=io.github.m0rb.heretic2r
+Exec=heretic2r
 Icon=io.github.m0rb.heretic2r
 Keywords=heretic;doom;heretic 2;id;quake;fantasy
 Name=Heretic2R
