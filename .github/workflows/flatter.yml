@@ -310,7 +310,11 @@ jobs:
     name: Merge PR
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
-    needs: builddir-lint
+    needs:
+      - build-site
+      - metainfo-lint
+      - flatter
+      - builddir-lint
     permissions:
       pull-requests: write
       contents: write
@@ -326,8 +330,10 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs:
-      - builddir-lint
       - build-site
+      - metainfo-lint
+      - flatter
+      - builddir-lint
     permissions:
       pages: write
       contents: write
