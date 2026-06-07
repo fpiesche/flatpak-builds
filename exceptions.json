@@ -76,7 +76,7 @@
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appid-url-not-reachable": "No public git repo but mednafen.github.io exists."
     },
-    "io.github.m0rf.heretic2r": {
+    "io.github.m0rb.heretic2r": {
         "appid-url-not-reachable": "Choosing a simpler app id than the full repo name",
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
