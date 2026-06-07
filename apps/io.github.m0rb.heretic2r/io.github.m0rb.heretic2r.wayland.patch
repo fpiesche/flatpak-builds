@@ -1,0 +1,7 @@
+diff --git a/src/quake2/src/unix/vid_sdl3.c b/src/quake2/src/unix/vid_sdl3.c
+index 0c58b8b..ddabaee 100644
+--- a/src/quake2/src/unix/vid_sdl3.c
++++ b/src/quake2/src/unix/vid_sdl3.c
+@@ -145,1 +145,1 @@ char* Sys_GetHomeDir(void)
+-    SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "x11");
++    SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "wayland,x11");
