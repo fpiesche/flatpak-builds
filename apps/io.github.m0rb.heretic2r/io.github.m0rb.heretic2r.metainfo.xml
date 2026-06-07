@@ -17,8 +17,7 @@
   <url type="homepage">https://github.com/m0rb/heretic2r-unix</url>
   <url type="vcs-browser">https://github.com/m0rb/heretic2r-unix</url>
   <description>
-    <p>A fully reverse engineered PC port of the Java mobile game based on the 90s
-        retro shooter.</p>
+    <p>A fully reverse engineered PC port of the the 90s action RPG.</p>
     <p><em>PLEASE NOTE:</em> This Flatpak does <em>not</em> include the game data for Doom RPG.
         Please copy at least the files <code>Htic2-0.pak</code> and <code>Htic2-1.pak</code>
         <code>$HOME/.var/app/io.github.m0rb.heretic2r/heretic2r/base/</code>.</p>

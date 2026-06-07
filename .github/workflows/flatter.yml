@@ -300,7 +300,11 @@ jobs:
 
       - name: Lint build dir
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        run: flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
+        run: |
+          echo "::group::Exceptions for ${{ matrix.app }}"
+          jq '."${{ matrix.app }}"' exceptions.json
+          echo "::endgroup::"
+          flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
 
   merge:
     name: Merge PR
