@@ -21,7 +21,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/m0rb/Heretic2R-UNIX
-        commit: 601993ebcc281f2d40cd86cdc9710951e0cf2434
+        commit: 4443b453d20c724689c531c9137a5620ce4000e4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/m0rb/Heretic2R-UNIX/branches/unix
@@ -43,7 +43,6 @@ modules:
         paths:
           - io.github.m0rb.heretic2r.cmake-install.patch
           - io.github.m0rb.heretic2r.homedir.patch
-          - io.github.m0rb.heretic2r.wayland.patch
     post-install:
       - install -m644 -Dt /app/share/metainfo/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml
       - install -m644 -Dt /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.png
