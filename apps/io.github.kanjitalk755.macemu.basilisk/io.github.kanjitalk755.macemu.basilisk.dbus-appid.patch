@@ -1,0 +1,7 @@
+diff --git a/BasiliskII/src/user_strings.cpp b/BasiliskII/src/user_strings.cpp
+index c63f22d..477610e 100644
+--- a/BasiliskII/src/user_strings.cpp
++++ b/BasiliskII/src/user_strings.cpp
+@@ -65,1 +65,1 @@
+-	{STR_APP_ID, "net.cebix.BasiliskII"},
++	{STR_APP_ID, "io.github.kanjitalk755.macemu.basilisk"},

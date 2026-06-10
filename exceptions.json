@@ -42,10 +42,6 @@
     "io.github.erick194.doomiirpg-re": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
-    "io.github.perfect_dark_pc_port.perfect_dark": {
-        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
-        "appstream-missing-screenshots": "Screenshots are not missing"
-    },
     "io.github.etonedemid.renut": {
         "appid-url-not-reachable": "repository has been renamed, redirect in place",
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
@@ -72,6 +68,9 @@
     "io.github.lunarmeadow.barrett": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.kanjitalk755.macemu.basilisk": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.mednafen.mednafen": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appid-url-not-reachable": "No public git repo but mednafen.github.io exists."
@@ -82,6 +81,10 @@
     },
     "io.github.openenroth.openenroth": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
+    "io.github.perfect_dark_pc_port.perfect_dark": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "appstream-missing-screenshots": "Screenshots are not missing"
     },
     "io.github.sergiou87.open-supaplex": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
