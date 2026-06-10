@@ -1,0 +1,43 @@
+app-id: io.github.kanjitalk755.macemu.basilisk
+runtime: org.freedesktop.Platform
+runtime-version: "25.08"
+sdk: org.freedesktop.Sdk
+command: BasiliskII
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=all
+  - --allow=bluetooth
+
+modules:
+  - name: basilisk
+    buildsystem: autotools
+    subdir: BasiliskII/src/Unix
+    no-parallel-make: true
+    sources:
+      - type: git
+        url: https://github.com/kanjitalk755/macemu.git
+        commit: 9a3f687fc1080b1cfdc4e0132a2017d9c734a950
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/kanjitalk755/macemu/branches/main
+          commit-query: .commit.sha
+      - type: patch
+        path: io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
+
+  - name: freedesktop
+    sources:
+      - type: file
+        path: io.github.kanjitalk755.macemu.basilisk.svg
+      - type: file
+        path: io.github.kanjitalk755.macemu.basilisk.desktop
+      - type: file
+        path: io.github.kanjitalk755.macemu.basilisk.metainfo.xml
+    buildsystem: simple
+    build-commands:
+      - install -m 644 -Dt /app/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
+      - install -m 644 -Dt /app/share/icons/hicolor/scalable/apps/ ${FLATPAK_ID}.svg
+      - install -m 644 -Dt /app/share/applications/ ${FLATPAK_ID}.desktop
