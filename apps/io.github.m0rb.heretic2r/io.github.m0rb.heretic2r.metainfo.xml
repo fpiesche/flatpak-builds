@@ -26,15 +26,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux/title.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/title.png</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux//intro.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/intro.jpg</image>
       <caption>Intro</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux//ingame.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/ingame.jpg</image>
       <caption>Ingame</caption>
     </screenshot>
   </screenshots>
