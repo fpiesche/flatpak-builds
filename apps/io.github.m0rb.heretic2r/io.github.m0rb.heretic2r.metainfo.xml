@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>io.github.m0rb.heretic2r</id>
-  <name>Heretic II-R</name>
+  <name>Heretic2R</name>
   <developer id="io.github.m0rb.heretic2r">
     <name>m0rb;Heretic2R Contributors</name>
     <url>https://github.com/m0rb/heretic2r-unix/graphs/contributors</url>
@@ -26,15 +26,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/title.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux/title.png</image>
       <caption>Title screen</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/intro.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux//intro.jpg</image>
       <caption>Intro</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.m0rb.heretic2r/screenshots/ingame.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/m0rb/heretic2r-unix@main/dist/screenshots/linux//ingame.jpg</image>
       <caption>Ingame</caption>
     </screenshot>
   </screenshots>
