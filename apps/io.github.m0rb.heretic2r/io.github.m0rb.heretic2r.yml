@@ -41,6 +41,7 @@ modules:
         path: io.github.m0rb.heretic2r.desktop
       - type: patch
         paths:
+          - io.github.m0rb.heretic2r.fix-plmpeg.patch
           - io.github.m0rb.heretic2r.cmake-install.patch
           - io.github.m0rb.heretic2r.homedir.patch
     post-install:
