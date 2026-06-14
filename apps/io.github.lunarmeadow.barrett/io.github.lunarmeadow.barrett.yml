@@ -71,8 +71,8 @@ modules:
           version-query: .tag_name | sub("^r"; "")
           url-query: .tarball_url
       - type: archive
-        url: https://api.github.com/repos/lunarmeadow/barrett/tarball/v1.2-beta
-        sha256: 1c4fcedd79cb8950f0f4e5abb1d8f0408cb39682b514b04a532655b6248772fc
+        url: https://api.github.com/repos/lunarmeadow/barrett/tarball/v1.3-beta
+        sha256: cd69ab6b3372e20b748cd5984bb7c4c250fb64cb3f55b88051b35b72cfdd7c15
         dest-filename: barrett.tar.gz
         x-checker-data:
           type: json
