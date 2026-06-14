@@ -21,7 +21,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/m0rb/Heretic2R-UNIX
-        commit: 4443b453d20c724689c531c9137a5620ce4000e4
+        commit: 4657c6116a4406fb850da0bbe3de63615887dd56
         x-checker-data:
           type: json
           url: https://api.github.com/repos/m0rb/Heretic2R-UNIX/branches/unix
@@ -41,6 +41,7 @@ modules:
         path: io.github.m0rb.heretic2r.desktop
       - type: patch
         paths:
+          - io.github.m0rb.heretic2r.fix-plmpeg.patch
           - io.github.m0rb.heretic2r.cmake-install.patch
           - io.github.m0rb.heretic2r.homedir.patch
     post-install:
