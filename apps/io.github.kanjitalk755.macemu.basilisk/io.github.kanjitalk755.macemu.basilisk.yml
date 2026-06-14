@@ -23,7 +23,7 @@ modules:
         commit: 9a3f687fc1080b1cfdc4e0132a2017d9c734a950
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/kanjitalk755/macemu/branches/main
+          url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
           commit-query: .commit.sha
       - type: patch
         path: io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch

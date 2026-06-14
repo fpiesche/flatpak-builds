@@ -25,10 +25,10 @@ modules:
         url: https://github.com/KorolevSoftware/DoomIIRPG-RE
         branch: refactoring_bug_fix
         commit: ef4f832c0827c9173f4e46ac98b4ecd077ac54d2
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/KorolevSoftware/doomiirpg-re/branches
-          commit-query: .[] | select(.name == "refactoring_bug_fix") | .commit.sha
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/KorolevSoftware/doomiirpg-re/branches
+        #   commit-query: .[] | select(.name == "refactoring_bug_fix") | .commit.sha
       - type: patch
         paths:
           - io.github.erick194.doomiirpg-re.cmake-install.patch
