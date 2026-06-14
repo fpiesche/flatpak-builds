@@ -1,0 +1,187 @@
+diff --git a/source/streamsources/music_dumb.cpp b/source/streamsources/music_dumb.cpp
+index 3050d5c..3e3df35 100644
+--- a/source/streamsources/music_dumb.cpp
++++ b/source/streamsources/music_dumb.cpp
+@@ -50,6 +50,9 @@
+ #include "zmusic/midiconfig.h"
+ #include "fileio.h"
+ 
++#include "unmo3.h"
++#include "internal/dumbfile.h"
++
+ // MACROS ------------------------------------------------------------------
+ 
+ // TYPES -------------------------------------------------------------------
+@@ -64,7 +67,8 @@ public:
+ 	//bool SetPosition(int ms);
+ 	bool SetSubsong(int subsong) override;
+ 	bool Start() override;
+	SoundStreamInfoEx GetFormatEx() override;
++	SoundStreamInfo GetFormat();
+ 	void ChangeSettingNum(const char* setting, double val) override;
+ 	std::string GetStats() override;
+ 
+@@ -774,6 +777,8 @@ StreamSource* MOD_OpenSong(MusicIO::FileInterface *reader, int samplerate)
+ 	bool is_it = false;
+ 	bool is_dos = true;
+ 
++	bool delete_unmo = false;
++
+ 	auto fpos = reader->tell();
+     int size = (int)reader->filelength();
+ 
+@@ -885,17 +890,47 @@ StreamSource* MOD_OpenSong(MusicIO::FileInterface *reader, int samplerate)
+ 			duh = dumb_read_okt_quick(f);
+ 		}
+ 	}
+-	else if (size >= 4 &&
+-		 (dstart[0] == MAKE_ID('A','M','F','\xa') ||
+-		 dstart[0] == MAKE_ID('A','M','F','\xb') ||
+-		 dstart[0] == MAKE_ID('A','M','F','\xc') ||
+-		 dstart[0] == MAKE_ID('A','M','F','\xd') ||
+-		 dstart[0] == MAKE_ID('A','M','F','\xe')))
++	else if (size >= 4 && dstart[0] == MAKE_ID('M', 'O', '3', '\x05'))
+ 	{
+-		if ((f = dumb_read_allfile(&filestate, start, reader, headsize, size)))
++		uint8_t* mem = new uint8_t[size];
++		memcpy(mem, start, headsize);
++
++		// read the rest of the file first, then decode it, then read that again with dumb instead
++		if (reader->read(mem + headsize, size - headsize) == (size - headsize))
+ 		{
+-			duh = dumb_read_amf_quick(f);
++			void* decodedData = mem;
++			unsigned int decodedSize = size;
++
++			int r = UNMO3_Decode(&decodedData, &decodedSize, 0);
++			delete_unmo = true;
++
++			if (r == 0)
++			{
++				filestate.ptr = static_cast<uint8_t*>(decodedData);
++				filestate.offset = 0;
++
++				is_it = true;
++
++				if ((f = dumb_read_allfile(&filestate, static_cast<uint8_t*>(decodedData), nullptr, decodedSize, decodedSize)))
++				{
++					duh = dumb_read_it_quick(f); // Now handle the module data as if it were a standard module format.
++				}
++			}
++			else if (r == 1)
++			{
++				SetError("File isn't an MO3 file");
++			}
++			else if (r == 2)
++			{
++				SetError("Problem decoding MO3 file");
++			}
+ 		}
++		else
++		{
++			SetError("Failed to read MO3 data");
++		}
++
++		delete[] mem;
+ 	}
+ 
+ 	if ( ! duh )
+@@ -941,10 +976,15 @@ StreamSource* MOD_OpenSong(MusicIO::FileInterface *reader, int samplerate)
+ 		// Reposition file pointer for other codecs to do their checks.
+         reader->seek(fpos, SEEK_SET);
+ 	}
+-	if (filestate.ptr != (uint8_t *)start)
++	if (!delete_unmo && filestate.ptr != (uint8_t *)start)
+ 	{
+ 		delete[] const_cast<uint8_t *>(filestate.ptr);
+ 	}
++	else if (delete_unmo)
++	{
++		UNMO3_Free((void*)filestate.ptr);
++	}
++
+ 	return state;
+ }
+ 
+@@ -1016,7 +1056,7 @@ DumbSong::DumbSong(DUH* myduh, int samplerate)
+ 	written = 0;
+ 	length = 0;
+ 	start_order = 0;
+-	MasterVolume = (float)dumbConfig.mod_dumb_mastervolume * 4;
++	MasterVolume = (float)dumbConfig.mod_dumb_mastervolume;
+ 	if (dumbConfig.mod_samplerate != 0)
+ 	{
+ 		srate = dumbConfig.mod_samplerate;
+@@ -1051,6 +1091,17 @@ SoundStreamInfoEx DumbSong::GetFormatEx()
+ 	return { 32*1024, srate, SampleType_Float32, ChannelConfig_Stereo };
+ }
+ 
++//==========================================================================
++//
++// DumbSong GetFormat
++//
++//==========================================================================
++
++SoundStreamInfo DumbSong::GetFormat()
++{
++	return { 32*1024, srate, 2 };
++}
++
+ //==========================================================================
+ //
+ // DumbSong :: Play
+diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
+index da3e80e..6873c16 100644
+--- a/source/CMakeLists.txt
++++ b/source/CMakeLists.txt
+@@ -3,6 +3,8 @@
+ # charge of compiling.  As a result any properties set on zmusic-obj should be
+ # interface.
+ 
++set(UNMO3_LIB "${CMAKE_SOURCE_DIR}/thirdparty/unmo3lib/linux/x64/libunmo3.so")
++
+ add_library(zmusic-obj INTERFACE)
+ target_sources(zmusic-obj
+ INTERFACE
+@@ -53,6 +54,7 @@ file(GLOB HEADER_FILES
+ 	decoder/*.h
+ 	streamsources/*.h
+ 	../thirdparty/*.h
++	../thirdparty/unmo3lib/*.h
+ 	../include/*.h
+ )
+ target_sources(zmusic-obj INTERFACE ${HEADER_FILES})
+@@ -140,12 +142,13 @@ if(WIN32)
+ 	)
+ endif()
+ 
+-target_link_libraries(zmusic-obj INTERFACE dumb gme libxmp miniz ${CMAKE_DL_LIBS})
++target_link_libraries(zmusic-obj INTERFACE dumb gme libxmp miniz ${CMAKE_DL_LIBS} ${UNMO3_LIB})
+ 
+ target_include_directories(zmusic-obj
+ INTERFACE
+ 	../include
+ 	${CMAKE_CURRENT_SOURCE_DIR}
++	${CMAKE_SOURCE_DIR}/thirdparty/unmo3lib
+ 	zmusic
+ )
+ 
+@@ -164,7 +167,7 @@ use_fast_math(zmusiclite)
+ target_include_directories(zmusic INTERFACE $<INSTALL_INTERFACE:include> $<BUILD_INTERFACE:${ZMusic_SOURCE_DIR}/include>)
+ target_include_directories(zmusiclite INTERFACE $<INSTALL_INTERFACE:include> $<BUILD_INTERFACE:${ZMusic_SOURCE_DIR}/include>)
+ 
+-target_link_libraries_hidden(zmusic zmusic-obj adl oplsynth opn timidity timidityplus wildmidi fluidsynth)
++target_link_libraries_hidden(zmusic zmusic-obj adl oplsynth opn timidity timidityplus wildmidi fluidsynth ${UNMO3_LIB})
+ target_link_libraries_hidden(zmusiclite zmusic-obj fluidsynth)
+ 
+ target_compile_definitions(zmusic PUBLIC $<$<STREQUAL:$<TARGET_PROPERTY:zmusic,TYPE>,STATIC_LIBRARY>:ZMUSIC_STATIC>)
+@@ -214,6 +217,9 @@ if(ZMUSIC_INSTALL)
+ 		NAMESPACE ZMusic::
+ 		COMPONENT devel
+ 	)
++	install(FILES ${UNMO3_LIB}
++		DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++	)
+ endif()
+ 
+ if( MSVC )
