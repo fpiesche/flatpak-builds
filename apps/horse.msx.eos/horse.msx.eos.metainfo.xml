@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <component type="desktop-application">
   <id>horse.msx.eos</id>
-  <launchable type="desktop-id">horse.msx.eos.desktop</launchable>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0</project_license>
-
   <name>end of starchild</name>
   <developer id="horse.msx.eos">
     <name>MuleNgine</name>
     <url>https://msx.horse/eos/</url>
   </developer>
-  <summary>survival fantasy and manic shooting adventure</summary>
-
-  <url type="homepage">https://msx.horse/eos/</url>
-  <url type="vcs-browser">https://github.com/msx2plus/gzdoom-eos</url>
-
   <branding>
     <color type="primary" scheme_preference="light">#aea4e0</color>
     <color type="primary" scheme_preference="dark">#4c02b1</color>
   </branding>
-
+  <summary>survival fantasy and manic shooting adventure</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <launchable type="desktop-id">horse.msx.eos.desktop</launchable>
+  <url type="homepage">https://msx.horse/eos/</url>
+  <url type="vcs-browser">https://github.com/msx2plus/gzdoom-eos</url>
   <description>
     <p>at first, one offers what is light, what feels like a spark of joy. an idea, a thought,
       a secret desire. the act of giving is not without its price. it is the yearning to be
@@ -41,27 +37,27 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://msx.horse/eos/screen01.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen01.jpg</image>
       <caption></caption>
     </screenshot>
     <screenshot>
-      <image>https://msx.horse/eos/screen02.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen02.jpg</image>
       <caption></caption>
     </screenshot>
     <screenshot>
-      <image>https://msx.horse/eos/screen03.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen03.jpg</image>
       <caption></caption>
     </screenshot>
     <screenshot>
-      <image>https://msx.horse/eos/screen04.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen04.jpg</image>
       <caption></caption>
     </screenshot>
     <screenshot>
-      <image>https://msx.horse/eos/screen05.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen05.jpg</image>
       <caption></caption>
     </screenshot>
     <screenshot>
-      <image>https://msx.horse/eos/screen06.jpg</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen06.jpg</image>
       <caption></caption>
     </screenshot>
   </screenshots>
@@ -92,9 +88,15 @@
   </categories>
 
   <releases>
-    <release version="1.5" date="2026-06-13" />
-    <release version="1.4" date="2026-06-12" />
-    <release version="1.3" date="2026-06-09" />
+    <release version="1.5" date="2026-06-13">
+      <description></description>
+    </release>
+    <release version="1.4" date="2026-06-12">
+      <description></description>
+    </release>
+    <release version="1.3" date="2026-06-09">
+      <description></description>
+    </release>
   </releases>
 
   <content_rating type="oars-1.1">
