@@ -1,0 +1,34 @@
+diff --git a/src/scripting/vmthunks_actors.cpp b/src/scripting/vmthunks_actors.cpp
+index 018025577..9659d8ab8 100644
+--- a/src/scripting/vmthunks_actors.cpp
++++ b/src/scripting/vmthunks_actors.cpp
+@@ -2223,3 +2223,15 @@ DEFINE_ACTION_FUNCTION_NATIVE(FLevelLocals, SpawnParticle, SpawnParticle)
+ 	SpawnParticle(self, p);
+ 	return 0;
+ }
++
++// expose line testing to zscript
++DEFINE_ACTION_FUNCTION(AActor, TestActivateLine)
++{
++    PARAM_SELF_PROLOGUE(AActor);
++    PARAM_INT(lineIndex);
++    PARAM_INT(side);
++    PARAM_INT(activationType);
++    if ((unsigned)lineIndex >= (unsigned)level.lines.Size()) ACTION_RETURN_BOOL(false);
++    line_t* ln = &level.lines[lineIndex];
++    ACTION_RETURN_BOOL(P_TestActivateLine(ln, self, side != 0, activationType, nullptr));
++}
+diff --git a/wadsrc/static/zscript/actors/actor.zs b/wadsrc/static/zscript/actors/actor.zs
+index dbc300461..3e0287d35 100644
+--- a/wadsrc/static/zscript/actors/actor.zs
++++ b/wadsrc/static/zscript/actors/actor.zs
+@@ -392,6 +392,9 @@ class Actor : Thinker native
+ 	native deprecated("2.3", "Use Scale.Y instead") double ScaleY;
+ 
+ 	//FStrifeDialogueNode *Conversation; // [RH] The dialogue to show when this actor is used.;
++
++    // line test
++    native bool TestActivateLine(int lineIndex, int side = 0, int activationType = 0);
+ 	
+ 	
+ 	Default

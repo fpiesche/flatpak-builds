@@ -1,0 +1,103 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2bb65f338..0bddc3836 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -155,7 +155,7 @@ IF( NOT CMAKE_BUILD_TYPE )
+ ENDIF()
+ 
+ set( ZDOOM_OUTPUT_DIR ${CMAKE_BINARY_DIR} CACHE PATH "Directory where zdoom.pk3 and the executable will be created." )
+-set( ZDOOM_EXE_NAME "uzdoom" CACHE FILEPATH "Name of the executable to create" )
++set( ZDOOM_EXE_NAME "eos" CACHE FILEPATH "Name of the executable to create" )
+ if( MSVC )
+ 	# Allow the user to use ZDOOM_OUTPUT_DIR as a single release point.
+ 	# Use zdoom, zdoomd, zdoom64, and zdoomd64 for the binary names
+diff --git a/src/version.h b/src/version.h
+index 1e7521ca9..f1ec040c1 100644
+--- a/src/version.h
++++ b/src/version.h
+@@ -41,7 +41,7 @@ const char *GetVersionString();
+ 
+ /** Lots of different version numbers **/
+ 
+-#define VERSIONSTR "4.14.3"
++#define VERSIONSTR "4.14.3-eos"
+ 
+ // The version as seen in the Windows resource
+ #define RC_FILEVERSION 4,14,3,0
+@@ -91,13 +91,13 @@ const char *GetVersionString();
+ #define SAVEVER 4560
+ 
+ // This is so that derivates can use the same savegame versions without worrying about engine compatibility
+-#define GAMESIG "UZDOOM"
++#define GAMESIG "eos"
+ 
+ #ifndef LOAD_GZDOOM_4142_SAVES
+     #define LOAD_GZDOOM_4142_SAVES 1
+ #endif
+ 
+-#define BASEWAD "uzdoom.pk3"
++#define BASEWAD "eos.pk3"
+ // Set OPTIONALWAD to "" (null) to disable searching for it
+ #define OPTIONALWAD "game_support.pk3"
+ #define GZDOOM 1
+@@ -105,13 +105,13 @@ const char *GetVersionString();
+ 
+ // More stuff that needs to be different for derivatives.
+ 
+-#define GAMENAME "UZDoom"
+-#define WGAMENAME L"UZDoom"
+-#define GAMENAMELOWERCASE "uzdoom"
+-#define APPID "org.zdoom.UZDoom"
++#define GAMENAME "eos"
++#define WGAMENAME L"eos"
++#define GAMENAMELOWERCASE "eos"
++#define APPID "horse.msx.eos"
+ #define QUERYIWADDEFAULT true
+-#define FORUM_URL "http://forum.zdoom.org/"
+-#define BUGS_FORUM_URL	"http://forum.zdoom.org/viewforum.php?f=2"
++#define FORUM_URL "https://msx.horse/eos/"
++#define BUGS_FORUM_URL	"https://msx.horse/eos/"
+ // For QUERYIWADDEFAULT: Set to 'true' to always show dialog box on startup by default, 'false' to disable.
+ // Should set to 'false' for standalone games, and set to 'true' for regular source port forks that are meant to run any game.
+ 
+diff --git a/src/win32/icon1.ico b/src/win32/icon1.ico
+index 8238934c6..76731e74f 100644
+Binary files a/src/win32/icon1.ico and b/src/win32/icon1.ico differ
+diff --git a/src/win32/zdoom.rc b/src/win32/zdoom.rc
+index 52bec74dc..130058a91 100644
+--- a/src/win32/zdoom.rc
++++ b/src/win32/zdoom.rc
+@@ -72,3 +72,3 @@ BEGIN
+-    "            VALUE ""FileDescription"", ""UZDoom""\r\n"
++    "            VALUE ""FileDescription"", ""end of starchild""\r\n"
+     "            VALUE ""FileVersion"", RC_FILEVERSION2\r\n"
+-    "            VALUE ""InternalName"", ""UZDoom""\r\n"
++    "            VALUE ""InternalName"", ""end of starchild""\r\n"
+@@ -74,5 +74,5 @@ BEGIN
+-    "            VALUE ""OriginalFilename"", ""uzdoom.exe""\r\n"
+-    "            VALUE ""ProductName"", ""UZDoom""\r\n"
++    "            VALUE ""OriginalFilename"", ""eos.exe""\r\n"
++    "            VALUE ""ProductName"", ""eos""\r\n"
+     "            VALUE ""ProductVersion"", GIT_VERSION\r\n"
+     "        END\r\n"
+     "    END\r\n"
+diff --git a/wadsrc/CMakeLists.txt b/wadsrc/CMakeLists.txt
+index 05b3f8c18..3175b3b3d 100644
+--- a/wadsrc/CMakeLists.txt
++++ b/wadsrc/CMakeLists.txt
+@@ -1 +1 @@
+-add_pk3(uzdoom.pk3 ${CMAKE_CURRENT_SOURCE_DIR}/static)
++add_pk3(eos.pk3 ${CMAKE_CURRENT_SOURCE_DIR}/static)
+diff --git a/src/g_game.cpp b/src/g_game.cpp
+index 4a72d4d24..1f9ad07a4 100644
+--- a/src/g_game.cpp
++++ b/src/g_game.cpp
+@@ -2309,7 +2345,7 @@ void G_DoAutoSave ()
+ 	}
+ 
+ 	readableTime = myasctime ();
+-	description.Format("Autosave %s", readableTime);
++	description.Format("%s - %s", readableTime, primaryLevel->LevelName.GetChars());
+ 	G_DoSaveGame (false, false, file, description.GetChars());
+ }
+ 
