@@ -10,7 +10,7 @@
     <color type="primary" scheme_preference="light">#814707</color>
     <color type="primary" scheme_preference="dark">#201d1b</color>
   </branding>
-  <summary>Become a legend – again.</summary>
+  <summary>Become a legend - again.</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>CC0-1.0</project_license>
   <launchable type="desktop-id">dev.twilitrealm.dusklight.desktop</launchable>
