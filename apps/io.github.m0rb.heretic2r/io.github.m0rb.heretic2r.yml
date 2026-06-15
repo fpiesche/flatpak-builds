@@ -31,6 +31,9 @@ modules:
         dest-filename: h2e.zip
         dest: h2e
         sha256: 6e2e385c77c0ee8f8f04b2016e43533405f377f1d010a4e446e18893fdf516e3
+      - type: file
+        path: io.github.m0rb.heretic2r.metainfo.xml
     post-install:
+      - install -m644 -Dt /app/share/metainfo/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml
       - mkdir -p /app/share/games/h2e
       - cp -r ${FLATPAK_BUILDER_BUILDDIR}/h2e/* /app/share/games/h2e/
