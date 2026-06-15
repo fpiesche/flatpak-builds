@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>io.github.glkarin.idtech4</id>
-  <name>Prey</name>
+  <name>idTech4A++ (Harmattan Edition)</name>
   <developer id="io.github.glkarin">
     <name>Human Head Studios; Raven Software; id Software; Ryan C. Gordon; glKarin; idtech4a++ Contributors</name>
     <url>https://github.com/glKarin/com.n0n3m4.diii4a/graphs/contributors</url>
