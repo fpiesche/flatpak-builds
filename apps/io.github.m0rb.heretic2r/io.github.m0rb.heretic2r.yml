@@ -21,7 +21,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/m0rb/Heretic2R-UNIX
-        commit: baf47326e8799c153161db78633e4082435913fb
+        commit: 395965abefdce2df8e1a59de74f6f87a78e21142
         x-checker-data:
           type: json
           url: https://api.github.com/repos/m0rb/Heretic2R-UNIX/branches/unix
@@ -32,23 +32,8 @@ modules:
         dest: h2e
         sha256: 6e2e385c77c0ee8f8f04b2016e43533405f377f1d010a4e446e18893fdf516e3
       - type: file
-        path: io.github.m0rb.heretic2r.sh
-      - type: file
-        path: io.github.m0rb.heretic2r.png
-      - type: file
         path: io.github.m0rb.heretic2r.metainfo.xml
-      - type: file
-        path: io.github.m0rb.heretic2r.desktop
-      - type: patch
-        paths:
-          - io.github.m0rb.heretic2r.fix-plmpeg.patch
-          - io.github.m0rb.heretic2r.cmake-install.patch
-          - io.github.m0rb.heretic2r.homedir.patch
     post-install:
       - install -m644 -Dt /app/share/metainfo/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml
-      - install -m644 -Dt /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.png
-      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
-      - install -m644 -Dt /app/share/applications/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.desktop
-      - install -m755 -Dt /app/bin/ ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh
       - mkdir -p /app/share/games/h2e
       - cp -r ${FLATPAK_BUILDER_BUILDDIR}/h2e/* /app/share/games/h2e/
