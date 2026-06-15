@@ -86,7 +86,7 @@ def parse_app(app_id: str) -> dict:
         app_info["screenshots"].append(
             {
                 "image": screenshot.xpath("image")[0].text,
-                "caption": screenshot.xpath("caption")[0].text,
+                "caption": getattr(screenshot.xpath("caption")[0], "text", ""),
                 "type": screenshot.xpath("concat(@type, substring('none', 1 div not(@type)))")
             }
         )
