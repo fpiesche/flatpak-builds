@@ -1,0 +1,293 @@
+diff --git a/src/g_game.cpp b/src/g_game.cpp
+index 4a72d4d24..1f9ad07a4 100644
+--- a/src/g_game.cpp
++++ b/src/g_game.cpp
+@@ -125,6 +125,7 @@ CVAR (Bool, longsavemessages, false, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
+ CVAR (Bool, cl_waitforsave, true, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
+ CVAR (Bool, enablescriptscreenshot, false, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
+ CVAR (Bool, cl_restartondeath, false, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
++CVAR (Float, cl_horizaimassist, 2.0f, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
+ EXTERN_CVAR (Float, con_midtime);
+ 
+ //==========================================================================
+@@ -210,7 +211,16 @@ CVAR (Bool,		freelook,		true,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)		// Always mlook?
+ CVAR (Bool,		lookstrafe,		false,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)		// Always strafe with mouse?
+ CVAR (Float,	m_forward,		1.f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
+ CVAR (Float,	m_side,			2.f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
+- 
++
++#define ANALOG_LOOK_BASE	1280
++
++// You can change cl_analog_sensitivity_pitch's default to 1.6f if the old historical
++// behavior is preferred, but IMO that is so fast that it's practically unplayable...
++CVAR (Float, cl_analog_sensitivity_yaw,		1.f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
++CVAR (Float, cl_analog_sensitivity_pitch,	0.6f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
++CVAR (Bool, cl_analog_run, true, CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
++CVAR (Float, cl_analog_move_sensitivity, 1.0f, CVAR_GLOBALCONFIG|CVAR_ARCHIVE) // expose movement sensitivity for joystick config; this is multiplied by 1.5 later to ensure straferunning is consistent
++
+ int 			turnheld;								// for accelerative turning 
+ 
+ EXTERN_CVAR (Bool, invertmouse)
+@@ -726,18 +742,40 @@ void G_BuildTiccmd (ticcmd_t *cmd)
+ 		joyaxes[JOYAXIS_Pitch] = joyaxes[JOYAXIS_Forward];
+ 		joyaxes[JOYAXIS_Forward] = 0;
+ 	}
++    
++    // Rescale diagonal analog input from roughly [0.77, 0.77] to [1.0, 1.0],
++    // which enables analog sticks to be able to strafe run like a keyboard can.
++
++    // This is inaccurate to how Doom had originally handled analog input, but
++    // that's why it's an option, after all.
++
++    const float sqrtOf2Frac = 0.41421356237309504880; // sqrt(2)'s fractional value
++
++    float move_min = min<float>(fabs(joyaxes[JOYAXIS_Side]), fabs(joyaxes[JOYAXIS_Forward]));
++    float move_max = max<float>(fabs(joyaxes[JOYAXIS_Side]), fabs(joyaxes[JOYAXIS_Forward]));
++
++    float scale = cl_analog_move_sensitivity*1.5;
++    if (move_max > EQUAL_EPSILON)
++    {
++        scale += (move_min / move_max) * sqrtOf2Frac;
++    }
++
++    joyaxes[JOYAXIS_Forward] = std::clamp(joyaxes[JOYAXIS_Forward] * scale, -1.f, 1.f);
++    joyaxes[JOYAXIS_Side] = std::clamp(joyaxes[JOYAXIS_Side] * scale, -1.f, 1.f);
+ 
+ 	if (joyaxes[JOYAXIS_Pitch] != 0)
+ 	{
+-		G_AddViewPitch(joyint(joyaxes[JOYAXIS_Pitch] * 2048));
++        G_AddViewPitch(joyint(joyaxes[JOYAXIS_Pitch] * ANALOG_LOOK_BASE * cl_analog_sensitivity_pitch));
+ 	}
+ 	if (joyaxes[JOYAXIS_Yaw] != 0)
+ 	{
+-		G_AddViewAngle(joyint(-1280 * joyaxes[JOYAXIS_Yaw]));
++        G_AddViewAngle(joyint(-ANALOG_LOOK_BASE * cl_analog_sensitivity_yaw * joyaxes[JOYAXIS_Yaw]));
+ 	}
+ 
+-	side -= joyint(sidemove[speed] * joyaxes[JOYAXIS_Side]);
+-	forward += joyint(joyaxes[JOYAXIS_Forward] * forwardmove[speed]);
++    cmd->ucmd.pitch = LocalViewPitch >> 16;
++   
++    side -= joyint(joyaxes[JOYAXIS_Side] * sidemove[cl_analog_run | speed]);
++	forward += joyint(joyaxes[JOYAXIS_Forward] * forwardmove[cl_analog_run | speed]);
+ 	fly += joyint(joyaxes[JOYAXIS_Up] * 2048);
+ 
+ 	// Handle mice.
+diff --git a/src/playsim/p_actionfunctions.cpp b/src/playsim/p_actionfunctions.cpp
+index 1c5a91d6d..dfbb9547d 100644
+--- a/src/playsim/p_actionfunctions.cpp
++++ b/src/playsim/p_actionfunctions.cpp
+@@ -783,6 +783,7 @@ DEFINE_ACTION_FUNCTION(AActor, A_SeekerMissile)
+ //==========================================================================
+ DEFINE_ACTION_FUNCTION(AActor, A_BulletAttack)
+ {
++    EXTERN_CVAR (Float, cl_horizaimassist);
+ 	PARAM_SELF_PROLOGUE(AActor);
+ 
+ 	int i;
+@@ -796,7 +797,7 @@ DEFINE_ACTION_FUNCTION(AActor, A_BulletAttack)
+ 	S_Sound (self, CHAN_WEAPON, 0, self->AttackSound, 1, ATTN_NORM);
+ 	for (i = self->GetMissileDamage (0, 1); i > 0; --i)
+     {
+-		DAngle angle = self->Angles.Yaw + DAngle::fromDeg(pr_cabullet.Random2() * (5.625 / 256.));
++		DAngle angle = self->Angles.Yaw + DAngle::fromDeg(pr_cabullet.Random2() * (cl_horizaimassist / 256.));
+ 		int damage = ((pr_cabullet()%5)+1)*3;
+ 		P_LineAttack(self, angle, MISSILERANGE, slope, damage,
+ 			NAME_Hitscan, NAME_BulletPuff);
+diff --git a/src/playsim/p_mobj.cpp b/src/playsim/p_mobj.cpp
+index bae49906f..5df356676 100644
+--- a/src/playsim/p_mobj.cpp
++++ b/src/playsim/p_mobj.cpp
+@@ -7353,9 +7353,10 @@ AActor *P_SpawnPlayerMissile (AActor *source, double x, double y, double z,
+ 	}
+ 	aimflags &= ~ALF_IGNORENOAUTOAIM; // just to be safe.
+ 
+-	static const double angdiff[3] = { -5.625, 5.625, 0 };
++	EXTERN_CVAR (Float, cl_horizaimassist);
++
+ 	DAngle an = angle;
+-	DAngle pitch;
++	DAngle pitch = nullAngle;
+ 	FTranslatedLineTarget scratch;
+ 	AActor *defaultobject = GetDefaultByType(type);
+ 	DAngle vrange = DAngle::fromDeg(nofreeaim ? 35. : 0.);
+@@ -7366,36 +7367,67 @@ AActor *P_SpawnPlayerMissile (AActor *source, double x, double y, double z,
+ 		// Keep exactly the same angle and pitch as the player's own aim
+ 		an = angle;
+ 		pitch = source->Angles.Pitch;
+-		pLineTarget->linetarget = NULL;
++		pLineTarget->linetarget = nullptr;
+ 	}
+ 	else // see which target is to be aimed at
+ 	{
+-		// [XA] If MaxTargetRange is defined in the spawned projectile, use this as the
+-		//      maximum range for the P_AimLineAttack call later; this allows MaxTargetRange
+-		//      to function as a "maximum tracer-acquisition range" for seeker missiles.
+-		double linetargetrange = defaultobject->maxtargetrange > 0 ? defaultobject->maxtargetrange*64 : 16*64.;
++		const double linetargetrange = (defaultobject->maxtargetrange > 0)
++			? defaultobject->maxtargetrange * 64.0
++			: 16.0 * 64.0;
+ 
+-		int i = 2;
+-		do
+-		{
+-			an = angle + DAngle::fromDeg(angdiff[i]);
+-			pitch = P_AimLineAttack (source, an, linetargetrange, pLineTarget, vrange, aimflags);
+-	
+-			if (source->player != NULL &&
+-				!nofreeaim &&
+-				source->Level->IsFreelookAllowed() &&
+-				source->player->userinfo.GetAimDist() <= 0.5)
+-			{
+-				break;
+-			}
+-		} while (pLineTarget->linetarget == NULL && --i >= 0);
++		const double maxDeg = std::max(0.0, double(cl_horizaimassist));
+ 
+-		if (pLineTarget->linetarget == NULL)
++		if (maxDeg <= 0.0)
+ 		{
+ 			an = angle;
+-			if (nofreeaim || !source->Level->IsFreelookAllowed())
++			pitch = P_AimLineAttack(source, an, linetargetrange, pLineTarget, vrange, aimflags);
++		}
++		else
++		{
++			const double coarseStep = std::clamp(maxDeg / 8.0, 0.5, 3.0);
++			const double fineStep   = std::max(coarseStep * 0.25, 0.125);
++
++			auto try_sweep = [&](double stepDeg) -> bool
++			{
++				for (int k = 0;; ++k)
++				{
++					const double delta = k * stepDeg;
++					if (delta > maxDeg) break;
++
++					for (int side = (k == 0 ? 0 : +1); side >= (k == 0 ? 0 : -1); side -= 2)
++					{
++						const double yawOffsetDeg = (side == 0) ? 0.0 : (side > 0 ? +delta : -delta);
++						an = angle + DAngle::fromDeg(yawOffsetDeg);
++
++						pitch = P_AimLineAttack(source, an, linetargetrange, pLineTarget, vrange, aimflags);
++
++						if (source->player != nullptr &&
++							!nofreeaim &&
++							source->Level->IsFreelookAllowed() &&
++							source->player->userinfo.GetAimDist() <= 0.5f)
++						{
++							return true;
++						}
++
++						if (pLineTarget->linetarget != nullptr)
++						{
++							return true;
++						}
++					}
++				}
++				return false;
++			};
++
++			if (!try_sweep(coarseStep))
+ 			{
+-				pitch = nullAngle;
++				try_sweep(fineStep);
++			}
++			if (pLineTarget->linetarget == nullptr)
++			{
++				an = angle;
++				pitch = (nofreeaim || !source->Level->IsFreelookAllowed())
++					? nullAngle
++					: source->Angles.Pitch;
+ 			}
+ 		}
+ 	}
+diff --git a/src/playsim/p_pspr.cpp b/src/playsim/p_pspr.cpp
+index f83a89d84..1edba727c 100644
+--- a/src/playsim/p_pspr.cpp
++++ b/src/playsim/p_pspr.cpp
+@@ -1256,30 +1256,61 @@ DEFINE_ACTION_FUNCTION(AActor, A_ClearOverlays)
+ 
+ DAngle P_BulletSlope (AActor *mo, FTranslatedLineTarget *pLineTarget, int aimflags)
+ {
+-	static const double angdiff[3] = { -5.625f, 5.625f, 0 };
+-	int i;
+-	DAngle an;
+-	DAngle pitch;
+-	FTranslatedLineTarget scratch;
+-
+-	aimflags &= ~ALF_IGNORENOAUTOAIM; // just to be safe.
+-	if (pLineTarget == NULL) pLineTarget = &scratch;
+-	// see which target is to be aimed at
+-	i = 2;
+-	do
+-	{
+-		an = mo->Angles.Yaw + DAngle::fromDeg(angdiff[i]);
+-		pitch = P_AimLineAttack (mo, an, 16.*64, pLineTarget, nullAngle, aimflags);
+-
+-		if (mo->player != nullptr &&
+-			mo->Level->IsFreelookAllowed() &&
+-			mo->player->userinfo.GetAimDist() <= 0.5)
+-		{
+-			break;
+-		}
+-	} while (pLineTarget->linetarget == NULL && --i >= 0);
+-
+-	return pitch;
++    EXTERN_CVAR (Float, cl_horizaimassist);
++
++    DAngle pitch = nullAngle;
++    FTranslatedLineTarget scratch;
++    aimflags &= ~ALF_IGNORENOAUTOAIM;
++    if (pLineTarget == nullptr) pLineTarget = &scratch;
++
++    const double maxDeg   = std::max(0.0, double(cl_horizaimassist));
++    if (maxDeg <= 0.0)
++    {
++        DAngle an = mo->Angles.Yaw;
++        return P_AimLineAttack(mo, an, 16.*64, pLineTarget, nullAngle, aimflags);
++    }
++
++    const double coarseStep = std::clamp(maxDeg / 8.0, 0.5, 3.0);
++    const double fineStep   = std::max(coarseStep * 0.25, 0.125);
++
++    auto try_sweep = [&](double stepDeg) -> bool
++    {
++        for (int k = 0;; ++k)
++        {
++            const double delta = k * stepDeg;
++            if (delta > maxDeg) break;
++
++            for (int side = (k == 0 ? 0 : +1); side >= (k == 0 ? 0 : -1); side -= 2)
++            {
++                const double yawOffsetDeg = (side == 0) ? 0.0 : (side > 0 ? +delta : -delta);
++                DAngle an = mo->Angles.Yaw + DAngle::fromDeg(yawOffsetDeg);
++
++                pitch = P_AimLineAttack(mo, an, 16.*64, pLineTarget, nullAngle, aimflags);
++
++                if (mo->player != nullptr &&
++                    mo->Level->IsFreelookAllowed() &&
++                    mo->player->userinfo.GetAimDist() <= 0.5f)
++                {
++                    return true;
++                }
++
++                if (pLineTarget->linetarget != nullptr)
++                {
++                    return true;
++                }
++            }
++        }
++        return false; 
++    };
++
++    if (!try_sweep(coarseStep))
++    {
++        try_sweep(fineStep);
++    }
++    else if (pLineTarget->linetarget == nullptr)
++    {
++    }
++    return pitch;
+ }
+ 
+ DEFINE_ACTION_FUNCTION(AActor, BulletSlope)

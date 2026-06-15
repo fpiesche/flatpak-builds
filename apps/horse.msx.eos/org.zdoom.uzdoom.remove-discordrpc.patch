@@ -1,0 +1,195 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2bb65f338..0bddc3836 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -343,11 +343,6 @@ endif()
+ add_subdirectory( libraries/ZWidget )
+ add_subdirectory( libraries/webp )
+ 
+-add_subdirectory( libraries/discordrpc EXCLUDE_FROM_ALL )
+-set( DRPC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/discordrpc/include" )
+-set( DRPC_LIBRARIES discord-rpc )
+-set( DRPC_LIBRARY discord-rpc )
+-
+ if( HAVE_VM_JIT AND UNIX )
+ 	check_symbol_exists( "backtrace" "execinfo.h" HAVE_BACKTRACE )
+ 	if( NOT HAVE_BACKTRACE )
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d5e895510..dc645c0d7 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -321,7 +321,7 @@ add_custom_target( revision_check ALL
+ 
+ # required libraries
+ 
+-set( PROJECT_LIBRARIES ${PROJECT_LIBRARIES} miniz "${BZIP2_LIBRARIES}" "${CMAKE_DL_LIBS}" "${DRPC_LIBRARIES}")
++set( PROJECT_LIBRARIES ${PROJECT_LIBRARIES} miniz "${BZIP2_LIBRARIES}" "${CMAKE_DL_LIBS}")
+ if (HAVE_VULKAN)
+ 	list( APPEND PROJECT_LIBRARIES "zvulkan" )
+ endif()
+@@ -385,7 +385,7 @@ else()
+ 	message( SEND_ERROR "Could not find libvpx" )
+ endif()
+ 
+-include_directories( SYSTEM "${BZIP2_INCLUDE_DIR}" "${LZMA_INCLUDE_DIR}" "${ZMUSIC_INCLUDE_DIR}" "${DRPC_INCLUDE_DIR}")
++include_directories( SYSTEM "${BZIP2_INCLUDE_DIR}" "${LZMA_INCLUDE_DIR}" "${ZMUSIC_INCLUDE_DIR}")
+ 
+ if( ${HAVE_VM_JIT} )
+ 	add_definitions( -DHAVE_VM_JIT )
+@@ -789,7 +789,6 @@ endif()
+ set (FASTMATH_SOURCES ${FASTMATH_SOURCES})
+ 
+ set (PCH_SOURCES
+-	common/thirdparty/richpresence.cpp
+ 	am_map.cpp
+ 	playsim/bots/b_bot.cpp
+ 	playsim/bots/b_func.cpp
+diff --git a/src/common/engine/startupinfo.h b/src/common/engine/startupinfo.h
+index c0dd608c1..6bf5253ae 100644
+--- a/src/common/engine/startupinfo.h
++++ b/src/common/engine/startupinfo.h
+@@ -11,7 +11,6 @@ struct FStartupInfo
+ 	FString Song;
+ 	FString con;
+ 	FString def;
+-	FString DiscordAppId = nullptr;
+ 	FString SteamAppId = nullptr;
+ 	int Type;
+ 	int LoadLights = -1;
+diff --git a/src/d_iwad.cpp b/src/d_iwad.cpp
+index 045fb6120..097a2fc6d 100644
+--- a/src/d_iwad.cpp
++++ b/src/d_iwad.cpp
+@@ -261,12 +261,6 @@ void FIWadManager::ParseIWadInfo(const char *fn, const char *data, int datasize,
+ 					sc.MustGetNumber();
+ 					iwad->LoadWidescreen = sc.Number;
+ 				}
+-				else if (sc.Compare("DiscordAppId"))
+-				{
+-					sc.MustGetStringName("=");
+-					sc.MustGetString();
+-					iwad->DiscordAppId = sc.String;
+-				}
+ 				else if (sc.Compare("SteamAppId"))
+ 				{
+ 					sc.MustGetStringName("=");
+@@ -913,7 +907,6 @@ const FIWADInfo *FIWadManager::FindIWAD(std::vector<std::string>& wadfiles, cons
+ 		GameStartupInfo.LoadBrightmaps = iwad_info->LoadBrightmaps;
+ 	if (GameStartupInfo.Type == 0) GameStartupInfo.Type = iwad_info->StartupType;
+ 	if (GameStartupInfo.Song.IsEmpty()) GameStartupInfo.Song = iwad_info->Song;
+-	if (GameStartupInfo.DiscordAppId.IsEmpty()) GameStartupInfo.DiscordAppId = iwad_info->DiscordAppId;
+ 	if (GameStartupInfo.SteamAppId.IsEmpty()) GameStartupInfo.SteamAppId = iwad_info->SteamAppId;
+ 	I_SetIWADInfo();
+ 	return iwad_info;
+diff --git a/src/d_main.cpp b/src/d_main.cpp
+index 15c59342f..70e48d370 100644
+--- a/src/d_main.cpp
++++ b/src/d_main.cpp
+@@ -156,7 +156,6 @@ void M_SaveDefaultsFinal();
+ void R_Shutdown();
+ void I_ShutdownInput();
+ void SetConsoleNotifyBuffer();
+-void I_UpdateDiscordPresence(bool SendPresence, const char* curstatus, const char* appid, const char* steamappid);
+ bool M_SetSpecialMenu(FName& menu, int param);	// game specific checks
+ 
+ const FIWADInfo *D_FindIWAD(TArray<FString> &wadfiles, const char *iwad, const char *basewad);
+@@ -300,10 +299,6 @@ CVAR(Bool, autoloadwidescreen, true, CVAR_ARCHIVE | CVAR_NOINITCALL | CVAR_GLOBA
+ CVAR(Bool, r_debug_disable_vis_filter, false, 0)
+ CVAR(Int, vid_showpalette, 0, 0)
+ 
+-CUSTOM_CVAR (Bool, i_discordrpc, false, CVAR_ARCHIVE | CVAR_GLOBALCONFIG)
+-{
+-	I_UpdateWindowTitle();
+-}
+ CUSTOM_CVAR(Int, I_FriendlyWindowTitle, 1, CVAR_GLOBALCONFIG|CVAR_ARCHIVE|CVAR_NOINITCALL)
+ {
+ 	I_UpdateWindowTitle();
+@@ -1922,11 +1917,6 @@ static FString ParseGameInfo(std::vector<std::string> &pwads, const char *fn, co
+ 			sc.MustGetNumber();
+ 			GameStartupInfo.LoadWidescreen = !!sc.Number;
+ 		}
+-		else if (!nextKey.CompareNoCase("DISCORDAPPID"))
+-		{
+-			sc.MustGetString();
+-			GameStartupInfo.DiscordAppId = sc.String;
+-		}
+ 		else if (!nextKey.CompareNoCase("STEAMAPPID"))
+ 		{
+ 			sc.MustGetString();
+@@ -3751,24 +3747,6 @@ static int D_DoomMain_Internal (void)
+ 		}
+ 		lastIWAD = iwad;
+ 
+-		if (GameStartupInfo.DiscordAppId.GetChars())
+-		{
+-			const char* check = GameStartupInfo.DiscordAppId.GetChars();
+-			uint32_t index = 0;
+-			bool failedcheck = false;
+-			while (!failedcheck && check[index])
+-			{
+-				if (check[index] < '0' || check[index] > '9')
+-				{
+-					Printf(TEXTCOLOR_RED "DiscordAppId must be a numerical value!\n");
+-					failedcheck = true;
+-				}
+-				index++;
+-			}
+-			if (failedcheck)
+-				GameStartupInfo.DiscordAppId = '\0';
+-		}
+-
+ 		if (GameStartupInfo.SteamAppId.GetChars())
+ 		{
+ 			const char* check = GameStartupInfo.SteamAppId.GetChars();
+@@ -3912,7 +3890,6 @@ void D_Cleanup()
+ 	GameStartupInfo.Name = "";
+ 	GameStartupInfo.BkColor = GameStartupInfo.FgColor = GameStartupInfo.Type = 0;
+ 	GameStartupInfo.LoadWidescreen = GameStartupInfo.LoadLights = GameStartupInfo.LoadBrightmaps = -1;
+-	GameStartupInfo.DiscordAppId = "";
+ 	GameStartupInfo.SteamAppId = "";
+ 		
+ 	GC::FullGC();					// clean up before taking down the object list.
+@@ -3998,7 +3975,6 @@ void I_UpdateWindowTitle()
+ 		titlestr = GameStartupInfo.Name;
+ 		break;
+ 	default:
+-		I_UpdateDiscordPresence(false, NULL, GameStartupInfo.DiscordAppId.GetChars(), GameStartupInfo.SteamAppId.GetChars());
+ 		I_SetWindowTitle(NULL);
+ 		return;
+ 	}
+@@ -4028,10 +4004,6 @@ void I_UpdateWindowTitle()
+ 		}
+ 	}
+ 	*dstp = 0;
+-	if (i_discordrpc)
+-		I_UpdateDiscordPresence(true, copy.Data(), GameStartupInfo.DiscordAppId.GetChars(), GameStartupInfo.SteamAppId.GetChars());
+-	else
+-		I_UpdateDiscordPresence(false, nullptr, nullptr, nullptr);
+ 	I_SetWindowTitle(copy.Data());
+ }
+ 
+diff --git a/src/d_main.h b/src/d_main.h
+index df16018dc..4d6e02efc 100644
+--- a/src/d_main.h
++++ b/src/d_main.h
+@@ -97,7 +97,6 @@ struct FIWADInfo
+ 	int LoadWidescreen = -1;
+ 	int LoadBrightmaps = -1;
+ 	int LoadLights = -1;
+-	FString DiscordAppId = nullptr;
+ 	FString SteamAppId = nullptr;
+ };
+ 
+diff --git a/src/version.h b/src/version.h
+index 1e7521ca9..f1ec040c1 100644
+--- a/src/version.h
++++ b/src/version.h
+@@ -121,8 +121,6 @@ const char *GetVersionString();
+ #define GAME_DIR "config/settings/" GAMENAME
+ #endif
+ 
+-#define DEFAULT_DISCORD_APP_ID "1428620310302691349"
+-
+ const int SAVEPICWIDTH = 216;
+ const int SAVEPICHEIGHT = 162;
+ const int VID_MIN_WIDTH = 320;

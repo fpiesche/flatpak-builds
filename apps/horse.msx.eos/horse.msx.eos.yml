@@ -62,14 +62,28 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_CXX_FLAGS=-DSHARE_DIR=\"/app/share\"
     sources:
-      - type: git
-        url: https://github.com/fpiesche/UZDoom
-        branch: eos
-        commit: 936da74231d1125075f8c52c4fb54dc4750792dc
+      - type: archive
+        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/4.14.3
+        sha256: 5c3054e6acae03867483d76b12d0b16ff884608dde6dfbef09056bd1d56fadf9
+        dest-filename: uzdoom.tar.gz
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/fpiesche/UZDoom/branches/eos
-          commit-query: .commit.sha
+          url: https://api.github.com/repos/uzdoom/UZDoom/releases/latest
+          version-query: .tag.name
+          url-template: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/$version
+      - type: file
+        path: horse.msx.eos.png
+        dest: src/posix/freedesktop/
+      - type: patch
+        paths:
+          - org.zdoom.uzdoom.eos-audio.patch
+          - org.zdoom.uzdoom.eos-branding.patch
+          - org.zdoom.uzdoom.eos-custom-keys.patch
+          - org.zdoom.uzdoom.eos-freedesktop.patch
+          - org.zdoom.uzdoom.eos-joystick-sensitivity.patch
+          - org.zdoom.uzdoom.eos-linetest-zscript.patch
+          - org.zdoom.uzdoom.eos-misc-changes.patch
+          - org.zdoom.uzdoom.remove-discordrpc.patch
 
   - name: 7zip
     buildsystem: simple

@@ -1,0 +1,26 @@
+diff --git a/src/g_game.cpp b/src/g_game.cpp
+index 4a72d4d24..1f9ad07a4 100644
+--- a/src/g_game.cpp
++++ b/src/g_game.cpp
+@@ -746,8 +784,6 @@ void G_BuildTiccmd (ticcmd_t *cmd)
+ 		forward += xs_CRoundToInt(mousey * m_forward);
+ 	}
+ 
+-	cmd->ucmd.pitch = LocalViewPitch >> 16;
+-
+ 	if (SendLand)
+ 	{
+ 		SendLand = false;
+diff --git a/src/playsim/p_mobj.cpp b/src/playsim/p_mobj.cpp
+index bae49906f..8b0821a18 100644
+--- a/src/playsim/p_mobj.cpp
++++ b/src/playsim/p_mobj.cpp
+@@ -7433,7 +7459,7 @@ AActor *P_SpawnPlayerMissile (AActor *source, double x, double y, double z,
+ 	{
+ 		return MissileActor;
+ 	}
+-	return NULL;
++	return nullptr;
+ }
+ 
+ DEFINE_ACTION_FUNCTION(AActor, SpawnPlayerMissile)

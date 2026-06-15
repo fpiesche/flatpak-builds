@@ -1,0 +1,81 @@
+diff --git a/src/d_buttons.h b/src/d_buttons.h
+index 341ead790..aefe3af8b 100644
+--- a/src/d_buttons.h
++++ b/src/d_buttons.h
+@@ -33,7 +33,10 @@ enum
+ 	Button_ShowScores,
+ 	Button_Speed,	
+ 	Button_Use,		
+-	Button_MoveUp,	
++	Button_MoveUp,
++    Button_SonataUp,
++    Button_SonataDown,
++    Button_SonataLeft,
+ 	NUM_ACTIONS
+ };
+ 
+diff --git a/src/d_event.h b/src/d_event.h
+index 013e096d3..7b8320f50 100644
+--- a/src/d_event.h
++++ b/src/d_event.h
+@@ -70,6 +70,11 @@ typedef enum
+ 	BT_USER4		= 1<<24,
+ 
+ 	BT_RUN			= 1<<25,
++
++	BT_SNUP	    	= 1<<26,
++	BT_SNDOWN		= 1<<27,
++	BT_SNLEFT		= 1<<28,
++
+ } buttoncode_t;
+ 
+ // Called by IO functions when input is detected.
+diff --git a/src/d_main.cpp b/src/d_main.cpp
+index 15c59342f..70e48d370 100644
+--- a/src/d_main.cpp
++++ b/src/d_main.cpp
+@@ -2635,7 +2625,13 @@ static const char *DoomButtons[] =
+ 	"showscores" ,
+ 	"speed" ,
+ 	"use" ,
+-	"moveup" };
++	"moveup",
++    "sonataup",
++    "sonatadown",
++    "sonataleft",
++    "sonataright",
++    "sonatause"
++};
+ 
+ CVAR(Bool, lookspring, true, CVAR_ARCHIVE);	// Generate centerview when -mlook encountered?
+ EXTERN_CVAR(String, language)
+diff --git a/src/g_game.cpp b/src/g_game.cpp
+index 4a72d4d24..1f9ad07a4 100644
+--- a/src/g_game.cpp
++++ b/src/g_game.cpp
+@@ -695,6 +707,10 @@ void G_BuildTiccmd (ticcmd_t *cmd)
+ 	if (buttonMap.ButtonDown(Button_User3))			cmd->ucmd.buttons |= BT_USER3;
+ 	if (buttonMap.ButtonDown(Button_User4))			cmd->ucmd.buttons |= BT_USER4;
+ 
++	if (buttonMap.ButtonDown(Button_SonataUp))		cmd->ucmd.buttons |= BT_SNUP;
++	if (buttonMap.ButtonDown(Button_SonataDown))	cmd->ucmd.buttons |= BT_SNDOWN;
++	if (buttonMap.ButtonDown(Button_SonataLeft))	cmd->ucmd.buttons |= BT_SNLEFT;
++
+ 	if (buttonMap.ButtonDown(Button_Speed))			cmd->ucmd.buttons |= BT_SPEED;
+ 	if (buttonMap.ButtonDown(Button_Strafe))		cmd->ucmd.buttons |= BT_STRAFE;
+ 	if (buttonMap.ButtonDown(Button_MoveRight))		cmd->ucmd.buttons |= BT_MOVERIGHT;
+diff --git a/wadsrc/static/zscript/constants.zs b/wadsrc/static/zscript/constants.zs
+index aa1109de4..38a105959 100644
+--- a/wadsrc/static/zscript/constants.zs
++++ b/wadsrc/static/zscript/constants.zs
+@@ -856,6 +856,10 @@ enum EButtons
+ 	BT_USER4		= 1<<24,
+ 
+ 	BT_RUN			= 1<<25,
++
++	BT_SNUP	    	= 1<<26,
++	BT_SNDOWN		= 1<<27,
++	BT_SNLEFT		= 1<<28,
+ };
+ 
+ // Flags for GetAngle

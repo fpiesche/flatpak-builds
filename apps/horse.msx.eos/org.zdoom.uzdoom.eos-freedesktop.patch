@@ -1,0 +1,155 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d5e895510..dc645c0d7 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1423,17 +1422,14 @@ install(DIRECTORY "${PROJECT_BINARY_DIR}/soundfonts" "${PROJECT_BINARY_DIR}/fm_b
+ 
+ # Install Linux desktop launcher, icon and metadata
+ if( UNIX AND NOT APPLE )
+-	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/org.zdoom.UZDoom.desktop
++	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/horse.msx.eos.desktop
+ 			DESTINATION share/applications
+ 			PERMISSIONS WORLD_EXECUTE WORLD_READ GROUP_READ GROUP_EXECUTE OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+-	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/org.zdoom.UZDoom.metainfo.xml
++	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/horse.msx.eos.metainfo.xml
+ 			DESTINATION share/metainfo
+ 			PERMISSIONS WORLD_READ GROUP_READ GROUP_EXECUTE OWNER_READ OWNER_WRITE)
+-	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/org.zdoom.UZDoom.svg
+-			DESTINATION share/icons/hicolor/scalable/apps
+-			PERMISSIONS WORLD_READ GROUP_READ GROUP_EXECUTE OWNER_READ OWNER_WRITE)
+-	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/org.zdoom.UZDoom-mime.xml
+-			DESTINATION share/mime/packages
++	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/posix/freedesktop/horse.msx.eos.png
++			DESTINATION share/icons/hicolor/256x256/apps
+ 			PERMISSIONS WORLD_READ GROUP_READ GROUP_EXECUTE OWNER_READ OWNER_WRITE)
+ 	# note:
+ 	# A post-install script would most likely need to run the following to register the desktop and mime files with the system
+diff --git a/src/posix/freedesktop/horse.msx.eos.desktop b/src/posix/freedesktop/horse.msx.eos.desktop
+new file mode 100644
+index 000000000..fd759d2ca
+--- /dev/null
++++ b/src/posix/freedesktop/horse.msx.eos.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Name=end of starchild
++Comment=survival fantasy and manic shooting adventure
++Icon=horse.msx.eos
++Categories=Game;Shooter;RolePlaying;AdventureGame
++Exec=eos
++StartupNotify=true
++PrefersNonDefaultGPU=true
++Terminal=false
++Type=Application
++Keywords=Indie;
+diff --git a/src/posix/freedesktop/horse.msx.eos.metainfo.xml b/src/posix/freedesktop/horse.msx.eos.metainfo.xml
+new file mode 100644
+index 000000000..c4bb633ac
+--- /dev/null
++++ b/src/posix/freedesktop/horse.msx.eos.metainfo.xml
+@@ -0,0 +1,106 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<component type="desktop-application">
++  <id>horse.msx.eos</id>
++  <launchable type="desktop-id">horse.msx.eos.desktop</launchable>
++  <metadata_license>CC0-1.0</metadata_license>
++  <project_license>GPL-3.0</project_license>
++
++  <name>end of starchild</name>
++  <developer id="horse.msx.eos">
++    <name>MuleNgine</name>
++    <url>https://msx.horse/eos/</url>
++  </developer>
++  <summary>survival fantasy and manic shooting adventure</summary>
++
++  <url type="homepage">https://msx.horse/eos/</url>
++  <url type="vcs-browser">https://github.com/msx2plus/gzdoom-eos</url>
++
++  <branding>
++    <color type="primary" scheme_preference="light">#999999</color>
++    <color type="primary" scheme_preference="dark">#222222</color>
++  </branding>
++
++  <description>
++    <p>at first, one offers what is light, what feels like a spark of joy. an idea, a thought,
++      a secret desire. the act of giving is not without its price. it is the yearning to be
++      seen, to be known that causes the soul to fray. the whisper becomes a chant. a plea, a
++      cry for attention, and then a demand. once two souls are entwined in the same obsession,
++      they pull at each other. in the end, both are consumed. what was once a mutual
++      understanding becomes a prison of thoughts.</p>
++    <p>a voice reaches through the fog clouding your senses.</p>
++    <p><em>polaris waketh; thrice in breath conceal'd, once graven deep on ashen flesh.</em></p>
++    <p><em>the sphere, that, sleeping, yet its oath doth keep, doth take the marrow,</em></p>
++    <p><em>and doth guide the hand that deems itself unbound</em></p>
++    <p><em>in time unreckon'd the heav'ns do barter breath for measur'd dust.</em></p>
++    <p><em>sleep names it fate; but waking calls it law. such freedom runs as straight as any line.</em></p>
++    <p><em>each path was trac'd ere thou couldst set thy foot, and nam'd ere tongue or voice were given thee.</em></p>
++    <p><em>man calls it choice; the geometry, an end; and night applauds what day doth never speak.</em></p>
++    <p><em>know that the skye hath clos'd its eyes.</em></p>
++    <p>rise and shine.</p>
++  </description>
++
++  <screenshots>
++    <screenshot type="default">
++      <image>https://msx.horse/eos/screen01.jpg</image>
++      <caption></caption>
++    </screenshot>
++    <screenshot>
++      <image>https://msx.horse/eos/screen02.jpg</image>
++      <caption></caption>
++    </screenshot>
++    <screenshot>
++      <image>https://msx.horse/eos/screen03.jpg</image>
++      <caption></caption>
++    </screenshot>
++    <screenshot>
++      <image>https://msx.horse/eos/screen04.jpg</image>
++      <caption></caption>
++    </screenshot>
++    <screenshot>
++      <image>https://msx.horse/eos/screen05.jpg</image>
++      <caption></caption>
++    </screenshot>
++    <screenshot>
++      <image>https://msx.horse/eos/screen06.jpg</image>
++      <caption></caption>
++    </screenshot>
++  </screenshots>
++
++  <supports>
++    <control>keyboard</control>
++    <control>pointing</control>
++  </supports>
++  <recommends>
++    <control>gamepad</control>
++  </recommends>
++  <provides>
++    <binary>eos</binary>
++  </provides>
++
++  <keywords>
++    <keyword>retro</keyword>
++    <keyword>fps</keyword>
++    <keyword>shooter</keyword>
++    <keyword>doom</keyword>
++  </keywords>
++
++  <categories>
++    <category>Game</category>
++    <category>Shooter</category>
++    <category>RolePlaying</category>
++    <category>AdventureGame</category>
++  </categories>
++
++  <releases>
++    <release version="1.5" date="2026-06-13" />
++    <release version="1.4" date="2026-06-12" />
++    <release version="1.3" date="2026-06-09" />
++  </releases>
++
++  <content_rating type="oars-1.1">
++    <content_attribute id="violence-fantasy">intense</content_attribute>
++    <content_attribute id="violence-bloodshed">intense</content_attribute>
++    <content_attribute id="violence-desecration">moderate</content_attribute>
++  </content_rating>
++
++</component>
