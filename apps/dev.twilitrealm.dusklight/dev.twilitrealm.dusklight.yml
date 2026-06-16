@@ -23,9 +23,9 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://github.com/TwilitRealm/dusklight/releases/download/v1.3.1/Dusklight-v1.3.1-linux-x86_64.AppImage
+        url: https://github.com/TwilitRealm/dusklight/releases/download/v1.4.0/Dusklight-v1.4.0-linux-x86_64.AppImage
         dest-filename: Dusklight.AppImage
-        sha256: 46e36dc50fb6e16dd9553ff5bfa67942ade97994807a52eefbc84439b9ae228f
+        sha256: 34754758b66228856e9c87aa831c51e25806a489bace2bab4cc92c00149155aa
         x-checker-data:
           type: json
           url: https://api.github.com/repos/TwilitRealm/dusklight/releases/latest
@@ -34,9 +34,9 @@ modules:
       - type: file
         only-arches:
           - aarch64
-        url: https://github.com/TwilitRealm/dusklight/releases/download/v1.3.1/Dusklight-v1.3.1-linux-arm64.AppImage
+        url: https://github.com/TwilitRealm/dusklight/releases/download/v1.4.0/Dusklight-v1.4.0-linux-arm64.AppImage
         dest-filename: Dusklight.AppImage
-        sha256: 113a6b78c01361ff8d1a1a4192892e12d2f64fc37f0b6fd88959ae758f6501bf
+        sha256: 24d9bfd95d2f0fc40f6b3482205ad622056bed5119f9051b54c614d9869c131b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/TwilitRealm/dusklight/releases/latest
