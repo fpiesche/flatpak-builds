@@ -15,7 +15,8 @@ finish-args:
 
 modules:
   - name: daggerfall-unity
-    only-arches: x86_64
+    only-arches:
+      - x86_64
     sources:
       - type: file
         url: https://github.com/Interkarma/daggerfall-unity/raw/v1.0.0/Assets/Resources/DFUIcon.png
