@@ -70,7 +70,7 @@ modules:
           type: json
           url: https://api.github.com/repos/uzdoom/UZDoom/releases/latest
           version-query: .tag.name
-          url-template: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/$version
+          url-query: .tarball_url
       - type: file
         path: horse.msx.eos.png
         dest: src/posix/freedesktop/
@@ -105,8 +105,13 @@ modules:
     subdir: Data
     sources:
       - type: archive
-        url: https://msx.horse/eos/eos_v1_5.zip
-        sha256: fb00bb73521d3bf3c92b7ef52f337c037cb4ab0724873f78ae68b3bbc7483351
+        url: https://msx.horse/eos/eos_v1_7.zip
+        sha256: 39e4aee491f0ba48c061a9e3d2175a00a096b013d31be3d4ea2ca59b9a0bf498
+        x-checker-data:
+          type: html
+          url: https://msx.horse/eos/
+          version-pattern: VERSION ([\d\.-]+)
+          url-template: https://msx.horse/eos/eos_v${major}_${minor}.zip
     build-commands:
       - 7zz x data2.eos && cd data && zip -r /app/share/games/eos/eos.ipk3 *
       - 7zz x data1.eos && zip -r /app/share/games/eos/eos.ipk3 maps
