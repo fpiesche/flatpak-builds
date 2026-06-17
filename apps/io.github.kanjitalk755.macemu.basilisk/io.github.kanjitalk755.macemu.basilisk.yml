@@ -1,6 +1,6 @@
 app-id: io.github.kanjitalk755.macemu.basilisk
 runtime: org.freedesktop.Platform
-runtime-version: "25.08"
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: BasiliskII
 
@@ -20,7 +20,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/kanjitalk755/macemu.git
-        commit: 9a3f687fc1080b1cfdc4e0132a2017d9c734a950
+        commit: 35e82471adf84204ab64088cf51e28d61545f550
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
