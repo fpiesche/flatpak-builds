@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.ref }}
       - name: Build web frontend
@@ -44,7 +44,7 @@ jobs:
       appids: ${{ steps.builds.outputs.appids }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
@@ -152,7 +152,7 @@ jobs:
     container: ghcr.io/flathub/flatpak-builder-lint:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
@@ -203,7 +203,7 @@ jobs:
 
       - name: Checkout
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
           ref: ${{ github.ref }}
@@ -280,7 +280,7 @@ jobs:
 
       - name: Checkout
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
           ref: ${{ github.ref }}
@@ -354,7 +354,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Check out current Flatpak repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: refs/heads/gh-pages
           lfs: true
