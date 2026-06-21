@@ -23,6 +23,10 @@ cleanup:
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm20
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: adlmidi
     builddir: true
@@ -34,7 +38,7 @@ modules:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_LINKER_TYPE=LLD
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DlibADLMIDI_STATIC=OFF
       - -DlibADLMIDI_SHARED=ON
     sources:
@@ -58,7 +62,7 @@ modules:
       - -DCMAKE_C_COMPILER=clang
       - -DCMAKE_CXX_COMPILER=clang++
       - -DCMAKE_LINKER_TYPE=LLD
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
         url: https://api.github.com/repos/benhoyt/inih/tarball/r62

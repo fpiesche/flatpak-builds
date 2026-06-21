@@ -26,11 +26,16 @@ cleanup:
   - /lib/cmake
   - /lib/pkgconfig
   - /share/cmake
+
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm18
+
+build-options:
+  strip: true
+  no-debuginfo: true
 
 modules:
   - name: boost

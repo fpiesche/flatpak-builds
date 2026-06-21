@@ -15,6 +15,10 @@ finish-args:
   - --device=dri
   - --device=all
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: libchdr
     buildsystem: cmake-ninja

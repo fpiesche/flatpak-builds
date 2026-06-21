@@ -24,6 +24,10 @@ cleanup:
   - /lib/pkgconfig
   - /lib/cmake
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: spirv-tools
     buildsystem: cmake-ninja

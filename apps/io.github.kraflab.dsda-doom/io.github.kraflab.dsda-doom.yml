@@ -26,6 +26,10 @@ cleanup:
   - /share/doc
   - /share/man
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - ../shared-modules/glu/glu-9.json
   - ../shared-modules/SDL2/SDL2_image.json

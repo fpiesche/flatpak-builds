@@ -49,12 +49,14 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref }}
           set-safe-directory: true
+
       - name: Get changed manifests
         if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
         id: changed_files_action
         uses: tj-actions/changed-files@v47
         with:
           files: apps/**/*.yml
+
       - name: Assemble build matrix
         id: builds
         run: |
@@ -292,12 +294,6 @@ jobs:
           name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
           path: _build
 
-      - name: Delete builddir artifact
-        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
-        uses: geekyeggo/delete-artifact@v6
-        with:
-          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
-
       - name: Lint build dir
         if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
         run: |
@@ -305,6 +301,12 @@ jobs:
           jq '."${{ matrix.app }}"' exceptions.json
           echo "::endgroup::"
           flatpak-builder-lint --exceptions --user-exceptions exceptions.json builddir _build
+
+      - name: Delete builddir artifact
+        if: ${{ contains(matrix.app.only-arches, matrix.arch.name) }}
+        uses: geekyeggo/delete-artifact@v6
+        with:
+          name: ${{ matrix.app.appid }}_${{ matrix.arch.name }}_builddir.zip
 
   merge:
     name: Merge PR
@@ -357,7 +359,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: refs/heads/gh-pages
-          lfs: true
 
       - name: Grab site artifact
         uses: actions/download-artifact@v8
@@ -393,10 +394,6 @@ jobs:
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
             repo/
-
-      - name: Enable git lfs and add any files
-        run: |
-          find repo -type f -size +25M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4

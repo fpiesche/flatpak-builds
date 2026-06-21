@@ -21,6 +21,10 @@ cleanup:
   - /share/pixmaps
   - /share/appdata
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: aerofoil
     buildsystem: cmake-ninja

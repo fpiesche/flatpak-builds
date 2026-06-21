@@ -14,6 +14,10 @@ finish-args:
   - --device=all
   - --allow=bluetooth
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - ../shared-modules/linux-audio/fluidsynth2.json
   - name: doomrpg
