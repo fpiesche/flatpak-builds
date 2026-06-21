@@ -31,6 +31,10 @@ cleanup:
   - /share/man
   - /share/pixmaps
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - ../shared-modules/glu/glu-9.json
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <component type="desktop-application">
   <id>horse.msx.eos</id>
   <name>end of starchild</name>
@@ -38,27 +38,27 @@
   <screenshots>
     <screenshot type="default">
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen01.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen02.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen03.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen04.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen05.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
     <screenshot>
       <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/horse.msx.eos/screenshots/screen06.jpg</image>
-      <caption/>
+      <caption></caption>
     </screenshot>
   </screenshots>
 
@@ -89,9 +89,15 @@
 
   <releases>
     <release version="1.9" date="2026-06-19">
-      <description></description>
+      <description/>
     </release>
     <release version="1.8" date="2026-06-18">
+      <description/>
+    </release>
+    <release version="1.7" date="2026-06-16">
+      <description/>
+    </release>
+    <release version="1.6" date="2026-06-14">
       <description/>
     </release>
     <release version="1.5" date="2026-06-13">

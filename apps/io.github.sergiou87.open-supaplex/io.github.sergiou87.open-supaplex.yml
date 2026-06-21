@@ -20,6 +20,10 @@ cleanup:
   - /lib/cmake
   - /lib/pkgconfig
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: libxmp
     buildsystem: cmake-ninja

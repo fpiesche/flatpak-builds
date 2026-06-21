@@ -23,6 +23,10 @@ cleanup:
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm20
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: adlmidi
     builddir: true

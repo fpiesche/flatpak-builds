@@ -1,3 +1,4 @@
+
 app-id: horse.msx.eos
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
@@ -17,6 +18,10 @@ finish-args:
   - --device=all
   # Allow network for multiplayer gameplay
   - --share=network
+
+build-options:
+  strip: true
+  no-debuginfo: true
 
 cleanup:
   - '*.a'

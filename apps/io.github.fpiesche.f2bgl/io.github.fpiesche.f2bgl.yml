@@ -19,6 +19,10 @@ cleanup:
   - /lib/pkgconfig
   - /share/man
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - ../shared-modules/linux-audio/fluidsynth2.json
   - name: wildmidi

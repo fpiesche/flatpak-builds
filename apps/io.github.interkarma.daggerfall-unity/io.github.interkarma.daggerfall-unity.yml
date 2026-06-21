@@ -13,6 +13,10 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: daggerfall-unity
     only-arches:

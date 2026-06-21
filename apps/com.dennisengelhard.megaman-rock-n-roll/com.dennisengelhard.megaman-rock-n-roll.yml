@@ -13,6 +13,10 @@ finish-args:
   - --share=ipc
   - --socket=x11
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 cleanup:
   - /include
   - "*.a"

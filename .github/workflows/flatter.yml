@@ -357,7 +357,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: refs/heads/gh-pages
-          lfs: true
 
       - name: Grab site artifact
         uses: actions/download-artifact@v8
@@ -393,10 +392,6 @@ jobs:
             --homepage="https://flatpak.yellowkeycard.net" \
             --verbose \
             repo/
-
-      - name: Enable git lfs and add any files
-        run: |
-          find repo -type f -size +25M -exec git lfs track {} \;
 
       - name: Publish repo
         uses: JamesIves/github-pages-deploy-action@v4

@@ -12,6 +12,10 @@ finish-args:
   - --device=all
   - --allow=bluetooth
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: basilisk
     buildsystem: autotools

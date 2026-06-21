@@ -16,6 +16,10 @@ finish-args:
   # Gamescope for SteamOS
   - --filesystem=xdg-run/gamescope-0:ro
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: sf64recomp
     buildsystem: simple

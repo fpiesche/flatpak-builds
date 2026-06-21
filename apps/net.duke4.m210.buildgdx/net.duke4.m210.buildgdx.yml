@@ -19,6 +19,11 @@ finish-args:
   - --share=network
   # Add JRE to system path
   - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - ../shared-modules/linux-audio/fluidsynth2.json
   - name: openjdk

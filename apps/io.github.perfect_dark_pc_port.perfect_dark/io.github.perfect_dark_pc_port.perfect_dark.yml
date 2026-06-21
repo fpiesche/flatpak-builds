@@ -15,6 +15,10 @@ finish-args:
   # Enable network for multiplayer
   - --share=network
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: perfect_dark_ntsc
     buildsystem: cmake-ninja

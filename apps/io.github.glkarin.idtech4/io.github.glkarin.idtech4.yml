@@ -23,6 +23,10 @@ cleanup:
   - '*.a'
   - '*.la'
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 modules:
   - name: miniz
     buildsystem: cmake-ninja

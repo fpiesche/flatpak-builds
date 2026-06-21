@@ -15,6 +15,10 @@ finish-args:
   # network for installation and map downloads
   - --share=network
 
+build-options:
+  strip: true
+  no-debuginfo: true
+
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
