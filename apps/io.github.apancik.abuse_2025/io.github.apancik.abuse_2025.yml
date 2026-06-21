@@ -45,7 +45,7 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT=True
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
         url: https://api.github.com/repos/apancik/Abuse_2025/tarball/2025.1.0

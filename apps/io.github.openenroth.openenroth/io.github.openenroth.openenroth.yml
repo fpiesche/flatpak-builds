@@ -4,10 +4,6 @@ runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 command: io.github.openenroth.openenroth.sh
 
-build-options:
-  build-args:
-    - --share=network
-
 finish-args:
   # hardware 3D and controller access
   - --device=all
@@ -32,6 +28,8 @@ add-extensions:
     autodelete: false
 
 build-options:
+  build-args:
+    - --share=network
   strip: true
   no-debuginfo: true
 
@@ -72,7 +70,7 @@ modules:
       - -DOE_CHECK_STYLE=OFF
       - -DOE_CHECK_LUA_STYLE=OFF
       - -DOE_USE_PREBUILT_DEPENDENCIES=OFF
-      - -DCMAKE_BUILD_TYPE=RelWithDbgInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_LINKER=lld
       # - -DCMAKE_C_COMPILER=clang
       # - -DCMAKE_CXX_COMPILER=clang++

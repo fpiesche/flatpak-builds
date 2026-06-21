@@ -28,7 +28,7 @@ modules:
   - name: libxmp
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_STATIC=OFF
       - -DLIBXMP_DISABLE_DEPACKERS=ON
       - -DLIBXMP_DISABLE_PROWIZARD=ON
