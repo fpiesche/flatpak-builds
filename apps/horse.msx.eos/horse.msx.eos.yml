@@ -74,7 +74,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/uzdoom/UZDoom/releases/latest
-          version-query: .tag.name
+          version-query: .tag_name
           url-query: .tarball_url
       - type: file
         path: horse.msx.eos.png
