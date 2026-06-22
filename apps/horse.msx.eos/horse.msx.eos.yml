@@ -67,14 +67,14 @@ modules:
       - -DCMAKE_CXX_FLAGS=-DSHARE_DIR=\"/app/share\"
     sources:
       - type: archive
-        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/4.14.3
-        sha256: 780f3c750a18d1e519a339c63f496a38a6aa2d4f38f91af5684d0d0d1758942b
+        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/4.14.3
+        sha256: 5c3054e6acae03867483d76b12d0b16ff884608dde6dfbef09056bd1d56fadf9
         dest-filename: uzdoom.tar.gz
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/uzdoom/UZDoom/releases/latest
+          url: https://api.github.com/repos/UZDoom/UZDoom/releases/latest
           version-query: .tag_name
-          url-query: .tarball_url
+          url-query: ("https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/" + .tag_name)
       - type: file
         path: horse.msx.eos.png
         dest: src/posix/freedesktop/
