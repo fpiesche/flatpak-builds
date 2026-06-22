@@ -1,4 +1,3 @@
-
 app-id: horse.msx.eos
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
@@ -73,9 +72,9 @@ modules:
         dest-filename: uzdoom.tar.gz
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/uzdoom/UZDoom/releases/latest
+          url: https://api.github.com/repos/UZDoom/UZDoom/releases/latest
           version-query: .tag_name
-          url-query: .tarball_url
+          url-query: ("https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/" + .tag_name)
       - type: file
         path: horse.msx.eos.png
         dest: src/posix/freedesktop/
