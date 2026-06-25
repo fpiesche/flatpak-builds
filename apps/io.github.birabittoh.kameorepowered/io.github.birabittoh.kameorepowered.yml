@@ -36,18 +36,19 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.2.0/kameorepowered-v0.2.0-linux-x64.tar.gz
+        url: https://github.com/birabittoh/KameoRePowered/releases/download/v0.2.1/kameorepowered-v0.2.1-linux-x64.tar.gz
         dest-filename: kameorepowered.tar.gz
-        sha256: 981fb29f54f8cc5796e34e3e260c51d60ae0bca3008aaaea94eaf955f789a5f7
+        sha256: f6f7e5e52bd19fccb298128a6b37ddeb5f851faf738c9fad8fe1d6a6960a6372
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/birabittoh/KameoRePowered/releases
-          version-query: .[0].tag_name
-          url-query: .[0].assets[] | select(.name | test("^kameorepowered.*linux-x64.tar.gz")).browser_download_url
+          url: https://api.github.com/repos/birabittoh/KameoRePowered/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name | test("^kameorepowered-v.*linux-x64.tar.gz")).browser_download_url
     build-commands:
       - tar -xf kameorepowered.tar.gz --no-same-owner
       - install -D -m755 kameorepowered -t /app/bin/
-      - install -D -m644 lib*.so -t /app/lib/
+      - install -D -m644 librexruntime.so -t /app/lib/
+      - install -D -m644 libTracyClient.so -t /app/lib/
 
   - name: freedesktop
     buildsystem: simple
@@ -58,21 +59,8 @@ modules:
         path: io.github.birabittoh.kameorepowered.sh
       - type: file
         path: io.github.birabittoh.kameorepowered.png
-      - type: inline
-        dest-filename: io.github.birabittoh.kameorepowered.desktop
-        contents: |
-          [Desktop Entry]
-          Categories=Game;AdventureGame
-          Comment=A recompiled port of Kameo: Elements of Power
-          Exec=io.github.birabittoh.kameorepowered.sh
-          Icon=io.github.birabittoh.kameorepowered
-          Keywords=xbox;kameo;rare
-          Name=Kameo RePowered
-          PrefersNonDefaultGPU=true
-          StartupNotify=true
-          Terminal=false
-          TerminalOptions=
-          Type=Application
+      - type: file
+        path: io.github.birabittoh.kameorepowered.desktop
     build-commands:
       - install -D -m644 io.github.birabittoh.kameorepowered.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -D -m644 ${FLATPAK_ID}.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
