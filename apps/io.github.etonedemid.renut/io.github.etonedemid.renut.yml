@@ -25,11 +25,11 @@ modules:
         url: https://github.com/etonedemid/reNut/releases/download/v1.0.3/reNut-x86_64.AppImage
         dest-filename: renut.appimage
         sha256: 659b9b8186b40b26a8748a2c04b2336ea8ce97b99cdd546dbdc55ef19bfe5fa8
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/etonedemid/renut/releases
-          version-query: .[0].tag_name
-          url-query: .[0].assets[] | select(.name | test("^reNut.*x86_64.AppImage$")).browser_download_url
+        # x-checker-data:
+        #   type: json
+        #   url: https://api.github.com/repos/etonedemid/renut/releases
+        #   version-query: .[0].tag_name
+        #   url-query: .[0].assets[] | select(.name | test("^reNut.*x86_64.AppImage$")).browser_download_url
       - type: file
         path: io.github.etonedemid.renut.metainfo.xml
       - type: file
