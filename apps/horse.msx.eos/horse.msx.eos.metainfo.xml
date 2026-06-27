@@ -88,8 +88,11 @@
   </categories>
 
   <releases>
-    <release version="1.10" date="2026-06-26">
+    <release version="1.11" date="2026-06-27">
       <description></description>
+    </release>
+    <release version="1.10" date="2026-06-26">
+      <description/>
     </release>
     <release version="1.9" date="2026-06-19">
       <description/>
