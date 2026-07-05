@@ -25,7 +25,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/m0rb/Heretic2R-UNIX
-        commit: 0edd869759db006d9ac2f67220b4969c96acc1d4
+        commit: 5a463b8d99d1869abf5158e7d160fc1d59ee2861
         x-checker-data:
           type: json
           url: https://api.github.com/repos/m0rb/Heretic2R-UNIX/branches/unix
