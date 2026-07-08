@@ -46,9 +46,9 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://api.github.com/repos/davea42/libdwarf-code/tarball/v2.3.1
+        url: https://api.github.com/repos/davea42/libdwarf-code/tarball/v2.3.2
         dest-filename: libdwarf.tar.gz
-        sha256: 555127e03fcf8104f19608f6df8f0d98d88c2c0969f04726c6130a08c98c49d5
+        sha256: 57005ec4f16696a44b20b7a7727fdc1d935dde532cfcd71bf323517251dced58
         x-checker-data:
           type: json
           url: https://api.github.com/repos/davea42/libdwarf-code/releases/latest
