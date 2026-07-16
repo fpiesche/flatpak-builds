@@ -1,7 +1,7 @@
 app-id: org.vita3k.vita3k
-runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '24.08'
-sdk: org.freedesktop.Sdk
+runtime: org.kde.Platform
+runtime-version: &runtime-version '6.11'
+sdk: org.kde.Sdk
 command: Vita3K
 
 finish-args:
@@ -31,7 +31,7 @@ cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm18
+  - org.freedesktop.Sdk.Extension.llvm20
 
 build-options:
   strip: true
@@ -45,8 +45,8 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=filesystem;icl;variant
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.xz
-        sha256: cc5dc5006ecbdf0051f90979be31b4eee5987d9ae14ae9fb9c03cfa43fa3cdad
+        url: https://github.com/boostorg/boost/releases/download/boost-1.92.0.beta1/boost-1.92.0.beta1-cmake.tar.xz
+        sha256: a60c3879ec1a262ac7a56c6badae4027c0ca5bed7b24f042bd9e7242f8389269
         x-checker-data:
           type: json
           url: https://api.github.com/repos/boostorg/boost/releases/latest
@@ -57,8 +57,8 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     build-options:
-      append-path: /usr/lib/sdk/llvm18/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm18/lib
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
       env:
         AR: llvm-ar
         CC: clang
@@ -66,7 +66,6 @@ modules:
         RANLIB: llvm-ranlib
       ldflags: -fuse-ld=lld
     config-opts:
-      - -DUSE_VITA3K_UPDATE=OFF
       - -DUSE_DISCORD_RICH_PRESENCE=OFF
       - -DVITA3K_FORCE_SYSTEM_BOOST=ON
       # - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
@@ -81,8 +80,9 @@ modules:
         #   url: https://api.github.com/repos/vita3k/vita3k/tags
         #   commit-query: .[0].commit.sha
       - type: patch
-        path: org.vita3k.vita3k.use-system-ffmpeg.patch
-    post-install:
-      - install -vDm755 -t /app/bin/ bin/Vita3K
-      - mkdir -p /app/share/Vita3K/
-      - cp -r bin/{data,lang,shaders-builtin} /app/share/Vita3K/
+        paths:
+          - org.vita3k.vita3k.flatpak-assetdir.patch
+          - org.vita3k.vita3k.no-tracy-on-relwithdbginfo.patch
+          - org.vita3k.vita3k.use-system-ffmpeg.patch
+          - org.vita3k.vita3k.use-system-fmtlib.patch
+          - org.vita3k.vita3k.use-system-sdl.patch

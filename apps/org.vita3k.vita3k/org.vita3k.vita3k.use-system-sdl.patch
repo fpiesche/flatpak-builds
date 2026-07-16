@@ -1,0 +1,25 @@
+diff --git a/external/CMakeLists.txt b/external/CMakeLists.txt
+index f9b99b6..2aa75d3 100644
+--- a/external/CMakeLists.txt
++++ b/external/CMakeLists.txt
+@@ -83,7 +83,7 @@ add_subdirectory(libfat16)
+ add_library(miniz STATIC miniz/miniz.c miniz/miniz.h)
+ target_include_directories(miniz PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/miniz")
+ 
+-add_subdirectory(sdl)
++#add_subdirectory(sdl)
+ 
+ # Cubeb setup, from https://github.com/RPCS3/rpcs3/blob/master/3rdparty/cubeb/CMakeLists.txt
+ set(BUILD_SHARED_LIBS FALSE CACHE BOOL "Don't build shared libs")
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d9edf97..53015dd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -291,6 +291,7 @@ if (${BUILD_APPIMAGE})
+ 	endif()
+ endif()
+ 
++find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
+ add_subdirectory(external)
+ add_subdirectory(vita3k)
+ add_subdirectory(tools/gen-modules)
