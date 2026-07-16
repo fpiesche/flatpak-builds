@@ -40,10 +40,9 @@ modules:
         size: 21136045
         sha256: 8f9758b7a0a4392d91f25e7551a42c3027d78d71b06772d84a0a7c6bf118178b
         x-checker-data:
-          type: json
-          url: https://gitlab.com/api/v4/projects/m210%2FBuildGDX/repository/tags?search=^Release
-          version-query: .[0].name | sub("^Release.*v"; "")
-          url-query: ("https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx")
+          type: anitya
+          project-id: 391027
+          url-template: "https://m210.duke4.net/index.php/downloads/send/8-java/54-buildgdx"
       - type: script
         dest-filename: apply_extra
         commands:
@@ -55,11 +54,10 @@ modules:
           - ln -s -T $XDG_DATA_HOME $HOME/.m210projects
           - java -jar /app/extra/BuildGDX.jar $@
       - type: file
-        path: net.duke4.m210.buildgdx.desktop
-      - type: file
-        path: net.duke4.m210.buildgdx.png
-      - type: file
-        path: net.duke4.m210.buildgdx.metainfo.xml
+        paths:
+          - net.duke4.m210.buildgdx.desktop
+          - net.duke4.m210.buildgdx.png
+          - net.duke4.m210.buildgdx.metainfo.xml
     build-commands:
       - install -Dm755 apply_extra /app/bin/apply_extra
       - install -Dm755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh

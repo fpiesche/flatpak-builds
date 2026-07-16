@@ -110,8 +110,8 @@ modules:
     subdir: Data
     sources:
       - type: archive
-        url: https://msx.horse/eos/eos_v1_12.zip
-        sha256: d69c9a0e33292a1a9ac1770b7ef73c1fc8e8322834b83bdec071f745b9fb53a5
+        url: https://msx.horse/eos/eos_v1_13.zip
+        sha256: c72bc286b1fe635585fd779f65057e23f69aea0f6989f7365d722231e75ee605
         x-checker-data:
           type: html
           url: https://msx.horse/eos/

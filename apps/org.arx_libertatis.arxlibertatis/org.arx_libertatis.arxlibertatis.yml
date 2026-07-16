@@ -43,8 +43,8 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=algorithm;circular_buffer;crc;date_time;foreach;format;interprocess;math;program_options
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.xz
-        sha256: cc5dc5006ecbdf0051f90979be31b4eee5987d9ae14ae9fb9c03cfa43fa3cdad
+        url: https://github.com/boostorg/boost/releases/download/boost-1.92.0.beta1/boost-1.92.0.beta1-cmake.tar.xz
+        sha256: a60c3879ec1a262ac7a56c6badae4027c0ca5bed7b24f042bd9e7242f8389269
         x-checker-data:
           type: json
           url: https://api.github.com/repos/boostorg/boost/releases/latest
