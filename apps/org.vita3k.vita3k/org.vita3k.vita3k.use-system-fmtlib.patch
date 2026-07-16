@@ -1,0 +1,17 @@
+diff --git a/external/CMakeLists.txt b/external/CMakeLists.txt
+index f9b99b6..2aa75d3 100644
+--- a/external/CMakeLists.txt
++++ b/external/CMakeLists.txt
+@@ -47,9 +47,9 @@ endif()
+ add_library(printf INTERFACE)
+ target_include_directories(printf INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/printf")
+ 
+-set(FMT_INSTALL ON)
+-add_subdirectory(fmt)
+-set(fmt_DIR fmt)
++# set(FMT_INSTALL ON)
++# add_subdirectory(fmt)
++# set(fmt_DIR fmt)
+ 
+ set(SPDLOG_WCHAR_FILENAMES ON CACHE BOOL "")
+ set(SPDLOG_NO_THREAD_ID ON CACHE BOOL "")

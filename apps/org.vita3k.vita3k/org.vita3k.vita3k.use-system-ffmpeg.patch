@@ -1,13 +1,12 @@
 diff --git a/external/CMakeLists.txt b/external/CMakeLists.txt
-index 336243555..2cda139af 100644
+index f9b99b6..8a764f4 100644
 --- a/external/CMakeLists.txt
 +++ b/external/CMakeLists.txt
-@@ -256,7 +256,6 @@ target_include_directories(vma INTERFACE
- 	"${CMAKE_CURRENT_SOURCE_DIR}/VulkanMemoryAllocator-Hpp/include"
- 	"${CMAKE_CURRENT_SOURCE_DIR}/VulkanMemoryAllocator-Hpp/VulkanMemoryAllocator/include")
- 
+@@ -267,7 +267,6 @@ target_include_directories(vma INTERFACE
+ if(ANDROID)
+ 	set(USE_STATIC_ANDROID_FFMPEG ON)
+ endif()
 -add_subdirectory(ffmpeg)
-
  
  if(APPLE OR NOT FORCE_BUILD_OPENSSL_MAC)
  	execute_process(
@@ -62,14 +61,14 @@ index 9fc182a71..cc9a0515b 100644
 +)
 +target_link_libraries(ngs PRIVATE util mem kernel cpu PkgConfig::LIBAV)
 diff --git a/vita3k/renderer/CMakeLists.txt b/vita3k/renderer/CMakeLists.txt
-index a728caf7d..1f0af5720 100644
+index 0e40944..8f671f7 100644
 --- a/vita3k/renderer/CMakeLists.txt
 +++ b/vita3k/renderer/CMakeLists.txt
-@@ -47,7 +47,16 @@ add_library(
+@@ -49,7 +49,16 @@ add_library(
  
  target_include_directories(renderer PUBLIC include)
- target_link_libraries(renderer PUBLIC display mem stb shader glutil threads config util vkutil)
--target_link_libraries(renderer PRIVATE ddspp sdl2 stb ffmpeg xxHash::xxhash concurrentqueue)
+ target_link_libraries(renderer PUBLIC display mem stb shader glutil threads config util vkutil overlay)
+-target_link_libraries(renderer PRIVATE dialog ddspp SDL3::SDL3 stb ffmpeg xxHash::xxhash concurrentqueue)
 +find_package(PkgConfig REQUIRED)
 +pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
 +    libavfilter
@@ -79,7 +78,7 @@ index a728caf7d..1f0af5720 100644
 +    libswscale
 +    libavutil
 +)
-+target_link_libraries(renderer PRIVATE ddspp sdl2 stb PkgConfig::LIBAV xxHash::xxhash concurrentqueue)
++target_link_libraries(renderer PRIVATE dialog ddspp SDL3::SDL3 stb PkgConfig::LIBAV xxHash::xxhash concurrentqueue)
  
- # Marshmallow Tracy linking
- if(TRACY_ENABLE_ON_CORE_COMPONENTS)
+ if(ANDROID)
+ 	target_link_libraries(renderer PRIVATE android adrenotools)
