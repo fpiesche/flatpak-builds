@@ -86,8 +86,8 @@ modules:
       - --prefix=/app
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/asio/files/asio/1.36.0%20(Stable)/asio-1.36.0.tar.gz
-        sha256: 55d5c64e78b1bedd0004423e695c2cfc191fc71914eaaa7f042329ff99ee6155
+        url: https://sourceforge.net/projects/asio/files/asio/1.38.2%20(Stable)/asio-1.38.2.tar.gz
+        sha256: 4893ad026013d1f64bf111c606e6abd857bb953823a4744e449969f1063fd9ce
         x-checker-data:
           type: anitya
           project-id: 117
