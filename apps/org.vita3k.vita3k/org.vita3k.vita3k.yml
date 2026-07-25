@@ -5,8 +5,9 @@ sdk: org.kde.Sdk
 command: Vita3K
 
 finish-args:
-  # X11
-  - --socket=x11
+  # Wayland
+  - --socket=wayland
+  - --socket=fallback-x11
   - --share=ipc
   # Hardware 3D, audio and network
   - --device=dri
@@ -68,17 +69,14 @@ modules:
     config-opts:
       - -DUSE_DISCORD_RICH_PRESENCE=OFF
       - -DVITA3K_FORCE_SYSTEM_BOOST=ON
-      # - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
-        url: https://github.com/fpiesche/Vita3K.git
-        branch: patch-1
-        # url: https://github.com/vita3k/Vita3K.git
-        # commit: 05690eb3441cc34ef03cdde4fc633db1b3c52a97
-        # x-checker-data:
-        #   type: json
-        #   url: https://api.github.com/repos/vita3k/vita3k/tags
-        #   commit-query: .[0].commit.sha
+        url: https://github.com/vita3k/Vita3K.git
+        commit: 5ded8c78fdafd99fd3982aa3c6fa8ada31f281ad
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/vita3k/vita3k/tags
+          commit-query: .[0].commit.sha
       - type: patch
         paths:
           - org.vita3k.vita3k.flatpak-assetdir.patch
