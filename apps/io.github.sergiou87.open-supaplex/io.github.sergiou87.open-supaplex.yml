@@ -34,8 +34,8 @@ modules:
       - -DLIBXMP_DISABLE_PROWIZARD=ON
     sources:
       - type: archive
-        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.7.1.tar.gz
-        sha256: aed426c38d7114a8fd663fccb6e3d2fa2e5438e14b13c36940cee3c1e4c692a8
+        url: https://github.com/libxmp/libxmp/archive/refs/tags/libxmp-4.7.2.tar.gz
+        sha256: 3a6ad7d154d931e21db79e1c0af3253998555c73706083ce9ab2b634180a6e99
         dest-filename: libxmp.tar.gz
         x-checker-data:
           type: anitya
