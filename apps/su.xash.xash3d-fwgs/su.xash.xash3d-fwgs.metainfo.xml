@@ -69,8 +69,11 @@
     <keyword>half-life</keyword>
   </keywords>
   <releases>
-    <release version="4134" date="2026-07-26">
+    <release version="4135" date="2026-07-27">
       <description></description>
+    </release>
+    <release version="4134" date="2026-07-26">
+      <description/>
     </release>
     <release version="4134" date="2026-07-26">
       <description/>
