@@ -101,9 +101,12 @@
     <keyword>recompile</keyword>
   </keywords>
   <releases>
+    <release version="1.0.2" date="2026-07-31">
+      <description></description>
+    </release>
     <release version="1.0.1" date="2026-01-29">
       <url>https://github.com/banjorecomp/banjorecomp/releases/tag/v1.0.1</url>
     </release>
   </releases>
-  <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
 </component>

@@ -56,9 +56,9 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://api.github.com/repos/BanjoRecomp/BanjoRecomp/tarball/v1.0.1
+        url: https://api.github.com/repos/BanjoRecomp/BanjoRecomp/tarball/v1.0.2
         dest-filename: repo.tar.gz
-        sha256: 639b0c336580383ac8cfa61a537525692f015f38e0d5468370d4d0c47a87d24f
+        sha256: a8bbd78567e88acd198f5c7c40ce7a11c1470be957a63fa5795ca28b3306ad05
         x-checker-data:
           type: json
           url: https://api.github.com/repos/BanjoRecomp/BanjoRecomp/releases
@@ -70,7 +70,8 @@ modules:
         dest-filename: io.github.banjorecomp.banjorecomp.sh
         commands:
           - export APP_FOLDER_PATH="${XDG_DATA_HOME}/${FLATPAK_ID}"
-          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH}; fi
+          - if [[ ! -d "${APP_FOLDER_PATH}" ]]; then mkdir -p ${APP_FOLDER_PATH};
+            fi
           - cd /app/bin/
           - BanjoRecompiled
     build-commands:
