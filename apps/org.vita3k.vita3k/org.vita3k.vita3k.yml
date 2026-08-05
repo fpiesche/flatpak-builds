@@ -79,7 +79,6 @@ modules:
           commit-query: .[0].commit.sha
       - type: patch
         paths:
-          - org.vita3k.vita3k.flatpak-assetdir.patch
           - org.vita3k.vita3k.no-tracy-on-relwithdbginfo.patch
           - org.vita3k.vita3k.use-system-ffmpeg.patch
           - org.vita3k.vita3k.use-system-fmtlib.patch
