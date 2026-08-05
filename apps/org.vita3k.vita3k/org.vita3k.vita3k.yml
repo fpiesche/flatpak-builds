@@ -72,7 +72,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/vita3k/Vita3K.git
-        commit: be6927105e65c0d6d17b707aac2e7f72214997e4
+        commit: 80075ce556a9d5c2c8fbe27f70625fb539d3bbba
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vita3k/vita3k/tags
