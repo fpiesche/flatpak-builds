@@ -34,7 +34,7 @@ modules:
           type: json
           url: https://api.github.com/repos/BanjoRecomp/BanjoRecomp/releases
           version-query: .[0].tag_name
-          url-query: .[0].assets[] | select(.name | test("^BanjoRecompiled.*Linux-ARM64.*.zip$")).browser_download_url
+          url-query: .[0].assets[] | select(.name | test("^BanjoRecompiled.*Linux-ARM64.*.tar.gz$")).browser_download_url
       - type: archive
         only-arches:
           - x86_64
@@ -45,7 +45,7 @@ modules:
           type: json
           url: https://api.github.com/repos/BanjoRecomp/BanjoRecomp/releases
           version-query: .[0].tag_name
-          url-query: .[0].assets[] | select(.name | test("^BanjoRecompiled.*Linux-X64.*.zip$")).browser_download_url
+          url-query: .[0].assets[] | select(.name | test("^BanjoRecompiled.*Linux-X64.*.tar.gz$")).browser_download_url
     build-commands:
       - tar -xf BanjoRecompiled.tar.gz --no-same-owner
       - install -D -m755 BanjoRecompiled -t /app/bin/
