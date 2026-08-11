@@ -15,16 +15,16 @@ finish-args:
   - --socket=pulseaudio
 
 cleanup:
-  - "/bin/lib"
-  - "/bin/include"
+  - /bin/lib
+  - /bin/include
 
 modules:
   - name: twoship
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/HarbourMasters/2ship2harkinian/releases/download/4.0.2/2Ship-Keiichi-Charlie-Linux.zip
-        sha256: c97fc9440f5584f350c911ec7385778394aa62f651c6613cee0b74c0141932cb
+        url: https://github.com/HarbourMasters/2ship2harkinian/releases/download/5.0.0/2Ship-Battler-Alfa-Linux.zip
+        sha256: 2718b32d60b3f4fc539b1b1628af6554f33e2c0f1c23235548587f6b5ecfef4d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/harbourmasters/2ship2harkinian/releases/latest
