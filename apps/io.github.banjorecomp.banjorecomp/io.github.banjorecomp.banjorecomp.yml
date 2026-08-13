@@ -47,7 +47,6 @@ modules:
           version-query: .[0].tag_name
           url-query: .[0].assets[] | select(.name | test("^BanjoRecompiled.*Linux-X64.*.tar.gz$")).browser_download_url
     build-commands:
-      - tar -xf BanjoRecompiled.tar.gz --no-same-owner
       - install -D -m755 BanjoRecompiled -t /app/bin/
       - install -D -m644 recompcontrollerdb.txt -t /app/bin/
       - cp -rv assets /app/bin/
