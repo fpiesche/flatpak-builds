@@ -29,6 +29,7 @@ modules:
           - aarch64
         url: https://github.com/BanjoRecomp/BanjoRecomp/releases/download/v1.0.2/BanjoRecompiled-v1.0.2-Linux-ARM64.tar.gz
         dest-filename: recomp.tar.gz
+        strip-components: 0
         sha256: 53515be8bc453bc32ed8cbc72e3cd06350ab4a28bd94b0aa6499d4b963a83757
         x-checker-data:
           type: json
@@ -40,6 +41,7 @@ modules:
           - x86_64
         url: https://github.com/BanjoRecomp/BanjoRecomp/releases/download/v1.0.2/BanjoRecompiled-v1.0.2-Linux-X64.tar.gz
         dest-filename: recomp.tar.gz
+        strip-components: 0
         sha256: a34a4d361221171ea638e0165301fff817c53b9cd46167c5affd37867cfc7ad0
         x-checker-data:
           type: json
