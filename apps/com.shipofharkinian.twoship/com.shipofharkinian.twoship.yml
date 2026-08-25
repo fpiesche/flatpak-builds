@@ -23,8 +23,8 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/HarbourMasters/2ship2harkinian/releases/download/5.0.0/2Ship-Battler-Alfa-Linux.zip
-        sha256: 2718b32d60b3f4fc539b1b1628af6554f33e2c0f1c23235548587f6b5ecfef4d
+        url: https://github.com/HarbourMasters/2ship2harkinian/releases/download/5.0.1/2Ship-Battler-Bravo-Linux.zip
+        sha256: 6cdd4fe06f3f9b095e99c86fef70b9265cc921fb6faa7ba1e18e94e90ed0b345
         x-checker-data:
           type: json
           url: https://api.github.com/repos/harbourmasters/2ship2harkinian/releases/latest
