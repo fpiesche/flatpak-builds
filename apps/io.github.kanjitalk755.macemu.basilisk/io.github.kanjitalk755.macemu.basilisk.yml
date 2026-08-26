@@ -24,13 +24,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/kanjitalk755/macemu.git
-        commit: 7e4c8f0c5fefeabe3cbe9f137af9313e06944de4
+        commit: 474ea0ab55cac933de35fa349820c9dd0944bf77
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
           commit-query: .commit.sha
       - type: patch
-        path: io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
+        paths:
+          - io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
+          - io.github.kanjitalk755.macemu.basilisk.precise-timing.patch
 
   - name: freedesktop
     sources:
