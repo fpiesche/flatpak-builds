@@ -30,7 +30,9 @@ modules:
           url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
           commit-query: .commit.sha
       - type: patch
-        path: io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
+        paths:
+          - io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
+          - io.github.kanjitalk755.macemu.basilisk.precise-timing.patch
 
   - name: freedesktop
     sources:
