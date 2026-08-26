@@ -32,7 +32,6 @@ modules:
       - type: patch
         paths:
           - io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
-          - io.github.kanjitalk755.macemu.basilisk.precise-timing.patch
 
   - name: freedesktop
     sources:
