@@ -29,20 +29,3 @@ modules:
           type: json
           url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
           commit-query: .commit.sha
-      - type: patch
-        paths:
-          - io.github.kanjitalk755.macemu.basilisk.dbus-appid.patch
-
-  - name: freedesktop
-    sources:
-      - type: file
-        path: io.github.kanjitalk755.macemu.basilisk.svg
-      - type: file
-        path: io.github.kanjitalk755.macemu.basilisk.desktop
-      - type: file
-        path: io.github.kanjitalk755.macemu.basilisk.metainfo.xml
-    buildsystem: simple
-    build-commands:
-      - install -m 644 -Dt /app/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
-      - install -m 644 -Dt /app/share/icons/hicolor/scalable/apps/ ${FLATPAK_ID}.svg
-      - install -m 644 -Dt /app/share/applications/ ${FLATPAK_ID}.desktop
