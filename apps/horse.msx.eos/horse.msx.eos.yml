@@ -67,8 +67,8 @@ modules:
       - -DCMAKE_CXX_FLAGS=-DSHARE_DIR=\"/app/share\"
     sources:
       - type: archive
-        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/4.14.3
-        sha256: 5c3054e6acae03867483d76b12d0b16ff884608dde6dfbef09056bd1d56fadf9
+        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/5.0.0
+        sha256: 626e263766467c72108b44f99e413fcbdad52f9f74cbdffdbbd061efed6392c7
         dest-filename: uzdoom.tar.gz
         x-checker-data:
           type: json
@@ -85,14 +85,14 @@ modules:
           - org.zdoom.uzdoom.eos-branding.patch
           - org.zdoom.uzdoom.eos-custom-keys.patch
           - org.zdoom.uzdoom.eos-freedesktop.patch
-          - org.zdoom.uzdoom.eos-joystick-sensitivity.patch
           - org.zdoom.uzdoom.eos-linetest-zscript.patch
           - org.zdoom.uzdoom.eos-misc-changes.patch
-          - org.zdoom.uzdoom.remove-discordrpc.patch
 
   - name: 7zip
     buildsystem: simple
     subdir: CPP/7zip/Bundles/Alone2
+    cleanup:
+      - "*"
     build-commands:
       - make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc
       - install -D ./_o/7zz -t /app/bin

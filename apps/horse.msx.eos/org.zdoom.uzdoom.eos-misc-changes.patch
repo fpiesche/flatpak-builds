@@ -2,15 +2,8 @@ diff --git a/src/g_game.cpp b/src/g_game.cpp
 index 4a72d4d24..1f9ad07a4 100644
 --- a/src/g_game.cpp
 +++ b/src/g_game.cpp
-@@ -746,8 +784,6 @@ void G_BuildTiccmd (ticcmd_t *cmd)
- 		forward += xs_CRoundToInt(mousey * m_forward);
- 	}
- 
--	cmd->ucmd.pitch = LocalViewPitch >> 16;
--
- 	if (SendLand)
- 	{
- 		SendLand = false;
+@@ -820,1 +820,0 @@ void G_BuildTiccmd (ticcmd_t *cmd)
+-	cmd->pitch = LocalViewPitch >> 16;
 diff --git a/src/playsim/p_mobj.cpp b/src/playsim/p_mobj.cpp
 index bae49906f..8b0821a18 100644
 --- a/src/playsim/p_mobj.cpp

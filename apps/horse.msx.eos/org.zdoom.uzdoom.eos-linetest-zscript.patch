@@ -22,13 +22,8 @@ diff --git a/wadsrc/static/zscript/actors/actor.zs b/wadsrc/static/zscript/actor
 index dbc300461..3e0287d35 100644
 --- a/wadsrc/static/zscript/actors/actor.zs
 +++ b/wadsrc/static/zscript/actors/actor.zs
-@@ -392,6 +392,9 @@ class Actor : Thinker native
- 	native deprecated("2.3", "Use Scale.Y instead") double ScaleY;
- 
+@@ -497,1 +497,4 @@ class Actor : Thinker native
  	//FStrifeDialogueNode *Conversation; // [RH] The dialogue to show when this actor is used.;
 +
 +    // line test
 +    native bool TestActivateLine(int lineIndex, int side = 0, int activationType = 0);
- 	
- 	
- 	Default
