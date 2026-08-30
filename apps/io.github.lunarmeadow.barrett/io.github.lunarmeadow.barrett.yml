@@ -43,8 +43,8 @@ modules:
       - -DlibADLMIDI_SHARED=ON
     sources:
       - type: archive
-        url: https://api.github.com/repos/Wohlstand/libADLMIDI/tarball/v1.6.2
-        sha256: 30b9361c2372c32c7e1aef21ca03f5e5b53d9db295971358cd05de3f6c320b81
+        url: https://api.github.com/repos/Wohlstand/libADLMIDI/tarball/v1.6.2.1
+        sha256: a06680498ad98286caf801b9d48e4d2b83bb9bc4c1cfbdad3f8bb737a982431f
         dest-filename: adlmidi.tar.gz
         x-checker-data:
           type: json
