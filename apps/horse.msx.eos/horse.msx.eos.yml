@@ -85,14 +85,14 @@ modules:
           - org.zdoom.uzdoom.eos-branding.patch
           - org.zdoom.uzdoom.eos-custom-keys.patch
           - org.zdoom.uzdoom.eos-freedesktop.patch
-          - org.zdoom.uzdoom.eos-joystick-sensitivity.patch
           - org.zdoom.uzdoom.eos-linetest-zscript.patch
           - org.zdoom.uzdoom.eos-misc-changes.patch
-          - org.zdoom.uzdoom.remove-discordrpc.patch
 
   - name: 7zip
     buildsystem: simple
     subdir: CPP/7zip/Bundles/Alone2
+    cleanup:
+      - "*"
     build-commands:
       - make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc
       - install -D ./_o/7zz -t /app/bin

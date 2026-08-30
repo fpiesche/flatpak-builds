@@ -2,20 +2,12 @@ diff --git a/src/g_game.cpp b/src/g_game.cpp
 index 4a72d4d24..1f9ad07a4 100644
 --- a/src/g_game.cpp
 +++ b/src/g_game.cpp
-@@ -125,6 +125,7 @@ CVAR (Bool, longsavemessages, false, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
- CVAR (Bool, cl_waitforsave, true, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
- CVAR (Bool, enablescriptscreenshot, false, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
+@@ -211,1 +211,2 @@ CVAR (Bool, longsavemessages, false, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
  CVAR (Bool, cl_restartondeath, false, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
 +CVAR (Float, cl_horizaimassist, 2.0f, CVAR_ARCHIVE | CVAR_GLOBALCONFIG);
- EXTERN_CVAR (Float, con_midtime);
- 
- //==========================================================================
-@@ -210,7 +211,16 @@ CVAR (Bool,		freelook,		true,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)		// Always mlook?
- CVAR (Bool,		lookstrafe,		false,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)		// Always strafe with mouse?
- CVAR (Float,	m_forward,		1.f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
+@@ -242,2 +242,12 @@ CVAR (Bool,		freelook,		true,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)		// Always mlook?
  CVAR (Float,	m_side,			2.f,	CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
-- 
-+
+
 +#define ANALOG_LOOK_BASE	1280
 +
 +// You can change cl_analog_sensitivity_pitch's default to 1.6f if the old historical
@@ -25,9 +17,6 @@ index 4a72d4d24..1f9ad07a4 100644
 +CVAR (Bool, cl_analog_run, true, CVAR_GLOBALCONFIG|CVAR_ARCHIVE)
 +CVAR (Float, cl_analog_move_sensitivity, 1.0f, CVAR_GLOBALCONFIG|CVAR_ARCHIVE) // expose movement sensitivity for joystick config; this is multiplied by 1.5 later to ensure straferunning is consistent
 +
- int 			turnheld;								// for accelerative turning 
- 
- EXTERN_CVAR (Bool, invertmouse)
 @@ -726,18 +742,40 @@ void G_BuildTiccmd (ticcmd_t *cmd)
  		joyaxes[JOYAXIS_Pitch] = joyaxes[JOYAXIS_Forward];
  		joyaxes[JOYAXIS_Forward] = 0;
