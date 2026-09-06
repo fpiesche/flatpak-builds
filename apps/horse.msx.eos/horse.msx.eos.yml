@@ -67,8 +67,8 @@ modules:
       - -DCMAKE_CXX_FLAGS=-DSHARE_DIR=\"/app/share\"
     sources:
       - type: archive
-        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/5.0.0
-        sha256: 626e263766467c72108b44f99e413fcbdad52f9f74cbdffdbbd061efed6392c7
+        url: https://api.github.com/repos/UZDoom/UZDoom/tarball/refs/tags/5.0.1
+        sha256: 3a9c062f1154c72bd93e6d44031830e2c645b6bc110494492f02ec01f6ecd513
         dest-filename: uzdoom.tar.gz
         x-checker-data:
           type: json
