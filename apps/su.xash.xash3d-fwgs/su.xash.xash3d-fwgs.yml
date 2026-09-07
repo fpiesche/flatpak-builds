@@ -83,7 +83,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/FWGS/xash3d-fwgs
-        commit: 9aa39ad49b2ba07ffd945f93a19d31e11400b6cd
+        commit: eb5785da6f709e7d28bfe4421cc8581706f0b643
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
@@ -110,7 +110,6 @@ modules:
       - python waf install --destdir=/
     post-install:
       - mkdir -p /app/share/icons/hicolor/scalable/apps /app/share/applications /app/share/metainfo
-      - install -m 755 -t /app/lib32/xash3d/ 3rdparty/vgui_support/vgui-dev/lib/vgui.so
       - install -m 644 -t /app/share/metainfo/ su.xash.xash3d-fwgs.metainfo.xml
       - install -m 644 -t /app/share/icons/hicolor/scalable/apps/ su.xash.xash3d-fwgs.svg
       - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} scripts/flatpak/su.xash.Engine.Compat.i386.desktop
