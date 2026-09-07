@@ -110,7 +110,6 @@ modules:
       - python waf install --destdir=/
     post-install:
       - mkdir -p /app/share/icons/hicolor/scalable/apps /app/share/applications /app/share/metainfo
-      - install -m 755 -t /app/lib32/xash3d/ 3rdparty/vgui_support/vgui-dev/lib/vgui.so
       - install -m 644 -t /app/share/metainfo/ su.xash.xash3d-fwgs.metainfo.xml
       - install -m 644 -t /app/share/icons/hicolor/scalable/apps/ su.xash.xash3d-fwgs.svg
       - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} scripts/flatpak/su.xash.Engine.Compat.i386.desktop
