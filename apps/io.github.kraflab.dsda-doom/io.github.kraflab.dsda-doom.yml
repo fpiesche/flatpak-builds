@@ -86,8 +86,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/libxmp/libxmp/
-        tag: libxmp-4.7.2
-        commit: a13276d27feabcf9ee4f982913f718ee05a65cb7
+        tag: libxmp-4.7.3
+        commit: 1e0812137e4f9e15cc026c0c75af82d71d3cb5ad
         x-checker-data:
           type: git
           tag-pattern: ^libxmp-(.*)$
@@ -131,8 +131,8 @@ modules:
       - type: patch
         path: dsda-launcher-disable-updates.patch
       - type: file
-        url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/src/icons/dsda-launcher.svg
-        sha256: b354bcc022f55d72dd0450fe44997175e5c2b41cd8684a3a5c3b851b1b289fcd
+        url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/dist/icons/eu.pedro_beirao.dsda-launcher.svg
+        sha256: 592a9c413a4809dcbad14bd1ac03f6abb3f8806264c2b52919ee5149b73db68d
       - type: script
         dest-filename: io.github.kraflab.dsda-doom.sh
         commands:
@@ -148,4 +148,4 @@ modules:
       - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA
         Doom" icons/dsda-Launcher.desktop
       - install -Dm644 icons/dsda-Launcher.desktop /app/share/applications/${FLATPAK_ID}.launcher.desktop
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dsda-launcher.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.launcher.svg
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/eu.pedro_beirao.dsda-launcher.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.launcher.svg
