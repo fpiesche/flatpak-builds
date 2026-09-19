@@ -55,8 +55,11 @@
     <keyword>decompile</keyword>
   </keywords>
   <releases>
-    <release version="v1.4.1" date="2026-06-16">
+    <release version="v2.0.0" date="2026-09-18">
       <description></description>
+    </release>
+    <release version="v1.4.1" date="2026-06-16">
+      <description/>
     </release>
     <release version="v1.4.0" date="2026-06-15">
       <description/>
