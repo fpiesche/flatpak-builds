@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Retro horror FPS
+Exec=nblood
+Icon=io.github.nblood.nblood
+Keywords=blood;build;source port;cryptic passage;fresh supply
+Name=NBlood
+StartupNotify=true
+Terminal=false
+Type=Application

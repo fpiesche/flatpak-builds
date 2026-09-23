@@ -1,0 +1,15 @@
+diff --git a/source/blood/src/common.cpp b/source/blood/src/common.cpp
+index 9838bf2..65a2f20 100644
+--- a/source/blood/src/common.cpp
++++ b/source/blood/src/common.cpp
+@@ -363,7 +363,9 @@ void G_AddSearchPaths(void)
+ 
+     Xfree(homepath);
+ 
+-    addsearchpath("/usr/share/games/" APPBASENAME);
++    addsearchpath("/app/share/games/" APPBASENAME);
++    Bsnprintf(buf, sizeof(buf), "%s/" APPBASENAME, getenv("XDG_DATA_HOME"));
++    addsearchpath(buf);
+     addsearchpath("/usr/local/share/games/" APPBASENAME);
+     addsearchpath("/app/extensions/extra");
+ #elif defined EDUKE32_OSX
