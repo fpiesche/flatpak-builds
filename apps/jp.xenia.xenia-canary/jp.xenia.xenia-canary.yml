@@ -38,8 +38,8 @@ modules:
       - -DSPIRV_HEADERS_ENABLE_TESTS=OFF
     sources:
       - type: archive
-        url: https://api.github.com/repos/KhronosGroup/SPIRV-Tools/zipball/refs/tags/vulkan-sdk-1.4.357.0
-        sha256: 0690b6122894f714b49adc82b39e63edc86d363f0aef55af35e2676114a9f9a4
+        url: https://api.github.com/repos/KhronosGroup/SPIRV-Tools/zipball/refs/tags/vulkan-sdk-1.4.363.0
+        sha256: d84ff36d57d9226e60b3a647b0b0fc6742742e20f57a35d28b42d178eb24d998
         dest-filename: spirv-tools.zip
         x-checker-data:
           type: json
@@ -47,8 +47,8 @@ modules:
           version-query: .[0].name | sub("vulkan-sdk-"; "")
           url-query: .[0].zipball_url
       - type: archive
-        url: https://api.github.com/repos/KhronosGroup/SPIRV-Headers/zipball/refs/tags/vulkan-sdk-1.4.357.0
-        sha256: 7809515a42e3a01293fc3f091e49ae92ee37179c3f7e663e4e7768471fb3bd95
+        url: https://api.github.com/repos/KhronosGroup/SPIRV-Headers/zipball/refs/tags/vulkan-sdk-1.4.363.0
+        sha256: b45b132e8dd113124531a6308133d02e444f0e2079cb3039567a658834efdcb2
         dest-filename: spirv-headers.zip
         dest: external/spirv-headers
         x-checker-data:
