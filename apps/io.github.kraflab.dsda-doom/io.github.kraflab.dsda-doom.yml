@@ -118,9 +118,9 @@ modules:
     subdir: src
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.5
+        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.5.1
         dest-filename: dsda-doom-launcher.tar.gz
-        sha256: 47150dd5c98b78cf69ec385def5e79c0b75f00f5982a69c53f8f429e32e78ece
+        sha256: 19cfd586a24991447a78ba58efdc8f18c07d21fa9445872183c23b4a248dc11c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
@@ -144,7 +144,9 @@ modules:
       - install -Dm755 build/dsda-launcher -t /app/bin
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh -t /app/bin
       - desktop-file-edit --set-icon=${FLATPAK_ID}.launcher ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
-      - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA Doom" ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop /app/share/applications/${FLATPAK_ID}.launcher.desktop
+      - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA
+        Doom" ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
+        /app/share/applications/${FLATPAK_ID}.launcher.desktop
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/eu.pedro_beirao.dsda-launcher.svg
         /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.launcher.svg
