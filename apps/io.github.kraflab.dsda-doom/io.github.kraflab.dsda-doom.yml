@@ -98,9 +98,9 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://api.github.com/repos/kraflab/dsda-doom/tarball/v0.29.4
+        url: https://api.github.com/repos/kraflab/dsda-doom/tarball/v0.30.0
         dest-filename: dsda-doom.tar.gz
-        sha256: 91630379edd11e00287a483653a7e558141bfa230a3b88d9ce8d539f63046d4d
+        sha256: e0d2026a73fb1906afa77e5d3f941d80e24aeb4cacb39dbcf5171ee7c74084c4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kraflab/dsda-doom/releases
@@ -110,7 +110,7 @@ modules:
         path: io.github.kraflab.dsda-doom.metainfo.xml
     post-install:
       - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
-  - name: dsda-doom-launcher
+  - name: dsda-launcher
     buildsystem: simple
     build-options:
       env:
@@ -118,18 +118,17 @@ modules:
     subdir: src
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.4
+        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.5
         dest-filename: dsda-doom-launcher.tar.gz
-        sha256: 80418d7e8eb69fd91a9ecf575e5e9d89e453fb18194d1bf5785847b709310390
+        sha256: 47150dd5c98b78cf69ec385def5e79c0b75f00f5982a69c53f8f429e32e78ece
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: .tarball_url
       - type: patch
-        path: dsda-launcher-ui.patch
-      - type: patch
-        path: dsda-launcher-disable-updates.patch
+        paths:
+          - dsda-launcher-disable-updates.patch
       - type: file
         url: https://raw.githubusercontent.com/Pedro-Beirao/dsda-launcher/refs/heads/master/dist/icons/eu.pedro_beirao.dsda-launcher.svg
         sha256: 592a9c413a4809dcbad14bd1ac03f6abb3f8806264c2b52919ee5149b73db68d
@@ -144,8 +143,8 @@ modules:
       - cd build && make
       - install -Dm755 build/dsda-launcher -t /app/bin
       - install -Dm755 ${FLATPAK_BUILDER_BUILDDIR}/${FLATPAK_ID}.sh -t /app/bin
-      - desktop-file-edit --set-icon=${FLATPAK_ID}.launcher icons/dsda-Launcher.desktop
-      - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA
-        Doom" icons/dsda-Launcher.desktop
-      - install -Dm644 icons/dsda-Launcher.desktop /app/share/applications/${FLATPAK_ID}.launcher.desktop
-      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/eu.pedro_beirao.dsda-launcher.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.launcher.svg
+      - desktop-file-edit --set-icon=${FLATPAK_ID}.launcher ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
+      - desktop-file-edit --set-key=Comment --set-value="Graphical launcher for DSDA Doom" ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/dist/linux/eu.pedro_beirao.dsda-launcher.desktop /app/share/applications/${FLATPAK_ID}.launcher.desktop
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/eu.pedro_beirao.dsda-launcher.svg
+        /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.launcher.svg
