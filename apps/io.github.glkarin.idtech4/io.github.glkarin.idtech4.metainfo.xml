@@ -86,8 +86,11 @@
     <keyword>quake 4</keyword>
   </keywords>
   <releases>
-    <release version="1.1.0harmattan72" date="2026-03-12">
+    <release version="1.1.0harmattan73" date="2026-09-30">
       <description></description>
+    </release>
+    <release version="1.1.0harmattan72" date="2026-03-12">
+      <description/>
     </release>
     <release version="1.1.0harmattan71" date="2026-02-17">
       <description/>
