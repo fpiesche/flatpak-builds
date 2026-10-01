@@ -117,8 +117,8 @@ modules:
       - type: file
         path: org.lhowon.alephone.metainfo.xml
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/Marathon-20250930-Data.zip
-        sha256: af89d04c5ca61e9d6e748972f9acd40764550ba85d6a35472cbabc192aedac21
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/Marathon-20260930-Data.zip
+        sha256: d598daaf7e300df6c7097e603b7d68307c4a2ca66488cbe436cd88d5de23f84e
         size: 26408514
         filename: marathon-data.zip
         x-checker-data:
@@ -127,8 +127,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/Marathon2-20250930-Data.zip
-        sha256: 1547722390735ceeffc75e04fe6aff344b72c8e3a6418ac27b2c53b831797587
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/Marathon2-20260930-Data.zip
+        sha256: a302f925d41f8ec46e3eb6c9a002381fd0af451be219b2ad646ba332d7d1387a
         size: 28902408
         filename: marathon2-data.zip
         x-checker-data:
@@ -137,8 +137,8 @@ modules:
           version-query: .tag_name
           url-query: .assets[] | select(.name | test("^Marathon2-.*-Data.zip")).browser_download_url
       - type: extra-data
-        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/MarathonInfinity-20250930-Data.zip
-        sha256: f4af33d94ea56af2d53e722bf8870a30794d3611be7b4ed7a5d64bcc2e37e74b
+        url: https://github.com/Aleph-One-Marathon/alephone/releases/download/release-20260930/MarathonInfinity-20260930-Data.zip
+        sha256: 782868c5de765e8fc519ba08a09356624765f1df77f62e571023f0a76858b563
         size: 31852152
         filename: marathon-infinity-data.zip
         x-checker-data:

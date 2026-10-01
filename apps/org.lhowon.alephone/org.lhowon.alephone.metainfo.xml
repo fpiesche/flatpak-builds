@@ -95,8 +95,11 @@
     <keyword>online</keyword>
   </keywords>
   <releases>
-    <release version="release-20260930" date="2026-09-30">
+    <release version="release-20260930" date="2026-10-01">
       <description></description>
+    </release>
+    <release version="release-20260930" date="2026-09-30">
+      <description/>
     </release>
     <release version="release-20250829" date="2025-08-29">
       <description/>
