@@ -66,8 +66,8 @@ modules:
       - -DBUILD_Q4_MOD=ON
     sources:
       - type: archive
-        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan72.zip
-        sha256: 7a2a91460c824b88ee5f9f91a3decc40efe1ff77b924c6a4ecf2419618202879
+        url: https://github.com/glkarin/com.n0n3m4.diii4a/archive/refs/tags/v1.1.0harmattan73.zip
+        sha256: 8349924f8aa5d9df0124f65f950fc6e34c7e7588c755be987aca383f6ef35464
         x-checker-data:
           type: anitya
           project-id: 377943
