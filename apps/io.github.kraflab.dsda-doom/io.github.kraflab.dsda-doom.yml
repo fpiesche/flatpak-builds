@@ -98,9 +98,9 @@ modules:
     builddir: true
     sources:
       - type: archive
-        url: https://api.github.com/repos/kraflab/dsda-doom/tarball/v0.30.0
+        url: https://api.github.com/repos/dsda-org/dsda-doom/tarball/v0.30.0
         dest-filename: dsda-doom.tar.gz
-        sha256: e0d2026a73fb1906afa77e5d3f941d80e24aeb4cacb39dbcf5171ee7c74084c4
+        sha256: c83ead39145bbff992975d97f441f0c69739a75fb0fafae51c7c2b1f1bf75e44
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kraflab/dsda-doom/releases
