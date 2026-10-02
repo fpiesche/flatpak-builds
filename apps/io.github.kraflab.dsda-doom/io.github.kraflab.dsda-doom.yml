@@ -118,9 +118,9 @@ modules:
     subdir: src
     sources:
       - type: archive
-        url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/tarball/v1.5.2
+        url: https://api.github.com/repos/dsda-org/dsda-launcher/tarball/v1.5.2
         dest-filename: dsda-doom-launcher.tar.gz
-        sha256: 3e833e79ab27bcab45a29ac3949d4a86b149a3c03d17f5f73a4772c9ff7a27e3
+        sha256: 95cf743c3a0f5eaefe13403d5f0699fd3e004f0bd70e60cd4a3669a352dac87e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Pedro-Beirao/dsda-launcher/releases/latest
