@@ -36,6 +36,10 @@
     "io.github.dinosaurplanetrecomp.dino-recomp": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.dsda_org.dsda-doom": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring",
+        "screenshot-image-not-found": "this is fine"
+    },
     "io.github.elasota.aerofoil": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
