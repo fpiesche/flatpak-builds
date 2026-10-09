@@ -22,14 +22,15 @@ modules:
   - name: soh
     buildsystem: simple
     sources:
-      - type: archive
-        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.2.3/SoH-Ackbar-Delta-Linux.zip
-        sha256: f81cde8052142d6abbbaaffa70699d6748e4cde3f158be8f268c3aab338ee315
+      - type: file
+        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.3.0/SoH-Dewey-Alpha.appimage
+        sha256: 8507bb70413e130e452ebaf5f156bfd78013ee0144364b7968680e8cf064a0fa
+        dest-filename: soh.appimage
         x-checker-data:
           type: json
           url: https://api.github.com/repos/harbourmasters/shipwright/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name | test("^SoH-.*-Linux.zip$")).browser_download_url
+          url-query: .assets[] | select(.name | test("^SoH-.*.appimage$")).browser_download_url
       - type: file
         path: com.shipofharkinian.soh.png
       - type: file
