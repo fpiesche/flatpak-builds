@@ -60,5 +60,3 @@ modules:
       - mv squashfs-root/usr/bin/* /app/bin/
       - install -D -m644 squashfs-root/usr/lib/libbz2.so.1.0 -t /app/lib/
       - install -D -m644 squashfs-root/usr/lib/libzip.so.5 -t /app/lib/
-      - install -D -m644 squashfs-root/usr/lib/libspdlog.so.1 -t /app/lib/
-      - install -D -m644 squashfs-root/usr/lib/libfmt.so.8 -t /app/lib/
