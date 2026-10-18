@@ -15,16 +15,16 @@ finish-args:
   - --socket=pulseaudio
 
 cleanup:
-  - "/bin/lib"
-  - "/bin/include"
+  - /bin/lib
+  - /bin/include
 
 modules:
   - name: soh
     buildsystem: simple
     sources:
       - type: file
-        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.3.0/SoH-Dewey-Alpha.appimage
-        sha256: 8507bb70413e130e452ebaf5f156bfd78013ee0144364b7968680e8cf064a0fa
+        url: https://github.com/HarbourMasters/Shipwright/releases/download/9.3.1/SoH-Dewey-Bravo.appimage
+        sha256: 40b2e54204e6c7102b0038d8b607d3dbf424d42e8b6d15763110cd5f008164bf
         dest-filename: soh.appimage
         x-checker-data:
           type: json
@@ -51,7 +51,8 @@ modules:
       - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} squashfs-root/soh.desktop
       - install -D -m644 squashfs-root/soh.desktop /app/share/applications/${FLATPAK_ID}.desktop
       # icon
-      - install -D -m644 squashfs-root/usr/share/icons/hicolor/512x512/apps/sohIcon.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -D -m644 squashfs-root/usr/share/icons/hicolor/512x512/apps/sohIcon.png
+        /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       # metainfo
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
       # launcher script
