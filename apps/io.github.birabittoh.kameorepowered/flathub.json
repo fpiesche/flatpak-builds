@@ -1,4 +1,4 @@
 {
-  "_submission-status": "Unsuitable for Flathub distribution - unclear licensing.",
-  "only-arches": ["x86_64"]
+  "end-of-life": "Moved to io.github.maxdeadbear.kameorepowered.",
+  "end-of-life-rebase": "io.github.maxdeadbear.kameorepowered"
 }
