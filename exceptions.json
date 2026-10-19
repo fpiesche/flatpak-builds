@@ -78,6 +78,9 @@
     "io.github.kanjitalk755.macemu.basilisk": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring"
     },
+    "io.github.maxdeadbear.kameorepowered": {
+        "appstream-external-screenshot-url": "Screenshots do not need mirroring"
+    },
     "io.github.mednafen.mednafen": {
         "appstream-external-screenshot-url": "Screenshots do not need mirroring",
         "appid-url-not-reachable": "No public git repo but mednafen.github.io exists."

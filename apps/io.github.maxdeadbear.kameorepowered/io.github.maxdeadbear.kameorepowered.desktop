@@ -1,8 +1,8 @@
 [Desktop Entry]
 Categories=Game;AdventureGame
 Comment=A recompiled port of Kameo: Elements of Power
-Exec=io.github.birabittoh.kameorepowered.sh
-Icon=io.github.birabittoh.kameorepowered
+Exec=io.github.maxdeadbear.kameorepowered.sh
+Icon=io.github.maxdeadbear.kameorepowered
 Keywords=xbox;kameo;rare
 Name=Kameo RePowered
 PrefersNonDefaultGPU=true

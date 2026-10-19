@@ -24,7 +24,7 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.birabittoh.kameorepowered/screenshots/01-title.png</image>
+      <image type="source">https://cdn.jsdelivr.net/gh/fpiesche/flatpak-builds@main/apps/io.github.maxdeadbear.kameorepowered/screenshots/01-title.png</image>
       <caption>Title screen</caption>
     </screenshot>
   </screenshots>
@@ -46,8 +46,11 @@
     <keyword>recompile</keyword>
   </keywords>
   <releases>
-    <release version="v0.2.0" date="2026-06-03">
+    <release version="v0.3.0" date="2026-10-19">
       <description></description>
+    </release>
+    <release version="v0.2.0" date="2026-06-03">
+      <description/>
     </release>
     <release version="0.1.1" date="2026-05-28">
       <url>https://github.com/birabittoh/KameoRePowered/releases/tag/v0.1.1</url>
