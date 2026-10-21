@@ -24,7 +24,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/kanjitalk755/macemu.git
-        commit: 892eeb74ab9d70dfb034138a0b39057b14f275bc
+        commit: b9a71d7a4ef109ef3b0a218a37481af37aa2974a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/kanjitalk755/macemu/branches/master
