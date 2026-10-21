@@ -46,8 +46,11 @@
     <keyword>recompile</keyword>
   </keywords>
   <releases>
-    <release version="v0.3.0" date="2026-10-19">
+    <release version="v0.2.1" date="2026-06-23">
       <description></description>
+    </release>
+    <release version="v0.3.0" date="2026-10-19">
+      <description/>
     </release>
     <release version="v0.2.0" date="2026-06-03">
       <description/>
