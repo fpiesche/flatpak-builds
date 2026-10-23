@@ -2,26 +2,15 @@ diff --git a/external/CMakeLists.txt b/external/CMakeLists.txt
 index f9b99b6..8a764f4 100644
 --- a/external/CMakeLists.txt
 +++ b/external/CMakeLists.txt
-@@ -267,7 +267,6 @@ target_include_directories(vma INTERFACE
- if(ANDROID)
- 	set(USE_STATIC_ANDROID_FFMPEG ON)
- endif()
+@@ -264,1 +264,0 @@ target_include_directories(vma INTERFACE
 -add_subdirectory(ffmpeg)
- 
- if(APPLE OR NOT FORCE_BUILD_OPENSSL_MAC)
- 	execute_process(
 diff --git a/vita3k/CMakeLists.txt b/vita3k/CMakeLists.txt
 index e254b4820..dee103e8a 100644
 --- a/vita3k/CMakeLists.txt
 +++ b/vita3k/CMakeLists.txt
-@@ -70,6 +70,7 @@ file(WRITE ${CMAKE_BINARY_DIR}/vita3k/config/gitver.h
- )
- 
+@@ -70,1 +70,2 @@ file(WRITE ${CMAKE_BINARY_DIR}/vita3k/config/gitver.h
  include_directories(${CMAKE_BINARY_DIR}/vita3k/config)
 +include_directories(${CMAKE_SOURCE_DIR}/external/ffmpeg/include)
- 
- if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
- 	set(LINUX TRUE)
 diff --git a/vita3k/codec/CMakeLists.txt b/vita3k/codec/CMakeLists.txt
 index b709aba7f..784c6b651 100644
 --- a/vita3k/codec/CMakeLists.txt
