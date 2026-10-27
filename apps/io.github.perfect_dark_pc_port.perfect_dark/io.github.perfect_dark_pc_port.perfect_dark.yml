@@ -28,7 +28,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 32a1cb9f268dd3ac73016801025c6bbbfa20130f
+        commit: a4b58e6dd14d5842d588e9841efa8bceb8b86fc3
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -44,7 +44,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 32a1cb9f268dd3ac73016801025c6bbbfa20130f
+        commit: a4b58e6dd14d5842d588e9841efa8bceb8b86fc3
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -60,7 +60,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 32a1cb9f268dd3ac73016801025c6bbbfa20130f
+        commit: a4b58e6dd14d5842d588e9841efa8bceb8b86fc3
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
@@ -127,7 +127,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/perfect-dark-pc-port/perfect_dark.git
-        commit: 32a1cb9f268dd3ac73016801025c6bbbfa20130f
+        commit: a4b58e6dd14d5842d588e9841efa8bceb8b86fc3
         x-checker-data:
           type: json
           url: https://api.github.com/repos/perfect-dark-pc-port/perfect_dark/branches/port
