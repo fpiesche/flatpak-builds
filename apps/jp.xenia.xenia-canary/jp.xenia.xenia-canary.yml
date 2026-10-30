@@ -38,7 +38,8 @@ modules:
       - -DSPIRV_HEADERS_ENABLE_TESTS=OFF
     sources:
       - type: archive
-        url: https://api.github.com/repos/KhronosGroup/SPIRV-Tools/zipball/refs/tags/vulkan-sdk-1.4.363.0
+        url: 
+          https://api.github.com/repos/KhronosGroup/SPIRV-Tools/zipball/refs/tags/vulkan-sdk-1.4.363.0
         sha256: d84ff36d57d9226e60b3a647b0b0fc6742742e20f57a35d28b42d178eb24d998
         dest-filename: spirv-tools.zip
         x-checker-data:
@@ -47,7 +48,8 @@ modules:
           version-query: .[0].name | sub("vulkan-sdk-"; "")
           url-query: .[0].zipball_url
       - type: archive
-        url: https://api.github.com/repos/KhronosGroup/SPIRV-Headers/zipball/refs/tags/vulkan-sdk-1.4.363.0
+        url: 
+          https://api.github.com/repos/KhronosGroup/SPIRV-Headers/zipball/refs/tags/vulkan-sdk-1.4.363.0
         sha256: b45b132e8dd113124531a6308133d02e444f0e2079cb3039567a658834efdcb2
         dest-filename: spirv-headers.zip
         dest: external/spirv-headers
@@ -73,10 +75,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/xenia-canary/xenia-canary.git
-        commit: 48b318a2ad7c36f8f3901a94e290ba70ae0ffec5
+        commit: f448664b6d0eea63ed67a098bd3ca2dd129532a0
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
+          url: 
+            https://api.github.com/repos/xenia-canary/xenia-canary/branches/canary_experimental
           commit-query: .commit.sha
       - type: patch
         path: jp.xenia.xenia-canary.fix-filesystem-link.patch
