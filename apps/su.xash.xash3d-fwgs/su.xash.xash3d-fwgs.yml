@@ -30,7 +30,8 @@ add-extensions:
     subdirectories: true
     autodelete: false
     add-ld-path: lib
-    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+    merge-dirs: 
+      vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
 
@@ -83,7 +84,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/FWGS/xash3d-fwgs
-        commit: ddc5c7bc5a303750a09765af81c440656a0077ca
+        commit: 3daa67eca9a9f9651b37d63babe6dfc8ec6961ac
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
