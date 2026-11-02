@@ -37,9 +37,9 @@ modules:
     sources:
       - type: file
         url: 
-          https://github.com/MaxDeadBear/KameoRePowered/releases/download/v0.3.2/kameorepowered-v0.3.2-linux-x64.tar.gz
+          https://github.com/MaxDeadBear/KameoRePowered/releases/download/v0.3.3/kameorepowered-v0.3.3-linux-x64.tar.gz
         dest-filename: kameorepowered.tar.gz
-        sha256: e0ebb734c6943f4e7012c43c5617a220c5862e15ac6d51a9c61ff129429d5d92
+        sha256: af23a36cb709d5b00d89a5a4d3d3109eb8efc595ce566283de736719bcd1c623
         x-checker-data:
           type: json
           url: https://api.github.com/repos/maxdeadbear/KameoRePowered/releases/latest
