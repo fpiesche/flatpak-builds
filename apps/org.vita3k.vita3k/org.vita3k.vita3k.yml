@@ -46,8 +46,7 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=filesystem;icl;variant
     sources:
       - type: archive
-        url: 
-          https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-cmake.tar.xz
+        url: https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-cmake.tar.xz
         sha256: 9bed76128d4e46755dbe818487788c6fceb6f72b378f4daa49b7e1e600d9088d
         x-checker-data:
           type: json
@@ -73,7 +72,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/vita3k/Vita3K.git
-        commit: 5482414e52efb90e368151004951a7e9bf643e29
+        commit: f34f11ee44cf04622826d27921a1ff0a02b8ba33
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vita3k/vita3k/tags
