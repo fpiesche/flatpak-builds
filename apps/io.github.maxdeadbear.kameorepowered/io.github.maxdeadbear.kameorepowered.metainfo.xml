@@ -46,8 +46,12 @@
     <keyword>recompile</keyword>
   </keywords>
   <releases>
-    <release version="v0.3.3" date="2026-11-02">
+    <release version="v0.3.4" date="2026-11-05">
+      <url type="details">https://github.com/MaxDeadBear/KameoRePowered/releases/tag/v0.3.4</url>
       <description></description>
+    </release>
+    <release version="v0.3.3" date="2026-11-02">
+      <description/>
     </release>
     <release version="v0.3.2" date="2026-10-31">
       <description/>
