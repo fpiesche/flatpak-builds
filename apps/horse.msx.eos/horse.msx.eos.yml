@@ -1,7 +1,7 @@
 app-id: horse.msx.eos
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
-runtime-version: '25.08'
+runtime-version: '26.08'
 command: eos
 
 finish-args:
