@@ -1,8 +1,8 @@
 app-id: su.xash.xash3d-fwgs
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '25.08'
+runtime-version: &runtime-version '26.08'
 x-gl-version: &gl-version '1.4'
-x-gl-versions: &gl-versions 25.08;1.4
+x-gl-versions: &gl-versions 26.08;1.4
 sdk: org.freedesktop.Sdk
 command: su.xash.xash3d-fwgs.sh
 
@@ -83,12 +83,36 @@ modules:
     sources:
       - type: git
         url: https://github.com/FWGS/xash3d-fwgs
-        commit: 22d256c7d6475258651bc256ab1f09beda1c3f01
+        commit: e9b94dc1a89bcd8867e2d16b37cd6f1cbd4dbd1c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
           version-query: .body | sub("\n"; "") | sub("buildnum "; "")
           commit-query: .target_commitish
+      - type: git
+        url: https://github.com/FWGS/nanogl
+        dest: 3rdparty/nanogl
+        commit: cf7ccf7173a7b616d29096380c2df2b0f1a0db3c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FWGS/nanogl/branches/master
+          commit-query: .commit.sha
+      - type: git
+        url: https://github.com/FWGS/gl-wes-v2
+        dest: 3rdparty/gl-wes-v2
+        commit: 5af92b047f3ba5c8a54a3e0b88442c01feb45e1c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FWGS/gl-wes-v2/branches/master
+          commit-query: .commit.sha
+      - type: git
+        url: https://github.com/ptitSeb/gl4es
+        dest: 3rdparty/gl4es/gl4es
+        commit: a025615bc79ac43ec911dced8fe5b8eb45a0b72d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/ptitSeb/gl4es/branches/master
+          commit-query: .commit.sha
       - type: file
         path: su.xash.xash3d-fwgs.svg
       - type: file
