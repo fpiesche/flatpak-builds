@@ -29,7 +29,6 @@ cleanup:
   - /lib/pkgconfig
   - /share/doc
   - /share/man
-  - /bin/7zz
 
 modules:
   - ../shared-modules/linux-audio/libinstpatch.json
@@ -88,22 +87,22 @@ modules:
           - org.zdoom.uzdoom.eos-linetest-zscript.patch
           - org.zdoom.uzdoom.eos-misc-changes.patch
 
-  - name: 7zip
-    buildsystem: simple
-    subdir: CPP/7zip/Bundles/Alone2
-    cleanup:
-      - '*'
-    build-commands:
-      - make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc
-      - install -D ./_o/7zz -t /app/bin
-    sources:
-      - type: git
-        url: https://github.com/ip7z/7zip.git
-        tag: '26.06'
-        commit: d3296e39e1f1f92c7b41c0c3848e65640428d42d
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
+  # - name: 7zip
+  #   buildsystem: simple
+  #   subdir: CPP/7zip/Bundles/Alone
+  #   cleanup:
+  #     - '*'
+  #   build-commands:
+  #     - make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc
+  #     - install -D ./_o/7za -t /app/bin
+  #   sources:
+  #     - type: git
+  #       url: https://github.com/ip7z/7zip.git
+  #       tag: '26.06'
+  #       commit: d3296e39e1f1f92c7b41c0c3848e65640428d42d
+  #       x-checker-data:
+  #         type: git
+  #         tag-pattern: ^([\d.]+)$
 
   - name: eos-data
     buildsystem: simple
@@ -118,5 +117,5 @@ modules:
           version-pattern: VERSION ([\d\.-]+)
           url-template: https://msx.horse/eos/eos_v${major}_${minor}.zip
     build-commands:
-      - 7zz x data2.eos && cd data && zip -r /app/share/games/eos/eos.ipk3 *
-      - 7zz x data1.eos && zip -r /app/share/games/eos/eos.ipk3 maps
+      - unzip data2.eos && cd data && zip -r /app/share/games/eos/eos.ipk3 *
+      - unzip data1.eos && zip -r /app/share/games/eos/eos.ipk3 maps
