@@ -15,7 +15,7 @@
   <project_license>GPL-3.0</project_license>
   <launchable type="desktop-id">horse.msx.eos.desktop</launchable>
   <url type="homepage">https://msx.horse/eos/</url>
-  <url type="vcs-browser">https://github.com/msx2plus/gzdoom-eos</url>
+  <url type="vcs-browser">https://github.com/uzdoom/uzdoom</url>
   <description>
     <p>at first, one offers what is light, what feels like a spark of joy. an idea, a thought,
       a secret desire. the act of giving is not without its price. it is the yearning to be
