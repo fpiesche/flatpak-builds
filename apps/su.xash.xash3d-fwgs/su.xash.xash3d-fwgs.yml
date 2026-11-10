@@ -83,7 +83,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/FWGS/xash3d-fwgs
-        commit: e9b94dc1a89bcd8867e2d16b37cd6f1cbd4dbd1c
+        commit: 707596f4905689ec224e993fcaa4d4ad66aa67d6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FWGS/xash3d-fwgs/releases/tags/continuous
@@ -108,7 +108,7 @@ modules:
       - type: git
         url: https://github.com/ptitSeb/gl4es
         dest: 3rdparty/gl4es/gl4es
-        commit: bc4314d8369f169d3fa81c5ed1b46b3dba4e74a5
+        commit: efdf0b13896478e0993798be38e78961f16e99f4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ptitSeb/gl4es/branches/master
