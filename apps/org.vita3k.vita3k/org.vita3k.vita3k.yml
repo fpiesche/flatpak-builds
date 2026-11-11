@@ -46,8 +46,8 @@ modules:
       - -DBOOST_INCLUDE_LIBRARIES=filesystem;icl;variant
     sources:
       - type: archive
-        url: https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-cmake.tar.xz
-        sha256: 9bed76128d4e46755dbe818487788c6fceb6f72b378f4daa49b7e1e600d9088d
+        url: https://github.com/boostorg/boost/releases/download/boost-1.93.0.beta1/boost-1.93.0.beta1-cmake.tar.xz
+        sha256: f018cbf416ab0a302e41c7220c286f14e234a8244864d07a97d70b02d5435ee9
         x-checker-data:
           type: json
           url: https://api.github.com/repos/boostorg/boost/releases/latest
