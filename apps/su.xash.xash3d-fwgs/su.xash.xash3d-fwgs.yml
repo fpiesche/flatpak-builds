@@ -108,7 +108,7 @@ modules:
       - type: git
         url: https://github.com/ptitSeb/gl4es
         dest: 3rdparty/gl4es/gl4es
-        commit: 1e5d45cb7448b45f2b9fad361d43d092e7f78aa9
+        commit: e8ccc5395b01f5290ac6cfaba5c6443061b9f117
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ptitSeb/gl4es/branches/master
