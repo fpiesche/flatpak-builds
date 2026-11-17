@@ -69,8 +69,8 @@ modules:
     subdir: miniupnpc
     sources:
       - type: archive
-        sha256: c7e7bd0dfc71fca34632d18a374db3871a9564726648eb03b0ef515c7003dbcc
-        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_4.tar.gz
+        sha256: 62858cfe25077481f53c54de51006f0e4eeb4528ddc81396d5fd37d5b664c9e2
+        url: https://github.com/miniupnp/miniupnp/archive/refs/tags/miniupnpc_2_3_5.tar.gz
         x-checker-data:
           type: anitya
           project-id: 1986
