@@ -1,0 +1,67 @@
+app-id: io.github.nblood.nblood
+runtime: org.freedesktop.Platform
+runtime-version: &runtime-version '26.08'
+sdk: org.freedesktop.Sdk
+command: nblood
+
+finish-args:
+  # hardware 3D and gamepads
+  - --device=all
+  # Audio
+  - --socket=pulseaudio
+  # desktop
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Steam library path on Ubuntu
+  - --filesystem=~/.steam/steam/steamapps/common:ro
+  # ... on SteamOS
+  - --filesystem=~/.local/share/Steam/steamapps/common:ro
+  # ... on Steam Flatpak
+  - --filesystem=~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common:ro
+
+build-options:
+  strip: true
+  no-debuginfo: true
+
+cleanup:
+  - /include
+  - "*.a"
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+
+modules:
+  - name: nblood
+    buildsystem: simple
+    sources:
+      - type: file
+        path: io.github.nblood.nblood.png
+      - type: file
+        path: io.github.nblood.nblood.desktop
+      - type: file
+        path: io.github.nblood.nblood.metainfo.xml
+      - type: file
+        path: io.github.nblood.nblood.sh
+      - type: git
+        url: https://github.com/NBlood/NBlood
+        tag: r14388
+        commit: 497385d64b97f4fd13b6efb3929df0f2ab3adc87
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/NBlood/NBlood/releases
+          version-query: .[0].tag_name | sub("^r"; "")
+          tag-query: .[0].tag_name
+      - type: patch
+        paths:
+          - io.github.nblood.nblood.default-search-path.patch
+          - io.github.nblood.nblood.log-path.patch
+    build-commands:
+      - make blood -j${FLATPAK_BUILDER_N_JOBS} FORCEDEBUG=1 LF=
+      - install -Dm 755 -t ${FLATPAK_DEST}/bin/ nblood ${FLATPAK_ID}.sh
+      - install -Dm 644 -t /app/share/games/nblood nblood.pk3
+      - install -Dm 644 -t /app/share/icons/hicolor/256x256/apps/ ${FLATPAK_ID}.png
+      - install -Dm 644 -t /app/share/applications/ ${FLATPAK_ID}.desktop
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml

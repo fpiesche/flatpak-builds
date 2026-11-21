@@ -1,0 +1,16 @@
+diff --git a/source/blood/src/blood.cpp b/source/blood/src/blood.cpp
+index bba6ae3..7663f20 100644
+--- a/source/blood/src/blood.cpp
++++ b/source/blood/src/blood.cpp
+@@ -1642,7 +1642,10 @@ int app_main(int argc, char const * const * argv)
+     }
+     else
+ #endif
+-    OSD_SetLogFile(APPBASENAME ".log");
++    char buf[BMAX_PATH];
++    const char *datapath = getenv("XDG_DATA_HOME");
++    Bsnprintf(buf, sizeof(buf), "%s/%s/%s.log", datapath, APPBASENAME, APPBASENAME);
++    OSD_SetLogFile(buf);
+ 
+     OSD_SetFunctions(NULL,
+                      NULL,

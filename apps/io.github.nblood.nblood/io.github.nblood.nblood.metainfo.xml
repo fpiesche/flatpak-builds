@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.nblood.nblood</id>
+  <name>NBlood</name>
+  <developer id="io.github.nblood.nblood">
+    <name>NBlood Contributors</name>
+    <url>https://github.com/NBlood/NBlood/graphs/contributors</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#3cbce5</color>
+    <color type="primary" scheme_preference="dark">#6e0808</color>
+  </branding>
+  <summary>Reverse-engineered port of Blood built on EDuke32</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">io.github.nblood.nblood.desktop</launchable>
+  <url type="homepage">https://github.com/NBlood/NBlood</url>
+  <url type="vcs-browser">https://github.com/NBlood/NBlood</url>
+  <description>
+    <p>NBlood is a reverse-engineered port of the 1997 classic horror shooter <em>Blood</em>, built on the EDuke32 project
+      with improved mod support and many new quality-of-life and technical improvements.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a02b032dc4.jpg</image>
+      <caption>Title screen</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e82fe54.jpg</image>
+      <caption>A new threat has appeared</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e87acd5.jpg</image>
+      <caption>New bosses!</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://images.gamebanana.com/img/ss/mods/5e1a04e894fb0.jpg</image>
+      <caption>Play as Roll</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+    <category>Shooter</category>
+  </categories>
+  <supports>
+    <control>keyboard</control>
+  </supports>
+  <recommends>
+    <control>gamepad</control>
+  </recommends>
+  <provides>
+    <binary>nblood</binary>
+  </provides>
+  <keywords>
+    <keyword>blood</keyword>
+    <keyword>build</keyword>
+    <keyword>cryptic passage</keyword>
+    <keyword>fresh supply</keyword>
+    <keyword>source port</keyword>
+  </keywords>
+  <releases>
+    <release version="r14388" date="2026-09-14" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">intense</content_attribute>
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-realistic">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="violence-desecration">intense</content_attribute>
+    <content_attribute id="drugs-alcohol">mild</content_attribute>
+    <content_attribute id="drugs-narcotics">mild</content_attribute>
+    <content_attribute id="drugs-tobacco">mild</content_attribute>
+    <content_attribute id="language-profanity">moderate</content_attribute>
+    <content_attribute id="language-humor">moderate</content_attribute>
+    <content_attribute id="social-chat">intense</content_attribute>
+  </content_rating>
+</component>
